@@ -145,6 +145,36 @@ and clears. The region is mapped non-cacheable.
   host-wake, RTC alarm, VBUS.
 - USB: ChipIdea `qcom,ci-hdrc` at 0xf9a55000, HS PHY; IRQ SPI 134.
 
+## Display (M1 findings)
+
+- The bootloader leaves the pipe in RGB888 with no flips, the ping-pong tear
+  check off (all PP registers 0) and gpio 24 (TE) as a plain input (cfg 0x1).
+  Kicks then run as fast as the DSI link drains a frame: ~12.3 ms, 81 Hz.
+- Tear check as mainline mdp5_cmd_encoder does it: SYNC_CONFIG_VSYNC =
+  COUNTER_EN | IN_EN | 19.2e6/(434*60) (434 = 400 + 16 + 16 + 2 porch
+  lines), SYNC_CONFIG_HEIGHT = 434 (mainline uses 2*vtotal as a 30 Hz
+  fallback when TE is not wired; with real TE one frame height is right),
+  VSYNC_INIT_VAL = START_POS = 400, RD_PTR_IRQ = 401, SYNC_THRESH = 4|4<<16,
+  TEAR_CHECK_EN = 1. TE pin: gpio 24 function 1, input, pull-down; it
+  pulses at 60 Hz (12 edges per 100 ms measured). Result: 60 flips/s, 2.4 ms
+  render + 14.5 ms PP_DONE wait per frame.
+- PP registers (base MDSS+0x21B00 on this MDP rev): TEAR_CHECK_EN 0x00,
+  SYNC_CONFIG_VSYNC 0x04, SYNC_CONFIG_HEIGHT 0x08, SYNC_WRCOUNT 0x0C,
+  VSYNC_INIT_VAL 0x10, INT_COUNT_VAL 0x14, SYNC_THRESH 0x18, START_POS 0x1C,
+  RD_PTR_IRQ 0x20, WR_PTR_IRQ 0x24, AUTOREFRESH 0x30. MDP INTR_STATUS at
+  MDSS+0x114 (PP0_DONE bit 8, PP0_RD_PTR bit 12), CLEAR +0x118, EN +0x110.
+- Pipe switch to XRGB8888: SRC_FORMAT 0x0002243f→(0x3<<9|0x3<<6|0x3<<4|0x3<<2|
+  0x3|1<<17|3<<12), UNPACK 0x03020001, YSTRIDE in bytes, OP_MODE FLIP_UD
+  bit 14 (FLIP_LR bit 13), CTL_FLUSH bit 3 for RGB0, CTL_START.
+- DSI command DMA (DSI0 0xfd922800): DMA_CMD_OFFSET +0x48, DMA_CMD_LENGTH
+  +0x4C, INT_CTRL +0x110 (write 0x03030303 then poll bit 0), SW trigger
+  +0x90. Packet bytes: data0, data1, type (0x05/0x15/0x39), 0x80 last.
+  Panel (Raydium RM69080): brightness DCS 0x51, off 0x28, sleep 0x10, sleep
+  out 0x11 (+120 ms), on 0x29; idle mode 0x39/0x38 (page select FE 00 first)
+  for AOD later; deep standby 4F 01 in the Android off sequence.
+- Software FlatMesh: 172 triangles, flat colours, scanline fill with the
+  FPU, 2.4 ms per 400x400 frame on one A7 core.
+
 ## Lab notes
 
 - Never kill a fastboot command mid-flight: the bootloader's USB writes block
@@ -197,3 +227,7 @@ and clears. The region is mapped non-cacheable.
   reset; TEST=hang returns a watchdog record with pc at the stuck loop,
   TEST=abort a dabt record with dfar=0xe0000000, both symbolized. Firmware
   8.3 KB.
+- 2026-10-26: M1 code done: own double buffers, pipe in XRGB8888 with
+  FLIP_UD, TE-synced 60 Hz flips, DCS brightness/sleep/wake, software
+  FlatMesh at 2.4 ms/frame with the console as overlay. Awaiting a visual
+  check (orientation, colours, fade, blank/wake).
