@@ -175,6 +175,64 @@ and clears. The region is mapped non-cacheable.
 - Software FlatMesh: 172 triangles, flat colours, scanline fill with the
   FPU, 2.4 ms per 400x400 frame on one A7 core.
 
+## Touch, PMIC and RPM (M2 findings)
+
+- **Regulators are RPM resources.** SPMI writes to LDO/LVS enable registers
+  on slave 1 are refused (reads work); the touch rails (LDO19 analog, LVS1 =
+  I2C pull-ups) came up only through RPM requests. With LVS1 off, SDA sits
+  low and a bit-banged read returns all zeros with fake ACKs.
+- **SMEM is at 0x03000000** (mainline is right; the Android `smem@fa00000`
+  node is a different mapping and reads as zeros). Header: alloc table at
+  +0xD0, 16 bytes per entry {allocated, offset, size, base_ext}. Item 13 =
+  SMD channel table (32-byte entries: name[20], cid, ctype, refs); the RPM
+  edge is `ctype & 0xff == 15`, channel name `rpm_requests`, cid 4 here.
+  Items 14+cid (88 bytes: two 11-word stream descriptors, ours then the
+  RPM's) and 338+cid (FIFO pair, 1024 B each way) have `base_ext =
+  0xfc428000` = the RPM message RAM; the address is base_ext + offset
+  (mainline masks base_ext only to find the region).
+- SMD open handshake: set OPENING (+DSR/CTS/CD, fBLOCKREADINTR, indices 0,
+  fSTATE), ring APCS IPC 0xf9011008 bit 0, wait for the remote to be
+  OPENING/OPENED, set OPENED, ring, wait for remote OPENED (both immediate
+  here). After a warm reset both states read CLOSED. Packet = 5-word header
+  (length) + payload; responses arrive in the second FIFO ('req', 12,
+  'msg#', 4, id = ack). RPM request: {'req', 20 + data} {msg_id, set 0,
+  type, id, data_len} {key, 4, value}; types 'ldoa' 0x616f646c, 'smpa'
+  0x61706d73, 'vsa' 0x00617376; key 'swen' 0x6e657773 (enable), 'uv'
+  0x7675 (microvolts), 'ma' 0x616d.
+- **QUP I2C (BLSP1 QUP5 at 0xf9927000) hangs**: clocks on (RCG 0x860 root
+  from XO, branch 0x848, AHB vote 0x1484 bit 17), HW version 0x20030002,
+  state RESET valid; lk's driver then hangs on a register read once the
+  core is moved to RUN state (bus stall, not a loop; the watchdog record
+  lands in the poll). Deferred; touch uses bit-banged I2C on gpio 18/19
+  (func 0) for now. Candidates: the I2C mini-core clock/`QUP_CONFIG`
+  sequence for v2.3, or the BLSP1 "sleep"/BAM clocks.
+- **Touch**: Synaptics DS4-firmware controller, product `MCRYHW_002`, I2C
+  0x20, reset gpio 16 (160 ms power delay, 10 ms low, 150 ms after),
+  attention gpio 17 (low while pending, polled), I2C on gpio 18/19. The
+  RMI4 function table starts AT 0xE9 and grows downwards (entry = 6 bytes
+  read upwards from 0xE9, 0xE3, 0xDD...; reading from 0xE4 gave nonsense):
+  F34 (flash) q 0x73, F01 q 0x7c d 0x13, F11 q 0x99 c 0x3e d 0x15. F11, not
+  F12: 5 fingers → 2 status bytes, then 5 bytes per finger {x[11:4],
+  y[11:4], y[3:0]<<4|x[3:0], wy<<4|wx, z}; range from F11 ctrl 6-9. The
+  Android DSX driver (`hw/sturgeon/synaptics_dsx_core.c`) is the reference;
+  touch coordinates match the flipped display without extra transforms.
+- **PM8226**: power key = PON INT_RT_STS (0x810) bit 0. RTC seconds at
+  0x6048 (write 0x6040 with ctrl 0x6046 bit 7 toggled), alarm at 0x6140 /
+  ctrl 0x6146 bit 7 / clear 0x6148. VADC at 0x3100 (lk's register list):
+  MODE 0x40, EN 0x46 bit 7, CHAN 0x48, DIG_PARAM 0x50, SETTLE 0x51, CONV_REQ
+  0x52 bit 7, STATUS 0x08 (==1 done), DATA 0x60/61; channels VBAT_SNS 6
+  (÷3), REF 0.625 V = 9, REF 1.25 V = 10; absolute calibration gives
+  4.23 V on a full battery. Charger SMBB: RT status CHGR 0x1010 (done bit 7,
+  fast 5, trickle 4), BAT_IF 0x1210 (temp ok 1, present 0), USB 0x1310
+  (gone 2, valid 1); limits CHG_VMAX 0x1040 (3240 + n*10 mV), VSAFE 0x1041,
+  IMAX 0x1044 (n*50 mA), ISAFE 0x1045, VIN_MIN 0x1047 (3400 + n*50 mV),
+  USB_IMAX 0x1344 (n*100 mA above 200). Sturgeon profile: 4.35/4.37 V,
+  300/600 mA, 100 mA termination, 300 mAh cell.
+- Deviations from the M2 exit criteria: touch is polled, not IRQ-driven
+  (TLMM summary IRQ 240 and the gpio interrupt config are still to do);
+  charger "not charging" at 4.23 V with USB valid is the PMIC's own state
+  (battery near full), not yet cross-checked against a discharged battery.
+
 ## Lab notes
 
 - Never kill a fastboot command mid-flight: the bootloader's USB writes block
@@ -231,3 +289,9 @@ and clears. The region is mapped non-cacheable.
   FLIP_UD, TE-synced 60 Hz flips, DCS brightness/sleep/wake, software
   FlatMesh at 2.4 ms/frame with the console as overlay. Awaiting a visual
   check (orientation, colours, fade, blank/wake).
+- 2026-10-26: M2 DONE. Blockers on the way: QUP I2C bus hang (bit-bang
+  instead), touch rails RPM-owned (SMD/RPM client written), SMEM at
+  0x03000000 with RPM items in the message RAM, PDT scan direction, F11
+  instead of F12. Verified on the watch: dot follows the finger, tap and
+  swipe classified, power key reboots, RTC/battery/charger logged every
+  second at 59 fps. Paused here at Darrel's request.
