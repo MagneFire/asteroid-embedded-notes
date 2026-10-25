@@ -1,0 +1,4 @@
+/system/etc/wifi/bcm4343s.txt
+/system/vendor/firmware/4343A0.hcd
+/system/vendor/firmware/a330_pm4.fw
+/system/vendor/firmware/a330_pfp.fw

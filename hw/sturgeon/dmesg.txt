@@ -1,0 +1,2112 @@
+[ 6161.198751] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 6182.015636] mmc0: Starting deferred resume
+[ 6182.115463] mmc0: Deferred resume completed
+[ 6208.226292] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 6208.226464] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 6208.242245] mmc0: Starting deferred resume
+[ 6208.345650] mmc0: Deferred resume completed
+[ 6212.009765] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 6212.010110] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 6249.012989] mmc0: Starting deferred resume
+[ 6249.113230] mmc0: Deferred resume completed
+[ 6259.048748] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 6259.048953] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 6319.252992] mmc0: Starting deferred resume
+[ 6319.356315] mmc0: Deferred resume completed
+[ 6336.004003] mmc0: Starting deferred resume
+[ 6336.107400] mmc0: Deferred resume completed
+[ 6355.014849] mmc0: Starting deferred resume
+[ 6355.118283] mmc0: Deferred resume completed
+[ 6384.013999] mmc0: Starting deferred resume
+[ 6384.117096] mmc0: Deferred resume completed
+[ 6419.463085] mmc0: Starting deferred resume
+[ 6419.566033] mmc0: Deferred resume completed
+[ 6454.533111] mmc0: Starting deferred resume
+[ 6454.636721] mmc0: Deferred resume completed
+[ 6484.693017] mmc0: Starting deferred resume
+[ 6484.793349] mmc0: Deferred resume completed
+[ 6516.006092] mmc0: Starting deferred resume
+[ 6516.103710] mmc0: Deferred resume completed
+[ 6552.074171] mmc0: Starting deferred resume
+[ 6552.176930] mmc0: Deferred resume completed
+[ 6566.003969] mmc0: Starting deferred resume
+[ 6566.107421] mmc0: Deferred resume completed
+[ 6585.073927] mmc0: Starting deferred resume
+[ 6585.170287] mmc0: Deferred resume completed
+[ 6618.074296] mmc0: Starting deferred resume
+[ 6618.176838] mmc0: Deferred resume completed
+[ 6636.003979] mmc0: Starting deferred resume
+[ 6636.107006] mmc0: Deferred resume completed
+[ 6653.074955] mmc0: Starting deferred resume
+[ 6653.176490] mmc0: Deferred resume completed
+[ 6688.074012] mmc0: Starting deferred resume
+[ 6688.177676] mmc0: Deferred resume completed
+[ 6694.148129] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 6694.148473] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 6711.013371] mmc0: Starting deferred resume
+[ 6711.116708] mmc0: Deferred resume completed
+[ 6741.166804] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 6741.167064] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 6747.013310] mmc0: Starting deferred resume
+[ 6747.117529] mmc0: Deferred resume completed
+[ 6798.163123] mmc0: Starting deferred resume
+[ 6798.263274] mmc0: Deferred resume completed
+[ 6805.371706] qpnp_eoc_work: End of Charging
+[ 6834.015554] mmc0: Starting deferred resume
+[ 6834.115039] mmc0: Deferred resume completed
+[ 6874.013364] mmc0: Starting deferred resume
+[ 6874.113207] mmc0: Deferred resume completed
+[ 6908.483454] mmc0: Starting deferred resume
+[ 6908.585014] mmc0: Deferred resume completed
+[ 6936.004009] mmc0: Starting deferred resume
+[ 6936.107065] mmc0: Deferred resume completed
+[ 6954.012365] mmc0: Starting deferred resume
+[ 6954.115904] mmc0: Deferred resume completed
+[ 6985.012975] mmc0: Starting deferred resume
+[ 6985.115872] mmc0: Deferred resume completed
+[ 7018.703257] mmc0: Starting deferred resume
+[ 7018.806660] mmc0: Deferred resume completed
+[ 7040.012385] mmc0: Starting deferred resume
+[ 7040.114004] mmc0: Deferred resume completed
+[ 7136.023485] mmc0: Starting deferred resume
+[ 7136.126128] mmc0: Deferred resume completed
+[ 7162.043107] mmc0: Starting deferred resume
+[ 7162.145101] mmc0: Deferred resume completed
+[ 7174.298991] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 7174.299289] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 7192.015655] mmc0: Starting deferred resume
+[ 7192.117944] mmc0: Deferred resume completed
+[ 7212.184763] mmc0: Starting deferred resume
+[ 7212.286377] mmc0: Deferred resume completed
+[ 7218.132622] qpnp_eoc_work: End of Charging
+[ 7221.315383] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 7221.315659] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 7236.004116] mmc0: Starting deferred resume
+[ 7236.105141] mmc0: Deferred resume completed
+[ 7277.134078] mmc0: Starting deferred resume
+[ 7277.235735] mmc0: Deferred resume completed
+[ 7296.003815] mmc0: Starting deferred resume
+[ 7296.105320] mmc0: Deferred resume completed
+[ 7313.012606] mmc0: Starting deferred resume
+[ 7313.116467] mmc0: Deferred resume completed
+[ 7343.303006] mmc0: Starting deferred resume
+[ 7343.406405] mmc0: Deferred resume completed
+[ 7376.453046] mmc0: Starting deferred resume
+[ 7376.557657] mmc0: Deferred resume completed
+[ 7404.013104] mmc0: Starting deferred resume
+[ 7404.116412] mmc0: Deferred resume completed
+[ 7431.442650] mmc0: Starting deferred resume
+[ 7431.545932] mmc0: Deferred resume completed
+[ 7456.522915] mmc0: Starting deferred resume
+[ 7456.622928] mmc0: Deferred resume completed
+[ 7496.633790] mmc0: Starting deferred resume
+[ 7496.736356] mmc0: Deferred resume completed
+[ 7526.803361] mmc0: Starting deferred resume
+[ 7526.905647] mmc0: Deferred resume completed
+[ 7552.043097] mmc0: Starting deferred resume
+[ 7552.144833] mmc0: Deferred resume completed
+[ 7592.194862] mmc0: Starting deferred resume
+[ 7592.296718] mmc0: Deferred resume completed
+[ 7618.015030] mmc0: Starting deferred resume
+[ 7618.119651] mmc0: Deferred resume completed
+[ 7629.213155] qpnp_eoc_work: End of Charging
+[ 7654.461210] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 7654.461546] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 7676.004391] mmc0: Starting deferred resume
+[ 7676.107482] mmc0: Deferred resume completed
+[ 7701.003351] mmc0: Starting deferred resume
+[ 7701.105012] mmc0: Deferred resume completed
+[ 7701.469087] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 7701.469323] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 7727.054024] mmc0: Starting deferred resume
+[ 7727.155995] mmc0: Deferred resume completed
+[ 7757.232947] mmc0: Starting deferred resume
+[ 7757.331100] mmc0: Deferred resume completed
+[ 7788.012992] mmc0: Starting deferred resume
+[ 7788.114266] mmc0: Deferred resume completed
+[ 7813.092944] mmc0: Starting deferred resume
+[ 7813.194700] mmc0: Deferred resume completed
+[ 7835.964778] mmc0: Starting deferred resume
+[ 7836.065286] mmc0: Deferred resume completed
+[ 7853.202943] mmc0: Starting deferred resume
+[ 7853.299146] mmc0: Deferred resume completed
+[ 7880.013100] mmc0: Starting deferred resume
+[ 7880.115542] mmc0: Deferred resume completed
+[ 7905.093057] mmc0: Starting deferred resume
+[ 7905.197742] mmc0: Deferred resume completed
+[ 7935.182915] mmc0: Starting deferred resume
+[ 7935.281916] mmc0: Deferred resume completed
+[ 8001.196354] mmc0: Starting deferred resume
+[ 8001.298060] mmc0: Deferred resume completed
+[ 8023.132149] qpnp_eoc_work: End of Charging
+[ 8029.015095] mmc0: Starting deferred resume
+[ 8029.118555] mmc0: Deferred resume completed
+[ 8046.212936] mmc0: Starting deferred resume
+[ 8046.312124] mmc0: Deferred resume completed
+[ 8069.104313] mmc0: Starting deferred resume
+[ 8069.207826] mmc0: Deferred resume completed
+[ 8102.073081] mmc0: Starting deferred resume
+[ 8102.176030] mmc0: Deferred resume completed
+[ 8134.617704] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 8134.617999] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 8135.953225] mmc0: Starting deferred resume
+[ 8136.041618] mmc0: Deferred resume completed
+[ 8156.034163] mmc0: Starting deferred resume
+[ 8156.136809] mmc0: Deferred resume completed
+[ 8181.632500] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 8181.632734] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 8188.745022] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 8188.745316] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 8235.742289] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 8235.742562] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 8240.764787] mmc0: Starting deferred resume
+[ 8240.867607] mmc0: Deferred resume completed
+[ 8245.260646] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 8245.260988] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 8276.182046] mmc0: Starting deferred resume
+[ 8276.284514] mmc0: Deferred resume completed
+[ 8292.333859] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 8292.334101] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 8297.354976] mmc0: Starting deferred resume
+[ 8297.455498] mmc0: Deferred resume completed
+[ 8328.015497] mmc0: Starting deferred resume
+[ 8328.116546] mmc0: Deferred resume completed
+[ 8349.014859] mmc0: Starting deferred resume
+[ 8349.116288] mmc0: Deferred resume completed
+[ 8371.012153] mmc0: Starting deferred resume
+[ 8371.106058] mmc0: Deferred resume completed
+[ 8401.433207] mmc0: Starting deferred resume
+[ 8401.530746] mmc0: Deferred resume completed
+[ 8423.172276] qpnp_eoc_work: End of Charging
+[ 8429.014908] mmc0: Starting deferred resume
+[ 8429.118082] mmc0: Deferred resume completed
+[ 8461.593155] mmc0: Starting deferred resume
+[ 8461.696452] mmc0: Deferred resume completed
+[ 8486.872973] mmc0: Starting deferred resume
+[ 8486.971830] mmc0: Deferred resume completed
+[ 8517.002098] mmc0: Starting deferred resume
+[ 8517.103184] mmc0: Deferred resume completed
+[ 8542.082932] mmc0: Starting deferred resume
+[ 8542.182526] mmc0: Deferred resume completed
+[ 8577.193910] mmc0: Starting deferred resume
+[ 8577.296031] mmc0: Deferred resume completed
+[ 8603.043255] mmc0: Starting deferred resume
+[ 8603.146186] mmc0: Deferred resume completed
+[ 8614.766534] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 8614.766828] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 8633.074600] mmc0: Starting deferred resume
+[ 8633.177695] mmc0: Deferred resume completed
+[ 8661.796894] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 8661.797154] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 8663.243019] mmc0: Starting deferred resume
+[ 8663.346088] mmc0: Deferred resume completed
+[ 8692.012690] mmc0: Starting deferred resume
+[ 8692.114731] mmc0: Deferred resume completed
+[ 8706.116850] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 8706.117145] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 8722.005827] mmc0: Starting deferred resume
+[ 8722.105619] mmc0: Deferred resume completed
+[ 8748.015225] mmc0: Starting deferred resume
+[ 8748.116509] mmc0: Deferred resume completed
+[ 8753.111802] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 8753.112063] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 8758.136350] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 8758.136687] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 8784.014915] mmc0: Starting deferred resume
+[ 8784.116302] mmc0: Deferred resume completed
+[ 8805.145935] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 8805.147354] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 8810.013283] mmc0: Starting deferred resume
+[ 8810.114668] mmc0: Deferred resume completed
+[ 8823.211694] qpnp_eoc_work: End of Charging
+[ 8837.447013] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 8837.447353] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 8857.283044] mmc0: Starting deferred resume
+[ 8857.387731] mmc0: Deferred resume completed
+[ 8874.012333] mmc0: Starting deferred resume
+[ 8874.111500] mmc0: Deferred resume completed
+[ 8884.481697] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 8884.481933] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 8896.979649] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 8896.979987] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 8902.003045] mmc0: Starting deferred resume
+[ 8902.103485] mmc0: Deferred resume completed
+[ 8934.983775] mmc0: Starting deferred resume
+[ 8935.086877] mmc0: Deferred resume completed
+[ 8943.996587] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 8943.996814] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 8965.797105] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 8965.797411] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 9001.043149] mmc0: Starting deferred resume
+[ 9001.146074] mmc0: Deferred resume completed
+[ 9012.814562] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 9012.814797] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 9043.003775] mmc0: Starting deferred resume
+[ 9043.103796] mmc0: Deferred resume completed
+[ 9063.143689] mmc0: Starting deferred resume
+[ 9063.242809] mmc0: Deferred resume completed
+[ 9080.012346] mmc0: Starting deferred resume
+[ 9080.111132] mmc0: Deferred resume completed
+[ 9111.012394] mmc0: Starting deferred resume
+[ 9111.107257] mmc0: Deferred resume completed
+[ 9137.053109] mmc0: Starting deferred resume
+[ 9137.153008] mmc0: Deferred resume completed
+[ 9176.033353] mmc0: Starting deferred resume
+[ 9176.136323] mmc0: Deferred resume completed
+[ 9215.954587] mmc0: Starting deferred resume
+[ 9216.054804] mmc0: Deferred resume completed
+[ 9223.251677] qpnp_eoc_work: End of Charging
+[ 9251.062043] mmc0: Starting deferred resume
+[ 9251.155217] mmc0: Deferred resume completed
+[ 9276.003981] mmc0: Starting deferred resume
+[ 9276.107773] mmc0: Deferred resume completed
+[ 9302.093430] mmc0: Starting deferred resume
+[ 9302.198158] mmc0: Deferred resume completed
+[ 9328.043455] mmc0: Starting deferred resume
+[ 9328.146837] mmc0: Deferred resume completed
+[ 9356.634786] mmc0: Starting deferred resume
+[ 9356.736582] mmc0: Deferred resume completed
+[ 9381.693391] mmc0: Starting deferred resume
+[ 9381.790810] mmc0: Deferred resume completed
+[ 9407.044397] mmc0: Starting deferred resume
+[ 9407.144872] mmc0: Deferred resume completed
+[ 9427.044206] mmc0: Starting deferred resume
+[ 9427.147020] mmc0: Deferred resume completed
+[ 9444.012226] mmc0: Starting deferred resume
+[ 9444.113444] mmc0: Deferred resume completed
+[ 9474.123419] mmc0: Starting deferred resume
+[ 9474.222142] mmc0: Deferred resume completed
+[ 9515.964758] mmc0: Starting deferred resume
+[ 9516.066817] mmc0: Deferred resume completed
+[ 9541.044249] mmc0: Starting deferred resume
+[ 9541.145583] mmc0: Deferred resume completed
+[ 9570.951146] mmc0: Starting deferred resume
+[ 9571.055067] mmc0: Deferred resume completed
+[ 9575.094712] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 9575.095041] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 9604.291700] qpnp_eoc_work: End of Charging
+[ 9610.013387] mmc0: Starting deferred resume
+[ 9610.117690] mmc0: Deferred resume completed
+[ 9622.110722] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 9622.110983] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 9628.013261] mmc0: Starting deferred resume
+[ 9628.116169] mmc0: Deferred resume completed
+[ 9651.412951] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 9651.413286] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 9657.012754] mmc0: Starting deferred resume
+[ 9657.114354] mmc0: Deferred resume completed
+[ 9678.014789] mmc0: Starting deferred resume
+[ 9678.116315] mmc0: Deferred resume completed
+[ 9698.460554] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 9698.460814] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 9704.013964] mmc0: Starting deferred resume
+[ 9704.116877] mmc0: Deferred resume completed
+[ 9739.014660] mmc0: Starting deferred resume
+[ 9739.115659] mmc0: Deferred resume completed
+[ 9756.003824] mmc0: Starting deferred resume
+[ 9756.105318] mmc0: Deferred resume completed
+[ 9781.150496] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 9781.150792] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 9800.014667] mmc0: Starting deferred resume
+[ 9800.119069] mmc0: Deferred resume completed
+[ 9828.152450] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 9828.152722] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 9828.384626] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[ 9828.384962] android_work: android_work: sent uevent USB_STATE=RESUMED
+[ 9834.012746] mmc0: Starting deferred resume
+[ 9834.116068] mmc0: Deferred resume completed
+[ 9852.012946] mmc0: Starting deferred resume
+[ 9852.115070] mmc0: Deferred resume completed
+[ 9875.411252] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[ 9875.411597] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[ 9897.012967] mmc0: Starting deferred resume
+[ 9897.115845] mmc0: Deferred resume completed
+[ 9928.593410] mmc0: Starting deferred resume
+[ 9928.695848] mmc0: Deferred resume completed
+[ 9964.074891] mmc0: Starting deferred resume
+[ 9964.175792] mmc0: Deferred resume completed
+[ 9987.332220] qpnp_eoc_work: End of Charging
+[ 9993.013405] mmc0: Starting deferred resume
+[ 9993.116686] mmc0: Deferred resume completed
+[10034.074172] mmc0: Starting deferred resume
+[10034.175291] mmc0: Deferred resume completed
+[10069.074078] mmc0: Starting deferred resume
+[10069.175351] mmc0: Deferred resume completed
+[10104.074016] mmc0: Starting deferred resume
+[10104.170860] mmc0: Deferred resume completed
+[10139.073576] mmc0: Starting deferred resume
+[10139.175794] mmc0: Deferred resume completed
+[10171.200489] mmc0: Starting deferred resume
+[10171.305118] mmc0: Deferred resume completed
+[10175.372617] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[10175.372953] android_work: android_work: sent uevent USB_STATE=RESUMED
+[10207.073997] mmc0: Starting deferred resume
+[10207.176425] mmc0: Deferred resume completed
+[10222.647042] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[10222.647301] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[10228.013294] mmc0: Starting deferred resume
+[10228.116058] mmc0: Deferred resume completed
+[10233.695016] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[10233.695353] android_work: android_work: sent uevent USB_STATE=RESUMED
+[10280.718870] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[10280.719134] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[10283.823017] mmc0: Starting deferred resume
+[10283.927029] mmc0: Deferred resume completed
+[10313.985876] mmc0: Starting deferred resume
+[10314.085308] mmc0: Deferred resume completed
+[10323.518454] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[10323.518749] android_work: android_work: sent uevent USB_STATE=RESUMED
+[10329.013173] mmc0: Starting deferred resume
+[10329.115737] mmc0: Deferred resume completed
+[10368.372291] qpnp_eoc_work: End of Charging
+[10370.554425] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[10370.554688] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[10371.652179] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[10371.652512] android_work: android_work: sent uevent USB_STATE=RESUMED
+[10374.012649] mmc0: Starting deferred resume
+[10374.103141] mmc0: Deferred resume completed
+[10402.013955] mmc0: Starting deferred resume
+[10402.116761] mmc0: Deferred resume completed
+[10418.691372] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[10418.691633] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[10419.796876] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[10419.797209] android_work: android_work: sent uevent USB_STATE=RESUMED
+[10423.011690] mmc0: Starting deferred resume
+[10423.101849] mmc0: Deferred resume completed
+[10463.012109] mmc0: Starting deferred resume
+[10463.113004] mmc0: Deferred resume completed
+[10466.818638] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[10466.818871] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[10473.944719] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[10473.945063] android_work: android_work: sent uevent USB_STATE=RESUMED
+[10496.013441] mmc0: Starting deferred resume
+[10496.116974] mmc0: Deferred resume completed
+[10520.966929] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[10520.967173] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[10526.003857] mmc0: Starting deferred resume
+[10526.107309] mmc0: Deferred resume completed
+[10537.716923] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[10537.717217] android_work: android_work: sent uevent USB_STATE=RESUMED
+[10557.414905] mmc0: Starting deferred resume
+[10557.516030] mmc0: Deferred resume completed
+[10584.719671] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[10584.719914] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[10590.014018] mmc0: Starting deferred resume
+[10590.114689] mmc0: Deferred resume completed
+[10602.640653] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[10602.640988] android_work: android_work: sent uevent USB_STATE=RESUMED
+[10607.511638] mmc0: Starting deferred resume
+[10607.602295] mmc0: Deferred resume completed
+[10626.293374] mmc0: Starting deferred resume
+[10626.393234] mmc0: Deferred resume completed
+[10642.583036] mmc0: Starting deferred resume
+[10642.686020] mmc0: Deferred resume completed
+[10649.704804] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[10649.705067] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[10659.796530] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[10659.796864] android_work: android_work: sent uevent USB_STATE=RESUMED
+[10697.015671] mmc0: Starting deferred resume
+[10697.108645] mmc0: Deferred resume completed
+[10706.823845] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[10706.824078] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[10710.020681] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[10710.020978] android_work: android_work: sent uevent USB_STATE=RESUMED
+[10733.013350] mmc0: Starting deferred resume
+[10733.117128] mmc0: Deferred resume completed
+[10749.412143] qpnp_eoc_work: End of Charging
+[10755.013404] mmc0: Starting deferred resume
+[10755.116520] mmc0: Deferred resume completed
+[10757.069306] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[10757.069764] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[10768.971995] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[10768.972339] android_work: android_work: sent uevent USB_STATE=RESUMED
+[10772.842847] mmc0: Starting deferred resume
+[10772.933947] mmc0: Deferred resume completed
+[10803.032960] mmc0: Starting deferred resume
+[10803.134960] mmc0: Deferred resume completed
+[10815.997451] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[10815.997679] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[10822.013971] mmc0: Starting deferred resume
+[10822.116882] mmc0: Deferred resume completed
+[10829.712741] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[10829.713073] android_work: android_work: sent uevent USB_STATE=RESUMED
+[10865.072887] mmc0: Starting deferred resume
+[10865.174977] mmc0: Deferred resume completed
+[10876.723415] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[10876.723649] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[10880.233409] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[10880.233703] android_work: android_work: sent uevent USB_STATE=RESUMED
+[10896.003815] mmc0: Starting deferred resume
+[10896.105143] mmc0: Deferred resume completed
+[10919.012120] mmc0: Starting deferred resume
+[10919.112655] mmc0: Deferred resume completed
+[10927.251237] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[10927.251478] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[10938.869105] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[10938.869441] android_work: android_work: sent uevent USB_STATE=RESUMED
+[10944.012762] mmc0: Starting deferred resume
+[10944.115692] mmc0: Deferred resume completed
+[10982.013908] mmc0: Starting deferred resume
+[10982.116878] mmc0: Deferred resume completed
+[10985.867581] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[10985.867817] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[11016.003828] mmc0: Starting deferred resume
+[11016.105403] mmc0: Deferred resume completed
+[11055.012146] mmc0: Starting deferred resume
+[11055.114818] mmc0: Deferred resume completed
+[11057.510676] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[11057.510979] android_work: android_work: sent uevent USB_STATE=RESUMED
+[11076.003822] mmc0: Starting deferred resume
+[11076.105379] mmc0: Deferred resume completed
+[11104.538180] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[11104.538453] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[11121.213041] mmc0: Starting deferred resume
+[11121.316473] mmc0: Deferred resume completed
+[11140.142145] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[11140.142480] android_work: android_work: sent uevent USB_STATE=RESUMED
+[11149.451364] qpnp_eoc_work: End of Charging
+[11172.015143] mmc0: Starting deferred resume
+[11172.115944] mmc0: Deferred resume completed
+[11196.004000] mmc0: Starting deferred resume
+[11196.105626] mmc0: Deferred resume completed
+[11236.213132] mmc0: Starting deferred resume
+[11236.313909] mmc0: Deferred resume completed
+[11259.013228] mmc0: Starting deferred resume
+[11259.112143] mmc0: Deferred resume completed
+[11302.133854] mmc0: Starting deferred resume
+[11302.237082] mmc0: Deferred resume completed
+[11332.005140] mmc0: Starting deferred resume
+[11332.106428] mmc0: Deferred resume completed
+[11353.014919] mmc0: Starting deferred resume
+[11353.117458] mmc0: Deferred resume completed
+[11404.695392] mmc0: Starting deferred resume
+[11404.797843] mmc0: Deferred resume completed
+[11474.083050] mmc0: Starting deferred resume
+[11474.187680] mmc0: Deferred resume completed
+[11505.013055] mmc0: Starting deferred resume
+[11505.115904] mmc0: Deferred resume completed
+[11530.512237] qpnp_eoc_work: End of Charging
+[11535.534840] mmc0: Starting deferred resume
+[11535.634994] mmc0: Deferred resume completed
+[11556.006334] mmc0: Starting deferred resume
+[11556.109833] mmc0: Deferred resume completed
+[11582.014485] mmc0: Starting deferred resume
+[11582.115573] mmc0: Deferred resume completed
+[11616.133716] mmc0: Starting deferred resume
+[11616.235424] mmc0: Deferred resume completed
+[11651.214108] mmc0: Starting deferred resume
+[11651.315563] mmc0: Deferred resume completed
+[11704.945386] mmc0: Starting deferred resume
+[11705.049578] mmc0: Deferred resume completed
+[11735.954573] mmc0: Starting deferred resume
+[11736.054825] mmc0: Deferred resume completed
+[11757.015018] mmc0: Starting deferred resume
+[11757.116421] mmc0: Deferred resume completed
+[11783.012153] mmc0: Starting deferred resume
+[11783.112945] mmc0: Deferred resume completed
+[11819.012383] mmc0: Starting deferred resume
+[11819.112328] mmc0: Deferred resume completed
+[11847.223058] mmc0: Starting deferred resume
+[11847.325266] mmc0: Deferred resume completed
+[11878.012951] mmc0: Starting deferred resume
+[11878.109098] mmc0: Deferred resume completed
+[11900.012405] mmc0: Starting deferred resume
+[11900.111054] mmc0: Deferred resume completed
+[11930.552297] qpnp_eoc_work: End of Charging
+[11930.564045] mmc0: Starting deferred resume
+[11930.669203] mmc0: Deferred resume completed
+[11947.074791] mmc0: Starting deferred resume
+[11947.175889] mmc0: Deferred resume completed
+[11968.012824] mmc0: Starting deferred resume
+[11968.118229] mmc0: Deferred resume completed
+[12005.200796] mmc0: Starting deferred resume
+[12005.303333] mmc0: Deferred resume completed
+[12056.043233] mmc0: Starting deferred resume
+[12056.140945] mmc0: Deferred resume completed
+[12078.012170] mmc0: Starting deferred resume
+[12078.105609] mmc0: Deferred resume completed
+[12109.013058] mmc0: Starting deferred resume
+[12109.115873] mmc0: Deferred resume completed
+[12134.102966] mmc0: Starting deferred resume
+[12134.205948] mmc0: Deferred resume completed
+[12181.033365] mmc0: Starting deferred resume
+[12181.134632] mmc0: Deferred resume completed
+[12207.044340] mmc0: Starting deferred resume
+[12207.147433] mmc0: Deferred resume completed
+[12224.015142] mmc0: Starting deferred resume
+[12224.119014] mmc0: Deferred resume completed
+[12244.184185] mmc0: Starting deferred resume
+[12244.286198] mmc0: Deferred resume completed
+[12269.243154] mmc0: Starting deferred resume
+[12269.345853] mmc0: Deferred resume completed
+[12300.014726] mmc0: Starting deferred resume
+[12300.119376] mmc0: Deferred resume completed
+[12326.012954] mmc0: Starting deferred resume
+[12326.115137] mmc0: Deferred resume completed
+[12330.611718] qpnp_eoc_work: End of Charging
+[12350.123197] mmc0: Starting deferred resume
+[12350.226040] mmc0: Deferred resume completed
+[12381.012950] mmc0: Starting deferred resume
+[12381.115068] mmc0: Deferred resume completed
+[12427.012591] mmc0: Starting deferred resume
+[12427.113805] mmc0: Deferred resume completed
+[12456.003781] mmc0: Starting deferred resume
+[12456.106264] mmc0: Deferred resume completed
+[12490.403116] mmc0: Starting deferred resume
+[12490.504739] mmc0: Deferred resume completed
+[12516.003757] mmc0: Starting deferred resume
+[12516.106251] mmc0: Deferred resume completed
+[12536.013048] mmc0: Starting deferred resume
+[12536.112879] mmc0: Deferred resume completed
+[12571.445849] mmc0: Starting deferred resume
+[12571.549607] mmc0: Deferred resume completed
+[12607.012536] mmc0: Starting deferred resume
+[12607.118388] mmc0: Deferred resume completed
+[12624.013249] mmc0: Starting deferred resume
+[12624.116067] mmc0: Deferred resume completed
+[12666.283037] mmc0: Starting deferred resume
+[12666.381090] mmc0: Deferred resume completed
+[12692.012963] mmc0: Starting deferred resume
+[12692.114743] mmc0: Deferred resume completed
+[12730.651769] qpnp_eoc_work: End of Charging
+[12735.674729] mmc0: Starting deferred resume
+[12735.776658] mmc0: Deferred resume completed
+[12756.006251] mmc0: Starting deferred resume
+[12756.101581] mmc0: Deferred resume completed
+[12782.015116] mmc0: Starting deferred resume
+[12782.115351] mmc0: Deferred resume completed
+[12815.954301] mmc0: Starting deferred resume
+[12816.054726] mmc0: Deferred resume completed
+[12837.014880] mmc0: Starting deferred resume
+[12837.112987] mmc0: Deferred resume completed
+[12876.005561] mmc0: Starting deferred resume
+[12876.105795] mmc0: Deferred resume completed
+[12897.015270] mmc0: Starting deferred resume
+[12897.111566] mmc0: Deferred resume completed
+[12927.445237] mmc0: Starting deferred resume
+[12927.547839] mmc0: Deferred resume completed
+[12956.413166] mmc0: Starting deferred resume
+[12956.516786] mmc0: Deferred resume completed
+[12973.012203] mmc0: Starting deferred resume
+[12973.114926] mmc0: Deferred resume completed
+[13020.013058] mmc0: Starting deferred resume
+[13020.115986] mmc0: Deferred resume completed
+[13055.954545] mmc0: Starting deferred resume
+[13056.056182] mmc0: Deferred resume completed
+[13077.014878] mmc0: Starting deferred resume
+[13077.116449] mmc0: Deferred resume completed
+[13092.692578] qpnp_eoc_work: End of Charging
+[13146.073311] mmc0: Starting deferred resume
+[13146.174689] mmc0: Deferred resume completed
+[13171.153517] mmc0: Starting deferred resume
+[13171.255412] mmc0: Deferred resume completed
+[13201.043510] mmc0: Starting deferred resume
+[13201.146077] mmc0: Deferred resume completed
+[13225.954969] mmc0: Starting deferred resume
+[13226.055315] mmc0: Deferred resume completed
+[13282.122047] mmc0: Starting deferred resume
+[13282.215727] mmc0: Deferred resume completed
+[13299.012247] mmc0: Starting deferred resume
+[13299.114808] mmc0: Deferred resume completed
+[13324.092917] mmc0: Starting deferred resume
+[13324.193051] mmc0: Deferred resume completed
+[13349.172968] mmc0: Starting deferred resume
+[13349.271450] mmc0: Deferred resume completed
+[13390.012946] mmc0: Starting deferred resume
+[13390.113381] mmc0: Deferred resume completed
+[13426.014688] mmc0: Starting deferred resume
+[13426.116332] mmc0: Deferred resume completed
+[13465.173313] mmc0: Starting deferred resume
+[13465.274845] mmc0: Deferred resume completed
+[13473.732324] qpnp_eoc_work: End of Charging
+[13495.364236] mmc0: Starting deferred resume
+[13495.466105] mmc0: Deferred resume completed
+[13531.074902] mmc0: Starting deferred resume
+[13531.178399] mmc0: Deferred resume completed
+[13566.073725] mmc0: Starting deferred resume
+[13566.173294] mmc0: Deferred resume completed
+[13582.195377] mmc0: Starting deferred resume
+[13582.298115] mmc0: Deferred resume completed
+[13628.012973] mmc0: Starting deferred resume
+[13628.113895] mmc0: Deferred resume completed
+[13671.223011] mmc0: Starting deferred resume
+[13671.326377] mmc0: Deferred resume completed
+[13706.302956] mmc0: Starting deferred resume
+[13706.400631] mmc0: Deferred resume completed
+[13741.382952] mmc0: Starting deferred resume
+[13741.484743] mmc0: Deferred resume completed
+[13782.013067] mmc0: Starting deferred resume
+[13782.111269] mmc0: Deferred resume completed
+[13799.004723] mmc0: Starting deferred resume
+[13799.109689] mmc0: Deferred resume completed
+[13818.015831] mmc0: Starting deferred resume
+[13818.115674] mmc0: Deferred resume completed
+[13851.013164] mmc0: Starting deferred resume
+[13851.115821] mmc0: Deferred resume completed
+[13856.772473] qpnp_eoc_work: End of Charging
+[13882.453324] mmc0: Starting deferred resume
+[13882.555030] mmc0: Deferred resume completed
+[13903.012367] mmc0: Starting deferred resume
+[13903.115206] mmc0: Deferred resume completed
+[13938.013309] mmc0: Starting deferred resume
+[13938.112671] mmc0: Deferred resume completed
+[13956.003752] mmc0: Starting deferred resume
+[13956.105321] mmc0: Deferred resume completed
+[14005.954521] mmc0: Starting deferred resume
+[14006.055909] mmc0: Deferred resume completed
+[14048.012959] mmc0: Starting deferred resume
+[14048.114695] mmc0: Deferred resume completed
+[14075.964711] mmc0: Starting deferred resume
+[14076.067938] mmc0: Deferred resume completed
+[14097.574256] mmc0: Starting deferred resume
+[14097.676256] mmc0: Deferred resume completed
+[14123.052957] mmc0: Starting deferred resume
+[14123.155958] mmc0: Deferred resume completed
+[14154.012992] mmc0: Starting deferred resume
+[14154.114479] mmc0: Deferred resume completed
+[14182.695403] mmc0: Starting deferred resume
+[14182.797999] mmc0: Deferred resume completed
+[14208.734467] synaptics_dsx_i2c 5-0020: fwu_read_f34_flash_status: Flash status = 7
+[14208.747387] synaptics_rmi4_sensor_report: spontaneous reset detected
+[14208.759587] mmc0: Starting deferred resume
+[14208.852751] mmc0: Deferred resume completed
+[14216.807713] qpnp_eoc_work: End of Charging
+[14219.648716] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[14219.648796] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[14219.848518] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[14219.849027] android_work: android_work: sent uevent USB_STATE=DISCONNECTED
+[14219.913864] android_work: android_work: sent uevent USB_STATE=CONNECTED
+[14219.920340] android_usb gadget: high-speed config #1: fe8050c8.android_usb
+[14219.971288] android_work: android_work: sent uevent USB_STATE=CONFIGURED
+[14220.114965] get_prop_batt_status: adjust charging status from full to discharging
+[14220.124910] get_prop_batt_status: adjust charging status from full to discharging
+[14220.130980] get_prop_batt_status: adjust charging status from full to discharging
+[14220.184223] get_prop_batt_status: adjust charging status from full to discharging
+[14220.217172] get_prop_batt_status: adjust charging status from full to discharging
+[14220.226589] get_prop_batt_status: adjust charging status from full to discharging
+[14220.256197] get_prop_batt_status: adjust charging status from full to discharging
+[14220.270461] get_prop_batt_status: adjust charging status from full to discharging
+[14220.296255] get_prop_batt_status: adjust charging status from full to discharging
+[14220.357862] get_prop_batt_status: adjust charging status from full to discharging
+[14220.366810] get_prop_batt_status: adjust charging status from full to discharging
+[14220.405707] get_prop_batt_status: adjust charging status from full to discharging
+[14220.416262] get_prop_batt_status: adjust charging status from full to discharging
+[14220.482543] get_prop_batt_status: adjust charging status from full to discharging
+[14220.489230] get_prop_batt_status: adjust charging status from full to discharging
+[14220.509717] get_prop_batt_status: adjust charging status from full to discharging
+[14220.516433] get_prop_batt_status: adjust charging status from full to discharging
+[14220.524656] get_prop_batt_status: adjust charging status from full to discharging
+[14220.573413] get_prop_batt_status: adjust charging status from full to discharging
+[14220.596891] get_prop_batt_status: adjust charging status from full to discharging
+[14220.620925] get_prop_batt_status: adjust charging status from full to discharging
+[14220.639950] get_prop_batt_status: adjust charging status from full to discharging
+[14220.696671] get_prop_batt_status: adjust charging status from full to discharging
+[14220.710146] get_prop_batt_status: adjust charging status from full to discharging
+[14220.773046] get_prop_batt_status: adjust charging status from full to discharging
+[14220.780040] get_prop_batt_status: adjust charging status from full to discharging
+[14316.002469] mmc0: Starting deferred resume
+[14316.095229] mmc0: Deferred resume completed
+[14371.968797] synaptics_rmi4_f11_abs_report: read data38=0x10
+[14372.215833] synaptics_dsx_i2c 5-0020: fwu_read_f34_flash_status: Flash status = 7
+[14372.228700] synaptics_rmi4_sensor_report: spontaneous reset detected
+[14375.012242] mmc0: Starting deferred resume
+[14375.107361] mmc0: Deferred resume completed
+[14405.013335] mmc0: Starting deferred resume
+[14405.125330] mmc0: Deferred resume completed
+[14435.013118] mmc0: Starting deferred resume
+[14435.116285] mmc0: Deferred resume completed
+[14471.073782] mmc0: Starting deferred resume
+[14471.175837] mmc0: Deferred resume completed
+[14507.014498] mmc0: Starting deferred resume
+[14507.115846] mmc0: Deferred resume completed
+[14536.013205] mmc0: Starting deferred resume
+[14536.112837] mmc0: Deferred resume completed
+[14555.496748] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[14555.497007] android_work: android_work: sent uevent USB_STATE=SUSPENDED
+[14566.699137] msm_otg f9a55000.usb: Avail curr from USB = 0
+[14566.706132] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_DISCONNECT_EVENT received
+[14566.707905] android_work: android_work: sent uevent USB_STATE=DISCONNECTED
+[14566.728224] msm_otg f9a55000.usb: phy_reset: success
+[14566.831471] get_bam_type_from_core_name: invalid BAM name()
+[14566.831505] usb_bam_get_connection_idx: Invalid bam, type=-22, name=
+[14566.831525] msm_bam_device_lpm_ok: Going to LPM now
+[14566.837406] msm_otg f9a55000.usb: USB in low power mode
+[14566.934365] ffs_data_put(): freeing
+[14586.033387] mmc0: Starting deferred resume
+[14586.138031] mmc0: Deferred resume completed
+[14588.737770] synaptics_dsx_i2c 5-0020: fwu_read_f34_flash_status: Flash status = 7
+[14588.752085] synaptics_rmi4_sensor_report: spontaneous reset detected
+[14656.283530] mmc0: Starting deferred resume
+[14656.388234] mmc0: Deferred resume completed
+[14697.013548] mmc0: Starting deferred resume
+[14697.127576] mmc0: Deferred resume completed
+[14727.192953] mmc0: Starting deferred resume
+[14727.300047] mmc0: Deferred resume completed
+[14744.003980] mmc0: Starting deferred resume
+[14744.116221] mmc0: Deferred resume completed
+[14766.562774] mmc0: Starting deferred resume
+[14766.670804] mmc0: Deferred resume completed
+[14790.014014] mmc0: Starting deferred resume
+[14790.124535] mmc0: Deferred resume completed
+[14836.693122] mmc0: Starting deferred resume
+[14836.805524] mmc0: Deferred resume completed
+[14857.013130] mmc0: Starting deferred resume
+[14857.122378] mmc0: Deferred resume completed
+[14893.013624] mmc0: Starting deferred resume
+[14893.120576] mmc0: Deferred resume completed
+[14916.004009] mmc0: Starting deferred resume
+[14916.116050] mmc0: Deferred resume completed
+[14952.213620] mmc0: Starting deferred resume
+[14952.316539] mmc0: Deferred resume completed
+[14988.013626] mmc0: Starting deferred resume
+[14988.130991] mmc0: Deferred resume completed
+[15026.006384] mmc0: Starting deferred resume
+[15026.111109] mmc0: Deferred resume completed
+[15057.433422] mmc0: Starting deferred resume
+[15057.533153] mmc0: Deferred resume completed
+[15087.594136] mmc0: Starting deferred resume
+[15087.704867] mmc0: Deferred resume completed
+[15122.663360] mmc0: Starting deferred resume
+[15122.778717] mmc0: Deferred resume completed
+[15156.007228] mmc0: Starting deferred resume
+[15156.108802] mmc0: Deferred resume completed
+[15187.802980] mmc0: Starting deferred resume
+[15187.904805] mmc0: Deferred resume completed
+[15204.004030] mmc0: Starting deferred resume
+[15204.111757] mmc0: Deferred resume completed
+[15253.033143] mmc0: Starting deferred resume
+[15253.137433] mmc0: Deferred resume completed
+[15276.003994] mmc0: Starting deferred resume
+[15276.116222] mmc0: Deferred resume completed
+[15323.173373] mmc0: Starting deferred resume
+[15323.282699] mmc0: Deferred resume completed
+[15359.015912] mmc0: Starting deferred resume
+[15359.126185] mmc0: Deferred resume completed
+[15389.223132] mmc0: Starting deferred resume
+[15389.332470] mmc0: Deferred resume completed
+[15422.718884] mmc0: Starting deferred resume
+[15422.825187] mmc0: Deferred resume completed
+[15446.005376] mmc0: Starting deferred resume
+[15446.117459] mmc0: Deferred resume completed
+[15483.012217] mmc0: Starting deferred resume
+[15483.125404] mmc0: Deferred resume completed
+[15508.563276] mmc0: Starting deferred resume
+[15508.667554] mmc0: Deferred resume completed
+[15543.642986] mmc0: Starting deferred resume
+[15543.749948] mmc0: Deferred resume completed
+[15573.814103] mmc0: Starting deferred resume
+[15573.922331] mmc0: Deferred resume completed
+[15613.894248] mmc0: Starting deferred resume
+[15614.002251] mmc0: Deferred resume completed
+[15636.003014] mmc0: Starting deferred resume
+[15636.113841] mmc0: Deferred resume completed
+[15669.002969] mmc0: Starting deferred resume
+[15669.110021] mmc0: Deferred resume completed
+[15705.074463] mmc0: Starting deferred resume
+[15705.176845] mmc0: Deferred resume completed
+[15722.945771] mmc0: Starting deferred resume
+[15723.054813] mmc0: Deferred resume completed
+[15756.004020] mmc0: Starting deferred resume
+[15756.111742] mmc0: Deferred resume completed
+[15773.075013] mmc0: Starting deferred resume
+[15773.186329] mmc0: Deferred resume completed
+[15798.013476] mmc0: Starting deferred resume
+[15798.122347] mmc0: Deferred resume completed
+[15837.014104] mmc0: Starting deferred resume
+[15837.121835] mmc0: Deferred resume completed
+[15876.003987] mmc0: Starting deferred resume
+[15876.116180] mmc0: Deferred resume completed
+[15897.014013] mmc0: Starting deferred resume
+[15897.120910] mmc0: Deferred resume completed
+[15936.003770] mmc0: Starting deferred resume
+[15936.109278] mmc0: Deferred resume completed
+[15966.064242] mmc0: Starting deferred resume
+[15966.165197] mmc0: Deferred resume completed
+[16034.083835] mmc0: Starting deferred resume
+[16034.189617] mmc0: Deferred resume completed
+[16056.007126] mmc0: Starting deferred resume
+[16056.119979] mmc0: Deferred resume completed
+[16091.082697] mmc0: Starting deferred resume
+[16091.184904] mmc0: Deferred resume completed
+[16156.233121] mmc0: Starting deferred resume
+[16156.341263] mmc0: Deferred resume completed
+[16191.303133] mmc0: Starting deferred resume
+[16191.412438] mmc0: Deferred resume completed
+[16227.013916] mmc0: Starting deferred resume
+[16227.124247] mmc0: Deferred resume completed
+[16257.013970] mmc0: Starting deferred resume
+[16257.125530] mmc0: Deferred resume completed
+[16291.513197] mmc0: Starting deferred resume
+[16291.619043] mmc0: Deferred resume completed
+[16327.014000] mmc0: Starting deferred resume
+[16327.124000] mmc0: Deferred resume completed
+[16350.955759] mmc0: Starting deferred resume
+[16351.063210] mmc0: Deferred resume completed
+[16396.732955] mmc0: Starting deferred resume
+[16396.836439] mmc0: Deferred resume completed
+[16415.013141] mmc0: Starting deferred resume
+[16415.127522] mmc0: Deferred resume completed
+[16432.076970] mmc0: Starting deferred resume
+[16432.190819] mmc0: Deferred resume completed
+[16462.253961] mmc0: Starting deferred resume
+[16462.365653] mmc0: Deferred resume completed
+[16476.004020] mmc0: Starting deferred resume
+[16476.111696] mmc0: Deferred resume completed
+[16497.453389] mmc0: Starting deferred resume
+[16497.555871] mmc0: Deferred resume completed
+[16533.013374] mmc0: Starting deferred resume
+[16533.129910] mmc0: Deferred resume completed
+[16567.572939] mmc0: Starting deferred resume
+[16567.679722] mmc0: Deferred resume completed
+[16596.004205] mmc0: Starting deferred resume
+[16596.109547] mmc0: Deferred resume completed
+[16642.833145] mmc0: Starting deferred resume
+[16642.941316] mmc0: Deferred resume completed
+[16670.013174] mmc0: Starting deferred resume
+[16670.121065] mmc0: Deferred resume completed
+[16702.013003] mmc0: Starting deferred resume
+[16702.118832] mmc0: Deferred resume completed
+[16728.016192] mmc0: Starting deferred resume
+[16728.128129] mmc0: Deferred resume completed
+[16749.013373] mmc0: Starting deferred resume
+[16749.127162] mmc0: Deferred resume completed
+[16775.954765] mmc0: Starting deferred resume
+[16776.057805] mmc0: Deferred resume completed
+[16815.312950] mmc0: Starting deferred resume
+[16815.422222] mmc0: Deferred resume completed
+[16872.012999] mmc0: Starting deferred resume
+[16872.117003] mmc0: Deferred resume completed
+[16896.004018] mmc0: Starting deferred resume
+[16896.115038] mmc0: Deferred resume completed
+[16956.004037] mmc0: Starting deferred resume
+[16956.116253] mmc0: Deferred resume completed
+[17001.313118] mmc0: Starting deferred resume
+[17001.419032] mmc0: Deferred resume completed
+[17037.016422] mmc0: Starting deferred resume
+[17037.130838] mmc0: Deferred resume completed
+[17065.013982] mmc0: Starting deferred resume
+[17065.125635] mmc0: Deferred resume completed
+[17101.523317] mmc0: Starting deferred resume
+[17101.632252] mmc0: Deferred resume completed
+[17142.163702] mmc0: Starting deferred resume
+[17142.266331] mmc0: Deferred resume completed
+[17178.014506] mmc0: Starting deferred resume
+[17178.123099] mmc0: Deferred resume completed
+[17196.004010] mmc0: Starting deferred resume
+[17196.116813] mmc0: Deferred resume completed
+[17217.433613] mmc0: Starting deferred resume
+[17217.544066] mmc0: Deferred resume completed
+[17246.003754] mmc0: Starting deferred resume
+[17246.109275] mmc0: Deferred resume completed
+[17263.012382] mmc0: Starting deferred resume
+[17263.125471] mmc0: Deferred resume completed
+[17286.892983] mmc0: Starting deferred resume
+[17287.000148] mmc0: Deferred resume completed
+[17339.015364] mmc0: Starting deferred resume
+[17339.125879] mmc0: Deferred resume completed
+[17351.216792] synaptics_rmi4_f11_abs_report: read data38=0x10
+[17351.470268] synaptics_dsx_i2c 5-0020: fwu_read_f34_flash_status: Flash status = 7
+[17351.483503] synaptics_rmi4_sensor_report: spontaneous reset detected
+[17369.548881] msm_otg f9a55000.usb: USB exited from low power mode
+[17369.618691] get_running_test_result: get_running_test_result info: usb=1 batt_pres=1 batt_volt=4139467 batt_temp=243 result=0x0
+[17369.767638] get_running_test_result: get_running_test_result info: usb=1 batt_pres=1 batt_volt=4164508 batt_temp=243 result=0x0
+[17369.875009] mmc0: Starting deferred resume
+[17369.974358] mmc0: Deferred resume completed
+[17370.204205] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESET_EVENT received
+[17370.858570] read descriptors
+[17370.858604] read descriptors
+[17370.858626] read strings
+[17370.858698] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_CONNECT_EVENT received
+[17370.962173] msm_otg f9a55000.usb: Avail curr from USB = 150
+[17370.962814] android_work: android_work: did not send uevent (0 0   (null))
+[17371.026251] android_work: android_work: sent uevent USB_STATE=CONNECTED
+[17371.032370] android_usb gadget: high-speed config #1: fe8050c8.android_usb
+[17371.032539] msm_otg f9a55000.usb: Avail curr from USB = 500
+[17371.091378] android_work: android_work: sent uevent USB_STATE=CONFIGURED
+[17371.664929] qpnp_chg_usb_low_power_work: usb present is 1 , usb_ma is 200 ,vusb_uv is5013510 ,vchg_uv is 4966317 
+[17372.281318] qpnp_chg_usb_low_power_work: vbat_uv is 4342101 ,vusb_uv is 5011057 ,vchg_uv is 4967236 ,usb_present is 1,usb_ma is 300 
+[17372.871327] qpnp_chg_usb_low_power_work: vbat_uv is 4342119 ,vusb_uv is 5024803 ,vchg_uv is 4974417 ,usb_present is 1,usb_ma is 400 
+[17373.511356] qpnp_chg_usb_low_power_work: vbat_uv is 4342193 ,vusb_uv is 5016212 ,vchg_uv is 4947610 ,usb_present is 1,usb_ma is 500 
+[17408.014696] mmc0: Starting deferred resume
+[17408.116676] mmc0: Deferred resume completed
+[17433.365060] mmc0: Starting deferred resume
+[17433.467246] mmc0: Deferred resume completed
+[17487.012148] mmc0: Starting deferred resume
+[17487.114681] mmc0: Deferred resume completed
+[17523.016057] mmc0: Starting deferred resume
+[17523.118272] mmc0: Deferred resume completed
+[17553.602935] mmc0: Starting deferred resume
+[17553.705793] mmc0: Deferred resume completed
+[17586.062946] mmc0: Starting deferred resume
+[17586.161563] mmc0: Deferred resume completed
+[17610.952869] mmc0: Starting deferred resume
+[17611.055183] mmc0: Deferred resume completed
+[17640.013928] mmc0: Starting deferred resume
+[17640.116972] mmc0: Deferred resume completed
+[17674.017954] mmc0: Starting deferred resume
+[17674.114361] mmc0: Deferred resume completed
+[17692.071740] mmc0: Starting deferred resume
+[17692.181371] mmc0: Deferred resume completed
+[17709.012788] mmc0: Starting deferred resume
+[17709.112908] mmc0: Deferred resume completed
+[17728.071765] mmc0: Starting deferred resume
+[17728.170292] mmc0: Deferred resume completed
+[17749.017522] mmc0: Starting deferred resume
+[17749.115922] mmc0: Deferred resume completed
+[17789.015902] mmc0: Starting deferred resume
+[17789.115344] mmc0: Deferred resume completed
+[17808.582959] mmc0: Starting deferred resume
+[17808.685171] mmc0: Deferred resume completed
+[17825.012603] mmc0: Starting deferred resume
+[17825.114965] mmc0: Deferred resume completed
+[17844.073848] mmc0: Starting deferred resume
+[17844.174964] mmc0: Deferred resume completed
+[17880.072958] mmc0: Starting deferred resume
+[17880.170880] mmc0: Deferred resume completed
+[17901.013010] mmc0: Starting deferred resume
+[17901.114753] mmc0: Deferred resume completed
+[17940.013919] mmc0: Starting deferred resume
+[17940.117537] mmc0: Deferred resume completed
+[17975.081710] mmc0: Starting deferred resume
+[17975.176793] mmc0: Deferred resume completed
+[18006.064503] mmc0: Starting deferred resume
+[18006.166568] mmc0: Deferred resume completed
+[18036.003929] mmc0: Starting deferred resume
+[18036.108321] mmc0: Deferred resume completed
+[18072.073654] mmc0: Starting deferred resume
+[18072.174979] mmc0: Deferred resume completed
+[18090.017456] mmc0: Starting deferred resume
+[18090.116299] mmc0: Deferred resume completed
+[18108.073091] mmc0: Starting deferred resume
+[18108.171010] mmc0: Deferred resume completed
+[18126.017046] mmc0: Starting deferred resume
+[18126.119064] mmc0: Deferred resume completed
+[18144.073085] mmc0: Starting deferred resume
+[18144.177786] mmc0: Deferred resume completed
+[18180.073085] mmc0: Starting deferred resume
+[18180.176511] mmc0: Deferred resume completed
+[18202.012971] mmc0: Starting deferred resume
+[18202.112456] mmc0: Deferred resume completed
+[18247.012116] mmc0: Starting deferred resume
+[18247.114933] mmc0: Deferred resume completed
+[18276.003897] mmc0: Starting deferred resume
+[18276.106982] mmc0: Deferred resume completed
+[18312.073185] mmc0: Starting deferred resume
+[18312.171325] mmc0: Deferred resume completed
+[18336.003763] mmc0: Starting deferred resume
+[18336.106412] mmc0: Deferred resume completed
+[18378.012976] mmc0: Starting deferred resume
+[18378.111152] mmc0: Deferred resume completed
+[18383.571743] qpnp_eoc_work: End of Charging
+[18414.013483] mmc0: Starting deferred resume
+[18414.116722] mmc0: Deferred resume completed
+[18449.012755] mmc0: Starting deferred resume
+[18449.112217] mmc0: Deferred resume completed
+[18482.343090] mmc0: Starting deferred resume
+[18482.441744] mmc0: Deferred resume completed
+[18486.711423] msm_otg f9a55000.usb: Avail curr from USB = 2
+[18486.711551] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[18486.714258] msm_otg f9a55000.usb: Avail curr from USB = 0
+[18486.714538] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_DISCONNECT_EVENT received
+[18486.718327] android_work: android_work: sent uevent USB_STATE=DISCONNECTED
+[18486.736969] msm_otg f9a55000.usb: phy_reset: success
+[18486.841592] get_bam_type_from_core_name: invalid BAM name()
+[18486.841626] usb_bam_get_connection_idx: Invalid bam, type=-22, name=
+[18486.841645] msm_bam_device_lpm_ok: Going to LPM now
+[18486.847029] msm_otg f9a55000.usb: USB in low power mode
+[18486.966180] ffs_data_put(): freeing
+[18491.804991] PM: suspend entry 2026-10-25 21:35:09.124728697 UTC
+[18491.805093] PM: Syncing filesystems ... done.
+[18492.064191] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[18492.066504] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18492.068374] Suspending console(s) (use no_console_suspend to debug)
+[18492.078348] bcmsdh_sdmmc_suspend Enter
+[18492.078358] bcmsdh_sdmmc_suspend Enter
+[18492.084201] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18492.084225] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18492.151548] PM: suspend of devices complete after 81.934 msecs
+[18492.152906] PM: late suspend of devices complete after 1.332 msecs
+[18492.155201] PM: noirq suspend of devices complete after 2.267 msecs
+[18492.155218] Disabling non-boot CPUs ...
+[18492.155561] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18492.155561] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18492.155561] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18492.155561] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18492.155561] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18492.155561] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18492.155561] Suspended for 0.000 seconds
+[18492.157722] PM: noirq resume of devices complete after 1.145 msecs
+[18492.160574] PM: early resume of devices complete after 1.051 msecs
+[18492.161499] bcmsdh_sdmmc_resume Enter
+[18492.161510] bcmsdh_sdmmc_resume Enter
+[18492.179196] PM: resume of devices complete after 18.589 msecs
+[18492.181824] Restarting tasks ... done.
+[18492.225330] PM: suspend exit 2026-10-25 21:36:01.184592010 UTC
+[18492.225451] PM: suspend entry 2026-10-25 21:36:01.184724145 UTC
+[18492.236128] mmc0: Starting deferred resume
+[18492.338412] mmc0: Deferred resume completed
+[18492.225528] PM: Syncing filesystems ... done.
+[18492.535983] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18492.537441] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18492.538767] Suspending console(s) (use no_console_suspend to debug)
+[18492.541948] bcmsdh_sdmmc_suspend Enter
+[18492.541951] bcmsdh_sdmmc_suspend Enter
+[18492.544701] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18492.544711] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18492.618217] PM: suspend of devices complete after 79.027 msecs
+[18492.618654] PM: late suspend of devices complete after 0.428 msecs
+[18492.619423] PM: noirq suspend of devices complete after 0.760 msecs
+[18492.619429] Disabling non-boot CPUs ...
+[18492.619582] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18492.619582] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18492.619582] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18492.619582] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18492.619582] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18492.619582] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18492.619582] Suspended for 0.000 seconds
+[18492.621040] PM: noirq resume of devices complete after 0.752 msecs
+[18492.622640] PM: early resume of devices complete after 0.488 msecs
+[18492.622925] bcmsdh_sdmmc_resume Enter
+[18492.622929] bcmsdh_sdmmc_resume Enter
+[18492.632107] PM: resume of devices complete after 9.454 msecs
+[18492.632868] Restarting tasks ... done.
+[18492.649344] PM: suspend exit 2026-10-25 21:37:01.145076622 UTC
+[18492.649730] PM: suspend entry 2026-10-25 21:37:01.145466570 UTC
+[18492.672951] mmc0: Starting deferred resume
+[18492.778200] mmc0: Deferred resume completed
+[18492.649755] PM: Syncing filesystems ... done.
+[18492.945485] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[18492.947789] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18492.949774] Suspending console(s) (use no_console_suspend to debug)
+[18492.959743] bcmsdh_sdmmc_suspend Enter
+[18492.959754] bcmsdh_sdmmc_suspend Enter
+[18492.965625] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18492.965649] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18493.041453] PM: suspend of devices complete after 90.507 msecs
+[18493.042806] PM: late suspend of devices complete after 1.328 msecs
+[18493.045093] PM: noirq suspend of devices complete after 2.259 msecs
+[18493.045110] Disabling non-boot CPUs ...
+[18493.045446] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18493.045446] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18493.045446] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18493.045446] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18493.045446] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18493.045446] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18493.045446] Suspended for 0.000 seconds
+[18493.047690] PM: noirq resume of devices complete after 1.145 msecs
+[18493.050541] PM: early resume of devices complete after 1.055 msecs
+[18493.051574] bcmsdh_sdmmc_resume Enter
+[18493.051584] bcmsdh_sdmmc_resume Enter
+[18493.069113] PM: resume of devices complete after 18.538 msecs
+[18493.071774] Restarting tasks ... done.
+[18493.104161] PM: suspend exit 2026-10-25 21:38:01.174244410 UTC
+[18493.104358] PM: suspend entry 2026-10-25 21:38:01.174450765 UTC
+[18493.115124] mmc0: Starting deferred resume
+[18493.222021] mmc0: Deferred resume completed
+[18493.104434] PM: Syncing filesystems ... done.
+[18493.374123] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18493.375898] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18493.377448] Suspending console(s) (use no_console_suspend to debug)
+[18493.382884] bcmsdh_sdmmc_suspend Enter
+[18493.382890] bcmsdh_sdmmc_suspend Enter
+[18493.386672] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18493.386688] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18493.458844] PM: suspend of devices complete after 80.655 msecs
+[18493.459579] PM: late suspend of devices complete after 0.721 msecs
+[18493.460883] PM: noirq suspend of devices complete after 1.288 msecs
+[18493.460894] Disabling non-boot CPUs ...
+[18493.461099] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18493.461099] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18493.461099] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18493.461099] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18493.461099] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18493.461099] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18493.461099] Suspended for 0.000 seconds
+[18493.462889] PM: noirq resume of devices complete after 0.856 msecs
+[18493.464747] PM: early resume of devices complete after 0.666 msecs
+[18493.465131] bcmsdh_sdmmc_resume Enter
+[18493.465137] bcmsdh_sdmmc_resume Enter
+[18493.476844] PM: resume of devices complete after 12.077 msecs
+[18493.478115] Restarting tasks ... done.
+[18493.505247] PM: suspend exit 2026-10-25 21:39:01.159723085 UTC
+[18493.505352] PM: suspend entry 2026-10-25 21:39:01.159833294 UTC
+[18493.527618] mmc0: Starting deferred resume
+[18493.630879] mmc0: Deferred resume completed
+[18493.505391] PM: Syncing filesystems ... done.
+[18493.806101] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18493.807508] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18493.808788] Suspending console(s) (use no_console_suspend to debug)
+[18493.811526] bcmsdh_sdmmc_suspend Enter
+[18493.811529] bcmsdh_sdmmc_suspend Enter
+[18493.814101] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18493.814111] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18493.887612] PM: suspend of devices complete after 78.442 msecs
+[18493.887985] PM: late suspend of devices complete after 0.366 msecs
+[18493.888652] PM: noirq suspend of devices complete after 0.659 msecs
+[18493.888657] Disabling non-boot CPUs ...
+[18493.888795] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18493.888795] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18493.888795] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18493.888795] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18493.888795] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18493.888795] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18493.888795] Suspended for 0.000 seconds
+[18493.890228] PM: noirq resume of devices complete after 0.735 msecs
+[18493.891706] PM: early resume of devices complete after 0.451 msecs
+[18493.891971] bcmsdh_sdmmc_resume Enter
+[18493.891974] bcmsdh_sdmmc_resume Enter
+[18493.900767] PM: resume of devices complete after 9.050 msecs
+[18493.901469] Restarting tasks ... done.
+[18493.916787] PM: suspend exit 2026-10-25 21:40:01.144366291 UTC
+[18493.917163] PM: suspend entry 2026-10-25 21:40:01.144744833 UTC
+[18493.939546] mmc0: Starting deferred resume
+[18494.042881] mmc0: Deferred resume completed
+[18493.917185] PM: Syncing filesystems ... done.
+[18494.209767] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18494.211182] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18494.212629] Suspending console(s) (use no_console_suspend to debug)
+[18494.216865] bcmsdh_sdmmc_suspend Enter
+[18494.216869] bcmsdh_sdmmc_suspend Enter
+[18494.220201] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18494.220216] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18494.288502] PM: suspend of devices complete after 75.225 msecs
+[18494.289092] PM: late suspend of devices complete after 0.577 msecs
+[18494.290169] PM: noirq suspend of devices complete after 1.064 msecs
+[18494.290178] Disabling non-boot CPUs ...
+[18494.290363] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18494.290363] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18494.290363] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18494.290363] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18494.290363] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18494.290363] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18494.290363] Suspended for 0.000 seconds
+[18494.292053] PM: noirq resume of devices complete after 0.796 msecs
+[18494.293690] PM: early resume of devices complete after 0.558 msecs
+[18494.294014] bcmsdh_sdmmc_resume Enter
+[18494.294018] bcmsdh_sdmmc_resume Enter
+[18494.304159] PM: resume of devices complete after 10.454 msecs
+[18494.305155] Restarting tasks ... done.
+[18494.326472] PM: suspend exit 2026-10-25 21:41:01.152348299 UTC
+[18494.326548] PM: suspend entry 2026-10-25 21:41:01.152427153 UTC
+[18494.345705] mmc0: Starting deferred resume
+[18494.445977] mmc0: Deferred resume completed
+[18494.326576] PM: Syncing filesystems ... done.
+[18494.604909] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18494.606340] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18494.607637] Suspending console(s) (use no_console_suspend to debug)
+[18494.610489] bcmsdh_sdmmc_suspend Enter
+[18494.610492] bcmsdh_sdmmc_suspend Enter
+[18494.613214] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18494.613224] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18494.687585] PM: suspend of devices complete after 79.547 msecs
+[18494.687987] PM: late suspend of devices complete after 0.394 msecs
+[18494.688703] PM: noirq suspend of devices complete after 0.708 msecs
+[18494.688709] Disabling non-boot CPUs ...
+[18494.688854] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18494.688854] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18494.688854] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18494.688854] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18494.688854] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18494.688854] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18494.688854] Suspended for 0.000 seconds
+[18494.690295] PM: noirq resume of devices complete after 0.746 msecs
+[18494.691830] PM: early resume of devices complete after 0.466 msecs
+[18494.692100] bcmsdh_sdmmc_resume Enter
+[18494.692104] bcmsdh_sdmmc_resume Enter
+[18494.701043] PM: resume of devices complete after 9.200 msecs
+[18494.701741] Restarting tasks ... done.
+[18494.717950] PM: suspend exit 2026-10-25 21:42:01.146177390 UTC
+[18494.718007] PM: suspend entry 2026-10-25 21:42:01.146238431 UTC
+[18494.741278] mmc0: Starting deferred resume
+[18494.846484] mmc0: Deferred resume completed
+[18494.718335] PM: Syncing filesystems ... done.
+[18495.003825] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18495.004972] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18495.006293] Suspending console(s) (use no_console_suspend to debug)
+[18495.009376] bcmsdh_sdmmc_suspend Enter
+[18495.009378] bcmsdh_sdmmc_suspend Enter
+[18495.012205] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18495.012215] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18495.087810] PM: suspend of devices complete after 81.092 msecs
+[18495.088247] PM: late suspend of devices complete after 0.428 msecs
+[18495.089016] PM: noirq suspend of devices complete after 0.760 msecs
+[18495.089022] Disabling non-boot CPUs ...
+[18495.089175] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18495.089175] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18495.089175] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18495.089175] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18495.089175] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18495.089175] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18495.089175] Suspended for 0.000 seconds
+[18495.090637] PM: noirq resume of devices complete after 0.752 msecs
+[18495.092238] PM: early resume of devices complete after 0.488 msecs
+[18495.092527] bcmsdh_sdmmc_resume Enter
+[18495.092530] bcmsdh_sdmmc_resume Enter
+[18495.101752] PM: resume of devices complete after 9.501 msecs
+[18495.102509] Restarting tasks ... done.
+[18495.119088] PM: suspend exit 2026-10-25 21:43:01.147360647 UTC
+[18495.119478] PM: suspend entry 2026-10-25 21:43:01.147755179 UTC
+[18495.139508] mmc0: Starting deferred resume
+[18495.242653] mmc0: Deferred resume completed
+[18495.119503] PM: Syncing filesystems ... done.
+[18495.903502] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[18495.905793] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18495.907778] Suspending console(s) (use no_console_suspend to debug)
+[18495.917742] bcmsdh_sdmmc_suspend Enter
+[18495.917751] bcmsdh_sdmmc_suspend Enter
+[18495.923603] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18495.923627] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18495.991182] PM: suspend of devices complete after 82.236 msecs
+[18495.992539] PM: late suspend of devices complete after 1.333 msecs
+[18495.994828] PM: noirq suspend of devices complete after 2.262 msecs
+[18495.994844] Disabling non-boot CPUs ...
+[18495.995179] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18495.995179] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18495.995179] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18495.995179] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18495.995179] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18495.995179] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18495.995179] Suspended for 0.000 seconds
+[18495.997430] PM: noirq resume of devices complete after 1.145 msecs
+[18496.000281] PM: early resume of devices complete after 1.049 msecs
+[18496.001337] bcmsdh_sdmmc_resume Enter
+[18496.001348] bcmsdh_sdmmc_resume Enter
+[18496.018901] PM: resume of devices complete after 18.586 msecs
+[18496.021522] Restarting tasks ... done.
+[18496.064775] PM: suspend exit 2026-10-25 21:44:01.187265155 UTC
+[18496.064965] PM: suspend entry 2026-10-25 21:44:01.187466717 UTC
+[18496.074742] mmc0: Starting deferred resume
+[18496.178882] mmc0: Deferred resume completed
+[18496.065042] PM: Syncing filesystems ... done.
+[18496.353440] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18496.354839] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18496.356119] Suspending console(s) (use no_console_suspend to debug)
+[18496.358767] bcmsdh_sdmmc_suspend Enter
+[18496.358770] bcmsdh_sdmmc_suspend Enter
+[18496.361414] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18496.361424] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18496.437362] PM: suspend of devices complete after 80.862 msecs
+[18496.437734] PM: late suspend of devices complete after 0.364 msecs
+[18496.438409] PM: noirq suspend of devices complete after 0.668 msecs
+[18496.438415] Disabling non-boot CPUs ...
+[18496.438553] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18496.438553] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18496.438553] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18496.438553] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18496.438553] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18496.438553] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18496.438553] Suspended for 0.000 seconds
+[18496.439974] PM: noirq resume of devices complete after 0.734 msecs
+[18496.441447] PM: early resume of devices complete after 0.450 msecs
+[18496.441724] bcmsdh_sdmmc_resume Enter
+[18496.441727] bcmsdh_sdmmc_resume Enter
+[18496.450610] PM: resume of devices complete after 9.151 msecs
+[18496.451312] Restarting tasks ... done.
+[18496.466749] PM: suspend exit 2026-10-25 21:45:01.146334193 UTC
+[18496.466802] PM: suspend entry 2026-10-25 21:45:01.146391016 UTC
+[18496.489490] mmc0: Starting deferred resume
+[18496.595064] mmc0: Deferred resume completed
+[18496.466822] PM: Syncing filesystems ... done.
+[18496.755472] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18496.756863] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18496.758145] Suspending console(s) (use no_console_suspend to debug)
+[18496.760887] bcmsdh_sdmmc_suspend Enter
+[18496.760889] bcmsdh_sdmmc_suspend Enter
+[18496.763456] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18496.763466] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18496.837312] PM: suspend of devices complete after 78.786 msecs
+[18496.837688] PM: late suspend of devices complete after 0.368 msecs
+[18496.838363] PM: noirq suspend of devices complete after 0.667 msecs
+[18496.838368] Disabling non-boot CPUs ...
+[18496.838507] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18496.838507] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18496.838507] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18496.838507] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18496.838507] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18496.838507] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18496.838507] Suspended for 0.000 seconds
+[18496.839933] PM: noirq resume of devices complete after 0.735 msecs
+[18496.841407] PM: early resume of devices complete after 0.452 msecs
+[18496.841673] bcmsdh_sdmmc_resume Enter
+[18496.841676] bcmsdh_sdmmc_resume Enter
+[18496.850449] PM: resume of devices complete after 9.030 msecs
+[18496.851157] Restarting tasks ... done.
+[18496.866605] PM: suspend exit 2026-10-25 21:46:01.146595368 UTC
+[18496.867038] PM: suspend entry 2026-10-25 21:46:01.147031306 UTC
+[18496.890109] mmc0: Starting deferred resume
+[18496.995795] mmc0: Deferred resume completed
+[18496.867060] PM: Syncing filesystems ... done.
+[18497.159269] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18497.161119] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18497.162916] Suspending console(s) (use no_console_suspend to debug)
+[18497.170925] bcmsdh_sdmmc_suspend Enter
+[18497.170933] bcmsdh_sdmmc_suspend Enter
+[18497.175766] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18497.175787] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18497.250181] PM: suspend of devices complete after 86.273 msecs
+[18497.251434] PM: late suspend of devices complete after 1.228 msecs
+[18497.253287] PM: noirq suspend of devices complete after 1.831 msecs
+[18497.253301] Disabling non-boot CPUs ...
+[18497.253577] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18497.253577] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18497.253577] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18497.253577] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18497.253577] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18497.253577] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18497.253577] Suspended for 0.000 seconds
+[18497.255565] PM: noirq resume of devices complete after 1.016 msecs
+[18497.257969] PM: early resume of devices complete after 0.869 msecs
+[18497.258696] bcmsdh_sdmmc_resume Enter
+[18497.258703] bcmsdh_sdmmc_resume Enter
+[18497.273220] PM: resume of devices complete after 15.223 msecs
+[18497.275155] Restarting tasks ... done.
+[18497.310107] PM: suspend exit 2026-10-25 21:47:01.175168522 UTC
+[18497.310259] PM: suspend entry 2026-10-25 21:47:01.175328678 UTC
+[18497.316554] mmc0: Starting deferred resume
+[18497.421570] mmc0: Deferred resume completed
+[18497.310318] PM: Syncing filesystems ... done.
+[18497.585720] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[18497.588033] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18497.590026] Suspending console(s) (use no_console_suspend to debug)
+[18497.599955] bcmsdh_sdmmc_suspend Enter
+[18497.599965] bcmsdh_sdmmc_suspend Enter
+[18497.605872] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18497.605898] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18497.680956] PM: suspend of devices complete after 89.486 msecs
+[18497.682309] PM: late suspend of devices complete after 1.328 msecs
+[18497.684603] PM: noirq suspend of devices complete after 2.268 msecs
+[18497.684620] Disabling non-boot CPUs ...
+[18497.684954] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18497.684954] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18497.684954] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18497.684954] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18497.684954] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18497.684954] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18497.684954] Suspended for 0.000 seconds
+[18497.687194] PM: noirq resume of devices complete after 1.144 msecs
+[18497.690047] PM: early resume of devices complete after 1.055 msecs
+[18497.691083] bcmsdh_sdmmc_resume Enter
+[18497.691093] bcmsdh_sdmmc_resume Enter
+[18497.708356] PM: resume of devices complete after 18.275 msecs
+[18497.710985] Restarting tasks ... done.
+[18497.745877] PM: suspend exit 2026-10-25 21:48:01.180024853 UTC
+[18497.746066] PM: suspend entry 2026-10-25 21:48:01.180222092 UTC
+[18497.754970] mmc0: Starting deferred resume
+[18497.860250] mmc0: Deferred resume completed
+[18497.746141] PM: Syncing filesystems ... done.
+[18498.018239] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18498.020029] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18498.021582] Suspending console(s) (use no_console_suspend to debug)
+[18498.026882] bcmsdh_sdmmc_suspend Enter
+[18498.026888] bcmsdh_sdmmc_suspend Enter
+[18498.030858] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18498.030875] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18498.098363] PM: suspend of devices complete after 76.027 msecs
+[18498.099101] PM: late suspend of devices complete after 0.723 msecs
+[18498.100404] PM: noirq suspend of devices complete after 1.288 msecs
+[18498.100414] Disabling non-boot CPUs ...
+[18498.100621] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18498.100621] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18498.100621] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18498.100621] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18498.100621] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18498.100621] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18498.100621] Suspended for 0.000 seconds
+[18498.102411] PM: noirq resume of devices complete after 0.855 msecs
+[18498.104263] PM: early resume of devices complete after 0.667 msecs
+[18498.104642] bcmsdh_sdmmc_resume Enter
+[18498.104647] bcmsdh_sdmmc_resume Enter
+[18498.116336] PM: resume of devices complete after 12.053 msecs
+[18498.117605] Restarting tasks ... done.
+[18498.144702] PM: suspend exit 2026-10-25 21:49:01.163217954 UTC
+[18498.144804] PM: suspend entry 2026-10-25 21:49:01.163326912 UTC
+[18498.166792] mmc0: Starting deferred resume
+[18498.271833] mmc0: Deferred resume completed
+[18498.144843] PM: Syncing filesystems ... done.
+[18498.437726] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18498.439392] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18498.440725] Suspending console(s) (use no_console_suspend to debug)
+[18498.445008] bcmsdh_sdmmc_suspend Enter
+[18498.445013] bcmsdh_sdmmc_suspend Enter
+[18498.448346] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18498.448361] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18498.518051] PM: suspend of devices complete after 76.676 msecs
+[18498.518642] PM: late suspend of devices complete after 0.579 msecs
+[18498.519716] PM: noirq suspend of devices complete after 1.063 msecs
+[18498.519725] Disabling non-boot CPUs ...
+[18498.519911] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18498.519911] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18498.519911] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18498.519911] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18498.519911] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18498.519911] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18498.519911] Suspended for 0.000 seconds
+[18498.521594] PM: noirq resume of devices complete after 0.797 msecs
+[18498.523231] PM: early resume of devices complete after 0.559 msecs
+[18498.523551] bcmsdh_sdmmc_resume Enter
+[18498.523554] bcmsdh_sdmmc_resume Enter
+[18498.533719] PM: resume of devices complete after 10.472 msecs
+[18498.534720] Restarting tasks ... done.
+[18498.556039] PM: suspend exit 2026-10-25 21:50:01.155564389 UTC
+[18498.556114] PM: suspend entry 2026-10-25 21:50:01.155643035 UTC
+[18498.562258] mmc0: Starting deferred resume
+[18498.669208] mmc0: Deferred resume completed
+[18498.556143] PM: Syncing filesystems ... done.
+[18498.824389] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18498.826379] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18498.828134] Suspending console(s) (use no_console_suspend to debug)
+[18498.835829] bcmsdh_sdmmc_suspend Enter
+[18498.835837] bcmsdh_sdmmc_suspend Enter
+[18498.840650] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18498.840669] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18498.909730] PM: suspend of devices complete after 80.736 msecs
+[18498.910930] PM: late suspend of devices complete after 1.177 msecs
+[18498.912677] PM: noirq suspend of devices complete after 1.726 msecs
+[18498.912690] Disabling non-boot CPUs ...
+[18498.912959] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18498.912959] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18498.912959] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18498.912959] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18498.912959] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18498.912959] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18498.912959] Suspended for 0.000 seconds
+[18498.914962] PM: noirq resume of devices complete after 1.016 msecs
+[18498.917368] PM: early resume of devices complete after 0.869 msecs
+[18498.918098] bcmsdh_sdmmc_resume Enter
+[18498.918106] bcmsdh_sdmmc_resume Enter
+[18498.932028] PM: resume of devices complete after 14.634 msecs
+[18498.933935] Restarting tasks ... done.
+[18498.963604] PM: suspend exit 2026-10-25 21:51:01.170722386 UTC
+[18498.963746] PM: suspend entry 2026-10-25 21:51:01.170867386 UTC
+[18498.977539] mmc0: Starting deferred resume
+[18499.081547] mmc0: Deferred resume completed
+[18498.963805] PM: Syncing filesystems ... done.
+[18499.244010] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18499.246085] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18499.247883] Suspending console(s) (use no_console_suspend to debug)
+[18499.255857] bcmsdh_sdmmc_suspend Enter
+[18499.255866] bcmsdh_sdmmc_suspend Enter
+[18499.260883] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18499.260904] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18499.329876] PM: suspend of devices complete after 81.007 msecs
+[18499.331126] PM: late suspend of devices complete after 1.225 msecs
+[18499.332984] PM: noirq suspend of devices complete after 1.838 msecs
+[18499.332999] Disabling non-boot CPUs ...
+[18499.333275] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18499.333275] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18499.333275] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18499.333275] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18499.333275] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18499.333275] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18499.333275] Suspended for 0.000 seconds
+[18499.335260] PM: noirq resume of devices complete after 1.018 msecs
+[18499.337672] PM: early resume of devices complete after 0.871 msecs
+[18499.338402] bcmsdh_sdmmc_resume Enter
+[18499.338409] bcmsdh_sdmmc_resume Enter
+[18499.352937] PM: resume of devices complete after 15.237 msecs
+[18499.354873] Restarting tasks ... done.
+[18499.389920] PM: suspend exit 2026-10-25 21:52:01.177059186 UTC
+[18499.390075] PM: suspend entry 2026-10-25 21:52:01.177221061 UTC
+[18499.396358] mmc0: Starting deferred resume
+[18499.503047] mmc0: Deferred resume completed
+[18499.390135] PM: Syncing filesystems ... done.
+[18499.643185] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18499.644841] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18499.646287] Suspending console(s) (use no_console_suspend to debug)
+[18499.650666] bcmsdh_sdmmc_suspend Enter
+[18499.650671] bcmsdh_sdmmc_suspend Enter
+[18499.654000] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18499.654014] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18499.727922] PM: suspend of devices complete after 80.988 msecs
+[18499.728514] PM: late suspend of devices complete after 0.580 msecs
+[18499.729599] PM: noirq suspend of devices complete after 1.073 msecs
+[18499.729609] Disabling non-boot CPUs ...
+[18499.729794] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18499.729794] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18499.729794] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18499.729794] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18499.729794] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18499.729794] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18499.729794] Suspended for 0.000 seconds
+[18499.731480] PM: noirq resume of devices complete after 0.797 msecs
+[18499.733118] PM: early resume of devices complete after 0.559 msecs
+[18499.733440] bcmsdh_sdmmc_resume Enter
+[18499.733444] bcmsdh_sdmmc_resume Enter
+[18499.743634] PM: resume of devices complete after 10.500 msecs
+[18499.744630] Restarting tasks ... done.
+[18499.765848] PM: suspend exit 2026-10-25 21:53:01.156570204 UTC
+[18499.766163] PM: suspend entry 2026-10-25 21:53:01.156888016 UTC
+[18499.772075] mmc0: Starting deferred resume
+[18499.878703] mmc0: Deferred resume completed
+[18499.766195] PM: Syncing filesystems ... done.
+[18500.044985] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18500.046766] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18500.048316] Suspending console(s) (use no_console_suspend to debug)
+[18500.053743] bcmsdh_sdmmc_suspend Enter
+[18500.053749] bcmsdh_sdmmc_suspend Enter
+[18500.057526] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18500.057543] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18500.128091] PM: suspend of devices complete after 79.025 msecs
+[18500.128824] PM: late suspend of devices complete after 0.719 msecs
+[18500.130125] PM: noirq suspend of devices complete after 1.287 msecs
+[18500.130136] Disabling non-boot CPUs ...
+[18500.130339] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18500.130339] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18500.130339] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18500.130339] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18500.130339] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18500.130339] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18500.130339] Suspended for 0.000 seconds
+[18500.132139] PM: noirq resume of devices complete after 0.858 msecs
+[18500.133990] PM: early resume of devices complete after 0.666 msecs
+[18500.134366] bcmsdh_sdmmc_resume Enter
+[18500.134372] bcmsdh_sdmmc_resume Enter
+[18500.146069] PM: resume of devices complete after 12.059 msecs
+[18500.147340] Restarting tasks ... done.
+[18500.174449] PM: suspend exit 2026-10-25 21:54:01.165028357 UTC
+[18500.174554] PM: suspend entry 2026-10-25 21:54:01.165139607 UTC
+[18500.196645] mmc0: Starting deferred resume
+[18500.297388] mmc0: Deferred resume completed
+[18500.174593] PM: Syncing filesystems ... done.
+[18500.517930] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18500.519351] Freezing remaining freezable tasks ... (elapsed 0.000 seconds) done.
+[18500.520378] Suspending console(s) (use no_console_suspend to debug)
+[18500.523235] bcmsdh_sdmmc_suspend Enter
+[18500.523238] bcmsdh_sdmmc_suspend Enter
+[18500.525868] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18500.525878] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18500.596909] PM: suspend of devices complete after 76.128 msecs
+[18500.597313] PM: late suspend of devices complete after 0.395 msecs
+[18500.598022] PM: noirq suspend of devices complete after 0.700 msecs
+[18500.598028] Disabling non-boot CPUs ...
+[18500.598174] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18500.598174] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18500.598174] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18500.598174] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18500.598174] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18500.598174] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18500.598174] Suspended for 0.000 seconds
+[18500.599622] PM: noirq resume of devices complete after 0.746 msecs
+[18500.601152] PM: early resume of devices complete after 0.464 msecs
+[18500.601423] bcmsdh_sdmmc_resume Enter
+[18500.601426] bcmsdh_sdmmc_resume Enter
+[18500.610458] PM: resume of devices complete after 9.294 msecs
+[18500.611155] Restarting tasks ... done.
+[18500.626632] PM: suspend exit 2026-10-25 21:55:01.150176303 UTC
+[18500.627010] PM: suspend entry 2026-10-25 21:55:01.150557397 UTC
+[18500.650955] mmc0: Starting deferred resume
+[18500.754696] mmc0: Deferred resume completed
+[18500.627033] PM: Syncing filesystems ... done.
+[18500.903767] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[18500.906063] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18500.908055] Suspending console(s) (use no_console_suspend to debug)
+[18500.918006] bcmsdh_sdmmc_suspend Enter
+[18500.918015] bcmsdh_sdmmc_suspend Enter
+[18500.923915] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18500.923940] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18501.000544] PM: suspend of devices complete after 91.319 msecs
+[18501.001897] PM: late suspend of devices complete after 1.327 msecs
+[18501.004189] PM: noirq suspend of devices complete after 2.264 msecs
+[18501.004206] Disabling non-boot CPUs ...
+[18501.004539] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18501.004539] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18501.004539] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18501.004539] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18501.004539] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18501.004539] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18501.004539] Suspended for 0.000 seconds
+[18501.006772] PM: noirq resume of devices complete after 1.144 msecs
+[18501.009627] PM: early resume of devices complete after 1.054 msecs
+[18501.010675] bcmsdh_sdmmc_resume Enter
+[18501.010685] bcmsdh_sdmmc_resume Enter
+[18501.028259] PM: resume of devices complete after 18.600 msecs
+[18501.030884] Restarting tasks ... done.
+[18501.063244] PM: suspend exit 2026-10-25 21:56:01.180658467 UTC
+[18501.063441] PM: suspend entry 2026-10-25 21:56:01.180864197 UTC
+[18501.073810] mmc0: Starting deferred resume
+[18501.178194] mmc0: Deferred resume completed
+[18501.063518] PM: Syncing filesystems ... done.
+[18501.337265] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18501.339342] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18501.341144] Suspending console(s) (use no_console_suspend to debug)
+[18501.348934] bcmsdh_sdmmc_suspend Enter
+[18501.348942] bcmsdh_sdmmc_suspend Enter
+[18501.354012] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18501.354033] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18501.429644] PM: suspend of devices complete after 87.511 msecs
+[18501.430903] PM: late suspend of devices complete after 1.234 msecs
+[18501.432758] PM: noirq suspend of devices complete after 1.834 msecs
+[18501.432773] Disabling non-boot CPUs ...
+[18501.433048] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18501.433048] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18501.433048] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18501.433048] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18501.433048] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18501.433048] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18501.433048] Suspended for 0.000 seconds
+[18501.435049] PM: noirq resume of devices complete after 1.016 msecs
+[18501.437459] PM: early resume of devices complete after 0.872 msecs
+[18501.438185] bcmsdh_sdmmc_resume Enter
+[18501.438192] bcmsdh_sdmmc_resume Enter
+[18501.452324] PM: resume of devices complete after 14.838 msecs
+[18501.454261] Restarting tasks ... done.
+[18501.491192] PM: suspend exit 2026-10-25 21:57:01.180343340 UTC
+[18501.491346] PM: suspend entry 2026-10-25 21:57:01.180504434 UTC
+[18501.508150] mmc0: Starting deferred resume
+[18501.609346] mmc0: Deferred resume completed
+[18501.491406] PM: Syncing filesystems ... done.
+[18501.765382] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18501.766835] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18501.768159] Suspending console(s) (use no_console_suspend to debug)
+[18501.771346] bcmsdh_sdmmc_suspend Enter
+[18501.771349] bcmsdh_sdmmc_suspend Enter
+[18501.774102] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18501.774112] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18501.847320] PM: suspend of devices complete after 78.736 msecs
+[18501.847754] PM: late suspend of devices complete after 0.426 msecs
+[18501.848523] PM: noirq suspend of devices complete after 0.760 msecs
+[18501.848529] Disabling non-boot CPUs ...
+[18501.848682] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18501.848682] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18501.848682] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18501.848682] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18501.848682] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18501.848682] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18501.848682] Suspended for 0.000 seconds
+[18501.850273] PM: noirq resume of devices complete after 0.874 msecs
+[18501.851756] PM: early resume of devices complete after 0.490 msecs
+[18501.852047] bcmsdh_sdmmc_resume Enter
+[18501.852051] bcmsdh_sdmmc_resume Enter
+[18501.861224] PM: resume of devices complete after 9.456 msecs
+[18501.862009] Restarting tasks ... done.
+[18501.878217] PM: suspend exit 2026-10-25 21:58:01.152336234 UTC
+[18501.878601] PM: suspend entry 2026-10-25 21:58:01.152724359 UTC
+[18501.903647] mmc0: Starting deferred resume
+[18502.006646] mmc0: Deferred resume completed
+[18501.878627] PM: Syncing filesystems ... done.
+[18502.172934] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18502.174388] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18502.175712] Suspending console(s) (use no_console_suspend to debug)
+[18502.178813] bcmsdh_sdmmc_suspend Enter
+[18502.178817] bcmsdh_sdmmc_suspend Enter
+[18502.181649] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18502.181660] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18502.257103] PM: suspend of devices complete after 80.964 msecs
+[18502.257536] PM: late suspend of devices complete after 0.425 msecs
+[18502.258308] PM: noirq suspend of devices complete after 0.762 msecs
+[18502.258314] Disabling non-boot CPUs ...
+[18502.258465] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18502.258465] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18502.258465] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18502.258465] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18502.258465] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18502.258465] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18502.258465] Suspended for 0.000 seconds
+[18502.259927] PM: noirq resume of devices complete after 0.752 msecs
+[18502.261526] PM: early resume of devices complete after 0.490 msecs
+[18502.261820] bcmsdh_sdmmc_resume Enter
+[18502.261823] bcmsdh_sdmmc_resume Enter
+[18502.271017] PM: resume of devices complete after 9.479 msecs
+[18502.271776] Restarting tasks ... done.
+[18502.288194] PM: suspend exit 2026-10-25 21:59:01.152887617 UTC
+[18502.288578] PM: suspend entry 2026-10-25 21:59:01.153275846 UTC
+[18502.313428] mmc0: Starting deferred resume
+[18502.416022] mmc0: Deferred resume completed
+[18502.288604] PM: Syncing filesystems ... done.
+[18502.576494] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[18502.578773] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18502.580535] Suspending console(s) (use no_console_suspend to debug)
+[18502.590481] bcmsdh_sdmmc_suspend Enter
+[18502.590492] bcmsdh_sdmmc_suspend Enter
+[18502.596140] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18502.596164] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18502.670332] PM: suspend of devices complete after 88.628 msecs
+[18502.671683] PM: late suspend of devices complete after 1.325 msecs
+[18502.673968] PM: noirq suspend of devices complete after 2.258 msecs
+[18502.673985] Disabling non-boot CPUs ...
+[18502.674319] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18502.674319] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18502.674319] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18502.674319] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18502.674319] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18502.674319] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18502.674319] Suspended for 0.000 seconds
+[18502.676560] PM: noirq resume of devices complete after 1.145 msecs
+[18502.679418] PM: early resume of devices complete after 1.055 msecs
+[18502.680474] bcmsdh_sdmmc_resume Enter
+[18502.680484] bcmsdh_sdmmc_resume Enter
+[18502.697834] PM: resume of devices complete after 18.381 msecs
+[18502.700471] Restarting tasks ... done.
+[18502.734517] PM: suspend exit 2026-10-25 22:00:01.183575145 UTC
+[18502.734714] PM: suspend entry 2026-10-25 22:00:01.183784520 UTC
+[18502.743896] mmc0: Starting deferred resume
+[18502.849445] mmc0: Deferred resume completed
+[18502.734790] PM: Syncing filesystems ... done.
+[18503.017304] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18503.019080] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18503.020636] Suspending console(s) (use no_console_suspend to debug)
+[18503.025936] bcmsdh_sdmmc_suspend Enter
+[18503.025942] bcmsdh_sdmmc_suspend Enter
+[18503.029736] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18503.029753] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18503.097742] PM: suspend of devices complete after 76.359 msecs
+[18503.098478] PM: late suspend of devices complete after 0.722 msecs
+[18503.099778] PM: noirq suspend of devices complete after 1.285 msecs
+[18503.099788] Disabling non-boot CPUs ...
+[18503.099995] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18503.099995] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18503.099995] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18503.099995] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18503.099995] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18503.099995] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18503.099995] Suspended for 0.000 seconds
+[18503.101784] PM: noirq resume of devices complete after 0.857 msecs
+[18503.103639] PM: early resume of devices complete after 0.666 msecs
+[18503.104016] bcmsdh_sdmmc_resume Enter
+[18503.104022] bcmsdh_sdmmc_resume Enter
+[18503.115718] PM: resume of devices complete after 12.060 msecs
+[18503.116989] Restarting tasks ... done.
+[18503.144101] PM: suspend exit 2026-10-25 22:01:01.167522309 UTC
+[18503.144206] PM: suspend entry 2026-10-25 22:01:01.167633924 UTC
+[18503.166434] mmc0: Starting deferred resume
+[18503.266502] mmc0: Deferred resume completed
+[18503.144244] PM: Syncing filesystems ... done.
+[18503.934907] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[18503.937123] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18503.939070] Suspending console(s) (use no_console_suspend to debug)
+[18503.948758] bcmsdh_sdmmc_suspend Enter
+[18503.948769] bcmsdh_sdmmc_suspend Enter
+[18503.954473] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18503.954496] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18504.030126] PM: suspend of devices complete after 89.737 msecs
+[18504.031437] PM: late suspend of devices complete after 1.287 msecs
+[18504.033629] PM: noirq suspend of devices complete after 2.165 msecs
+[18504.033644] Disabling non-boot CPUs ...
+[18504.033972] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18504.033972] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18504.033972] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18504.033972] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18504.033972] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18504.033972] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18504.033972] Suspended for 0.000 seconds
+[18504.036209] PM: noirq resume of devices complete after 1.143 msecs
+[18504.039060] PM: early resume of devices complete after 1.052 msecs
+[18504.039999] bcmsdh_sdmmc_resume Enter
+[18504.040008] bcmsdh_sdmmc_resume Enter
+[18504.057522] PM: resume of devices complete after 18.430 msecs
+[18504.060118] Restarting tasks ... done.
+[18504.090738] PM: suspend exit 2026-10-25 22:02:01.180873120 UTC
+[18504.090919] PM: suspend entry 2026-10-25 22:02:01.181060724 UTC
+[18504.103709] mmc0: Starting deferred resume
+[18504.209271] mmc0: Deferred resume completed
+[18504.090993] PM: Syncing filesystems ... done.
+[18504.374315] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18504.376095] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18504.377647] Suspending console(s) (use no_console_suspend to debug)
+[18504.383110] bcmsdh_sdmmc_suspend Enter
+[18504.383116] bcmsdh_sdmmc_suspend Enter
+[18504.386896] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18504.386913] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18504.457579] PM: suspend of devices complete after 79.183 msecs
+[18504.458312] PM: late suspend of devices complete after 0.719 msecs
+[18504.459608] PM: noirq suspend of devices complete after 1.281 msecs
+[18504.459620] Disabling non-boot CPUs ...
+[18504.459825] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18504.459825] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18504.459825] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18504.459825] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18504.459825] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18504.459825] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18504.459825] Suspended for 0.000 seconds
+[18504.461615] PM: noirq resume of devices complete after 0.858 msecs
+[18504.463473] PM: early resume of devices complete after 0.664 msecs
+[18504.463849] bcmsdh_sdmmc_resume Enter
+[18504.463854] bcmsdh_sdmmc_resume Enter
+[18504.475590] PM: resume of devices complete after 12.099 msecs
+[18504.476865] Restarting tasks ... done.
+[18504.503960] PM: suspend exit 2026-10-25 22:03:01.168269190 UTC
+[18504.504066] PM: suspend entry 2026-10-25 22:03:01.168380283 UTC
+[18504.525954] mmc0: Starting deferred resume
+[18504.628255] mmc0: Deferred resume completed
+[18504.504105] PM: Syncing filesystems ... done.
+[18504.792967] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18504.794424] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18504.795744] Suspending console(s) (use no_console_suspend to debug)
+[18504.798821] bcmsdh_sdmmc_suspend Enter
+[18504.798824] bcmsdh_sdmmc_suspend Enter
+[18504.801657] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18504.801667] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18504.876864] PM: suspend of devices complete after 80.698 msecs
+[18504.877302] PM: late suspend of devices complete after 0.429 msecs
+[18504.878072] PM: noirq suspend of devices complete after 0.761 msecs
+[18504.878078] Disabling non-boot CPUs ...
+[18504.878230] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18504.878230] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18504.878230] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18504.878230] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18504.878230] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18504.878230] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18504.878230] Suspended for 0.000 seconds
+[18504.879818] PM: noirq resume of devices complete after 0.875 msecs
+[18504.881301] PM: early resume of devices complete after 0.490 msecs
+[18504.881596] bcmsdh_sdmmc_resume Enter
+[18504.881600] bcmsdh_sdmmc_resume Enter
+[18504.890788] PM: resume of devices complete after 9.474 msecs
+[18504.891549] Restarting tasks ... done.
+[18504.907977] PM: suspend exit 2026-10-25 22:04:01.154693802 UTC
+[18504.908360] PM: suspend entry 2026-10-25 22:04:01.155080364 UTC
+[18504.932778] mmc0: Starting deferred resume
+[18505.037923] mmc0: Deferred resume completed
+[18504.908384] PM: Syncing filesystems ... done.
+[18505.231304] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18505.232758] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18505.234078] Suspending console(s) (use no_console_suspend to debug)
+[18505.237178] bcmsdh_sdmmc_suspend Enter
+[18505.237181] bcmsdh_sdmmc_suspend Enter
+[18505.240013] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18505.240024] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18505.306793] PM: suspend of devices complete after 72.293 msecs
+[18505.307224] PM: late suspend of devices complete after 0.422 msecs
+[18505.307991] PM: noirq suspend of devices complete after 0.758 msecs
+[18505.307998] Disabling non-boot CPUs ...
+[18505.308150] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18505.308150] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18505.308150] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18505.308150] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18505.308150] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18505.308150] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18505.308150] Suspended for 0.000 seconds
+[18505.309615] PM: noirq resume of devices complete after 0.753 msecs
+[18505.311216] PM: early resume of devices complete after 0.490 msecs
+[18505.311502] bcmsdh_sdmmc_resume Enter
+[18505.311506] bcmsdh_sdmmc_resume Enter
+[18505.320712] PM: resume of devices complete after 9.484 msecs
+[18505.321473] Restarting tasks ... done.
+[18505.337853] PM: suspend exit 2026-10-25 22:05:01.155005757 UTC
+[18505.338236] PM: suspend entry 2026-10-25 22:05:01.155393830 UTC
+[18505.361437] mmc0: Starting deferred resume
+[18505.463415] mmc0: Deferred resume completed
+[18505.338262] PM: Syncing filesystems ... done.
+[18505.641682] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[18505.643978] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18505.645970] Suspending console(s) (use no_console_suspend to debug)
+[18505.655964] bcmsdh_sdmmc_suspend Enter
+[18505.655974] bcmsdh_sdmmc_suspend Enter
+[18505.661868] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18505.661893] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18505.730016] PM: suspend of devices complete after 82.855 msecs
+[18505.731376] PM: late suspend of devices complete after 1.334 msecs
+[18505.733669] PM: noirq suspend of devices complete after 2.266 msecs
+[18505.733686] Disabling non-boot CPUs ...
+[18505.734021] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18505.734021] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18505.734021] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18505.734021] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18505.734021] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18505.734021] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18505.734021] Suspended for 0.000 seconds
+[18505.736263] PM: noirq resume of devices complete after 1.146 msecs
+[18505.739118] PM: early resume of devices complete after 1.055 msecs
+[18505.740161] bcmsdh_sdmmc_resume Enter
+[18505.740171] bcmsdh_sdmmc_resume Enter
+[18505.757705] PM: resume of devices complete after 18.555 msecs
+[18505.760342] Restarting tasks ... done.
+[18505.794945] PM: suspend exit 2026-10-25 22:06:01.186449744 UTC
+[18505.795134] PM: suspend entry 2026-10-25 22:06:01.186646567 UTC
+[18505.803797] mmc0: Starting deferred resume
+[18505.909428] mmc0: Deferred resume completed
+[18505.795209] PM: Syncing filesystems ... done.
+[18506.083072] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18506.084524] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18506.085847] Suspending console(s) (use no_console_suspend to debug)
+[18506.088925] bcmsdh_sdmmc_suspend Enter
+[18506.088928] bcmsdh_sdmmc_suspend Enter
+[18506.091755] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18506.091765] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18506.166714] PM: suspend of devices complete after 80.444 msecs
+[18506.167150] PM: late suspend of devices complete after 0.427 msecs
+[18506.167920] PM: noirq suspend of devices complete after 0.762 msecs
+[18506.167926] Disabling non-boot CPUs ...
+[18506.168078] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18506.168078] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18506.168078] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18506.168078] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18506.168078] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18506.168078] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18506.168078] Suspended for 0.000 seconds
+[18506.169536] PM: noirq resume of devices complete after 0.752 msecs
+[18506.171140] PM: early resume of devices complete after 0.492 msecs
+[18506.171428] bcmsdh_sdmmc_resume Enter
+[18506.171432] bcmsdh_sdmmc_resume Enter
+[18506.181157] PM: resume of devices complete after 10.004 msecs
+[18506.181919] Restarting tasks ... done.
+[18506.198433] PM: suspend exit 2026-10-25 22:07:01.156364616 UTC
+[18507.622394] PM: suspend entry 2026-10-25 22:07:02.580290397 UTC
+[18507.623647] mmc0: Starting deferred resume
+[18507.735820] mmc0: Deferred resume completed
+[18507.622497] PM: Syncing filesystems ... done.
+[18507.872127] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[18507.874420] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18507.876405] Suspending console(s) (use no_console_suspend to debug)
+[18507.886313] bcmsdh_sdmmc_suspend Enter
+[18507.886323] bcmsdh_sdmmc_suspend Enter
+[18507.892181] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18507.892205] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18507.959852] PM: suspend of devices complete after 82.277 msecs
+[18507.961206] PM: late suspend of devices complete after 1.329 msecs
+[18507.963499] PM: noirq suspend of devices complete after 2.265 msecs
+[18507.963516] Disabling non-boot CPUs ...
+[18507.963850] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18507.963850] Resume caused by IRQ 335, qpnp_rtc_alarm
+[18507.963850] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[18507.963850] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18507.963850] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18507.963850] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[18507.963850] Suspended for 0.000 seconds
+[18507.966001] PM: noirq resume of devices complete after 1.144 msecs
+[18507.968850] PM: early resume of devices complete after 1.050 msecs
+[18507.969779] bcmsdh_sdmmc_resume Enter
+[18507.969789] bcmsdh_sdmmc_resume Enter
+[18507.987454] PM: resume of devices complete after 18.570 msecs
+[18507.990146] Restarting tasks ... done.
+[18508.022712] PM: suspend exit 2026-10-25 22:08:01.185093343 UTC
+[18508.022909] PM: suspend entry 2026-10-25 22:08:01.185299176 UTC
+[18508.033499] mmc0: Starting deferred resume
+[18508.140240] mmc0: Deferred resume completed
+[18508.022985] PM: Syncing filesystems ... done.
+[18508.212255] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[18508.214008] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[18508.215554] Suspending console(s) (use no_console_suspend to debug)
+[18508.220997] bcmsdh_sdmmc_suspend Enter
+[18508.221003] bcmsdh_sdmmc_suspend Enter
+[18508.222539] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[18508.222555] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[18508.297295] PM: suspend of devices complete after 81.003 msecs
+[18508.298025] PM: late suspend of devices complete after 0.715 msecs
+[18508.299321] PM: noirq suspend of devices complete after 1.282 msecs
+[18508.299333] Disabling non-boot CPUs ...
+[18508.299535] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[18508.299535] Resume caused by IRQ 339, synaptics_dsx
+[18508.299535] msm_gpio_show_resume_irq: 339 triggered synaptics_dsx
+[18508.299535] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[18508.299535] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[18508.299535] gic_show_resume_irq: 240 triggered msmgpio
+[18508.299535] Suspended for 0.000 seconds
+[18508.301292] PM: noirq resume of devices complete after 0.856 msecs
+[18508.301669] qup_i2c f9927000.i2c: Runtime PM-callback was not invoked.
+[18508.303149] synaptics_rmi4_f11_abs_report: read data38=0x10
+[18508.304562] PM: early resume of devices complete after 0.953 msecs
+[18508.304828] bcmsdh_sdmmc_resume Enter
+[18508.304833] bcmsdh_sdmmc_resume Enter
+[18508.316156] PM: resume of devices complete after 11.574 msecs
+[18508.317478] Restarting tasks ... done.
+[18508.337890] PM: suspend exit 2026-10-25 22:17:55.184307543 UTC
+[18508.547706] Mcusleep: mcusleep_sleep_deny: awake mcu ap_status_gpio high
+[18508.547722] Mcusleep: mcusleep_sleep_deny: ext_wake_mcu high
+[18508.571507] qup_i2c f9927000.i2c: attempt to resume when already active
+[18508.573271] synaptics_dsx_i2c 5-0020: fwu_read_f34_flash_status: Flash status = 7
+[18508.585839] Mcusleep: mcusleep_sleep_deny: ext_wake_mcu low
+[18508.586220] synaptics_rmi4_sensor_report: spontaneous reset detected
+[18508.609914] mmc0: Starting deferred resume
+[18508.710702] mmc0: Deferred resume completed
+[18536.002231] mmc0: Starting deferred resume
+[18536.110027] mmc0: Deferred resume completed
+[18570.948316] mmc0: Starting deferred resume
+[18571.059367] mmc0: Deferred resume completed
+[18608.392035] mmc0: Starting deferred resume
+[18608.506435] mmc0: Deferred resume completed
+[18626.002352] mmc0: Starting deferred resume
+[18626.114507] mmc0: Deferred resume completed
+[18660.002228] mmc0: Starting deferred resume
+[18660.113945] mmc0: Deferred resume completed
+[18714.171212] mmc0: Starting deferred resume
+[18714.280466] mmc0: Deferred resume completed
+[18739.011427] mmc0: Starting deferred resume
+[18739.124904] mmc0: Deferred resume completed
+[18780.142399] mmc0: Starting deferred resume
+[18780.243331] mmc0: Deferred resume completed
+[18815.074536] mmc0: Starting deferred resume
+[18815.187226] mmc0: Deferred resume completed
+[18850.072610] mmc0: Starting deferred resume
+[18850.178119] mmc0: Deferred resume completed
+[18915.221373] mmc0: Starting deferred resume
+[18915.331227] mmc0: Deferred resume completed
+[18951.002796] mmc0: Starting deferred resume
+[18951.112428] mmc0: Deferred resume completed
+[18981.221730] mmc0: Starting deferred resume
+[18981.323679] mmc0: Deferred resume completed
+[19011.382867] mmc0: Starting deferred resume
+[19011.483601] mmc0: Deferred resume completed
+[19051.444301] mmc0: Starting deferred resume
+[19051.558396] mmc0: Deferred resume completed
+[19086.021814] mmc0: Starting deferred resume
+[19086.126950] mmc0: Deferred resume completed
+[19116.002043] mmc0: Starting deferred resume
+[19116.108408] mmc0: Deferred resume completed
+[19152.014552] mmc0: Starting deferred resume
+[19152.126812] mmc0: Deferred resume completed
+[19227.013226] mmc0: Starting deferred resume
+[19227.117213] mmc0: Deferred resume completed
+[19263.010777] mmc0: Starting deferred resume
+[19263.129724] mmc0: Deferred resume completed
+[19296.002056] mmc0: Starting deferred resume
+[19296.106445] mmc0: Deferred resume completed
+[19327.021372] mmc0: Starting deferred resume
+[19327.130305] mmc0: Deferred resume completed
+[19356.002038] mmc0: Starting deferred resume
+[19356.108573] mmc0: Deferred resume completed
+[19373.010441] mmc0: Starting deferred resume
+[19373.114989] mmc0: Deferred resume completed
+[19406.003006] mmc0: Starting deferred resume
+[19406.106489] mmc0: Deferred resume completed
+[19433.011626] mmc0: Starting deferred resume
+[19433.120601] mmc0: Deferred resume completed
+[19469.010590] mmc0: Starting deferred resume
+[19469.118263] mmc0: Deferred resume completed
+[19502.371425] mmc0: Starting deferred resume
+[19502.480679] mmc0: Deferred resume completed
+[19531.135058] msm_otg f9a55000.usb: USB exited from low power mode
+[19531.208639] get_running_test_result: get_running_test_result info: usb=1 batt_pres=1 batt_volt=4198090 batt_temp=228 result=0x0
+[19531.271295] synaptics_dsx_i2c 5-0020: fwu_read_f34_flash_status: Flash status = 7
+[19531.284204] synaptics_rmi4_sensor_report: spontaneous reset detected
+[19531.329717] msm_otg f9a55000.usb: Avail curr from USB = 1500
+[19531.332544] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESET_EVENT received
+[19531.332584] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_CONNECT_EVENT received
+[19531.392384] get_running_test_result: get_running_test_result info: usb=1 batt_pres=1 batt_volt=4213114 batt_temp=228 result=0x0
+[19531.483304] get_running_test_result: get_running_test_result info: usb=1 batt_pres=1 batt_volt=4218415 batt_temp=228 result=0x0
+[19532.495517] read descriptors
+[19532.495549] read descriptors
+[19532.495569] read strings
+[19532.495633] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_CONNECT_EVENT received
+[19532.599438] android_work: android_work: did not send uevent (0 0   (null))
+[19532.663670] android_work: android_work: sent uevent USB_STATE=CONNECTED
+[19532.666771] android_usb gadget: high-speed config #1: fe8050c8.android_usb
+[19532.719829] android_work: android_work: sent uevent USB_STATE=CONFIGURED
+[19540.909670] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_SUSPEND_EVENT received
+[19541.109293] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESUME_EVENT received
+[19541.119648] android_work: android_work: sent uevent USB_STATE=DISCONNECTED
+[19541.178210] android_work: android_work: sent uevent USB_STATE=CONNECTED
+[19541.181161] android_usb gadget: high-speed config #1: fe8050c8.android_usb
+[19541.239759] android_work: android_work: sent uevent USB_STATE=CONFIGURED
+[19568.069844] mmc0: Starting deferred resume
+[19568.168090] mmc0: Deferred resume completed
+[19589.010627] mmc0: Starting deferred resume
+[19589.113261] mmc0: Deferred resume completed
+[19603.301697] mmc0: Starting deferred resume
+[19603.404070] mmc0: Deferred resume completed
+[19614.011411] mmc0: Starting deferred resume
+[19614.115791] mmc0: Deferred resume completed
+[19695.011394] mmc0: Starting deferred resume
+[19695.115312] mmc0: Deferred resume completed
+[19773.011062] mmc0: Starting deferred resume
+[19773.117857] mmc0: Deferred resume completed
+[19796.011424] mmc0: Starting deferred resume
+[19796.115373] mmc0: Deferred resume completed
+[19830.953696] mmc0: Starting deferred resume
+[19831.051942] mmc0: Deferred resume completed
+[19867.201495] mmc0: Starting deferred resume
+[19867.304991] mmc0: Deferred resume completed
+[19896.002040] mmc0: Starting deferred resume
+[19896.099523] mmc0: Deferred resume completed
+[19928.013582] mmc0: Starting deferred resume
+[19928.105067] mmc0: Deferred resume completed

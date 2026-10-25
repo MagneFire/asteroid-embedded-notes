@@ -1,0 +1,1 @@
+androidboot.hardware=sturgeon user_debug=31 maxcpus=4 msm_rtb.filter=0x3F pm_levels.sleep_disabled=1 selinux=0 androidboot.emmc=true androidboot.serialno=MQB7N15A19001564 gpt androidboot.baseband=apq mdss_mdp.panel=1:dsi:0:qcom,mdss_dsi_auo_rm69080_hvga_video androidboot.emmcid=16b8f028 androidboot.bootloader=STURGEONV3.4 androidboot.bootreason=reboot

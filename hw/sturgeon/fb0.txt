@@ -1,0 +1,18 @@
+== /sys/class/graphics/fb0/modes
+U:400x400p-14
+== /sys/class/graphics/fb0/bits_per_pixel
+32
+== /sys/class/graphics/fb0/stride
+1664
+== /sys/class/graphics/fb0/virtual_size
+400,800
+== /sys/class/graphics/fb0/msm_fb_panel_info
+pu_en=0
+xstart=0
+walign=0
+ystart=0
+halign=0
+min_w=0
+min_h=0
+roi_merge=0== /sys/class/graphics/fb0/msm_fb_type
+mipi dsi cmd panel
