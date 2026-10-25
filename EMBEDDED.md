@@ -66,6 +66,9 @@ lab USB appliance.
   SCRATCH_SIZE=0x0F000000 lk2nd-msm8226` (GNU make 3.81 on macOS is fine).
   Flash to `boot` (mmcblk0p21, 20 MB); the AsteroidOS boot image is backed
   up in `backup/sturgeon/boot-asteroidos.img`.
+- This sturgeon boots the `recovery` partition, not `boot` (a known quirk of
+  the unit): lk2nd had to be flashed to both (backups of both in
+  `backup/sturgeon/`).
 - Return to fastboot: a warm reset with no restart reason. The stock aboot
   then loads lk2nd from `boot` as usual. Do not write FASTBOOT_MODE
   (0x77665500) to IMEM 0xFE80565C: the stock aboot would enter *its own*
@@ -73,6 +76,14 @@ lab USB appliance.
 - Warm vs hard reset is decided by PM8226 PON `PS_HOLD_RESET_CTL` (0x85A,
   type 1 = warm, 0x85B bit 7 enables); the firmware sets warm at boot so
   DRAM survives its own PS_HOLD drop (MPM2 0xFC4AB000) and a watchdog bite.
+- A watchdog bite and a PS_HOLD drop only reset the chip after the secure
+  world's "watchdog debug" is disabled: SCM boot service (1), command 9
+  (`SCM_WDOG_DEBUG_BOOT_PART`), arg 1, legacy register convention
+  (`src/soc/scm.c`). The Android kernel makes the same call before every
+  restart; without it the first firmware sat forever on a bite.
+- The generic timer PPIs are wired as 18 (secure physical), 19 (non-secure
+  physical), 20 (virtual) on this SoC, not the architectural 29/30/27. lk
+  uses 19 too (`INT_QTMR_NON_SECURE_PHY_TIMER_EXP`).
 - IMEM download cookies (0xFE805000 +0 two words, +0xFE0 three words) must
   be cleared: the Android kernel sets them at boot (`CONFIG_MSM_DLOAD_MODE`)
   so an unexpected reset lands in Qualcomm download mode (9008).
@@ -94,10 +105,14 @@ and clears. The region is mapped non-cacheable.
   holds the bootloader's framebuffer (0x03200000) and other reserved memory.
 - Firmware image at 0x8000 (link in `ld/asteroid.ld`), MMU L1 table and
   stacks right after it. lk2nd itself lives at 0x07F00000 (1 MB).
-- Framebuffer: read back from the MDP5 pipe (`PIPE_SSPP_SRC0_ADDR`); the
-  Android kernel reported 400x400, 32 bpp, stride 1664 (416 px), `mipi dsi
-  cmd panel`, panel `auo rm69080 hvga` on this unit (EDO RM67160 is the other
-  variant).
+- Framebuffer as the bootloader leaves it (read back from pipe RGB_0 at
+  MDSS+0x1E00): base 0x04200000, 400x400, RGB888 (3 bytes/pixel), stride
+  400 px, format 0x2243f, DSI command mode, autorefresh off (so every frame
+  needs a CTL_START kick); MDP rev 0x10010001. The scan-out is rotated 180°
+  relative to the watch (lk2nd's menu and the firmware console appear flipped
+  and mirrored); set the pipe flip bits (SSPP_SRC_OP_MODE +0x38, bits 13/14)
+  or draw rotated. The Android kernel instead used 32 bpp, stride 416 px, panel
+  `auo rm69080 hvga` on this unit (EDO RM67160 is the other variant).
 - Peripherals mapped as device memory: 0xF9000000 (GIC 0xf9000000/+0x2000,
   QTMR frames 0xf9020000, APCS watchdog 0xf9017000, USB 0xf9a55000),
   0xFC400000 (GCC 0xfc400000, PS_HOLD 0xfc4ab000, SPMI arbiter 0xfc4c0000
@@ -130,6 +145,19 @@ and clears. The region is mapped non-cacheable.
   host-wake, RTC alarm, VBUS.
 - USB: ChipIdea `qcom,ci-hdrc` at 0xf9a55000, HS PHY; IRQ SPI 134.
 
+## Lab notes
+
+- Never kill a fastboot command mid-flight: the bootloader's USB writes block
+  until the host reads them, and a killed host process leaves lk2nd (or the
+  stock aboot) waiting forever; only a power-key reboot recovers. Use long
+  timeouts instead. `fastboot oem log` hung lk2nd on this Mac (not needed).
+- The stock fastboot sometimes enumerates at full speed on the Mac and then
+  refuses every command; re-seating / rebooting into fastboot fixes it.
+- DRAM content (the ramoops log) survived even a power-key reset, although
+  the PON config lists the key as a hard reset (`qcom,s2-type = <7>`).
+- The generic-timer counter is not reset by a warm reset: boot time stamps
+  continue from the previous boot (e.g. `[16.079]` at the first line).
+
 ## Milestones
 
 | # | Milestone | Exit criterion |
@@ -160,3 +188,12 @@ and clears. The region is mapped non-cacheable.
   from AsteroidOS with `dd` over adb (no fastboot needed), then see whether
   lk2nd's fastboot behaves on the Mac; otherwise run the loop through the
   appliance.
+- 2026-10-26: M0 DONE. Direct Mac fastboot works once the watch is cleanly
+  in fastboot (the earlier hangs were self-inflicted: killed commands).
+  lk2nd flashed to `boot` and `recovery`. First boot stalled at "tick 0":
+  wrong timer PPI (30 instead of 19) and no SCM watchdog-debug disable, so
+  neither the tick nor the bite happened. Fixed: `make run` = boot 0.2 s,
+  5 ticks, self-reboot, back in fastboot 6.9 s later, log fetched across the
+  reset; TEST=hang returns a watchdog record with pc at the stuck loop,
+  TEST=abort a dabt record with dfar=0xe0000000, both symbolized. Firmware
+  8.3 KB.
