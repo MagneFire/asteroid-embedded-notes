@@ -424,3 +424,8 @@ GPU path options, cheapest first:
    offline-compiled ir3 shaders for femtovg's fixed shader set) plus a GLES2
    implementation on our command stream. Only worth it if 2 proves too
    fragile.
+- Slint 1.18.1 watchface running (2026-10-26): Rust staticlib in ui/ (agent-
+  written), C API src/ui/ui.h, heap 0x06000000 64 MiB, full software
+  repaint blended over the GPU mesh: 6.4 ms CPU per frame at 59 fps. Image
+  925 KB text (Slint ~865 KB, 405 KB glyphs at 5 sizes). Next on this path:
+  partial repaint into a UI layer + GPU compositing (option 1 above).
