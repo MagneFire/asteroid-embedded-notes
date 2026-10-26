@@ -452,3 +452,9 @@ GPU path options, cheapest first:
   boots crawl into the watchdog. Firmware now sets both at boot.
 - Staged measurement image (uncommitted): MDSS clock gating, touch sleep,
   low bus votes, CPU on XO; numbers pending.
+
+Staged results (unplugged, asleep): MDSS clock gating, touch F01 sleep and
+lower bus votes changed nothing; CPU on XO 124 -> 94 mA. CPU0 SAW + standalone
+power collapse works (warm boot via register SCM call, QTimer frame 0 wake)
+but saves nothing measurable (~96 mA). L2 does not keep dirty lines through
+the collapse: clean all cache levels. Next: full APCS collapse (SUSPEND.md).
