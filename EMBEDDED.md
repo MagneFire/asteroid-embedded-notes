@@ -256,6 +256,28 @@ and clears. The region is mapped non-cacheable.
   reboot:) and the command console were written by an Opus 5.5 agent against
   a transport contract, with host-side unit tests (`make test`).
 
+## M3 state (2026-10-26, handed over mid-way)
+
+- Build fixed: TinyUSB 0.21 has no usbd_control.c (removed from SRCS). Always
+  check make's exit status; a filtered grep hid a "No rule to make target"
+  error for two runs.
+- On the watch: `usb: before init usbcmd 00080000 portsc 8c000004 ahb
+  2000cff1 sys 00004ff1`, after the core reset `usbcmd 02080000 portsc
+  8c000004 dccparams 00000190`, a direct USBMODE write reads back 2. Then
+  `tusb_init` fails: `dcd_init 212: ASSERT FAILED` =
+  `TU_ASSERT(ci_ep_count(dcd_reg) <= TUP_DCD_ENDPOINT_MAX)`. Raw DCCPARAMS at
+  0xf9a55124 is 0x190 (DEN = 16) and `TUP_DCD_ENDPOINT_MAX` preprocesses to
+  16 in tusb_config.h, so the next step is to log `ci_ep_count()` and
+  `dcd_reg->DCCPARAMS` from inside dcd_init: suspects are the struct offset
+  of DCCPARAMS in ci_hs_type.h versus +0x24 from the capability base, or
+  DCCPARAMS_DEN_MASK. CFG_TUSB_DEBUG=1 with `tusb_log` is wired up and
+  prints assertion locations to the persistent log.
+- After that: expect enumeration as 18d1:4ee7 "asteroid-embedded", then
+  `adb devices`, `adb shell`, `adb push/pull` (RAM file table, 64 KiB
+  files), measure push/pull speed for the go/no-go. The firmware currently
+  self-reboots after 20 s (REBOOT_AFTER_MS in main.c) so logs come back
+  through run.py; set it to 0 once ADB reboot works.
+
 ## Lab notes
 
 - Never kill a fastboot command mid-flight: the bootloader's USB writes block
@@ -318,3 +340,7 @@ and clears. The region is mapped non-cacheable.
   instead of F12. Verified on the watch: dot follows the finger, tap and
   swipe classified, power key reboots, RTC/battery/charger logged every
   second at 59 fps. Paused here at Darrel's request.
+- 2026-10-26: M3 started. ADB device services + console written by an Opus
+  agent with host tests (make test passes). USB bring-up on the watch stuck
+  at TinyUSB's endpoint-count assert (see M3 state). Fable context exhausted;
+  continuing with Opus 5.5 as the main model.
