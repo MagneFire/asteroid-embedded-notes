@@ -379,3 +379,14 @@ and clears. The region is mapped non-cacheable.
   0x01e00000.
 - Shader toolchain: Mesa ir3 compiler being built on pc by an agent
   (IR3.md, tools/ir3c in this repo when done).
+- First GPU draw (2026-10-26): sysmem/GMEM-bypass rendering into the linear
+  XRGB8888 back buffer works; per-vertex-colour triangle over the CPU mesh,
+  0.43 ms per draw incl. clean+invalidate of the 666 KB buffer. Render
+  target pitch is in 32-pixel units (RB_RENDER_CONTROL BIN_WIDTH), so the
+  framebuffers now use 416-pixel rows. Draw path written by an Opus agent
+  from freedreno fd3_* (sysmem prep, restore state, program, draw); first
+  run worked unmodified. Cache rule: CPU-cached framebuffer → clean+inv
+  before the GPU writes, invalidate after.
+- Build trap: make's dependency on firmware/*.fw did not rebuild an empty
+  ramdisk.img (built while firmware/ was absent); the ramdisk is now
+  regenerated every build and replaced only if different.
