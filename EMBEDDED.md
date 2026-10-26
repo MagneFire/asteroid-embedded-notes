@@ -199,13 +199,21 @@ and clears. The region is mapped non-cacheable.
   type, id, data_len} {key, 4, value}; types 'ldoa' 0x616f646c, 'smpa'
   0x61706d73, 'vsa' 0x00617376; key 'swen' 0x6e657773 (enable), 'uv'
   0x7675 (microvolts), 'ma' 0x616d.
-- **QUP I2C (BLSP1 QUP5 at 0xf9927000) hangs**: clocks on (RCG 0x860 root
-  from XO, branch 0x848, AHB vote 0x1484 bit 17), HW version 0x20030002,
-  state RESET valid; lk's driver then hangs on a register read once the
-  core is moved to RUN state (bus stall, not a loop; the watchdog record
-  lands in the poll). Deferred; touch uses bit-banged I2C on gpio 18/19
-  (func 0) for now. Candidates: the I2C mini-core clock/`QUP_CONFIG`
-  sequence for v2.3, or the BLSP1 "sleep"/BAM clocks.
+- **QUP I2C (BLSP1 QUP5 at 0xf9927000) works** with the downstream
+  sequence (`drivers/i2c/busses/i2c-qup.c` of the sturgeon 3.10 kernel, a
+  copy is not kept): SW_RESET → wait RESET valid → CONFIG 0, OPERATIONAL
+  0xff0, ERROR_FLAGS_EN 0x7c, CONFIG = I2C_MINI_CORE (2<<8) | N_VAL 0xf,
+  I2C_CLK_CTL 0, I2C_STATUS 0xfffffc; per transfer wait for QUP_STATE
+  MAST_GEN (bit 4), IO_MODE PACK|UNPACK (+MX_READ_CNT), RUN, then write
+  I2C_CLK_CTL (3<<8 | (19.2M/bus/2-3)), PAUSE, fill FIFO (16-bit tag|byte,
+  two per word, low first: START 1, DATA 2, STOP 3, REC 4), RUN; done on
+  MX_INPUT_DONE (reads) or out-FIFO empty and bus idle (writes). lk's
+  driver "hung" because it skipped the mini-core/MAST_GEN steps; my first
+  port also waited for RESET between transitions (5 ms timeout each,
+  frame rate halved) instead of just STATE_VALID. Clocks: RCG 0x860 (cfg 0
+  = XO), branch 0x848, AHB vote 0x1484 bit 17; pins gpio 18/19 func 3;
+  FIFO 32 entries; IRQ SPI 99. 384 kHz (downstream value): 111 µs per
+  one-byte register read. Bit-banged I2C kept as fallback.
 - **Touch**: Synaptics DS4-firmware controller, product `MCRYHW_002`, I2C
   0x20, reset gpio 16 (160 ms power delay, 10 ms low, 150 ms after),
   attention gpio 17 (low while pending, polled), I2C on gpio 18/19. The
@@ -338,3 +346,5 @@ and clears. The region is mapped non-cacheable.
   with Opus 5.5 as the main model.
 - 2026-10-26: M3 DONE: wrong controller base fixed, adb shell/push/pull/
   reboot work, full edit-to-running loop 3.7 s.
+- 2026-10-26: hardware I2C fixed by following the downstream vendor driver
+  (Darrel asked whether I had checked it; I had only used lk's).
