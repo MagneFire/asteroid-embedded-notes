@@ -236,8 +236,17 @@ and clears. The region is mapped non-cacheable.
   IMAX 0x1044 (n*50 mA), ISAFE 0x1045, VIN_MIN 0x1047 (3400 + n*50 mV),
   USB_IMAX 0x1344 (n*100 mA above 200). Sturgeon profile: 4.35/4.37 V,
   300/600 mA, 100 mA termination, 300 mAh cell.
-- Deviations from the M2 exit criteria: touch is polled, not IRQ-driven
-  (TLMM summary IRQ 240 and the gpio interrupt config are still to do);
+- Touch is interrupt-driven since 2026-10-26: TLMM pin interrupt config at
+  0xfd511008 + n*0x10 (enable bit 0, polarity 1, detection 2-3, raw status
+  4, target apps = 4 << 5), status at +0x100c (write 0 to ack), summary SPI
+  208 (GIC 240). QUP completion on SPI 99 (GIC 131): OPERATIONAL_MASK
+  0x028 masks OUT_SVC for reads; OUT_SVC ends writes, MX_INPUT_DONE reads.
+  Attention handler masks the pin, chains F01 status + F11 data reads in
+  interrupt context, queues the event, unmasks. ~40 reports/s while
+  dragging. Traps: IRQ entry must keep the stack 8-byte aligned (alignment
+  fault on STRD otherwise); the main loop must drain the whole event queue
+  per frame or the dot lags.
+- Remaining M2 deviation:
   charger "not charging" at 4.23 V with USB valid is the PMIC's own state
   (battery near full), not yet cross-checked against a discharged battery.
 
