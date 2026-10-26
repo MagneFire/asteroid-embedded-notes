@@ -397,3 +397,30 @@ and clears. The region is mapped non-cacheable.
 - FlatMesh on the GPU (per-vertex-colour shaders, CPU-animated vertices,
   one 516-vertex triangle list): 1.1 ms/frame incl. vertex animation and
   cache maintenance vs 2.4 ms software; looks identical on the watch.
+
+## UI toolkit: Slint (decided 2026-10-26)
+
+Darrel picked Slint as closest to QML (declarative markup, bindings,
+animations; GPLv3 licence fits). Bare metal it renders in software. Plan:
+software first, GPU path planned.
+
+GPU path options, cheapest first:
+1. **Layer compositing (do first):** Slint renders the UI into its own
+   XRGB/ARGB layer only when something changed (partial repaint,
+   `RepaintBufferType::ReusedBuffer`), the GPU draws the animated background
+   (FlatMesh already) and composites the UI layer with one textured,
+   alpha-blended quad per frame. Needs textured quads + blending in
+   src/gpu/draw.c (texture state, sampler, FS with a texture fetch via ir3c).
+   Static UI then costs almost nothing per frame; animating UI still renders
+   on the CPU.
+2. **Slint GPU renderer on internals:** implement Slint's internal item
+   renderer (what the software renderer implements: rectangles, borders,
+   images, text, clipping, opacity layers) on the a3xx draw path: solid and
+   rounded rects as quads with a SDF fragment shader, images as textures,
+   text from a glyph atlas texture. Uses i-slint-core internals that are not
+   a stable API: pin the Slint version, expect porting work on upgrades.
+3. **OpenGL ES for Slint's femtovg/skia renderers:** not practical bare
+   metal: they need std and a runtime GLSL compiler (or a lookup table of
+   offline-compiled ir3 shaders for femtovg's fixed shader set) plus a GLES2
+   implementation on our command stream. Only worth it if 2 proves too
+   fragile.
