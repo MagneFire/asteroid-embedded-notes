@@ -429,3 +429,13 @@ GPU path options, cheapest first:
   repaint blended over the GPU mesh: 6.4 ms CPU per frame at 59 fps. Image
   925 KB text (Slint ~865 KB, 405 KB glyphs at 5 sizes). Next on this path:
   partial repaint into a UI layer + GPU compositing (option 1 above).
+- Random boot hangs after linking Slint: Rust's compiler_builtins provides a
+  weak __aeabi_uldivmod that the linker used for the whole firmware (the
+  Rust lib came before -lgcc). It is ~2000x slower than libgcc's here:
+  time_us() took ~300 us, init ran past the 3 s watchdog in most boots. Link
+  -lgcc before the Rust library. (The GPU-stop-before-reboot theory was
+  wrong.)
+- UI layer compositing works: Slint partial repaint into a premultiplied
+  RGBA layer at 0x0a000000, GPU blends it over the mesh (texture state,
+  ONE/ONE_MINUS_SRC_ALPHA). Idle UI ~1 us CPU per frame; GPU 3.0 ms per frame
+  for mesh + full-screen blended quad.
