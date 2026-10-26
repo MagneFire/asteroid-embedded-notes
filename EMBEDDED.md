@@ -390,3 +390,10 @@ and clears. The region is mapped non-cacheable.
 - Build trap: make's dependency on firmware/*.fw did not rebuild an empty
   ramdisk.img (built while firmware/ was absent); the ramdisk is now
   regenerated every build and replaced only if different.
+- GPU core clock: 320 MHz via RPM made ~1 in 3 boots hang right after the
+  request (CPU stalled writing DRAM); 200 MHz: 11/11 clean, with or without
+  an OCMEM vote. Probably the vdd_dig corner (Android pairs gfx3d rates with
+  corners); not verified. OCMEM is not used.
+- FlatMesh on the GPU (per-vertex-colour shaders, CPU-animated vertices,
+  one 516-vertex triangle list): 1.1 ms/frame incl. vertex animation and
+  cache maintenance vs 2.4 ms software; looks identical on the watch.
