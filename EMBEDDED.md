@@ -357,3 +357,25 @@ and clears. The region is mapped non-cacheable.
   reboot work, full edit-to-running loop 3.7 s.
 - 2026-10-26: hardware I2C fixed by following the downstream vendor driver
   (Darrel asked whether I had checked it; I had only used lk's).
+
+## GPU (M4 findings)
+
+- Power: RPM 'clk2' id 1 (gfx3d core, rate in kHz via key 'KHz' 0x007a484b
+  plus 'swen') and id 2 (OCMEM); OXILICX GDSC at MMSS+0x4034 (clear
+  SW_COLLAPSE, EN_FEW_WAIT=2, wait bit 31), branches MMSS_MMSSNOC_AXI 0x506c,
+  OXILICX_AHB 0x403c, OXILICX_AXI 0x4038, OXILI_GFX3D 0x4028. GPU MMIO
+  0xfdb00000 (register index * 4). IRQ SPI 33.
+- hw_init as mainline `a3xx_gpu.c` for a305b (VBIF limits, RBBM, CP_PROTECT,
+  CP_DEBUG, QUEUE_THRESHOLDS 0x003e2008), PM4/PFP microcode (skip word 0),
+  ME_INIT 17 dwords. The GPU reads and writes plain DDR physical addresses
+  (no IOMMU setup needed): ring at 0x1e000000 (uncached window).
+- RBBM_HW_VERSION 0x00070010; PM4 0x00330043, PFP 0x00330020 (identical to
+  linux-firmware qcom/a330_*.fw). Self-test (PKT0 scratch write + CP_MEM_WRITE
+  + WAIT_FOR_IDLE) completes in ~5 µs.
+- Microcode ships in the code repo's firmware/ with LICENSE.qcom and is
+  loaded from the boot image's ramdisk (not linked into the GPL binary):
+  lk2nd puts the DTB at 0x01e00000 (r2) and the ramdisk at 0x02000000 and
+  records it in /chosen linux,initrd-start/end. Keep firmware memory below
+  0x01e00000.
+- Shader toolchain: Mesa ir3 compiler being built on pc by an agent
+  (IR3.md, tools/ir3c in this repo when done).
