@@ -233,6 +233,29 @@ and clears. The region is mapped non-cacheable.
   charger "not charging" at 4.23 V with USB valid is the PMIC's own state
   (battery near full), not yet cross-checked against a discharged battery.
 
+## USB (M3 design)
+
+- Controller: ChipIdea at 0xf9a55000 (capability regs +0x100, operational
+  +0x140), IRQ SPI 134 (GIC 166), clocks GCC USB_HS_AHB 0x488 and USB_HS_SYSTEM
+  0x484 (RCG 0x490 from GPLL0/8 = 75 MHz), block reset BCR 0x480, ULPI PHY via
+  the viewport at +0x170 (MISC_A set 0x97: VBUSVLDEXTSEL|VBUSVLDEXT, plus
+  GENCONFIG_2 bit 7 and USBCMD bit 25 for external session-valid), PHY rails
+  L10 (1.8 V) and L20 (3.3 V) via RPM, PHY init-seq (mainline) writes ULPI
+  0x80+n. The bootloader leaves the PHY configured, so the firmware only
+  resets the controller core (USBCMD RST) and re-applies the ULPI select.
+- TinyUSB 0.21.0 submodule; the ChipIdea DCD is compiled from a copy with an
+  MSM variant header (reg base, GIC mask/unmask); cache maintenance through
+  the dcd_dcache hooks; OPT_MCU_NONE with TUP_USBIP_CHIPIDEA_HS and 16
+  endpoints declared by hand.
+- Gadget 18d1:4ee7, CDC-ACM console (itf 0/1, ep 0x83/0x84/0x04) + ADB
+  interface ff/42/01 (ep 0x81/0x01). ADB header and payload are separate
+  bulk transfers in both directions; the OUT side queues exactly the number
+  of bytes the parser expects (24 or the payload length) so a full-packet
+  payload completes without waiting for the next short packet.
+- ADB device services (shell:, shell:<cmd>, sync: to a RAM file table,
+  reboot:) and the command console were written by an Opus 5.5 agent against
+  a transport contract, with host-side unit tests (`make test`).
+
 ## Lab notes
 
 - Never kill a fastboot command mid-flight: the bootloader's USB writes block
