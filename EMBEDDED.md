@@ -439,3 +439,16 @@ GPU path options, cheapest first:
   RGBA layer at 0x0a000000, GPU blends it over the mesh (texture state,
   ONE/ONE_MINUS_SRC_ALPHA). Idle UI ~1 us CPU per frame; GPU 3.0 ms per frame
   for mesh + full-screen blended quad.
+
+## Sleep (M6 tier 1, 2026-10-26)
+
+- Battery current: PM8226 IADC 0x3600, external 9.7 mOhm sense resistor;
+  gain channel 3, offset channel 5, signal channel 1; I = (raw-off)*17857 uV
+  /(gain-off) / R. Unplugged: awake ~170 mA, asleep (panel off) ~131 mA,
+  + GPU powered down ~127 mA. Charger USB-valid bit lags unplug by ~16 s;
+  PON cable bit (Huawei driver's choice) never set here.
+- CPU clock mux (APCS RCG 0xf9011050/54, 0x501 = A7 PLL undivided) and RPM
+  bus/DDR votes survive a warm reset: a test that lowered them made later
+  boots crawl into the watchdog. Firmware now sets both at boot.
+- Staged measurement image (uncommitted): MDSS clock gating, touch sleep,
+  low bus votes, CPU on XO; numbers pending.
