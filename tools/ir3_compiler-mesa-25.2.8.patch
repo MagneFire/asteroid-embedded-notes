@@ -1,0 +1,632 @@
+diff --git a/src/compiler/glsl/standalone.cpp b/src/compiler/glsl/standalone.cpp
+index 2fec533ab..e852ad2d8 100644
+--- a/src/compiler/glsl/standalone.cpp
++++ b/src/compiler/glsl/standalone.cpp
+@@ -59,6 +59,12 @@ initialize_context(struct gl_context *ctx, gl_api api)
+       &nir_fs_options;
+    ctx->Const.ShaderCompilerOptions[MESA_SHADER_FRAGMENT].NirOptions =
+       &nir_vs_options;
++   if (options->nir_options) {
++      for (unsigned i = 0; i < MESA_SHADER_STAGES; i++)
++         ctx->Const.ShaderCompilerOptions[i].NirOptions = options->nir_options;
++      ctx->Const.GLSLTessLevelsAsInputs = true;
++   }
++   ctx->Const.PointSizeFixed = options->point_size_fixed;
+ 
+    /* The standalone compiler needs to claim support for almost
+     * everything in order to compile the built-in functions.
+diff --git a/src/compiler/glsl/standalone.h b/src/compiler/glsl/standalone.h
+index 59009eceb..f7a8fb888 100644
+--- a/src/compiler/glsl/standalone.h
++++ b/src/compiler/glsl/standalone.h
+@@ -28,6 +28,8 @@
+ extern "C" {
+ #endif
+ 
++struct nir_shader_compiler_options;
++
+ struct standalone_options {
+    int glsl_version;
+    int dump_ast;
+@@ -36,6 +38,8 @@ struct standalone_options {
+    int do_link;
+    int just_log;
+    int lower_precision;
++   const struct nir_shader_compiler_options *nir_options;
++   int point_size_fixed;
+ };
+ 
+ struct gl_shader_program;
+diff --git a/src/gallium/drivers/freedreno/ir3/ir3_cmdline.c b/src/gallium/drivers/freedreno/ir3/ir3_cmdline.c
+index 7f7f8e6d9..656d74774 100644
+--- a/src/gallium/drivers/freedreno/ir3/ir3_cmdline.c
++++ b/src/gallium/drivers/freedreno/ir3/ir3_cmdline.c
+@@ -9,6 +9,7 @@
+ #include <err.h>
+ #include <fcntl.h>
+ #include <getopt.h>
++#include <inttypes.h>
+ #include <stdint.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+@@ -37,53 +38,6 @@
+ 
+ #include "pipe/p_context.h"
+ 
+-static void
+-dump_info(struct ir3_shader_variant *so, const char *str)
+-{
+-   uint32_t *bin;
+-   const char *type = ir3_shader_stage(so);
+-   bin = ir3_shader_assemble(so);
+-   printf("; %s: %s\n", type, str);
+-   ir3_shader_disasm(so, bin, stdout);
+-}
+-
+-static void
+-insert_sorted(struct exec_list *var_list, nir_variable *new_var)
+-{
+-   nir_foreach_variable_in_list (var, var_list) {
+-      if (var->data.location > new_var->data.location) {
+-         exec_node_insert_node_before(&var->node, &new_var->node);
+-         return;
+-      }
+-   }
+-   exec_list_push_tail(var_list, &new_var->node);
+-}
+-
+-static void
+-sort_varyings(nir_shader *nir, nir_variable_mode mode)
+-{
+-   struct exec_list new_list;
+-   exec_list_make_empty(&new_list);
+-   nir_foreach_variable_with_modes_safe (var, nir, mode) {
+-      exec_node_remove(&var->node);
+-      insert_sorted(&new_list, var);
+-   }
+-   exec_list_append(&nir->variables, &new_list);
+-}
+-
+-static void
+-fixup_varying_slots(nir_shader *nir, nir_variable_mode mode)
+-{
+-   nir_foreach_variable_with_modes (var, nir, mode) {
+-      if (var->data.location >= VARYING_SLOT_VAR0) {
+-         var->data.location += 9;
+-      } else if ((var->data.location >= VARYING_SLOT_TEX0) &&
+-                 (var->data.location <= VARYING_SLOT_TEX7)) {
+-         var->data.location += VARYING_SLOT_VAR0 - VARYING_SLOT_TEX0;
+-      }
+-   }
+-}
+-
+ static void
+ assign_var_locations(nir_shader *shader, nir_variable_mode mode,
+                      unsigned *size,
+@@ -104,87 +58,115 @@ assign_var_locations(nir_shader *shader, nir_variable_mode mode,
+ 
+ static struct ir3_compiler *compiler;
+ 
+-static nir_shader *
+-load_glsl(unsigned num_files, char *const *files, gl_shader_stage stage)
++static struct gl_shader_program *
++compile_glsl(unsigned num_files, char *const *files)
+ {
+-   static const struct standalone_options options = {
+-      .glsl_version = 310,
++   static struct standalone_options options;
++   static struct gl_context local_ctx;
++   struct gl_shader_program *prog;
++
++   options = (struct standalone_options){
++      .glsl_version = 300,
+       .do_link = true,
+-      .lower_precision = true,
++      .nir_options = ir3_get_compiler_options(compiler),
++      .point_size_fixed = true,
+    };
+-   struct gl_shader_program *prog;
+-   static struct gl_context local_ctx;
+ 
+    prog = standalone_compile_shader(&options, num_files, files, &local_ctx);
+    if (!prog)
+       errx(1, "couldn't parse `%s'", files[0]);
+ 
+-   nir_shader *nir = prog->_LinkedShaders[stage]->Program->nir;
++   if (!prog->data->LinkStatus)
++      warnx("GLSL link failed, continuing with the unlinked stage(s)");
+ 
+-   /* required NIR passes: */
+-   if (nir->info.stage == MESA_SHADER_VERTEX ||
+-       nir->info.stage == MESA_SHADER_GEOMETRY) {
+-      NIR_PASS_V(nir, nir_lower_io_vars_to_temporaries,
+-                 nir_shader_get_entrypoint(nir), true, true);
+-   } else if (nir->info.stage == MESA_SHADER_TESS_EVAL ||
+-              nir->info.stage == MESA_SHADER_FRAGMENT) {
+-      NIR_PASS_V(nir, nir_lower_io_vars_to_temporaries,
+-                 nir_shader_get_entrypoint(nir), true, false);
++   return prog;
++}
++
++static void
++assign_uniform_locations(nir_shader *nir)
++{
++   unsigned location = 0;
++
++   nir_foreach_variable_with_modes (var, nir, nir_var_uniform) {
++      const struct glsl_type *t = glsl_without_array(var->type);
++      if (glsl_type_is_sampler(t) || glsl_type_is_image(t))
++         continue;
++      var->data.driver_location = location;
++      location += ir3_glsl_type_size(var->type, false);
++   }
++
++   nir->num_uniforms = location;
++}
++
++static const char *const precision_names[] = {"none", "highp", "mediump", "lowp"};
++
++static void
++print_uniforms(nir_shader *nir)
++{
++   const char *type = _mesa_shader_stage_to_abbrev(nir->info.stage);
++
++   printf("; %s: uniforms (vec4 slot in UBO0 = default uniform block; see ubo_state range[] for where ir3 pushes UBO0 into the const file):\n", type);
++   nir_foreach_variable_with_modes (var, nir, nir_var_uniform) {
++      const struct glsl_type *t = glsl_without_array(var->type);
++      if (glsl_type_is_sampler(t) || glsl_type_is_image(t)) {
++         printf(";   %-20s %-12s binding=%d\n", var->name,
++                glsl_get_type_name(var->type), var->data.binding);
++         continue;
++      }
++      unsigned size = ir3_glsl_type_size(var->type, false);
++      printf(";   %-20s %-12s %-7s vec4 slot %u..%u = UBO0 bytes %u..%u\n",
++             var->name, glsl_get_type_name(var->type),
++             precision_names[var->data.precision & 3],
++             var->data.driver_location, var->data.driver_location + size - 1,
++             var->data.driver_location * 16,
++             (var->data.driver_location + size) * 16 - 1);
+    }
++}
++
++static nir_shader *
++prepare_glsl_nir(struct gl_shader_program *prog, gl_shader_stage stage)
++{
++   nir_shader *nir = prog->_LinkedShaders[stage]->Program->nir;
++
++   nir->options = ir3_get_compiler_options(compiler);
+ 
+    NIR_PASS_V(nir, nir_lower_global_vars_to_local);
+    NIR_PASS_V(nir, nir_split_var_copies);
+    NIR_PASS_V(nir, nir_lower_var_copies);
+ 
+-   NIR_PASS_V(nir, nir_split_var_copies);
+-   NIR_PASS_V(nir, nir_lower_var_copies);
+-   nir_print_shader(nir, stdout);
++   if (!nir->info.io_lowered) {
++      unsigned dummy;
++      NIR_PASS_V(nir, nir_lower_io_vars_to_temporaries,
++                 nir_shader_get_entrypoint(nir), true,
++                 stage == MESA_SHADER_FRAGMENT);
++      NIR_PASS_V(nir, nir_lower_global_vars_to_local);
++      NIR_PASS_V(nir, nir_split_var_copies);
++      NIR_PASS_V(nir, nir_lower_var_copies);
++      assign_var_locations(nir, nir_var_shader_in, &dummy, ir3_glsl_type_size);
++      assign_var_locations(nir, nir_var_shader_out, &dummy, ir3_glsl_type_size);
++      NIR_PASS_V(nir, nir_lower_io, nir_var_shader_in | nir_var_shader_out,
++                 ir3_glsl_type_size,
++                 nir_lower_io_use_interpolated_input_intrinsics);
++   }
++
+    NIR_PASS_V(nir, gl_nir_lower_atomics, prog, true);
+    NIR_PASS_V(nir, gl_nir_lower_buffers, prog);
+    NIR_PASS_V(nir, nir_lower_atomics_to_ssbo, 0);
+-   nir_print_shader(nir, stdout);
+ 
+-   switch (stage) {
+-   case MESA_SHADER_VERTEX:
+-      assign_var_locations(nir, nir_var_shader_in, &nir->num_inputs,
+-                               ir3_glsl_type_size);
+-
+-      /* Re-lower global vars, to deal with any dead VS inputs. */
+-      NIR_PASS_V(nir, nir_lower_global_vars_to_local);
+-
+-      sort_varyings(nir, nir_var_shader_out);
+-      assign_var_locations(nir, nir_var_shader_out, &nir->num_outputs,
+-                               ir3_glsl_type_size);
+-      fixup_varying_slots(nir, nir_var_shader_out);
+-      break;
+-   case MESA_SHADER_FRAGMENT:
+-      sort_varyings(nir, nir_var_shader_in);
+-      assign_var_locations(nir, nir_var_shader_in, &nir->num_inputs,
+-                               ir3_glsl_type_size);
+-      fixup_varying_slots(nir, nir_var_shader_in);
+-      assign_var_locations(nir, nir_var_shader_out, &nir->num_outputs,
+-                               ir3_glsl_type_size);
+-      break;
+-   case MESA_SHADER_COMPUTE:
+-   case MESA_SHADER_KERNEL:
+-      break;
+-   default:
+-      errx(1, "unhandled shader stage: %d", stage);
+-   }
+-
+-   assign_var_locations(nir, nir_var_uniform, &nir->num_uniforms,
+-                            ir3_glsl_type_size);
++   assign_uniform_locations(nir);
++   print_uniforms(nir);
+ 
+    NIR_PASS_V(nir, nir_lower_system_values);
+    NIR_PASS_V(nir, nir_lower_compute_system_values, NULL);
+-
+    NIR_PASS_V(nir, nir_lower_frexp);
+-   NIR_PASS_V(nir, nir_lower_io,
+-              nir_var_shader_in | nir_var_shader_out | nir_var_uniform,
+-              ir3_glsl_type_size,
+-              nir_lower_io_use_interpolated_input_intrinsics);
++   NIR_PASS_V(nir, nir_lower_io, nir_var_uniform, ir3_glsl_type_size,
++              (nir_lower_io_options)0);
++   NIR_PASS_V(nir, nir_lower_uniforms_to_ubo, false, false);
+    NIR_PASS_V(nir, gl_nir_lower_samplers, prog);
+ 
++   if (ir3_shader_debug & IR3_DBG_OPTMSGS)
++      nir_print_shader(nir, stdout);
++
+    return nir;
+ }
+ 
+@@ -257,17 +239,169 @@ load_spirv(const char *filename, const char *entry, gl_shader_stage stage)
+    };
+    NIR_PASS_V(nir, nir_lower_sysvals_to_varyings, &sysvals_to_varyings);
+ 
+-   nir_print_shader(nir, stdout);
++   if (ir3_shader_debug & IR3_DBG_OPTMSGS)
++      nir_print_shader(nir, stdout);
+ 
+    return nir;
+ }
+ 
+-static const char *shortopts = "g:hv";
++static void
++dump_dwords(struct ir3_shader_variant *v, const uint32_t *bin)
++{
++   const char *type = ir3_shader_stage(v);
++
++   printf("; %s: BEGIN DWORDS (%u dwords, %u instrs, instrlen=%u)\n", type,
++          v->info.sizedwords, v->info.sizedwords / 2, v->instrlen);
++   for (unsigned i = 0; i < v->info.sizedwords; i += 2)
++      printf("  0x%08x, 0x%08x, /* %03u */\n", bin[i], bin[i + 1], i / 2);
++   printf("; %s: END DWORDS\n", type);
++}
++
++static void
++dump_regid(const char *name, unsigned r)
++{
++   if (!VALIDREG(r))
++      printf(";   %-22s r63.x (unused, regid 0x%02x)\n", name, r);
++   else
++      printf(";   %-22s %sr%u.%c (regid 0x%02x)\n", name,
++             (r & HALF_REG_ID) ? "h" : "", (r & ~HALF_REG_ID) >> 2,
++             "xyzw"[r & 3], r);
++}
++
++static void
++dump_variant_summary(struct ir3_shader_variant *v)
++{
++   const char *type = ir3_shader_stage(v);
++
++   printf("; %s: SUMMARY\n", type);
++   printf(";   instrlen:              %u (units of 4 instrs = 8 dwords)\n", v->instrlen);
++   printf(";   sizedwords:            %u\n", v->info.sizedwords);
++   printf(";   constlen (vec4):       %u\n", v->constlen);
++   printf(";   max_reg:               %d -> FULLREGFOOTPRINT %d\n",
++          v->info.max_reg, v->info.max_reg + 1);
++   printf(";   max_half_reg:          %d -> HALFREGFOOTPRINT %d\n",
++          v->info.max_half_reg, v->info.max_half_reg + 1);
++   printf(";   total_in:              %u\n", v->total_in);
++   printf(";   sysval_in:             %u\n", v->sysval_in);
++   printf(";   varying_in:            %u\n", v->varying_in);
++   printf(";   num_sampler_prefetch:  %u\n", v->num_sampler_prefetch);
++   for (unsigned i = 0; i < v->inputs_count; i++) {
++      printf(";   input[%u]: slot=%u (%s) regid=0x%02x compmask=0x%x inloc=%u "
++             "sysval=%u bary=%u flat=%u rasterflat=%u\n",
++             i, v->inputs[i].slot,
++             v->type == MESA_SHADER_VERTEX && !v->inputs[i].sysval
++                ? gl_vert_attrib_name(v->inputs[i].slot)
++                : (v->inputs[i].sysval
++                      ? gl_system_value_name(v->inputs[i].slot)
++                      : gl_varying_slot_name_for_stage(v->inputs[i].slot,
++                                                       v->type)),
++             v->inputs[i].regid, v->inputs[i].compmask, v->inputs[i].inloc,
++             v->inputs[i].sysval, v->inputs[i].bary, v->inputs[i].flat,
++             v->inputs[i].rasterflat);
++   }
++   for (unsigned i = 0; i < v->outputs_count; i++) {
++      printf(";   output[%u]: slot=%u (%s) regid=0x%02x half=%u\n", i,
++             v->outputs[i].slot,
++             v->type == MESA_SHADER_FRAGMENT
++                ? gl_frag_result_name(v->outputs[i].slot)
++                : gl_varying_slot_name_for_stage(v->outputs[i].slot, v->type),
++             v->outputs[i].regid, v->outputs[i].half);
++   }
++   if (v->type == MESA_SHADER_VERTEX) {
++      dump_regid("POSREGID", ir3_find_output_regid(v, VARYING_SLOT_POS));
++      dump_regid("PSIZEREGID", ir3_find_output_regid(v, VARYING_SLOT_PSIZ));
++      printf(";   writes_psize:          %u\n", v->writes_psize);
++   } else if (v->type == MESA_SHADER_FRAGMENT) {
++      if (v->color0_mrt)
++         dump_regid("MRT color (all)", ir3_find_output_regid(v, FRAG_RESULT_COLOR));
++      else
++         for (unsigned i = 0; i < 4; i++) {
++            char n[32];
++            snprintf(n, sizeof(n), "MRT%u (data%u)", i, i);
++            dump_regid(n, ir3_find_output_regid(v, FRAG_RESULT_DATA0 + i));
++         }
++      dump_regid("DEPTH_REGID", ir3_find_output_regid(v, FRAG_RESULT_DEPTH));
++      dump_regid("FRAGCOORDXYREGID", ir3_find_sysval_regid(v, SYSTEM_VALUE_FRAG_COORD));
++      dump_regid("FACENESSREGID", ir3_find_sysval_regid(v, SYSTEM_VALUE_FRONT_FACE));
++      dump_regid("IJPERSPCENTERREGID", ir3_find_sysval_regid(v, SYSTEM_VALUE_BARYCENTRIC_PERSP_PIXEL));
++      dump_regid("IJNONPERSPCENTERREGID", ir3_find_sysval_regid(v, SYSTEM_VALUE_BARYCENTRIC_LINEAR_PIXEL));
++      dump_regid("IJPERSPCENTROIDREGID", ir3_find_sysval_regid(v, SYSTEM_VALUE_BARYCENTRIC_PERSP_CENTROID));
++      dump_regid("IJNONPERSPCENTROIDREGID", ir3_find_sysval_regid(v, SYSTEM_VALUE_BARYCENTRIC_LINEAR_CENTROID));
++      printf(";   writes_pos (depth):    %u\n", v->writes_pos);
++      printf(";   need_pixlod:           %u\n", v->need_pixlod);
++      printf(";   color0_mrt:            %u\n", v->color0_mrt);
++   }
++}
++
++static void
++dump_linkage(struct ir3_shader_variant *vs, struct ir3_shader_variant *fs)
++{
++   struct ir3_shader_linkage l = {0};
++   ir3_link_shaders(&l, vs, fs, false);
++
++   printf("; LINKAGE (ir3_link_shaders(vs, fs, pack_vs_out=false), as fd3_program.c uses it)\n");
++   printf(";   cnt=%u max_loc=%u\n", l.cnt, l.max_loc);
++   for (unsigned i = 0; i < l.cnt; i++) {
++      printf(";   var[%u]: slot=%u (%s) vs regid=0x%02x (r%u.%c) compmask=0x%x "
++             "loc=%u -> SP_VS_VPC_DST OUTLOC=%u\n",
++             i, l.var[i].slot,
++             gl_varying_slot_name_for_stage(l.var[i].slot, MESA_SHADER_VERTEX),
++             l.var[i].regid, l.var[i].regid >> 2, "xyzw"[l.var[i].regid & 3],
++             l.var[i].compmask, l.var[i].loc, l.var[i].loc + 8);
++   }
++   printf(";   SP_VS_PARAM_REG.TOTALVSOUTVAR = fs->varying_in = %u\n",
++          fs->varying_in);
++   printf(";   VPC_ATTR.TOTALATTR = VPC_PACK.NUMFPNONPOSVAR = NUMNONPOSVSVAR = fs->total_in = %u\n",
++          fs->total_in);
++   printf(";   HLSQ CONSTMODE = %u (vs->constlen + fs->constlen > 256)\n",
++          (vs->constlen + fs->constlen) > 256);
++}
++
++static struct ir3_shader_variant *
++compile_nir(nir_shader *nir, gl_shader_stage stage)
++{
++   const struct ir3_shader_nir_options nir_options = {};
++   struct ir3_shader_key key = {};
++
++   ir3_nir_lower_io_vars_to_temporaries(nir);
++   ir3_finalize_nir(compiler, &nir_options, nir);
++
++   struct ir3_shader *shader =
++      ir3_shader_from_nir(compiler, nir, &(struct ir3_shader_options){
++                             .api_wavesize = IR3_SINGLE_OR_DOUBLE,
++                             .real_wavesize = IR3_SINGLE_OR_DOUBLE,
++                          }, NULL);
++
++   struct ir3_shader_variant *v = ir3_shader_create_variant(shader, &key, true);
++   if (!v)
++      errx(1, "compiler failed!");
++
++   printf("; %s: NIR compiler\n", ir3_shader_stage(v));
++   fputs(v->disasm_info.disasm, stdout);
++   dump_variant_summary(v);
++   dump_dwords(v, v->bin);
++   printf("\n");
++
++   if (v->binning) {
++      printf("; %s: BINNING VARIANT (VS used for the binning pass; position only)\n",
++             ir3_shader_stage(v));
++      fputs(v->binning->disasm_info.disasm, stdout);
++      dump_variant_summary(v->binning);
++      dump_dwords(v->binning, v->binning->bin);
++      printf("\n");
++   }
++
++   return v;
++}
++
++static const char *shortopts = "g:c:hv";
+ 
+ static const struct option longopts[] = {
+    {"gpu",     required_argument, 0, 'g'},
++   {"chip",    required_argument, 0, 'c'},
+    {"help",    no_argument,       0, 'h'},
+    {"verbose", no_argument,       0, 'v'},
++   {0, 0, 0, 0},
+ };
+ 
+ static void
+@@ -276,8 +410,11 @@ print_usage(void)
+    printf("Usage: ir3_compiler [OPTIONS]... <file.tgsi | file.spv entry_point "
+           "| (file.vert | file.frag)*>\n");
+    printf("    -g, --gpu GPU_ID - specify gpu-id (default 320)\n");
++   printf("    -c, --chip HEX   - specify chip-id instead, e.g. 03000520\n");
+    printf("    -h, --help       - show this message\n");
+    printf("    -v, --verbose    - verbose compiler/debug messages\n");
++   printf("GLSL: pass a .vert and a .frag together to link them; every linked stage\n"
++          "is compiled and the VS->FS linkage is printed.\n");
+ }
+ 
+ int
+@@ -287,9 +424,9 @@ main(int argc, char **argv)
+    char *filenames[2];
+    int num_files = 0;
+    unsigned stage = 0;
+-   struct ir3_shader_key key = {};
+    unsigned gpu_id = 320;
+-   const char *info;
++   bool verbose = false;
++   uint64_t chip_id = 0;
+    const char *spirv_entry = NULL;
+    void *ptr;
+    bool from_tgsi = false;
+@@ -302,7 +439,10 @@ main(int argc, char **argv)
+          gpu_id = strtol(optarg, NULL, 0);
+          break;
+       case 'v':
+-         ir3_shader_debug |= IR3_DBG_OPTMSGS | IR3_DBG_DISASM;
++         verbose = true;
++         break;
++      case 'c':
++         chip_id = strtoull(optarg, NULL, 16);
+          break;
+       default:
+          printf("unrecognized arg: %c\n", opt);
+@@ -324,7 +464,10 @@ main(int argc, char **argv)
+       char *filename = argv[n];
+       char *ext = strrchr(filename, '.');
+ 
+-      if (strcmp(ext, ".tgsi") == 0) {
++      if (!ext) {
++         print_usage();
++         return -1;
++      } else if (strcmp(ext, ".tgsi") == 0) {
+          if (num_files != 0)
+             errx(1, "in TGSI mode, only a single file may be specified");
+          from_tgsi = true;
+@@ -338,24 +481,15 @@ main(int argc, char **argv)
+             errx(1, "in SPIR-V mode, an entry point must be specified");
+          spirv_entry = argv[n];
+          n++;
+-      } else if (strcmp(ext, ".comp") == 0) {
+-         if (from_tgsi || spirv_entry)
+-            errx(1, "cannot mix GLSL/TGSI/SPIRV");
+-         if (num_files >= ARRAY_SIZE(filenames))
+-            errx(1, "too many GLSL files");
+-         stage = MESA_SHADER_COMPUTE;
+-      } else if (strcmp(ext, ".frag") == 0) {
++      } else if (strcmp(ext, ".comp") == 0 || strcmp(ext, ".frag") == 0 ||
++                 strcmp(ext, ".vert") == 0) {
+          if (from_tgsi || spirv_entry)
+             errx(1, "cannot mix GLSL/TGSI/SPIRV");
+          if (num_files >= ARRAY_SIZE(filenames))
+             errx(1, "too many GLSL files");
+-         stage = MESA_SHADER_FRAGMENT;
+-      } else if (strcmp(ext, ".vert") == 0) {
+-         if (from_tgsi)
+-            errx(1, "cannot mix GLSL and TGSI");
+-         if (num_files >= ARRAY_SIZE(filenames))
+-            errx(1, "too many GLSL files");
+-         stage = MESA_SHADER_VERTEX;
++         stage = strcmp(ext, ".comp") == 0   ? MESA_SHADER_COMPUTE
++                 : strcmp(ext, ".frag") == 0 ? MESA_SHADER_FRAGMENT
++                                             : MESA_SHADER_VERTEX;
+       } else {
+          print_usage();
+          return -1;
+@@ -366,13 +500,42 @@ main(int argc, char **argv)
+       n++;
+    }
+ 
+-   nir_shader *nir;
+-
+    struct fd_dev_id dev_id = {
+-         .gpu_id = gpu_id,
++         .gpu_id = chip_id ? 0 : gpu_id,
++         .chip_id = chip_id,
+    };
+-   compiler = ir3_compiler_create(NULL, &dev_id, fd_dev_info_raw(&dev_id),
++   const struct fd_dev_info *dev_info = fd_dev_info_raw(&dev_id);
++   if (!dev_info)
++      errx(1, "unknown gpu-id %u / chip-id 0x%" PRIx64, gpu_id, chip_id);
++   compiler = ir3_compiler_create(NULL, &dev_id, dev_info,
+                                   &(struct ir3_compiler_options) {});
++   if (verbose)
++      ir3_shader_debug |= IR3_DBG_OPTMSGS | IR3_DBG_DISASM;
++   printf("; gpu_id=%u chip_id=0x%08" PRIx64 " gen=%u\n", dev_id.gpu_id,
++          dev_id.chip_id, compiler->gen);
++
++   if (!from_tgsi && !spirv_entry) {
++      struct gl_shader_program *prog = compile_glsl(num_files, filenames);
++      struct ir3_shader_variant *variants[MESA_SHADER_STAGES] = {0};
++      unsigned compiled = 0;
++
++      for (unsigned s = 0; s < MESA_SHADER_STAGES; s++) {
++         if (!prog->_LinkedShaders[s])
++            continue;
++         nir_shader *nir = prepare_glsl_nir(prog, s);
++         variants[s] = compile_nir(nir, s);
++         compiled++;
++      }
++      if (!compiled)
++         errx(1, "no linked shader stages");
++
++      if (variants[MESA_SHADER_VERTEX] && variants[MESA_SHADER_FRAGMENT])
++         dump_linkage(variants[MESA_SHADER_VERTEX],
++                      variants[MESA_SHADER_FRAGMENT]);
++      return 0;
++   }
++
++   nir_shader *nir;
+ 
+    if (from_tgsi) {
+       struct tgsi_token toks[65536];
+@@ -396,54 +559,20 @@ main(int argc, char **argv)
+ 
+       nir = tgsi_to_nir_noscreen(toks, nir_options);
+       NIR_PASS_V(nir, nir_lower_global_vars_to_local);
+-   } else if (spirv_entry) {
++      stage = nir->info.stage;
++   } else {
+       nir = load_spirv(filenames[0], spirv_entry, stage);
+ 
+       NIR_PASS_V(nir, nir_lower_io, nir_var_shader_in | nir_var_shader_out,
+                  ir3_glsl_type_size,
+                  nir_lower_io_use_interpolated_input_intrinsics);
+ 
+-      /* TODO do this somewhere else */
+       nir_lower_int64(nir);
+       nir_lower_system_values(nir);
+       nir_lower_compute_system_values(nir, NULL);
+-   } else if (num_files > 0) {
+-      nir = load_glsl(num_files, filenames, stage);
+-   } else {
+-      print_usage();
+-      return -1;
+    }
+ 
+-   const struct ir3_shader_nir_options options = {};
+-
+-   ir3_nir_lower_io_vars_to_temporaries(nir);
+-   ir3_finalize_nir(compiler, &options, nir);
+-
+-   struct ir3_shader *shader = rzalloc_size(NULL, sizeof(*shader));
+-   shader->compiler = compiler;
+-   shader->type = stage;
+-   shader->nir = nir;
+-
+-   ir3_nir_post_finalize(shader);
+-
+-   struct ir3_shader_variant *v = rzalloc_size(shader, sizeof(*v));
+-   v->type = shader->type;
+-   v->compiler = compiler;
+-   v->key = key;
+-   v->const_state = rzalloc_size(v, sizeof(*v->const_state));
+-
+-   shader->variants = v;
+-   shader->variant_count = 1;
+-
+-   ir3_nir_lower_variant(v, &options, nir);
+-
+-   info = "NIR compiler";
+-   ret = ir3_compile_shader_nir(compiler, shader, v);
+-   if (ret) {
+-      fprintf(stderr, "compiler failed!\n");
+-      return ret;
+-   }
+-   dump_info(v, info);
++   compile_nir(nir, stage);
+ 
+    return 0;
+ }

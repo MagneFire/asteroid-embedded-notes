@@ -1,0 +1,140 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REMOTE=${IR3C_HOST:-pc}
+ROOT=${IR3C_ROOT:-/media/Data/mesa-ir3}
+COMPILER=$ROOT/mesa-25.2.8/build/src/gallium/drivers/freedreno/ir3_compiler
+
+usage() {
+	cat >&2 <<EOF
+Usage: ir3c [options] STAGE FILE [STAGE FILE]
+
+Compile GLSL (ES) shaders to Adreno ir3 machine code on the build host and
+print disassembly, metadata and C arrays of the instruction dwords.
+
+  STAGE         vs|vert or fs|frag. Give a vs and an fs together to link
+                them; this also prints the VS->FS varying linkage.
+  -c CHIP       chip id in hex (default 03000520, Adreno 305B)
+  -g GPU_ID     gpu id instead of chip id (e.g. 305, 320)
+  -p PREFIX     C identifier prefix (default: first file's basename)
+  -v            verbose: also print the NIR and ir3 pass output
+  -C            print only the C arrays
+  -q            print only the compiler output, no C arrays
+
+A file without a #version line gets "#version 100" prepended, so compiler
+line numbers in errors are off by one for those files.
+Env: IR3C_HOST (default pc), IR3C_ROOT (default /media/Data/mesa-ir3).
+EOF
+	exit 1
+}
+
+target=(-c 03000520)
+prefix=
+flags=()
+show_asm=1
+show_c=1
+while getopts "c:g:p:vCqh" opt; do
+	case $opt in
+	c) target=(-c "$OPTARG") ;;
+	g) target=(-g "$OPTARG") ;;
+	p) prefix=$OPTARG ;;
+	v) flags+=(-v) ;;
+	C) show_asm=0 ;;
+	q) show_c=0 ;;
+	*) usage ;;
+	esac
+done
+shift $((OPTIND - 1))
+[[ $# -eq 2 || $# -eq 4 ]] || usage
+
+tmp=$(mktemp -d)
+remote_tmp=
+cleanup() {
+	rm -rf "$tmp"
+	[[ -n $remote_tmp ]] && ssh "$REMOTE" rm -rf "$remote_tmp" || true
+}
+trap cleanup EXIT
+
+remote_files=()
+while [[ $# -gt 0 ]]; do
+	stage=$1 file=$2
+	shift 2
+	case $stage in
+	vs | vert) ext=vert ;;
+	fs | frag) ext=frag ;;
+	*) echo "ir3c: unknown stage '$stage'" >&2; usage ;;
+	esac
+	[[ -r $file ]] || { echo "ir3c: cannot read $file" >&2; exit 1; }
+	base=$(basename "$file")
+	base=${base%.*}
+	[[ -n $prefix ]] || prefix=$(echo "$base" | tr -c 'A-Za-z0-9_\n' '_')
+	out=$tmp/$base.$ext
+	if ! grep -q '^[[:space:]]*#[[:space:]]*version' "$file"; then
+		printf '#version 100\n' >"$out"
+	else
+		: >"$out"
+	fi
+	cat "$file" >>"$out"
+	remote_files+=("$base.$ext")
+done
+
+remote_tmp=$(ssh "$REMOTE" mktemp -d "$ROOT/tmp/ir3c.XXXXXX")
+local_files=()
+for f in "${remote_files[@]}"; do
+	local_files+=("$tmp/$f")
+done
+scp -q "${local_files[@]}" "$REMOTE:$remote_tmp/"
+
+args=()
+for f in "${remote_files[@]}"; do
+	args+=("$remote_tmp/$f")
+done
+
+set +e
+ssh "$REMOTE" stdbuf -o0 "$COMPILER" "${target[@]}" "${flags[@]+"${flags[@]}"}" "${args[@]}" >"$tmp/out.txt" 2>&1
+rc=$?
+set -e
+
+if [[ $rc -ne 0 ]]; then
+	cat "$tmp/out.txt"
+	echo "ir3c: ir3_compiler failed (exit $rc)" >&2
+	exit $rc
+fi
+
+[[ $show_asm -eq 1 ]] && cat "$tmp/out.txt"
+
+if [[ $show_c -eq 1 ]]; then
+	[[ $show_asm -eq 1 ]] && printf '\n/* ---------------- C ---------------- */\n'
+	awk -v prefix="$prefix" '
+	function cname(s) {
+		if (s == "VERT") return "vs"
+		if (s == "BVERT") return "vs_binning"
+		if (s == "FRAG") return "fs"
+		return tolower(s)
+	}
+	/^; [A-Z]+: SUMMARY$/ { st = $2; sub(":", "", st); next }
+	st != "" && /^;   instrlen:/ { instrlen[st] = $3 }
+	st != "" && /^;   constlen/ { constlen[st] = $NF }
+	st != "" && /^;   max_reg:/ { full[st] = $NF }
+	st != "" && /^;   max_half_reg:/ { half[st] = $NF }
+	st != "" && /^;   total_in:/ { total_in[st] = $NF }
+	st != "" && /^;   sysval_in:/ { sysval_in[st] = $NF }
+	st != "" && /^;   varying_in:/ { varying_in[st] = $NF }
+	/^; [A-Z]+: BEGIN DWORDS/ {
+		cur = $2; sub(":", "", cur)
+		n = cname(cur)
+		N = toupper(prefix "_" n)
+		printf "#define %s_INSTRLEN %s\n", N, instrlen[cur]
+		printf "#define %s_CONSTLEN %s\n", N, constlen[cur]
+		printf "#define %s_FULLREGFOOTPRINT %s\n", N, full[cur]
+		printf "#define %s_HALFREGFOOTPRINT %s\n", N, half[cur]
+		printf "#define %s_TOTAL_IN %s\n", N, total_in[cur]
+		printf "#define %s_SYSVAL_IN %s\n", N, sysval_in[cur]
+		printf "#define %s_VARYING_IN %s\n", N, varying_in[cur]
+		printf "static const uint32_t %s_%s[] = {\n", prefix, n
+		next
+	}
+	/^; [A-Z]+: END DWORDS/ { print "};\n"; cur = ""; st = ""; next }
+	cur != "" { print }
+	' "$tmp/out.txt"
+fi
