@@ -775,3 +775,37 @@ Risks:
   (`lpm-levels.c:486`). If an AsteroidOS kernel on sturgeon is still
   available, enabling that print is the cheapest way to get the exact
   list.
+
+## 8. Bring-up results (2026-10-27)
+
+- **Secondaries must be parked first.** With cores 1-3 never started, any
+  TERMINATE_PC with a cluster flag (1 or 3) never returns. Starting them
+  (ACC release sequence `arm_release_secondary`, cold+warm boot address via
+  `scm_call2(1,1,0x29/0x52,stub)`) into a stub that sets its SAW to 0x59 and
+  calls TERMINATE_PC `0x10|0` fixes it. Afterwards the ACC status shows
+  bit 19 and the park counter is 1 per core.
+- **Flag 1 (L2 off) works exactly once.** After one real cluster power
+  down every later flag-1 call hangs, even without the L2 SAW; flag 0 core
+  collapse keeps working. Not caused by: GIC state, SAW config, PLL,
+  L2CTLR/ACTLR, S:7 handoff lock (TZ does release it), RST of the L2 SAW,
+  re-parking the secondaries (works, park count 2), timing. Workaround in
+  the firmware: always flag 0 + L2 SAW pc (0x1a1) + own full cache
+  clean/invalidate; 1700+ cycles without a fault.
+- RPM master stats confirm each cycle (numshutdowns, wakeup_reason 1 =
+  scheduled by the vMPM timer). With the CXO sleep vote 0 the RPM "vmin"
+  count increments every cycle; USB drops while XO is off.
+- A wake time < ~20 ms ahead hangs the VDD-min path; the firmware falls
+  back to core collapse then.
+- SMBB USB_RT_STS USBIN_VALID (0x1310 bit 1) stays set after unplug; PON
+  0x810 bit 2 is never set. The ChipIdea PORTSC (CCS && !SUSP) is the
+  reliable "host present" signal; a new host's bus reset clears SUSP even
+  while the CPU sleeps, so enumeration works when XO is kept on then.
+- Coulomb counter: PM8226 BMS 0x4000, CC_DATA0 0x408a (36-bit), hold via
+  0x4042 bit 0; uAs = dcc * 542535 * 56 / 32764 / 970. Frozen while USB
+  power is present. Linux BMS uses the same rsense (9700 uOhm).
+- **Current, unplugged (CC average):** core collapse 72 mA, cluster/VDD min
+  62 mA. AsteroidOS awake with screen off ~40-50 mA. S2 (APC FTS2) was in
+  PWM (0x11745 = 0x80) → auto saves ~6 mA. Ruled out as the remaining
+  floor: L12/17/18/19/21/S4 off, LDO LPM, panel (DSTB, reset, enable),
+  MCU reset (-4 mA), GPIO 58/59/114 to Linux's config. Measuring on
+  battery while plugged: write 0x1347 = 1 (USB_SUSP).
