@@ -830,3 +830,32 @@ Risks:
 - Codex review (codex-answer in the session scratchpad) ranked USB/DSI PHY
   first; the local kernel checkout is minnow/sturgeon-kernel at the
   AsteroidOS recipe commit.
+
+### 8.2 Residency, not an external load (2026-10-27, end of day)
+
+RPM vmin `accumulated` (0xfc19dbd0 + 0x18, 19.2 MHz ticks) against the MPM2
+sleep counter, unplugged, same run:
+
+| tick | residency | average |
+|---|---|---|
+| 100 ms | 22 % | 68 mA |
+| 1 s | 86 % | 32 mA |
+| 2.5 s | 94 % | 27 mA |
+
+Fit: VDD-min floor ~23 mA, awake/transition ~86 mA for ~150 ms per wake
+(per-second ADC + log work and full cache maintenance at 19.2 MHz). Most of
+the "45 mA gap" was the firmware's own wake overhead. AsteroidOS suspend
+with AOD measured ~1.6 mA (charge counter, logger as `systemd-run` unit so
+it survives the adb session; it logs at each minute AOD wake).
+
+Floor reductions measured within runs: USB PHY LPM -7, DSI PLL/PHY off -2,
+MDSS GDSC collapse -1 (GDSC 0x00282001 after gating MDSS CBCRs). Remaining
+~10 mA candidates: charger suspend writes 0x124a (0xc0 -> 0x80) and BATFET
+LPM 0x12df (0xc0 -> 0x40), unpulled TLMM inputs, RPM clka buffers.
+
+The debug harness used for all of this (console `pw`, `rpm`, `deep`,
+`gpio`; phased unplug tests; time/residency log) is in
+`patches/sleep-debug-harness.patch` against code repo 6d1317a.
+
+Known issue: after booting AsteroidOS, the firmware may die in the fbcon
+memset on every warm boot until a 12 s power key PMIC reset.

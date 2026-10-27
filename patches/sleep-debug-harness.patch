@@ -1,0 +1,192 @@
+diff --git a/src/console/console.c b/src/console/console.c
+index 85f0e9c..ca91739 100644
+--- a/src/console/console.c
++++ b/src/console/console.c
+@@ -182,6 +182,60 @@ static void cmd_pmic(const char *args)
+ 	}
+ }
+ 
++static void cmd_pw(const char *args)
++{
++	uint32_t addr, v;
++	if (parse_num(&args, 16, &addr) && parse_num(&args, 16, &v))
++		pmic_write(addr, v);
++	say("%05lx = %02x\n", addr, pmic_read(addr));
++}
++
++static uint32_t fourcc(const char **args)
++{
++	*args = skip_spaces(*args);
++	uint32_t v = 0;
++	for (int i = 0; i < 4 && **args && **args != ' '; i++)
++		v |= (uint32_t)(uint8_t)*(*args)++ << (8 * i);
++	return v;
++}
++
++int rpm_debug_request(uint32_t set, uint32_t type, uint32_t id, uint32_t key, uint32_t val);
++
++static void cmd_rpm(const char *args)
++{
++	uint32_t set, id, val;
++	if (!parse_num(&args, 0, &set))
++		return;
++	uint32_t type = fourcc(&args);
++	if (!parse_num(&args, 0, &id))
++		return;
++	uint32_t key = fourcc(&args);
++	if (!parse_num(&args, 0, &val))
++		return;
++	say("rpm %lu %08lx %lu %08lx %lu -> %d\n", set, type, id, key, val, rpm_debug_request(set, type, id, key, val));
++}
++
++extern volatile uint32_t deep_until;
++
++static void cmd_deep(const char *args)
++{
++	uint32_t s = 20;
++	parse_num(&args, 0, &s);
++	pmic_write(0x1347, 1);
++	deep_until = time_ms() + s * 1000;
++	power_request(true);
++}
++
++static void cmd_gpio(const char *args)
++{
++	uint32_t n, cfg, io;
++	if (!parse_num(&args, 0, &n) || !parse_num(&args, 16, &cfg) || !parse_num(&args, 16, &io))
++		return;
++	writel(io, TLMM_GPIO_IO(n));
++	writel(cfg, TLMM_GPIO_CFG(n));
++	say("gpio %lu: %08lx %08lx\n", n, readl(TLMM_GPIO_CFG(n)), readl(TLMM_GPIO_IO(n)));
++}
++
+ static void cmd_echo(const char *args)
+ {
+ 	say("%s\n", args);
+@@ -199,6 +253,10 @@ static const struct command commands[] = {
+ 	{ "mem", "<hex addr> [words]", cmd_mem },
+ 	{ "pmic", "<hex addr> [bytes]", cmd_pmic },
+ 	{ "echo", "<text>", cmd_echo },
++	{ "pw", "", cmd_pw },
++	{ "rpm", "", cmd_rpm },
++	{ "deep", "", cmd_deep },
++	{ "gpio", "", cmd_gpio },
+ };
+ 
+ static void cmd_help(const char *args)
+diff --git a/src/main.c b/src/main.c
+index 331b26a..91b25b2 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -83,6 +83,7 @@ static void draw_dot(uint32_t *buf)
+ }
+ 
+ static volatile bool console_sleep, console_wake;
++volatile uint32_t deep_until;
+ 
+ void power_request(bool sleep)
+ {
+@@ -127,6 +128,7 @@ void main(void)
+ 		log_printf("no fault record from the previous boot\n");
+ 
+ 	pmic_charger_configure();
++	{ extern void pmic_iadc_debug(void); pmic_iadc_debug(); pmic_iadc_debug(); }
+ 	spm_init();
+ 	have_gpu = gpu_init() && gpu_selftest();
+ 	bool have_ui = have_display && ui_init((void *)UI_HEAP_BASE, UI_HEAP_SIZE, layer, fb.stride, fb.width, fb.height);
+@@ -275,6 +277,31 @@ void main(void)
+ 			log_printf("power: %s, asleep %lu%% of the last second, %lu wakeups, %lu/%lu/%lu collapses, battery %ld mA, %ld mA average\n",
+ 				   awake ? "awake" : "asleep", slept > 1000 ? 100 : slept / 10, wakeups, pc, pcc, pcb,
+ 				   pmic_battery_ua() / 1000, pmic_battery_avg_ua() / 1000);
++			{
++				extern int rpm_debug_request(uint32_t set, uint32_t type, uint32_t id, uint32_t key, uint32_t val);
++				static uint32_t unplug_t, phase;
++				if (!awake && !usb_connected() && !unplug_t)
++					unplug_t = now;
++				uint32_t ph = unplug_t ? 1 + (now - unplug_t) / 20000 : 0;
++				if (ph != phase && ph <= 4) {
++					phase = ph;
++					log_printf("phase %lu\n", ph);
++					if (ph == 2)
++						timer_set_period(1000);
++					else if (ph == 3)
++						timer_set_period(2500);
++				}
++			}
++			{
++				static uint32_t sc_last, ms_last;
++				uint32_t sc = readl(0xfc4a3000);
++				static uint32_t acc_last;
++				uint32_t acc = readl(0xfc19dbd0 + 0x18);
++				log_printf("time: sleep clock %lu ms, vmin accumulated +%lu\n", (uint32_t)((uint64_t)(sc - sc_last) * 1000 / 32768), acc - acc_last);
++				acc_last = acc;
++				sc_last = sc;
++				ms_last = now;
++			}
+ 			asleep_ms = 0;
+ 			if (!awake)
+ 				asleep_t = now;
+@@ -307,6 +334,11 @@ void main(void)
+ 		}
+ #endif
+ 		if ((!have_display || !awake) && timer_ticks())
+-			spm_idle(!awake && !usb_connected());
++			spm_idle(!awake && (!usb_connected() || (int32_t)(time_ms() - deep_until) < 0));
++		if (deep_until && (int32_t)(time_ms() - deep_until) >= 0) {
++			deep_until = 0;
++			pmic_write(0x1347, 0);
++			log_printf("deep: done\n");
++		}
+ 	}
+ }
+diff --git a/src/soc/pmic.c b/src/soc/pmic.c
+index c2a3c7b..d72f175 100644
+--- a/src/soc/pmic.c
++++ b/src/soc/pmic.c
+@@ -226,6 +226,11 @@ static int iadc_raw(uint8_t chan)
+ 	return -1;
+ }
+ 
++void pmic_iadc_debug(void)
++{
++	log_printf("iadc: gain %d offset %d rsense %d\n", iadc_raw(IADC_CH_GAIN), iadc_raw(IADC_CH_EXT_OFFSET), iadc_raw(IADC_CH_EXT_RSENSE));
++}
++
+ /* Positive while the battery discharges. */
+ int32_t pmic_battery_ua(void)
+ {
+diff --git a/src/soc/rpm.c b/src/soc/rpm.c
+index 769aaed..b7b992b 100644
+--- a/src/soc/rpm.c
++++ b/src/soc/rpm.c
+@@ -229,3 +229,9 @@ void rpm_sleep_votes(void)
+ 	uint32_t kvp[3] = { RPM_KEY_ENABLE, 4, 0 };
+ 	request(RPM_SET_SLEEP, RPM_CLK0, 0, kvp, 1);
+ }
++
++int rpm_debug_request(uint32_t set, uint32_t type, uint32_t id, uint32_t key, uint32_t val)
++{
++	uint32_t kvp[3] = { key, 4, val };
++	return request(set, type, id, kvp, 1);
++}
+diff --git a/src/usb/usb.c b/src/usb/usb.c
+index 98f4ce0..c18ec57 100644
+--- a/src/usb/usb.c
++++ b/src/usb/usb.c
+@@ -278,6 +278,16 @@ void tud_umount_cb(void) { log_printf("usb: unconfigured\n"); }
+  * port itself, as the controller only raises its interrupts while the
+  * crystal runs: after an unplug the bus goes idle and the port suspends,
+  * a newly attached host resets the port out of suspend. */
++void usb_phy_lpm(void)
++{
++	ulpi_write(0x98, 3);
++	writel(readl(USB_PORTSC) | BIT(23), USB_PORTSC);
++	for (int i = 0; i < 100000 && !(readl(USB_PORTSC) & BIT(23)); i++)
++		;
++	writel(readl(USB_USBCMD) | BIT(30) | BIT(29), USB_USBCMD);
++	log_printf("usb: phy lpm, portsc %08lx\n", readl(USB_PORTSC));
++}
++
+ bool usb_connected(void)
+ {
+ 	return (readl(USB_PORTSC) & (PORTSC_CCS | PORTSC_SUSP)) == PORTSC_CCS;
