@@ -809,3 +809,24 @@ Risks:
   floor: L12/17/18/19/21/S4 off, LDO LPM, panel (DSTB, reset, enable),
   MCU reset (-4 mA), GPIO 58/59/114 to Linux's config. Measuring on
   battery while plugged: write 0x1347 = 1 (USB_SUSP).
+
+### 8.1 Floor hunt (2026-10-27, later)
+
+- AsteroidOS suspended with AOD, unplugged: ~4-7 mA average (charge
+  counter before/after a 227 s suspend, charging parts subtracted). The
+  firmware in VDD min: 47-62 mA (varies between runs; compare only within
+  a run). So ~45 mA is unexplained.
+- Timebase verified: CNTPCT vs MPM2 sleep counter agree within 1%.
+- BMS IADC trim (0x36f2/3) equals Linux's, 0x3848 = 1 (external rsense);
+  gain-offset 3267 vs ideal 3291. The CC reading is trustworthy.
+- Within-run effects: USB PHY LPM (ULPI 0x98 clear 3, PORTSC PHCD, USBCMD
+  bits 29/30) -7 mA; DSI PLL GLB_CFG 0xfd922a20=0 + PHY 0xfd922c70/d98=0
+  -2 mA. No effect: L10/L20 off, A7 PLL off, GPIO60 (DRV2605 EN) low,
+  MCU sleep handshake (108/62 low or 108 high), MCU reset, flash enable
+  0x1d346 0x60 -> 0 (Linux has 0), sleep-set bus 0 / CX ret / MX 750 mV /
+  LDOs off. WLED/LPG/vibrator are off. MMPLL0/1/2 off.
+- Booting AsteroidOS first and then warm-rebooting into the firmware does
+  not lower the floor (48 mA), so it is no persistent setting Linux makes.
+- Codex review (codex-answer in the session scratchpad) ranked USB/DSI PHY
+  first; the local kernel checkout is minnow/sturgeon-kernel at the
+  AsteroidOS recipe commit.
