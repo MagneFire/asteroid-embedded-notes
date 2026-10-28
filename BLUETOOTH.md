@@ -741,3 +741,17 @@ log_tail; use `log N <pattern>` and poll at 1.5 s, or ramoops after
 Next: passkey on screen, persistent bonds (eMMC store), AsteroidOSSync
 end to end (time, notifications), BT sleep (dev-wake/host-wake) so
 cluster collapse can stay on with BT up.
+
+## 12. Persistence, pairing UI, address (2026-10-28)
+
+- Bonds and the BD_ADDR key live in the eMMC key/value store (`cache`
+  partition, first 1 MiB); bond reconnect after a watch reboot verified.
+  `bt forget` clears them.
+- The passkey is shown full-screen over the watchface (display woken),
+  cleared on encryption change or disconnect. Verified with the S23.
+- BD_ADDR: Darrel chose the simplest option, the chip default
+  43:43:a0:12:1f:ac (no `bt.addr` key written). It is the same on every
+  BCM4343A0, so two such watches near each other would clash; fine for one
+  personal watch. AsteroidOS uses a random address per install
+  (`/var/lib/bluetooth-rfkill-event/bluetooth_address`), so adopting it
+  was rejected; `btinfo` can still read it and the BlueZ bonds.
