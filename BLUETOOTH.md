@@ -755,3 +755,18 @@ cluster collapse can stay on with BT up.
   personal watch. AsteroidOS uses a random address per install
   (`/var/lib/bluetooth-rfkill-event/bluetooth_address`), so adopting it
   was rejected; `btinfo` can still read it and the BlueZ bonds.
+
+## 13. Gadgetbridge and notifications (2026-10-28)
+
+Darrel uses Gadgetbridge (AsteroidOS support) instead of AsteroidOSSync.
+Verified: bond reconnect, battery level, time sync, notifications.
+Notifications follow asteroid-btsyncd's format: writes to 9001 are
+collected until they end in `</insert>` or `</removed>`; fields pn, id,
+an, ai, su, bo, vb (none/normal/strong/ringtone). btsyncd never
+implemented the 9002 feedback (TODO upstream), so a tap only dismisses
+locally. src/notify keeps the last 20; the newest is shown over the
+watchface and wakes the display. Gadgetbridge's test notification is a
+call notification that it removes again after a few seconds.
+
+Next: vibration (DRV2605 on blsp1_i2c2 at 0x5a), a notification list,
+media/weather, BT low-power mode so cluster collapse stays on with BT up.
