@@ -18,9 +18,10 @@ and a default watchface (extensible), animated FlatMesh, the current apps
 
 Decisions (2026-10-25): raw superloop, no lk kernel; register-level driver
 files may be copied from lk under their BSD headers; the UI layer is decided
-later but must render on the GPU; BTstack preferred over NimBLE (runs in a
-superloop); commits and code never mention the reference projects or the
-lab USB appliance.
+later but must render on the GPU; BLE host is NimBLE (Apache-2.0; changed
+2026-10-28, BTstack's non-commercial clause conflicts with the GPL, see
+BLUETOOTH.md); commits and code never mention the reference projects or
+the lab USB appliance.
 
 ## Reference trees (never vendored)
 
@@ -311,7 +312,7 @@ and clears. The region is mapped non-cacheable.
 | M4 | GPU | A305B bring-up, clear → quad → FlatMesh via ir3_compiler |
 | M5 | UI layer | GPU-rendered toolkit, launcher, default watchface behind an interface |
 | M6 | Sleep tier 1 | WFI + display off + rails, wake sources, current measured |
-| M7 | Bluetooth | UARTDM + patchram + BTstack, AsteroidOS profile, notifications end to end |
+| M7 | Bluetooth | UARTDM + patchram + NimBLE host, AsteroidOS profile, notifications end to end |
 | M8 | Sleep tier 2/3 | SPM power collapse, RPM sleep set |
 | M9 | Apps | one at a time |
 | M10 | Always-on display | panel idle mode, minute updates from RTC wake |
