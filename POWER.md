@@ -1,0 +1,516 @@
+# Sleep power on sturgeon: where the 14 mA go
+
+Research notes, 2026-10-29. Source comparison plus the 2026-10-29 day log;
+no watch access, no code changes. Follows SUSPEND.md §8-9 (VDD min works,
+~26 mA then) and L2OFF.md.
+
+**Notation**
+
+- `K:` vendor kernel `~/Downloads/AsteroidOS/minnow/sturgeon-kernel`
+  (msm-3.10, HEAD 97abcf5b2468). `FW:` `~/Downloads/AsteroidOS/asteroid-embedded/src/`
+  at c9f07f3 (main). `LOG:` the day log (`rc.txt`, 3241 lines).
+- **[V]** verified in source (file:line), **[M]** measured on the watch
+  (this log or an earlier note, cited), **[I]** inferred with reasoning,
+  **[U]** unknown. Savings are expectations unless marked [M].
+
+## 0. Summary
+
+1. The firmware sleeps at exactly **1 Hz**: every wake is the 1 s CNTP tick
+   (`FW:main.c:289`, `FW:spm.c:150-152`), and every tick is a full cluster
+   power down with VDD min (10 wakeups and 10 cluster collapses per 10 s in
+   2472 of 2569 samples). Linux in suspend has **no tick**: the vMPM wake is
+   ~72.8 min out and only RTC alarms and MPM pins wake it (SUSPEND.md §2.4,
+   `K:drivers/cpuidle/lpm-levels.c:339-346,484-493`). AsteroidOS wakes once
+   a minute for the AOD clock (SUSPEND.md §8.2).
+2. The average is `floor + (overhead per cycle) × 1 Hz`. The log cannot
+   separate the two terms because the rate never varies. The earlier
+   residency fit (SUSPEND.md §8.2: 86 % VDD-min residency at a 1 s tick,
+   ~140 ms per cycle outside VDD min) and the log's own ~90 mA "awake but
+   idle" level (§1.3) together suggest the **per-cycle overhead is most of
+   the 14 mA**, with the floor in the low single digits [I]. One
+   measurement (§6.0) settles it; the fix (no tick, §5 F1) is right either
+   way because it is what the vendor does.
+3. Of the three floor reductions measured on 2026-10-27 (USB PHY LPM
+   -7 mA, DSI PLL/PHY off -2 mA, MDSS GDSC -1 mA, SUSPEND.md §8.1-8.2),
+   **none is in the committed firmware** [V: no PHCD/ULPI/PLL/GDSC writes in
+   `FW:usb/`, `FW:display/`; the only copy is `usb_phy_lpm()` in
+   `patches/sleep-debug-harness.patch:180-187`]. They are the vendor's
+   methods (§5 F3, F4) and worth ~10 mA if the 2026-10-27 deltas still hold
+   at the new baseline.
+4. Every BT host-wake costs ~90 mAs (23.0 vs 14.1 mA in the 10 s window,
+   n=66) because the loop then spends two ticks at the core-only collapse
+   level waiting for the 1 s BT_WAKE idle timer (§1.3, §5 F2). Rare in this
+   log (1 per 6.5 min, ~0.2 mA average), but it becomes the dominant wake
+   once the tick is gone.
+5. The current measurement is the same PM8226 coulomb counter the vendor's
+   BMS uses, with the same constants (§3). Comparisons against the
+   AsteroidOS 1.6 mA figure are like for like.
+
+## 1. What the day log says
+
+### 1.1 Layout and span
+
+`LOG` is two dumps concatenated: lines 1-691 are the tail (32390-37233 s),
+lines 692-3242 the body (11327-32380 s). Reordered, it spans 11339 s to
+37234 s = **7.2 h** (the first ~3 h of the 10.3 h run are not in this
+file). The watch is unplugged throughout ("usb absent (charger gone)" at
+11328 s) until 37185 s when USB is attached and it starts fast charging at
+-280 mA.
+
+### 1.2 Asleep samples
+
+`power: asleep, W wakeups, C/CC/B collapses, I mA average` every 10 s
+(`FW:main.c:345-350`).
+
+| | value |
+|---|---|
+| samples | 2569 |
+| clean samples (W=10, ΔCC=10, ΔB=0, previous sample 10 s earlier) | 2472 |
+| clean mean / median / sd | **14.11 / 14.0 / 1.73 mA** |
+| by hour from 11339 s | 15.2, 15.3, 14.6, 14.8, 14.7, 14.2, 13.0, (10.3 over the last 64 samples) |
+| wakeup histogram | 10: 2481, 11: 68, 12-15: 7, 19-85: 12 |
+| collapse deltas per 10 s (core, cluster, bailout) | (0,10,0): 2472, (3,8,0): 51, (2,9,0): 5, (1,9,0): 5, (0,11,0): 3, rest < 3 each |
+
+So: one wake per second, each one a cluster collapse, and a steady
+~14 mA. The slow decline over the night (15.2 → 13.0 mA) is unexplained
+[U]; candidates are the phone's connection interval changing with its own
+idle state, the cell voltage (3.89 V at 11328 s), or temperature. Worth
+logging `bt: connection update` lines and the battery voltage next time.
+
+### 1.3 The cost of an extra wake
+
+Samples with 11 wakeups (n=66) average **23.0 mA (sd 3.8)** against 14.1,
+i.e. one extra wake costs **~90 mAs**. The extra wakes coincide with BT
+traffic (`nimble: GATT procedure initiated: notify; att_handle=56` lines,
+and the (3,8,0) pattern: 3 core-only collapses, 8 cluster collapses).
+Mechanism [V]:
+
+- HOST_WAKE (gpio 64, MPM pin 28) wakes the cluster, the chip's data is
+  read, `bt_tx_activity()` resets `tx_t` (`FW:bt/bcm.c:230-237`).
+- `bt_can_sleep()` needs `!dev_awake` (`FW:bt/bcm.c:252-255`), and
+  `dev_awake` only clears `DEV_WAKE_IDLE_MS` = 1000 ms after the last
+  activity (`FW:bt/bcm.c:21,242-250`).
+- Until then `cluster` is false (`FW:main.c:399`) and the loop does
+  `spm_idle(false)`: core collapse only, L2 on, XO on, no RPM sleep set, all
+  active-set votes in force, the whole SoC at its active corner, on the 1 s
+  tick. That is the "72 mA core collapse" level of SUSPEND.md §8, now
+  ~90 mA by this estimate: 2 ticks × ~1 s × ~45 mA above the sleeping
+  average, or 1 s at ~90 mA; the two cannot be told apart from the log.
+
+That ~90 mA is also the best available number for what each 1 Hz wake
+costs per unit time outside VDD min (§2).
+
+### 1.4 Awake
+
+`power: awake` lines with the display on: **136-140 mA** instantaneous,
+60 fps GPU FlatMesh, UI repainting every frame
+(`ui: 59 of 59 frames repainted` while a notification is shown, else
+1 of 60). Not the subject here, but the repaint-every-frame case doubles
+the GPU work for nothing.
+
+## 2. Cost model: overhead × rate + floor
+
+Average current = `floor + E_cycle × f`, with f = 1 Hz. The log fixes
+`floor + E_cycle ≈ 14 mA` and nothing else. Two anchors:
+
+- SUSPEND.md §8.2 (2026-10-27, before the flag-1 fix): VDD-min residency
+  86 % at a 1 s tick, 94 % at 2.5 s, i.e. ~140 ms per cycle not in VDD
+  min, fitted as ~86 mA × 150 ms ≈ 13 mAs per cycle. At the time the CPU
+  ran the sleep loop at 19.2 MHz; since 9c5d365/874f815 and fde97a9 the
+  loop after a cluster wake runs on the A7 PLL (`FW:main.c:407-411`,
+  `FW:soc/clock.c:47-75`), so the firmware part should be shorter now.
+- The 90 mAs per BT wake (§1.3) says the non-VDD-min level is ~90 mA.
+
+If the cycle still spends ~140 ms outside VDD min: E_cycle ≈ 12.6 mAs →
+floor ≈ 1.5 mA, which is the AsteroidOS figure. If it spends 40 ms (a
+plausible hardware minimum: Linux's own latency figure for this level is
+12.7 ms, `K:arch/arm/boot/dts/qcom/msm8226-v2-pm.dtsi:160`, plus RPM
+shutdown/bringup and our flush): E_cycle ≈ 3.6 mAs → floor ≈ 10 mA. Both
+fit the log. **§6.0 is the measurement that decides**, and it is cheap.
+
+What is in a cycle [V unless marked]:
+
+| phase | what | where |
+|---|---|---|
+| wake | MPM timer → RPM bringup (XO start, PLLs, CX/MX up, DDR out of self-refresh) → SPI 171 | SUSPEND.md §2.4.6; durations readable at master stats +0x2c/+0x30 (§3.4) |
+| wake | TZ warm boot, `cpu_resume`, GIC restore, `timer_resume` (TVAL=1 → immediate tick) | `FW:soc/suspend.S:63-112`, `FW:soc/spm.c:160-166`, `FW:soc/timer.c:47-52` |
+| wake | A7 PLL re-enable (BYPASSNL, 10 us, RESET_N, lock wait ≤ 200 us, OUTCTRL), mux to PLL | `FW:soc/clock.c:67-80`, `:47-52` |
+| loop | `wdt_feed`, `usb_poll` (tud_task + adb + console), `bt_poll`, charger poll 1/s (3 SPMI reads), `pmic_power_key()` = 1 SPMI read **every iteration**, touch poll, notify, every 10 s the CC read + `log_printf` | `FW:main.c:192-230, 345-350` |
+| sleep | mux to XO, then `cpu_clock_park` (GPLL0 vote, mux GPLL0/2, PLL off), `bt_sleep`, `mpm_arm` (12 vMPM words + IPC), L2 SAW 0x1a1, QTimer, GIC save, handoff lock, **full L1+L2 clean+invalidate by set/way**, SMC | `FW:main.c:400-406`, `FW:soc/spm.c:137-170`, `FW:soc/suspend.S:26-58` |
+| sleep | TZ flag-1 work (its own L2 flush), CPU SAW pc, L2 SAW pc (APC rail off over SPMI), RPM shutdown handshake, sleep set applied, XO off, VDD min | SUSPEND.md §2.4.5 [I] |
+
+The SPMI reads cost ~10-50 us each [I]; the cache flush is the largest
+firmware item on the way down; the RPM/XO work on the way up is outside
+our control except through the rate.
+
+## 3. How trustworthy is the current measurement
+
+`pmic_battery_avg_ua()` (`FW:soc/pmic.c:635-646`) is the BMS coulomb
+counter delta over elapsed `time_ms()`:
+
+- Same hardware path as the vendor: BMS `CC_DATA0` 0x408a, 5 bytes, held
+  via `CC_DATA_CTL` 0x4042 bit 0 (`K:drivers/power/qpnp-bms.c:55,79,524-548,787-798`).
+- Same constants: 542535/100000 uV per LSB (`qpnp-bms.c:621-626`), 56
+  ticks of a 32764 Hz clock per reading (`:1410-1411`), 9.7 mΩ external
+  sense (`K:arch/arm/boot/dts/apq8026-sturgeon/apq8026-sturgeon-pm.dtsi:104-106`,
+  `qcom,use-external-rsense`). `cc × 542535 × 56 / 32764 × 10 / 9700` =
+  0.956 µAs per count, identical to `cc_uv_to_pvh` / `r_sense_uohm`
+  (`:1414-1426,1462-1465`). [V]
+- Differences from the vendor: `calculate_cc` also applies the IADC gain
+  trim (`cc_adjust_for_gain`, `:1459-1461`) and die-temperature
+  compensation (`qpnp_iadc_comp_result`, `:1467`). SUSPEND.md §8.1 found
+  the trim gain-offset 3267 vs the ideal 3291, i.e. ~0.7 %. Omitting both
+  is a ≤1-2 % scale error [I].
+- Resolution: 1 count ≈ 1 µAs, so a 10 s window resolves µA; the printed
+  value is truncated to whole mA. The 1.7 mA sd between clean samples is
+  therefore real variation plus ±0.5 mA quantisation, not counter noise.
+  Use 60 s windows (sd ≈ 0.7 mA) or 5 min (≈ 0.3 mA) for A/B tests.
+- Time base: CNTPCT keeps counting through VDD min and agrees with the
+  MPM2 sleep counter within 1 % [M, SUSPEND.md §8.1].
+- Caveats: the counter is frozen while USB power is present [M, §8]; sign
+  is positive for discharge; the 36-bit counter cannot wrap in a day
+  (2^35 counts ≈ 9 Ah). The AsteroidOS 1.6 mA reference was taken with the
+  same counter on the same watch (§8.2), so the comparison is like for
+  like.
+
+The instantaneous `battery N mA` value (`pmic_battery_ua`, `:606-614`) is
+a single IADC conversion without averaging; the vendor's `get_prop_batt_current`
+path uses the same IADC with gain/offset channels but averages over its
+fast-average setting. Only the CC average should be used for this work.
+
+## 4. Wakeups: how many and why
+
+- **Ours, asleep:** exactly 1.0/s from the CNTP tick: `timer_set_period(1000)`
+  at sleep (`FW:main.c:289`), `tick_irq` reloads TVAL (`FW:soc/timer.c:39-43`),
+  `spm_idle` turns the remaining TVAL into the vMPM wake time
+  (`FW:soc/spm.c:150-152`). Plus BT host-wake (~66 in 7.2 h here), touch
+  (none), power key (10 wake/sleep pairs). Every tick is an RPM-assisted
+  cluster collapse; the 20 ms guard at `spm.c:150` never triggers at this
+  period.
+- **Why the tick exists:** nothing in the sleep loop needs it. The charger
+  poll matters only with USB present (then `usb_connected()` already
+  forbids cluster sleep), the power key and BT and touch are MPM wake pins
+  (`spm.c:118`), the 10 s stats line is cosmetic, and NimBLE's host timers
+  have an explicit next-deadline query (`bt_npl_next_ms()`,
+  `FW:bt/npl.c:277-293`) that is not used by the sleep path. The watchdog
+  (bark 3 s, bite 4 s, `FW:main.c:134`) is the one hard constraint: a tick
+  longer than 3 s needs the vendor's suspend treatment (§5 F1).
+- **Vendor, suspend (AsteroidOS idle with screen off):** no periodic
+  timer. `lpm_suspend_enter` programs the vMPM with `~0` → ~72.8 min
+  (SUSPEND.md §2.4.3), the arch timer PPIs and QTimer are MPM-bypassed
+  (`msm8226-v2-pm.dtsi:223-289`), so only MPM pins and the PMIC RTC alarm
+  wake it. The watchdog is stopped in device suspend
+  (`K:drivers/soc/qcom/watchdog_v2.c:114-126`) and re-armed in resume
+  (`:128-140`). AsteroidOS adds one wake a minute for the AOD clock
+  (SUSPEND.md §8.2, the logger sees "each minute AOD wake"). BT host-wake
+  behaves like ours: `nitrous` deasserts dev-wake 1 s after the last TX
+  (`K:drivers/bluetooth/nitrous.c:39,186`), the wakelock keeps Linux in
+  idle (gdhs / pc-no-rpm, SUSPEND.md §9) for that second.
+- **Vendor, idle with screen on:** NO_HZ tickless; cpuidle picks gdhs or
+  l2-cache-pc-no-rpm between events (SUSPEND.md §9 live lpm_stats).
+
+So the structural difference is **1 wake/s vs ~1 wake/min**. Everything
+else about our wake sources already matches the vendor.
+
+## 5. Where the 14 mA can go, and the fixes, ranked
+
+Each item: what we do, what the vendor does (file:line), evidence,
+expected saving, confidence, how to measure. "Awake-part" means it only
+costs during the non-VDD-min part of each cycle (so it scales with the
+tick rate); "floor" means it costs for the whole sleep.
+
+### F1. Drop the 1 Hz tick (awake-part, largest)
+
+- **Ours:** `timer_set_period(1000)` (`FW:main.c:289`); the vMPM wake is
+  always the next tick (`FW:soc/spm.c:150-152`).
+- **Vendor:** no tick in suspend (§4); vMPM wake = next real deadline or
+  ~72.8 min (`K:drivers/cpuidle/lpm-levels.c:339-346,484-493`,
+  `K:drivers/soc/qcom/mpm-of.c:531-551`); watchdog stopped across the
+  collapse (`K:drivers/soc/qcom/watchdog_v2.c:114-140`: `WDT0_RST=1`,
+  `WDT0_EN=0` before, `EN=1, RST=1` after).
+- **Change:** while asleep, compute the wake as the minimum of
+  `bt_npl_next_ms()` (`FW:bt/npl.c:277`), the BT dev-wake idle expiry
+  (F2), the haptics pattern step, and a long stats period (60 s, or none);
+  program it into the vMPM via `spm_idle`'s TVAL path. Before the SMC:
+  `wdt_stop()` (`FW:soc/wdt.c:28`); after resume: `wdt_arm` again. Keep
+  the "wake < 20 ms ahead → core collapse" guard (SUSPEND.md §8).
+  Whether the APCS WDT even counts with the APC rail off is [U]
+  (L2OFF.md §5 E2 raised it); stopping it the vendor's way makes the
+  question moot.
+- **Risk:** a NimBLE callout that fires late is harmless for the link (the
+  controller keeps the connection), but security/GATT timers must be
+  honoured, which `bt_npl_next_ms()` gives. RTC-driven UI (minute clock)
+  is not shown while asleep.
+- **Saving:** `E_cycle × (1 − 1/60)`. If §6.0 confirms ~140 ms/cycle:
+  **~10-12 mA**. If the cycle is ~40 ms: ~3.5 mA. Confidence that it is
+  the largest single item: medium-high [I from §1.3 and §8.2]; the size
+  needs §6.0.
+- **Measure:** §6.0 first (residency vs tick), then A/B 5-min CC windows
+  at 1 s vs 60 s vs no tick.
+
+### F2. Shorten the BT wake tail (awake-part)
+
+- **Ours:** after a host-wake, two ticks at core-only collapse (§1.3)
+  because `bt_can_sleep()` waits for the 1 s idle timer and the tick is
+  the only timer.
+- **Vendor:** same 1 s rule (`nitrous.c:39`), but Linux spends that second
+  in cpuidle, not at a fixed 1 s granularity.
+- **Change:** when `bt_can_sleep()` is false only because `dev_awake`, set
+  the wake time to `tx_t + DEV_WAKE_IDLE_MS` (not the tick) and use the
+  core-only collapse until then; re-evaluate immediately after. Also stop
+  deasserting/re-asserting BT_WAKE around the firmware's own 10 s log line
+  if it ever sends (it does not today).
+- **Saving:** ~90 mAs → ~20 mAs per event [I]; at this log's rate
+  ~0.2 mA, more with a chatty phone. Confidence high on mechanism [V],
+  low on magnitude.
+- **Measure:** compare the 11-wakeup sample mean against the 10-wakeup
+  mean before/after (the log already gives this split).
+
+### F3. USB PHY low power mode (floor + awake-part)
+
+- **Ours:** PHY left as the bootloader runs it, controller reset, pull-up
+  connected (`FW:usb/usb.c:51-66,297-308`). No LPM anywhere.
+- **Vendor `msm_otg_suspend`** (`K:drivers/usb/phy/phy-msm-usb.c:884-1141`)
+  [V]: OTG comparators off `ulpi_write(OTG_COMP_DISABLE,
+  ULPI_SET(ULPI_PWR_CLK_MNG_REG))` (`:616-617`); non-driving opmode when
+  `ALLOW_VDD_MIN_WITH_RETENTION_DISABLED` (`:955-963`); `PORTSC |= PHCD`
+  and poll (`:969-980`); `USBCMD |= ASYNC_INTR_CTRL | ULPI_STP_CTRL`
+  (`:1005-1012`); `pclk`/`core_clk` off (`:1071-1073`); XO vote off
+  (`:1077-1082`); PHY regulators off (`USB_PHY_REG_OFF`, `:1085-1088`) with
+  `ALLOW_PHY_POWER_COLLAPSE`, else L20/L10 to 4 mA LPM loads
+  (`:1089-1092`, loads `:65,70`, `msm_hsusb_ldo_enable` `:268-278`); bus
+  vote 0 (`:1124`). 8226 gets `ALLOW_PHY_POWER_COLLAPSE | ALLOW_PHY_RETENTION`
+  (`:4871`) and `ALLOW_LPM_ON_DEV_SUSPEND` from DT (`:4404,4882`; the
+  sturgeon node has `qcom,hsusb-otg-lpm-on-dev-suspend`? not in
+  `msm8226.dtsi:332-358` [V]; check the common MTP dtsi before relying on
+  it). Resume is the mirror (`:1170-1280`).
+- **Evidence:** `usb_phy_lpm()` (PHCD + USBCMD bits 29/30, plus the ULPI
+  0x98 clear noted in SUSPEND.md §8.1) measured **-7 mA** within a run on
+  2026-10-27 [M]. The regulator part (L20 3.075 V / L10 1.8 V off or LPM)
+  was not measured separately ("L10/L20 off: no effect" at the 50 mA
+  baseline, §8.1, inconclusive at that noise).
+- **Wake on attach:** the vendor's path is the PMIC `usbin-valid`
+  interrupt (`K:drivers/power/qpnp-charger.c:2103-2120,5784-5795`,
+  `enable_irq_wake` `:707,757`) → MPM pin 62, which the firmware already
+  wakes on for the power key (`FW:soc/pmic.c:62-86` does the same
+  SET_TYPE/POLARITY/EN_SET dance for PON; repeat it for SMBB USB periph
+  0x13). That also fixes "USB attach doesn't wake" (EMBEDDED.md).
+- **Saving:** ~7 mA [M, 2026-10-27 baseline]. Confidence high that it is
+  real, medium on the exact size at 14 mA.
+- **Measure:** 5-min windows with/without `usb_phy_lpm()` on the sleep
+  path, then add the L20/L10 `swen=0` / LPM step as a third arm.
+
+### F4. DSI PHY/PLL off, DSI/MDP clocks off, MDSS GDSC (floor + awake-part)
+
+- **Ours:** `display_sleep()` = DCS 0x28 + 0x10 only (`FW:display/display.c:139-144`).
+  DSI PHY, DSI PLL, DSI/MDP clocks, MDSS GDSC and the panel rails L15
+  (2.8 V "vdd"), L8 (1.8 V "vddio"), L4 (1.2 V "vdda") stay as the
+  bootloader left them.
+- **Vendor off path** `mdss_dsi_off` (`K:drivers/video/msm/mdss/mdss_dsi.c:518-565`)
+  [V]: controller off, `mdss_dsi_phy_disable` (`K:.../msm_mdss_io_8974.c:48-80`),
+  all DSI clocks off (`mdss_dsi.c:558`, PLL off via
+  `dsi_pll_disable` → `GLB_CFG = 0` at `K:drivers/clk/qcom/mdss/mdss-dsi-pll-util.c:470-484`;
+  that register is 0xfd922a20, the one the harness zeroed), then
+  `mdss_dsi_panel_power_ctrl(OFF)` (`mdss_dsi.c:229-300`) → panel supplies
+  disabled per `qcom,panel-supply-entries` / `ctrl-supply-entries`
+  (`K:arch/arm/boot/dts/qcom/msm8226-mdss.dtsi:145-200`: vdda L4
+  enable-load 100 mA / disable-load 100 µA, vdd L15, vddio L8). MDSS
+  runtime suspend drops the footswitch (`mdss_mdp.c:2960-3030,3143-3157`,
+  GDSC 0xfd8c2304 = `FW:soc/msm8226.h:33 MDP_GDSCR`).
+- **Vendor low-power (AOD) path**, if we ever keep the panel on: command
+  panels with `qcom,ulps-enabled` (the rm69080 has it,
+  `dsi-panel-auo-rm69080-hvga-video.dtsi:45`) enter ULPS
+  (`msm_mdss_io_8974.c:920-1000`, lane ULPS request at ctrl +0x0ac,
+  status +0xa8), clocks off, supplies stay on at the `ulp-load` values.
+- **Evidence:** DSI PLL + PHY power-down **-2 mA**, MDSS CBCRs gated and
+  GDSC collapsed **-1 mA** [M, SUSPEND.md §8.2]. Rails off: not measured
+  (the panel in sleep-in draws ~100s of µA [I]; the LDO quiescent is the
+  real question, ~0.1-0.3 mA per LDO in NPM [I, PM8226 class figures]).
+- **Cost:** a full DSI PHY/PLL/controller re-init and the panel on
+  sequence (`dsi-panel-auo-rm69080-hvga-video.dtsi:46-61`, reset
+  `:95`) on wake, which the firmware does not have yet; the harness only
+  toggled PLL/PHY registers and relied on the bootloader's state
+  surviving. Stage it: (a) PLL GLB_CFG + PHY power down and re-enable
+  (measured path), (b) clocks + GDSC, (c) rails.
+- **Saving:** ~3 mA [M] for (a)+(b); (c) [U].
+- **Measure:** per stage, 5-min windows; verify the wake path with
+  `display_timeouts()`.
+
+### F5. eMMC: sleep the card and gate SDCC1 (floor, small; awake-part)
+
+- **Ours:** `emmc_init` enables SDCC1 AHB + APPS clocks (RCG GPLL0/3 =
+  200 MHz, `FW:storage/emmc.c:166-182`), wakes the card from the
+  bootloader's CMD5 sleep (`:488-500`, the bootloader "puts it to sleep and
+  turns HC mode off", `:5-6`), and leaves it in transfer state with the
+  clocks on for the rest of the run.
+- **Vendor:** suspend puts the card to sleep (`mmc_card_sleep` or
+  deselect, `K:drivers/mmc/core/mmc.c:1857-1860`), power-off notification
+  when supported (`:1732-1761`); host runtime PM gates clocks 200 ms after
+  the last request (`K:drivers/mmc/host/sdhci-msm.c:194,3199`) and drops
+  the bus vote (`:3470-3495`); `vdd` L17 is disabled and its load set to
+  0 (`:1897-1918`), `vdd-io` L6 is always-on at 250 µA LPM
+  (`:1919-1927`; DT `qcom,vdd-io-always-on`, `qcom,vdd-io-current-level =
+  <250 154000>`, `qcom,vdd-current-level = <800 500000>`,
+  `K:arch/arm/boot/dts/qcom/msm8226-720p-mtp.dtsi:134-141`).
+- **Change:** after each store access, CMD5 sleep + gate both CBCRs
+  (`store.c` already re-inits via `generation`/`emmc_card()->ready`);
+  L17 `swen=0` while asleep is optional (the card must be re-identified
+  after VCC off, which `emmc_init` can do).
+- **Saving:** eMMC standby with clock running vs sleep: ~0.2-1 mA [I,
+  datasheet class; "L17 off: no effect" at the 2026-10-27 noise level].
+  Confidence low on size, high on direction.
+- **Measure:** 5-min window with the card in CMD5 sleep and SDCC1 CBCRs
+  off vs current.
+
+### F6. Touch controller mode (floor, small)
+
+- **Ours:** IC left in normal operation (`FW:input/touch.c:169-230`),
+  default doze, L19 + LVS1 on, attention line as MPM pin 8.
+- **Vendor:** `synaptics_rmi4_suspend` (`K:drivers/input/touchscreen/synaptics_dsx/synaptics_dsx_core.c:3834-3878`):
+  with wake-gesture support (`WAKEUP_GESTURE` true, `:43`; set when F11
+  query 27 / F12 ctrl 27 report it, `:1756,2055,2601-2604`) it switches the
+  reporting mode to wake-gesture (`synaptics_rmi4_f11_wg`, `:3470-3500`)
+  and keeps power and the IRQ as a wake source; otherwise IRQ off,
+  `SENSOR_SLEEP` (`:3579-3600`) and `regulator_disable(pwr_reg)` (`:3871`).
+  The real watch wakes from touch in AsteroidOS ("Resume caused by IRQ
+  339, synaptics_dsx", `hw/sturgeon/dmesg.txt`), so it is the wake-gesture
+  branch: IC powered, in gesture doze. `synaptics,is_wake` in the DT is
+  unused by the driver [V grep]. Doze interval F01_CTRL02 = 3 (30 ms) both
+  at init and resume (`:54,1640,3922,3725-3750`).
+- **Saving:** full-report doze vs gesture doze: ~0.1-0.5 mA [I]; the
+  2026-10-27 "touch F01 sleep: nothing" was at a 120 mA baseline.
+  Confidence low.
+- **Measure:** 5-min window with F01_CTRL00 = SENSOR_SLEEP (upper bound on
+  what the IC costs), then the gesture mode if the bound is worth it.
+
+### F7. Sensor-hub MCU handshake (floor, unknown size)
+
+- **Ours (main):** gpio 108 (AP status) never driven; the MCU is on an
+  unswitched rail (SENSORS.md §2) and runs whatever it does after reset.
+  The sensors worktree drives 108 low during cluster sleep (`hub_sleep`,
+  `asteroid-embedded-sensors/src/sensors/hub.c:239-243`) like the vendor.
+- **Vendor:** `mcusleep_sleep_allow()` (`K:drivers/hwmcu/hwmcusleep.c:145-167`):
+  108 low, gpio 65 wake IRQ, before suspend. What the MCU does with that
+  is [U] (SENSORS.md §4).
+- **Evidence:** contradictory at the old baseline: "MCU reset (-4 mA)" vs
+  "MCU sleep handshake / MCU reset: no effect" (SUSPEND.md §8 vs §8.1).
+- **Measure:** three 5-min windows: 108 floating (now), 108 low, NRST
+  (gpio 87) held low. The last bounds the MCU + IMU share; the vendor only
+  ever gets the middle one.
+
+### F8. Regulator sleep set and LDO modes (floor, small each)
+
+- **Ours:** active-set `swen=1` for L19 and LVS1 (`FW:input/touch.c:50-53`,
+  `FW:soc/rpm.c:194-198`), no `ma`/`lsmd` keys; one sleep-set request
+  (CXO Enab=0, `rpm.c:227-231`); bus votes active-set only (`rpm.c:213-219`).
+  Whatever the bootloader enabled is unknown and stays on (SUSPEND.md
+  §3.1 default rule).
+- **Vendor:** sleep set only differs for `_ao` handles (`l8_ao`,
+  `s1_corner_ao`, SUSPEND.md §3.2); LDO mode via `lsmd` and load via `ma`
+  (`K:drivers/regulator/rpm-smd-regulator.c:113-129`, mode mapping
+  `:1163-1164`), driven by each consumer's `regulator_set_optimum_mode`
+  (USB `:268-278`, eMMC `sdhci-msm.c:1832-1930`, DSI supply entries).
+- **Evidence:** "sleep-set bus 0 / CX ret / MX 750 mV / LDOs off: no
+  effect" [M, 2026-10-27, noisy]. Since the RPM reaches VDD min every
+  cycle (§8.2, §9), CX/MX and bus clocks are already at the vendor's
+  sleep level; the remaining lever is which LDOs are on and in which mode
+  (NPM vs LPM quiescent, [I] ~0.1-0.3 mA each).
+- **Measure first, then fix:** dump every LDO/SMPS/VS `EN_CTL` (0x46) and
+  `MODE_CTL` (0x45) at 0x1x00-0x1xFF/0x4x00 over SPMI once awake and once
+  from the sleep loop, diff against the vendor's suspend set (L19, LVS1,
+  L6 always-on, L8/L10/L20 LPM or off per F3/F5, L3 MX, S1 CX, S2 APC off
+  by SAW, S3/S4 as rails for the others), and turn off or LPM the rest one
+  at a time in 5-min windows.
+- Items checked and already matching the vendor: BATFET LPM 0x40 when USB
+  is absent (`FW:soc/pmic.c` `usb_changed`, vendor `qpnp-charger.c:1926-1946`);
+  VREF_BAT_THM forced on (0xc0) is what the vendor does too
+  (`qpnp-charger.c:6082-6086`), so the §8.2 candidate "0x124a 0xc0 → 0x80"
+  is not a vendor method; S2 auto mode (`pmic.c:38`).
+
+### F9. GPIO pulls (floor, tiny)
+
+The vendor's suspended gpiomux configs (`K:arch/arm/mach-msm/board-8226-gpiomux.c`)
+pull every unused line. We configure only the pins we use; the rest are
+the bootloader's. A fighting pull costs V/R ≈ 20-100 µA each [I]. Only
+worth a TLMM dump (117 × `GPIO_CFG`/`GPIO_IO`) diffed against the vendor
+table once everything above is done.
+
+### F10. Per-wake work, if any tick remains (awake-part)
+
+Linux comes out of l2-cache-pc, handles the IRQ and goes back; it does
+not read the PMIC or format text. Ours per wake: a SPMI read of
+`PON_INT_RT_STS` every iteration (`FW:main.c:229`, `pmic.c:49-52`) that
+the PON IRQ (`pmic.c:68-86`) already makes redundant; the charger poll
+with USB absent (`main.c:202`); three clock-mux switches and a PLL re-lock
+(`main.c:400-411`; the vendor leaves the mux on GPLL0 after
+`ramp_down_last_cpu`, L2OFF.md §1.4.2, and runs no slower than 300 MHz,
+`K:arch/arm/boot/dts/qcom/msm8226.dtsi:1048-1051`); `fbcon_puts` into the
+text grid (cheap, `FW:display/fbcon.c:94-109`, no present while the overlay
+is on). Saving: a few ms per wake; only matters at 1 Hz, zero after F1.
+
+### F11. BT controller: connection parameters (floor, [U])
+
+The host-wake rate is low, so the remaining BT cost is the controller's
+own connection events. Interval and slave latency are set by the phone
+and only logged at connect (`FW:bt/host.c:86-88`, `:99-100`); the log has
+no such line, so the values during this run are [U]. A peripheral can
+request latency (`ble_gap_update_params`); BlueZ on AsteroidOS advertises
+its PPCP from `hci0` defaults (30-50 ms, latency 0) and whether the
+AsteroidOS 1.6 mA figure had a phone connected is not recorded. BCM43430
+BLE-connected idle at 30-50 ms is of order 0.5-1 mA [I, no local source].
+Measure: 5-min windows BT off / connected / connected with latency 4.
+
+### Not a problem, or the same as the vendor
+
+- XO shutdown and VDD min happen every cycle (SUSPEND.md §8-9), so
+  GCC/MMSS clocks, GDSCs on CX, BLSP/UART/QUP clocks and bus votes cost
+  nothing during the sleep part; they matter only for the awake part
+  (F10). `APCS_CLOCK_SLEEP_ENA_VOTE` (0xfc401488) is never written by the
+  firmware; the vendor zeroes it at boot (`K:arch/arm/mach-msm/clock-8226.c:3597-3610`).
+  Read it once; if nonzero, zero it (cheap, cannot hurt).
+- Verify both RPM stat records (XO shutdown and VDD min, SUSPEND.md §3.4)
+  increment, not only vmin; a stuck XO buffer vote (`clka`) would show
+  there [I].
+- GPU: GDSC collapsed and clocks gated at sleep (`FW:gpu/a3xx.c:257-270`).
+- DDR self-refresh, PMIC own consumption, RPM: same hardware state as the
+  vendor's suspend once VDD min is reached.
+
+## 6. Measurement plan
+
+All windows unplugged (the CC freezes with USB present), 5 min each,
+CC average over the whole window, compared within one boot. The sd of a
+5-min mean is ~0.3 mA (§3), so 0.5 mA effects are resolvable; the
+2026-10-27 null results were 10 s samples at 50-60 mA and cannot rule
+out anything below ~3 mA.
+
+**6.0 Residency vs tick (decides how much F1 is worth).** Console
+command that sets the sleep tick to 1, 2, 5, 10, 30 s. Per window read:
+RPM VDD-min `accumulated` (0xfc19dbd0 + 0x18, 19.2 MHz ticks) and the MPM2
+sleep counter (0xfc4a3000) at start and end → residency; the APSS master
+stats shutdown/bringup durations (0xfc428150 + 0x2c/0x30) → the RPM part
+of each cycle; the CC average. Fit `I = floor + E × f`. The watchdog must
+be stopped across the collapse for ticks > 3 s (F1).
+
+**6.1 Per-fix A/B.** F3 (PHY LPM, then + regulator step), F4 (a/b/c),
+F5, F6, F7 (three arms), F8 (per LDO), F11 (three arms), each against the
+immediately preceding baseline window, best at the longest tick from 6.0
+so the floor dominates and the effect is not diluted by overhead.
+
+**6.2 Bookkeeping in the log line.** Add to the 10 s line: VDD-min
+residency % since the last line, XO-shutdown count delta, the BT
+interval/latency (cached from the last `conn_update`), battery mV. That
+turns every future day run into data for §1.2's unexplained drift.
+
+## 7. Open points
+
+- E_cycle today (§2): the one number that orders F1 against F3/F4.
+- `qcom,hsusb-otg-lpm-on-dev-suspend` is absent from every sturgeon DT
+  file (`msm8226.dtsi`, `msm8226-720p-mtp.dtsi`, `apq8026-v2.dtsi`,
+  `apq8026-sturgeon/*`) [V grep], so the vendor does not enter USB LPM
+  with a host attached and suspended; only the unplugged case (F3) is
+  vendor-backed.
+- What the MCU does while 108 is low (SENSORS.md §4 open point).
+- The BT connection parameters during long sleeps and whether the
+  AsteroidOS 1.6 mA reference had a phone connected.
+- Whether the APCS watchdog counts through a cluster collapse (L2OFF.md
+  §5 E2); F1 stops it either way.

@@ -319,12 +319,20 @@ and clears. The region is mapped non-cacheable.
 
 Open items (2026-10-29), not tied to a milestone:
 
-- Fixed 2026-10-29 (watchdog fed in fbcon present): fbcon `memset` "hang"
-  3x on 2026-10-28/29, also without a previous AsteroidOS boot).
+- fbcon `memset` watchdog at boot: c9f07f3 (feed in present) did not end
+  it. With the sensor hub builds it came back on about every other boot
+  (watchdog ~3 s after boot start, pc in the fbcon memset right after the
+  GPU self-test), then stopped reproducing (25 clean boots). IRQ counts at
+  the bark were normal (~1 kHz tick only), CPU loop and memset speed
+  measured at boot were the same every time, and one near-miss boot took
+  1.2 s from `gpu: powered` to `pm4` (normally 17 ms): the whole system
+  slows down, which points at bus/DDR clocks (RPM bus votes?) rather than
+  interrupts. Next time: log RPM acks and the BIMC/SNOC rates.
 - End of charge / resume not yet observed with the vendor-style poll.
 - Battery percentage: replace the IR-compensated OCV stopgap with the
   vendor qpnp-bms method (reimplemented, OCV from PMIC + CC + UUC).
-- Sleep current: ~26 mA asleep with BT vs ~1.6 mA on AsteroidOS (with AOD).
+- Sleep current: ~14 mA asleep with BT (day test) vs ~1.6 mA on AsteroidOS
+  (with AOD). See POWER.md for the ranked fixes.
 - USB attach doesn't wake the watch from cluster sleep (needs a VBUS / PHY
   wake source).
 
