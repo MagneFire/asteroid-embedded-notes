@@ -278,3 +278,37 @@ record and at `ui: ready`.
   line, and whether the previous session was awake or asleep at `reboot`.
 - Whether `numshutdowns` (0xfc428154) continues across our warm reset.
 - Did the sensors-branch alternation predate e7bf745?
+
+## 7. Watch results 2026-10-29 evening
+
+Trigger: boot AsteroidOS (`fastboot boot backup/sturgeon/boot-asteroidos.img`),
+`adb reboot bootloader`, then our firmware several times.
+
+- **First boot after AsteroidOS, 2 of 2:** lk2nd hands over a different device
+  tree (`boot: device tree 08600000, ramdisk 00000000-00000000` instead of
+  `01e00000`, `02000000-0200ca00`), so no boot-image files: `gpu: no
+  microcode`, and earlier the same day `bt: patch file 4343A0.hcd ... failed`.
+  Separate bug from the slowdown; the next boot is normal again.
+- **Slowdown reproduced once** (boots 3 and 4 after AsteroidOS, back to back,
+  build e7bf745e51+ with `dbg` logging):
+  - boot 3: `gpu: powered` 2.153 -> `selftest` 2.451 (300 ms, normally 33),
+    bark 5.451. Secondaries: park counts 1 1 1, ACC status 00080460
+    (collapsed) at the bark. IRQ frame r0..r3 = 05000000 00000000 050a2800
+    0501382b: the fbcon memset of buffer 0 had done 0x1382b bytes (80 KB of
+    650 KB) in ~3 s, i.e. ~27 KB/s, ~150 us per 4-byte store.
+  - boot 4: bark at 3.47 s after `boot:` with park counts 0 0 0 (the bark
+    came before `spm_init()` released the secondaries), memset of buffer 1
+    (r0 050a2800, r3 050b5ca2: 77 KB done).
+  - So **H1 (secondaries) is killed**: parked once and collapsed in one
+    failure, never released in the other. **H3 (GPU state) and H5
+    (charger) are killed** by boot 4: the window was open before either
+    runs (display/fbcon stage). Remaining: H2 (secure FIQs) and H4 (RPM /
+    bus), plus anything that makes each store cost ~150 us (bus or XPU
+    timeouts per transaction, DDR in a throttled state).
+  - GDSCR before GPU power-on was 00222001 (off) in every boot, failing or
+    not.
+- **Heisenbug:** after adding a probe to the bark handler (loop timing, 16 KB
+  memset timing, 100 MPM timetick reads, A7 RCG/PLL), 2 more AsteroidOS
+  round trips' worth of boots (18) did not reproduce. Third time
+  instrumentation has made it go quiet; code layout or image size may matter
+  (check what the image end / bss / heap overlap after a size change).
