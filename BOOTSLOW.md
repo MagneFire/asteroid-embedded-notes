@@ -312,3 +312,37 @@ Trigger: boot AsteroidOS (`fastboot boot backup/sturgeon/boot-asteroidos.img`),
   round trips' worth of boots (18) did not reproduce. Third time
   instrumentation has made it go quiet; code layout or image size may matter
   (check what the image end / bss / heap overlap after a size change).
+
+## 8. Deeper measurements 2026-10-29 night
+
+Trigger used: boot the `asteroid-embedded-power` build, wait 15 s, then
+`make run` of the m7 debug build (twice), repeated. Roughly 1 failure in
+5-10 boots, but series of 16-20 with none happen, with or without code
+changes.
+
+- Per-tick samples (pc, svc lr, r3 of the IRQ frame): the stalled memset
+  advances **uniformly**, ~30 bytes per 1 ms tick and ~250 bytes per 10 ms
+  tick (boot tick slowed to 10 ms): a continuous ~25 KB/s crawl, no
+  rewinds, always at the same `strb`.
+- In the bark handler (IRQ mode, IRQs masked), all at normal speed: 100k
+  loop 1.01 ms, 16 KiB memset 62 us, 4 KiB byte stores at the stalled
+  address 17 us (PAR: normal WB-WA, NS), **2 MiB memset 7.9 ms plus a 0.5
+  ms clean (i.e. through DDR)**. So DDR and the bus are fine at bark time.
+- Main context CPSR at the stall: 0x80000113, A=1 I=0 **F=0**, while at boot
+  it is 0x600001d3 (F=1); something (likely an SCM return) clears F.
+  Async-abort livelock is ruled out (A masked).
+- Code checksum identical in good and failing boots (image not corrupt).
+- PMU totals are boot-wide (Fable/Codex point out they include normal
+  boot time and possibly secure-state cycles); per-tick deltas are still
+  to be taken.
+- Masking FIQ for main on every IRQ return: 0/16 failures, but the
+  control without it was also 0/16, so inconclusive.
+
+Remaining explanations: (B) secure-world time stealing, a Group 0 FIQ
+source handled by TZ that only hits code running with F=0; (A) a per
+transaction stall that only the main context's traffic pattern triggers
+(e.g. while an MDP frame is in flight, since a kick precedes every stalled
+memset). Next build, from Fable/Codex: per-tick PMU cycle and instruction
+deltas next to the r3 delta, PMU secure-counting calibration around an SCM
+call, MDP PP_DONE/kick state in the bark, SCTLR/ACTLR/L2CTLR and the NoC
+RCGs at boot and bark, TZ diag interrupt counters (IMEM 0xfe805720).
