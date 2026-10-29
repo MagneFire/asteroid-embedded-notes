@@ -859,3 +859,37 @@ The debug harness used for all of this (console `pw`, `rpm`, `deep`,
 
 Known issue: after booting AsteroidOS, the firmware may die in the fbcon
 memset on every warm boot until a 12 s power key PMIC reset.
+
+## 9. Cluster power down fixed (2026-10-29)
+
+- Since 6d1317a (flag 0 + L2 SAW PC) the watch reset a few seconds after
+  waking from a cluster power down (PS_HOLD warm reset, no record); flag 1
+  hung on the second cycle inside TZ. Not seen in short wake tests.
+- Root cause: the A7 PLL's parent is xo_a_clk. With XO off during VDD min
+  the PLL loses its reference; we only waited for the lock bit and switched
+  the A7 mux to it anyway, leaving the RCG update stuck. Vendor
+  (msm-pm.c ramp_down_last_cpu / ramp_up_first_cpu, clock-a7.c rcg_disable,
+  clock-pll.c sr2_pll_clk_enable): move the mux to GPLL0/2 (src 4, div 3)
+  and clear PLL MODE bits 0-2 before, then BYPASSNL, 10 us, RESET_N, wait
+  lock (status bit 16), OUTCTRL after. With that, flag 1 (L2 off) works
+  for hundreds of cycles; RPM vmin counts every cycle; ~26 mA asleep with
+  BT connected.
+- Also: flag 1 like Linux, handoff lock (SFPB mutex 7 @ 0xfd484380, tid
+  128+cpu) before the flush, no D-cache invalidate on resume, Cortex-A7
+  erratum 814220 DSB between set/way levels.
+- Live vendor reference (AsteroidOS, lpm_stats): awake idle uses
+  l2-cache-gdhs and l2-cache-pc-no-rpm; l2-cache-pc (notify RPM) ~1750
+  times in a short unplugged run; DT qcom,pm pc-mode "tz_l2_int",
+  use-sync-timer, synced-clocks. Notes: L2OFF.md, L2LIVE (not written).
+- Debug tooling that found it: breadcrumbs in uncached ramoops zone 1
+  (0x1ef83fc0) at each step of cpu_suspend/cpu_resume.
+
+## 10. Charging (2026-10-29)
+
+Battery never charged with our firmware: SMBB needs BOOT_DONE (MISC
+0x1642 bit 7) and CHG_EN (0x1049 bit 7) from software. e7bf745 ports the
+vendor qpnp-charger hwinit (sturgeon DT values, HACKs) plus its software
+end-of-charge/resume poll. Fast charging at ~-260 mA verified; end of
+charge not yet observed.
+
+Open: fbcon memset boot hang on some warm boots (3x on 2026-10-28/29).
