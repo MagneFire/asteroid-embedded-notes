@@ -319,7 +319,7 @@ and clears. The region is mapped non-cacheable.
 
 Open items (2026-10-29), not tied to a milestone:
 
-- fbcon `memset` hang on some warm boots (watchdog in sink_fbcon/present;
+- Fixed 2026-10-29 (watchdog fed in fbcon present): fbcon `memset` "hang"
   3x on 2026-10-28/29, also without a previous AsteroidOS boot).
 - End of charge / resume not yet observed with the vendor-style poll.
 - Battery percentage: replace the IR-compensated OCV stopgap with the
