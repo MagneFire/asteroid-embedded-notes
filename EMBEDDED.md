@@ -312,10 +312,21 @@ and clears. The region is mapped non-cacheable.
 | M4 | GPU | A305B bring-up, clear → quad → FlatMesh via ir3_compiler |
 | M5 | UI layer | GPU-rendered toolkit, launcher, default watchface behind an interface |
 | M6 | Sleep tier 1 | WFI + display off + rails, wake sources, current measured |
-| M7 | Bluetooth | UARTDM + patchram + NimBLE host, AsteroidOS profile, notifications end to end |
-| M8 | Sleep tier 2/3 | SPM power collapse, RPM sleep set |
+| M7 | Bluetooth | UARTDM + patchram + NimBLE host, AsteroidOS profile, notifications end to end (done 2026-10-28); media, weather, notification list, screenshot in progress |
+| M8 | Sleep tier 2/3 | SPM power collapse, RPM sleep set (done 2026-10-29: cluster PD + VDD min, SUSPEND.md §9) |
 | M9 | Apps | one at a time |
 | M10 | Always-on display | panel idle mode, minute updates from RTC wake |
+
+Open items (2026-10-29), not tied to a milestone:
+
+- fbcon `memset` hang on some warm boots (watchdog in sink_fbcon/present;
+  3x on 2026-10-28/29, also without a previous AsteroidOS boot).
+- End of charge / resume not yet observed with the vendor-style poll.
+- Battery percentage: replace the IR-compensated OCV stopgap with the
+  vendor qpnp-bms method (reimplemented, OCV from PMIC + CC + UUC).
+- Sleep current: ~26 mA asleep with BT vs ~1.6 mA on AsteroidOS (with AOD).
+- USB attach doesn't wake the watch from cluster sleep (needs a VBUS / PHY
+  wake source).
 
 ## Log
 
