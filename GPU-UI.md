@@ -402,3 +402,32 @@ hang). Before that check, painting while the GPU was suspended timed out
 Not done: async paint (CPU still spins in `gpu_draw_end` for the GPU
 part, ~1–2 ms of a repaint); GMEM rendering; image atlas eviction beyond
 "reset both when full".
+
+## 11. Sleeping GPU waits and the colour order (2026-10-30, main f18b970, 1c9640c, 9ec72d3)
+
+Waits: `gpu_draw_submit` ends a submission with CACHE_FLUSH_TS (fence),
+CP_WAIT_FOR_IDLE, then CP_INTERRUPT 0x80000000 (the kgsl sequence; RBBM
+INT_0 bit 15 CP_RB_INT, GIC SPI 33). `gpu_draw_wait` sleeps in WFI with
+IRQs masked between the fence check and WFI. Without the WAIT_FOR_IDLE
+before CP_INTERRUPT the interrupt came before the fence landed and the
+CPU slept to the next 1 ms tick (+0.3 ms per frame). The ring now only
+blocks when it would overwrite words past CP_RB_RPTR.
+
+`paint_end` only submits; rows to invalidate are queued (`paint_finish`).
+Main waits once after all `ui_update`s, *before* `stack_damage`: that
+scans layer pixels on the CPU for the content bands, and scanning while
+the GPU was still painting gave bands from a half-drawn popup (a black
+staircase over the face). So paint and compose do not overlap; the gain
+is the CPU in WFI instead of polling.
+
+A/B (same script, popup and face, USB): compose 1449 vs 1458 us (face),
+3571 vs 3583 us (popup); uibench unchanged (face 1.77 ms GPU). Power not
+measured (needs unplugged runs).
+
+Colour order: the render target used SWAP_WXYZ for every target, right
+for the XRGB display buffer but not for the RGBA layers, so the painter
+wrote B and R swapped. Invisible until the first coloured item (a red
+heart icon came out blue). `gpu_target.rgba` selects SWAP_WZYX. `shot
+layer` copied layers as XRGB, so it showed them swapped too; it now
+converts. `uibench n 0` leaves dirty CPU lines in the layer (no clean),
+so the composed frame is garbage until the next repaint: benchmark only.

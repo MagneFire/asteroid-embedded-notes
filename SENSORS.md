@@ -575,3 +575,23 @@ open algorithm: the vendor method is to use the MCU's bpm.
 boot + log read, no interaction): gpio 114/65 levels after reset, any bytes
 after reset, a CRC-valid handshake reply and the version string. Tilt, HR
 and steps need someone to wear or move the watch.
+
+## 8. Steps and heart rate (2026-10-30, branch `health`, not on main)
+
+Worktree `../asteroid-embedded-health`, uncommitted. Verified on the watch
+without wearing it:
+
+- After the tilt batch: set time `01 00 0c 01` + u64 UTC ms -> `(0)`,
+  activate step counter `01 00 30 00` -> `(0)`. Flush `01 00 30 04` while
+  sitting still returns no events.
+- Heart rate activate `01 00 32 00` gets a reply; no 0x32 events in 8 s
+  off the wrist (expected [I]). Deactivate `01 00 32 01`.
+- UI: steps and a heart icon on the battery row; tapping the heart
+  measures for 60 s (keeps the screen on), then switches the sensor off.
+  Steps today = running total (kv `steps`: total, day, day start) + MCU
+  count since its reset at boot; saved at sleep and day change.
+
+Still to check with the watch worn/walked: the step event sample (assumed
+u32, last sample of a batch used), the heart rate sample layout (assumed
+u32 bpm + u8 status at +4), whether steps taken while asleep arrive on the
+wake flush, and the status values.

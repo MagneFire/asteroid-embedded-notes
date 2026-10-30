@@ -528,3 +528,49 @@ turns every future day run into data for §1.2's unexplained drift.
 - One 1401 mA sample: counter read glitch, still to explain.
 - Tilt wake from cluster sleep, notification wake, palm to sleep all
   seen in the same run.
+
+## 10. Battery level: the vendor BMS method (2026-10-30, main adb84c5)
+
+Reimplemented from `K:drivers/power/qpnp-bms.c` (GPL-2.0, not copied) with
+the sturgeon DT values (`apq8026-sturgeon-pm.dtsi` bms node) and the
+HB442528EBC profiles (`HB442528EBC-{SCUD,XWD}-4v35-300mah.dtsi`): FCC 322
+mAh, cutoff 3.2 V (profile overrides the node's 3.4 V), max 4.35 V, chg
+term 20 mA, flat OCV 3.8 V. The two makers share the OCV table and differ
+in rbatt (496/487 mOhm and the SF table); picked by the ID resistor
+(VADC 0x31, 68k pull-up): this watch is SCUD (10 kOhm).
+
+- soc = (FCC*PC(OCV) - CC - UUC) / (FCC - UUC). OCV from BMS OCV_FOR_SOC
+  (0x4090) when it changes, else the last one; CC from the main counter
+  (0x408a), cleared after every read and summed in software; UUC from the
+  16-sample average current and rbatt, moving 1%/min at most.
+- Every boot here is a warm reset (PON warm reason 0x02 = PS_HOLD), so the
+  vendor path estimates the OCV from V + I*rbatt(50%) and then forces it to
+  the stored SOC (BMS 0x40b0 = (soc+1)<<1, 0x40b1 = iavg) if within 50%
+  (Huawei: `estimate_new_ocv_flag` is always set, so the warm-reset limit
+  50 applies, not the DT's 40).
+- Kept: adjust_soc below 15% (OCV pulled towards V+I*R, limited per step),
+  charging_adjustments in CV, clamp to 1% while V > cutoff, the Huawei
+  cutoff (0% only after 5 readings with OCV estimate < 3.25 V), the
+  "voltage < 3.25 V with USB" protection, report smoothing (1% per >= 5 s,
+  rises only while charging, catch-up), and the charger driver's display
+  hold (no drop < 6% while plugged, 10 s after unplug, only >= 50%).
+  The charger resume now uses the BMS soc <= 99 as the vendor does.
+- Left out: FCC learning (disabled in the DT), SOC wake thresholds (no
+  suspend in that form), the low-voltage wake lock (no shutdown at 0% yet),
+  battery insertion/removal, OCV dynamic settings (not in the DT).
+- ADC corrections for PM8226 v2.2 (REVID 0x102/3 = 02 02, fab 0 = GF):
+  VBAT_SNS -3.5 mV; PON OCV -6.8 mV and a temperature factor only at or
+  below 25 C die temperature; current: internal-rsense path (the IADC node
+  has no qcom,rsense), discharge only, x 1/(1 - 33*T[mC]/1e8). The IADC
+  ATE gain trim (0x36f5 = 0xc9) applies only to the external path, so not
+  here.
+- Battery temperature: VADC 0x30 ratiometric over GND_REF/VDD_VADC, the
+  vendor's 1.8 V / 68k table (sampled every 5 C). 29-30 C on the desk.
+- The average current log (`pmic_battery_avg_ua`) now reads the shadow
+  counter 0x40a8, which only software clears; the main counter is cleared
+  by the gauge (and by the hardware at each new OCV, which may explain the
+  odd 1401 mA sample in §9).
+
+First run: boot estimate under charge gave 92% (charging current lowers
+V + I*R), then a new hardware OCV (4.3765 V) at the end of the charge gave
+100% at once (soc 100 is not rate limited, as in the vendor driver).

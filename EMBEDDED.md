@@ -478,3 +478,25 @@ lower bus votes changed nothing; CPU on XO 124 -> 94 mA. CPU0 SAW + standalone
 power collapse works (warm boot via register SCM call, QTimer frame 0 wake)
 but saves nothing measurable (~96 mA). L2 does not keep dirty lines through
 the collapse: clean all cache levels. Next: full APCS collapse (SUSPEND.md).
+
+## 2026-10-30 evening
+
+- Battery: vendor BMS method on main (POWER.md §10).
+- GPU: sleeping waits, painter colour order fixed (GPU-UI.md §11).
+- USB attach wake: branch `usbwake` (worktree ../asteroid-embedded-usbwake),
+  uncommitted until a real plug test: USB_CHGPTH (0x1300) USBIN_VALID
+  interrupt on both edges through the same SPMI summary IRQ as the power
+  key; plugging in wakes the screen for 3 s as mce does
+  (`MCE_DEFAULT_TK_EXCEPT_LEN_CHARGER` 3000). USBIN_VALID lags an unplug by
+  ~16 s, so only the attach wakes.
+- Steps and heart rate: branch `health` (SENSORS.md §8).
+- AOD on main (8051e5e): on sleep (not palm) the face switches to ambient
+  (time, date, battery, white on black), the GPU is suspended first so
+  Slint renders on the CPU, `ui_render` blends it over black, one flip,
+  then the vendor idle-on sequence (FE 00, NOP + 150 ms, 39; off: FE 00,
+  38, from `qcom,mdss-dsi-idle-on-command`). Redrawn when the RTC minute
+  changes; the sleep length is capped to the next minute. Wake: idle off,
+  GPU back (1.1 ms). `aod on|off` (kv `aod`). Checked: buffer screenshots,
+  one frame per minute while asleep, wake and the off path. Not checked:
+  how the panel looks in idle mode (needs eyes) and the current (needs an
+  unplugged run).
