@@ -500,3 +500,30 @@ the collapse: clean all cache levels. Next: full APCS collapse (SUSPEND.md).
   one frame per minute while asleep, wake and the off path. Not checked:
   how the panel looks in idle mode (needs eyes) and the current (needs an
   unplugged run).
+
+## M9 apps (2026-10-30, main 624cfa2..7ba0a4a)
+
+- Layout as AsteroidOS: top quick settings, left notifications, right
+  weather, bottom launcher (2 columns of round icons). Apps open on their
+  own layer (panel 6, `UI_PANELS` 7) that slides in from the right, over
+  the stack; a swipe right closes it; only right drags are gestures on an
+  app, vertical moves go to the app (scrolling). When fully open only the
+  app layer is composed.
+- Settings: one kv key per byte (`brightness`, `bt`, `vibrate`, `aod`,
+  `clock12`), applied at boot (brightness via DCS 0x51 x 255/100; BT
+  start skipped when off; vibration gates notification buzz only).
+- Alarm: kv `alarms` (count + 4 bytes each), checked once a second from
+  the RTC (local time; weekday = (day + 4) % 7), once alarms turn off
+  after ringing, snooze 600 s exact (checked every second), ring overlay
+  with Snooze/Dismiss, vibrates 500/500 ms until dismissed or 5 min; going
+  to sleep while ringing snoozes. Sleep length capped to the next alarm.
+- Timer (default 5 min, +-1 min/10 s, 10 s..99 min) and stopwatch (tenths)
+  run in main from time_ms, also with the app closed and asleep; timer end
+  caps the sleep length and rings on the alarm overlay (Dismiss only).
+- Gotchas: ios-add.svg is a 1 px cross at 28 px (use text); the submodule
+  ios-play/ios-pause differ from the copies in ui/icons (keep ours);
+  `make test` did not rebuild on ui.h changes (fixed, 6426f7d); stray
+  pixels at the screen corners in shots are the known garbage outside the
+  round panel (mesh does not cover the square buffer), not app bugs.
+- health and usbwake branches still predate all of this; rebase before
+  committing.
