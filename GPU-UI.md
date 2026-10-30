@@ -312,3 +312,44 @@ is in the square's corners outside the round panel, which the FlatMesh
 does not cover and nothing clears; the pre-port single-layer build shows
 the same. Invisible on the watch; a black clear of the corners would
 fix screenshots.
+
+## 9. Stage 1 done 2026-10-30 (main ff7591e, 7cd8947, 1f4d425, b44f612)
+
+What a frame costs (temporary knobs, weather screen at rest, before the
+changes): mesh ~1.0 ms (incl. the D-cache invalidates), each full-screen
+blended quad ~1.8-2.1 ms (a layer or the 0.4 darkening fill). Removing
+the `CP_WAIT_FOR_IDLE` between draws changed nothing (< 10 µs), so the
+WFIs stay.
+
+GPU vs bus: votes changed live over RPM (`clk2` id 0 BIMC, id 1 gfx3d,
+`clk1` id 1 SNOC). GPU 200 MHz: 4.9 ms whatever BIMC (200 or 400 MHz);
+GPU 320 MHz: 4.2 ms; GPU 450 MHz: 3.1 ms with BIMC 200 or 533 MHz, SNOC
+100 or 200 MHz. So it is GPU-clock bound in GMEM bypass, ~2 GPU clocks
+per blended pixel, not bandwidth bound. Vendor levels (kgsl node):
+450/320/200/19.2 MHz with bus cases 3/2/1/0 (GPU→EBI ib 4.26/3.2/1.6
+GB/s), initial level 200 MHz. We stay at 200 MHz, BIMC 200 MHz.
+
+Changes:
+- darkening folded into the mesh vertex colours (`flatmesh_view(...,
+  shade)`, `stack_dim`), no fill pass;
+- per layer, 25 bands of 16 rows each keep the column extent of their
+  content (`stack_damage` scans what `ui_update` repainted; a repaint
+  covering the whole band replaces the extent, a partial one widens
+  it); the layer is drawn as one draw of the non-empty bands
+  (`gpu_draw_layer_parts`, quad ring now 128);
+- overlay fades in/out over 150 ms; while fading out its `ui_update` is
+  skipped (`stack_overlay_frozen`) so the layer keeps the last picture.
+
+GPU time per frame now: watchface 1.43 ms (was 3.1), weather 1.5 (was
+4.9), music 1.4 (4.9), notifications list with 5 entries 2.15 (4.9),
+popup up 3.6 (opaque black full-screen overlay over the face).
+Screenshots of every screen and mid-slide match the previous build.
+
+Charging: the battery icon animates while charging, `ui: 59 of 59
+frames repainted` (panel 0, 22x8 at 159,338, ~165 µs). Not a regression;
+looked like one when comparing a charging and a full run.
+
+Seen once, not reproduced: an injected swipe after tap-dismiss was
+logged as `swipe right (200,200 -> 340,200 in 33107 ms)`, i.e. the
+touch driver still had the earlier tap's finger down. Three repeats of
+notify / tap / swipe were fine.
