@@ -514,3 +514,17 @@ turns every future day run into data for §1.2's unexplained drift.
   AsteroidOS 1.6 mA reference had a phone connected.
 - Whether the APCS watchdog counts through a cluster collapse (L2OFF.md
   §5 E2); F1 stops it either way.
+
+## 9. F1 result 2026-10-30 (main efae487, combined test build)
+
+101 min unplugged, display off, untouched:
+
+- 1-7 wakeups per minute (was 60), one cluster collapse per minute.
+- BT connected (first 13 min): 7, 6, 6, 6, 6, 7, 4, 4, 4, 4, 2, 1, 2, 3 mA
+  per minute, still falling, so possibly the BMS settling after charging.
+- BT disconnected (phone out of range, reason 0x08 supervision timeout),
+  advertising: 0 +/- 1 mA for 85 min, i.e. below the counter's 1 mA
+  truncation. Not comparable with the AsteroidOS 1.6 mA figure.
+- One 1401 mA sample: counter read glitch, still to explain.
+- Tilt wake from cluster sleep, notification wake, palm to sleep all
+  seen in the same run.
