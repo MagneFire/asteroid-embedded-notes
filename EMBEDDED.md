@@ -609,3 +609,24 @@ the always-on face not done.
   time picker, Repetition day buttons, 12 h AM/PM wheel.
 - Licence review: keep GPL-3.0 (Darrel). Open: 4343A0.hcd has no redistribution licence;
   NOTICE.qcom missing.
+
+## App fidelity rework (2026-10-31, main 03d1545..582d59f)
+
+From APPS-AUDIT.md. Shared qml-asteroid ports in ui/ui/controls.slint (c014aaa). Plumbing a6f6577:
+bt connected, RTC + notification time, timer-set / brightness-set events, stopwatch laps kept in
+main. Pop-up (6c4993f), music (2688b35), timer (1e9865d), stopwatch (e17a750), weather (740be8d),
+notifications one per page with stack routing via ui_notes_edges (32f3d29), settings list + pages
+(52050bb), ringing + pairing screens (5a85ba4), console `media` (2542c34).
+- Gotchas: an element with only height/width gets centred (give x/y); Flickable swallows
+  horizontal drags once scrolled (notes uses one two-axis TouchArea under the pages);
+  Slint arrays can't be appended in .slint (laps live in the firmware); timer spinners need a
+  guard or turning them feeds back through timer-set.
+- Noto Sans Bold added (same family, weight 700). Slint has no font-stretch, so condensed styles
+  stay Light.
+- Icons through component properties render at intrinsic size: tools/addicon.py makes our
+  copies 160 px (11.0 → 7.1 MB, 582d59f). Note icons stay 40 px (579 of them), so the pop-up's
+  80 px icon is soft.
+- Not done: notification actions panel (snooze), Display extras (auto brightness, tilt/tap
+  wake), nightstand brightness/delay, Time/Date/Language pages, launcher preview flipping.
+- Vibration was turned off on the watch while testing (Darrel: avoid buzzing). Ringing still
+  buzzes regardless of that setting.
