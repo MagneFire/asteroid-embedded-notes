@@ -556,3 +556,27 @@ for computed font sizes), image grew 4.5 -> 11 MB; bold/semibold labels
 (launcher names, battery %) use Noto Light for now; launcher variants and
 their selector not implemented; indicator pop animation, burn-in shift on
 the always-on face not done.
+
+## Indicators, flicks and launcher layouts (2026-10-30, main 0d66e56..0a1e6fe)
+
+- App close: apps carry their own FlatMesh in their colours (second mesh, clipped to a 64-gon
+  round window), so closing shows two meshes as on AsteroidOS (f281b96, c034e24).
+- Edge indicators (21720b3): qml-asteroid `Indicator.qml` diamonds, GPU-drawn from a 32 px
+  texture in stack_compose, fixed on screen; pop on touch release and wake (300 ms out, 400 ms
+  back). Left one kept out while notifications are pending, also CPU-drawn on the AOD face.
+  The wake pop is timed from the first flipped frame (495e293); before, GPU/panel resume ate it.
+- Palm to sleep used to skip the AOD face (4b1f159).
+- Launcher flicks (b5cd260): Pager component, velocity from recent moves on animation-tick,
+  Qt ListView physics (1500 px/s² deceleration, 2500 px/s cap), snap to nearest item.
+- Seven launcher layouts (0a1e6fe), `set launcher n` / Settings → Launcher. Stack routing in
+  `launcher_scroll`: horizontal layouts take sideways drags; vertical ones take vertical drags
+  except down from their start (ui_launcher_edges bit 4) or the top 40 px; speed dial takes
+  drags starting on its wheel ring (24–47 % of W from the centre). Turbo list and 3×3 keep the
+  mesh grey, two columns keeps the first app's colours (as their QML does).
+- Slint gotchas: colour literals are `#RRGGBBAA` (Qt's `#AARRGGBB` `#66000000` came out fully
+  transparent: the speed dial band); the software renderer clips rectangles only, so the
+  launcher previews hide items that don't fit the circle; `row`/`col` property names clash.
+- Image grew to ~11.3 MB from the extra embedded font sizes (launchers, previews, turbo list
+  in 4 px steps).
+- Untested on AsteroidOS side by side: the six non-default layouts (no reference screenshots,
+  built from QML only).

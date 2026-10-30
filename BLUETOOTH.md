@@ -770,3 +770,128 @@ call notification that it removes again after a few seconds.
 
 Next: vibration (DRV2605 on blsp1_i2c2 at 0x5a), a notification list,
 media/weather, BT low-power mode so cluster collapse stays on with BT up.
+
+## 14. Media, weather, screenshot, notification list (M7, 2026-10-29)
+
+Written offline (watch not available): builds, untested on hardware.
+Formats from `S:mediaservice.cpp`, `S:weatherservice.cpp`,
+`S:screenshotservice.cpp` and the matching `Sy:connectivity/*Service.java`.
+
+### 14.1 Formats
+
+- **Media 7071** [V from source]: 7001 title, 7002 album, 7003 artist are
+  raw UTF-8 (Sync sends a single 0 byte for a missing field, so the
+  firmware stops at the first NUL); 7004 playing = byte 0 != 0; 7006
+  volume = byte 0, 0-100. 7005 (notify, watch to phone): one byte
+  `0` previous, `1` next, `2` play, `3` pause; volume is `4` plus a second
+  byte with the absolute new volume 0-100 (`m_value[1] = volume*100`).
+  btsyncd's play/pause button sends 2 or 3 depending on the playing state;
+  stop also sends 3. Sync acts on byte 0 and, for 4, `data[1]`. The
+  firmware's volume up/down steps the last known volume by 10 (50 if the
+  phone never sent one) and updates it locally, since the phone may not
+  echo it.
+- **Weather 8071** [V]: 8001 city UTF-8; 8002 ids, 8003 min, 8004 max are
+  five big-endian 16-bit values, day 0 = today. btsyncd reads exactly 5;
+  the firmware takes `min(len/2, 5)` (the count comes from the ids write).
+  Ids are OpenWeatherMap condition codes. Temperatures are **kelvin**:
+  Sync sends OWM's default unit rounded (`Math.round(getTemp())`, no
+  `units=` parameter), and asteroid-weather/launcher show `kelvin - 273`.
+  btsyncd stores `time(NULL)` as `timestamp-day0` on the ids write; the
+  firmware stores the RTC (phone local time) there. Today's index: Asteroid
+  uses `round((now - day0) / 24 h)`; the firmware uses calendar days of the
+  RTC (`now/86400 - day0/86400`), which does not show yesterday's forecast
+  as today in the morning. Sync's write order is city, ids, max, min.
+  Gadgetbridge's order/day count is [U].
+- **Screenshot 6071** [V]: any write to 6001 triggers it (Sync writes one
+  zero byte). btsyncd asks lipstick for `/tmp/btsyncd-screenshot.jpg`, then
+  notifies 6002 with the file size as 4 bytes **little-endian**, then the
+  file in **20-byte** chunks (the last one shorter), one notification each.
+  If the file cannot be opened it notifies `QByteArray::number(0)`, the
+  ASCII byte `'0'`. Reads of 6002 return the last value sent. Sync's
+  receiver treats the first 4-byte notification after a request as the
+  size and appends everything after it until `size` bytes, then decodes
+  with `BitmapFactory` and saves `Screenshot_<time>.jpg`. Chunks stay at 20
+  bytes as btsyncd does (fits the minimum MTU; a larger MTU is not used).
+
+### 14.2 Firmware
+
+- `src/media/media.c/.h`: state (title/album/artist 96 bytes each,
+  playing, volume or -1), `media_write`, `media_command` (UI action ->
+  7005 bytes via `bt_gatt_media_command`, only if 7005 is subscribed).
+- `src/weather/weather.c/.h`: state (city 64 bytes, day-0 time, days,
+  ids/min/max in K), saved with `kv_set("weather", 100 bytes)` 3 s after
+  the last write (main loop, not inside the GATT callback); loaded at
+  `BT_START_MS` together with the BT start (no eMMC access earlier in boot).
+- `src/screenshot/screenshot.c/.h`: on a request (and 6002 subscribed)
+  copies the front buffer (`fb.buf[fb.back ^ 1]`: the frame the MDP scans,
+  mesh + UI layer as the GPU composed it, XRGB8888, stride 416, rows
+  upright as the user sees them because the pipe does the vertical flip) to
+  0x0b000000, then encodes it to a JPEG at 0x0b000000 + 666 KB (2 MiB
+  region, write-back cached), MCU rows until 4 ms are spent per main loop
+  iteration (CPU taken off XO while encoding). The idle path does not sleep
+  while encoding. With the display asleep it sends the last frame shown
+  (which is the watchface, see 14.3) [I: lipstick probably behaves alike].
+- `src/screenshot/jpeg.c/.h`: our own baseline JPEG encoder (GPL like the
+  rest; no third-party code): JFIF, YCbCr 4:2:0, AAN float DCT, the example
+  quantisation and Huffman tables of T.81 Annex K, IJG quality scaling,
+  quality 75. Host-checked: decodes with macOS ImageIO (sips); the UI
+  screens come out at 14-16 KB (about 750 notifications).
+- `src/bt/gatt.c`: routes 7001-7006 / 8001-8004 writes to the modules;
+  tracks subscriptions from `BLE_GAP_EVENT_SUBSCRIBE` (`bt_gatt_subscribe`,
+  called from `host.c`; TERM on disconnect clears them and aborts a
+  transfer); `bt_gatt_poll()` (end of `bt_poll`) sends up to 16 screenshot
+  chunks per call while more than 12 of the 32 msys blocks are free;
+  NimBLE queues on the connection when the controller is out of ACL
+  buffers, so the msys count is the back-pressure. `BLE_HS_ENOMEM` = retry
+  next poll, other errors abort.
+
+### 14.3 UI (Slint, `ui/ui/watchface.slint`, `ui/src/watch.rs`)
+
+Layout follows asteroid-launcher's `MainScreen.qml` PanelsGrid: the
+notifications panel is at (-1, 0), left of the watchface, so **swipe right**
+opens it; Today (weather) is at (1, 0), **swipe left**; the app launcher is
+at (0, 1), **swipe up**. Music is an app in AsteroidOS, so the music screen
+takes the launcher's place below the watchface (swipe up). The quick
+settings slot (swipe down) is unused. Back is the opposite swipe; screens
+slide in 250 ms.
+
+- Gestures are recognised in `ui_touch`: a move past 40 px becomes a swipe
+  unless it is vertical on the notification list (that goes to the
+  Flickable); a swipe cancels the press by releasing at (-10000, -10000) so
+  no TouchArea clicks (host-checked). A swipe while a popup is shown closes
+  the popup (the notification stays in the list); the pairing code ignores
+  swipes.
+- **Notification list**: newest first, app + summary per row; tap a row to
+  open it in the existing full-screen view, tap that view to dismiss
+  (`notify_dismiss`); the x on each row dismisses directly. New
+  notifications still pop up (and vibrate, wake) as before, but only the
+  new one: dismissing it no longer shows the next older one, those are in
+  the list. A popup whose notification is removed by the phone closes.
+- **Weather screen**: city, ionicon for today's id (AsteroidOS's
+  `weathericons` mapping: 2xx thunderstorm, 3xx drizzle, 511 snow, 5xx
+  rain, 6xx snow, 7xx cloudy, 800 sunny, 801 partly sunny, 802-804 cloudy,
+  else alert), condition text, max/min in degrees C, then the next days
+  (weekday, icon, max/min). The watchface shows a compact line at the top
+  ("Partly cloudy  13° / 7°") when there is a forecast for today.
+- **Music screen**: title (two lines), artist - album, previous /
+  play-pause / next, volume down / volume % / volume up.
+- **Sleep**: going to sleep calls `ui_home()` (watchface, popup closed,
+  no animation), so waking always shows the watchface.
+- Icons: ionicons from `asteroid-icons-ion` (MIT), copied to `ui/icons/`
+  with their size set in the SVG; Slint rasterises them at build time to
+  alpha maps (about 46 KB). Font sizes reuse the existing ones only (each
+  new size costs a full glyph set, 20-30 KB).
+- Size: `asteroid.bin` 1262336 -> 1416176 bytes (+150 KB: Slint generated
+  code ~75 KB, icons ~46 KB, C ~16 KB).
+
+### 14.4 Open points [U]
+
+1. Whether Gadgetbridge subscribes to 7005 and 6002, its weather write
+   order/day count, and whether it implements AsteroidOS screenshots at
+   all (AsteroidOSSync does).
+2. Real screenshot encode time on the A7 (host: 1 ms; expect tens of ms in
+   4 ms slices) and transfer time (about 750 notifications; depends on the
+   connection interval and packets per event).
+3. Whether lipstick's screenshot with the screen off is the last frame too.
+4. Swipe threshold (40 px) and Flickable interaction on the real touch
+   controller.
