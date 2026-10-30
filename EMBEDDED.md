@@ -527,3 +527,32 @@ the collapse: clean all cache levels. Next: full APCS collapse (SUSPEND.md).
   round panel (mesh does not cover the square buffer), not app bugs.
 - health and usbwake branches still predate all of this; rebase before
   committing.
+
+## AsteroidOS layout match (2026-10-30, main b12a245..fcea3e3)
+
+Surveyed on the watch running AsteroidOS (screenshots and QML in the
+session scratchpad `aos/`, launcher QML `aos/src/applauncher/`):
+plus-shaped grid (top quick panel, left notifications, right Today,
+bottom launcher), default face 000-default-digital, launcher
+000-default-horizontal (6 other layouts installed: vertical, three-icons,
+two-columns, turbo-list, 3x3, speed-dial; picked under Settings ->
+Launcher with live previews), LPM brightness 45/255 = 18 % from
+`[BrightnessLPM]` in meta-sturgeon 20als-defaults.ini (normal 114/255 on
+the charger).
+
+Done to match: AOD 18 %; default digital face (Roboto Medium/Light,
+Raleway Light, nightstand ring of 50 segments generated as SVGs in
+build.rs since Slint paths need std) with the old face as "Classic" and a
+Settings watchface page; carousel launcher with per-app mesh colours
+(blend by page position, fade in with the vertical offset, no dimming
+towards the launcher); quick panel (lock, Settings, toggles 3/page, dots,
+battery bar); Today screen, Weather as an app; apps fade in, left-edge
+drag = back through app pages (Face.app-depth / back-count) then close to
+the watchface, top-edge drag closes; edge chevrons; 50 % / flick snap in
+100 ms. `set` console command for settings.
+
+Open: Slint embeds every font at every size (SLINT_FONT_SIZES adds sizes
+for computed font sizes), image grew 4.5 -> 11 MB; bold/semibold labels
+(launcher names, battery %) use Noto Light for now; launcher variants and
+their selector not implemented; indicator pop animation, burn-in shift on
+the always-on face not done.
