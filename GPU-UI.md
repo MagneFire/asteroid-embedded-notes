@@ -292,3 +292,23 @@ instances, so `ui_add_notification` etc. act on panel 1's `Screen`);
   non-commercial.
 - GPU microcode `a330_pm4/pfp.fw`: Qualcomm licence, loaded from the
   ramdisk, not linked (unchanged).
+
+## 8. Stage 0 merged 2026-10-30 (main ed09267, 3a74afc, db0f242)
+
+M7 screens ported onto the stage 0 layers: kinds 0 watchface, 1
+notifications, 2 weather, 3 music, 4 overlay (notification popup and
+pairing code, composed on top while `ui_modal`). Every Screen gets the
+same state through its Face global; models are shared. A swipe on the
+popup closes it, a tap dismisses it. `make preview` uses
+`ui/ui/preview.slint`, which binds its properties to Face.
+
+Measured on the watch (unattended, `touch` + `shot`): idle 60 fps, GPU
+3.1 ms; on a side screen or during a slide GPU 4.9 ms; during a 4 s drag
+`ui: 1 of 60 frames repainted` (the seconds), was every frame. Image
++30 KB.
+
+Edge garbage in screenshots after slides (x 0-25 / 385-400 in text rows)
+is in the square's corners outside the round panel, which the FlatMesh
+does not cover and nothing clears; the pre-port single-layer build shows
+the same. Invisible on the watch; a black clear of the corners would
+fix screenshots.
