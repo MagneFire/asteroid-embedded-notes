@@ -580,3 +580,32 @@ the always-on face not done.
   in 4 px steps).
 - Untested on AsteroidOS side by side: the six non-default layouts (no reference screenshots,
   built from QML only).
+
+## Run-time fonts, review findings, alarm app (2026-10-30/31, main e2fee26..03d1545)
+
+- Run-time fonts: third_party/slint vendors 5 Slint 1.18.1 crates (365e00e pristine) + PR 12367
+  (9b3c992) + no_std systemfonts (a25005f) + optional complex-scripts (9945a42). da8871c
+  registers the TTFs via `with_global_context` right after set_platform (registering in
+  create_window_adapter fails: no context yet). Image 11.3 → 6.5 MB. Full repaints +15-30 %
+  (GPU path face 4.2 → 5.6 ms, +0.7 ms more for the atlas checksum). Text layout needs
+  52.6 KB stack (bitmap fonts: 15.5 KB) → svc stack 128 KiB. Plan for next steps (subset fonts
+  → ~5.2 MB, cache tuning): FONTPLAN.md.
+- 41bd6a0: paint atlas keyed by address broke with heap glyphs (freed/reused); heap texels now
+  also matched by FNV-1a checksum.
+- `uibench <p> 0` (CPU repaint) corrupts the on-screen layer (striped digits); not a renderer
+  bug. GPU path: `uibench <p> 1`.
+- Slint 1.19 not on crates.io yet (master bumped 2026-10-30); rebase the third_party patches then,
+  drop PR 12367 if merged, drop the ring SVG hack (no_std Path).
+- Hindsight reviews (Codex + Fable): keep Slint, stay in C. Done from them: INT_MIN printf
+  (f706dfa), i2c length wrap (533eada), parser_test + ASan/UBSan (baaf053), ext4 scan_dir
+  hang on corrupt dir size found by a deep fuzz run (220e109), typed ui_event/ui_alarm/
+  ui_colors seam (9b8c121), ring buffer compiler barriers (a8038d0), rounded clips through
+  the renderer (e1f0a41) and shader g (c7287fe), ui.h contract (03d1545). Not done: compositor
+  mask post-pass for the speed dial (band and label share the layer; strips stay).
+- Shader g: ir3c on pc; gl_FragCoord asserts in the standalone ir3_compiler, so the pixel
+  position is a varying (VS c0 = to_px, c1 = rect centre; FS c0.zw = half size - r, c1.x = r).
+- Quick settings toggles were dead since 2f0d1e1 (paging TouchArea on top); 87b0364.
+- Alarm app now asteroid-alarmclock's layout (3bc5128, e431b7e): pager per alarm, CircularSpinner
+  time picker, Repetition day buttons, 12 h AM/PM wheel.
+- Licence review: keep GPL-3.0 (Darrel). Open: 4343A0.hcd has no redistribution licence;
+  NOTICE.qcom missing.
