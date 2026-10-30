@@ -353,3 +353,52 @@ Seen once, not reproduced: an injected swipe after tap-dismiss was
 logged as `swipe right (200,200 -> 340,200 in 33107 ms)`, i.e. the
 touch driver still had the earlier tap's finger down. Three repeats of
 notify / tap / swipe were fine.
+
+## 10. Stage 2 on main 2026-10-30 (4dbe963, 9dddb19, d36168e, 585409c)
+
+Slint 1.18.1 `TargetPixelBuffer` (`i-slint-renderer-software` added as a
+direct dependency with `experimental`) in `ui/src/paint.rs`, painter in
+`src/gpu/paint.c`. Benchmark: `uibench <panel> <0 cpu|1 gpu> [n]` repaints
+a whole panel n times (`RepaintBufferType::NewBuffer` for the one render).
+
+What was tried, GPU 200 MHz, full repaint of the notification list
+(CPU 7.4 ms) unless noted:
+
+| Variant | Result |
+|---|---|
+| plain rects + glyphs on GPU, rounded rects CPU fallback | slower than CPU: ~9 GPU/CPU syncs per frame (each card) |
+| SDF rounded-rect shader g (54 instr) + tex shader, separate programs | list frame 2.75 ms GPU wait, 16 draws/frame (program switch per card) |
+| one combined shader (tex × colour × SDF), 1 batch | 4.5 ms wait: every pixel (the clear too) interpolates 19 varyings |
+| combined with a per-quad branch on border < 0 | 3.8 ms wait |
+| back to 2 programs over one vertex layout | face 1.8, list 4.4, 17 draws |
+| **rounded rects as corner coverage masks in the A8 atlas + plain rects (one shader, tex × vertex colour, 2 varyings)** | **2 draws per screen; face 1.76 ms, list 2.94, weather 2.08, music 2.04 (CPU 4.4 / 7.4 / 4.3 / 3.25)** |
+
+Slint's own scene walk with every draw discarded: ~0.75 ms of a list
+repaint. In GMEM bypass the A305 is fill bound (~2 clocks per blended
+pixel at 200 MHz); at 450 MHz the GPU repaints take ~half (face 1.9 vs
+3.4 ms before the mask change). Clocks left at 200 MHz.
+
+Live: scrolling the list `ui: … 2.8–3.0 ms per repaint` (was 5–6.7 ms on
+the CPU), 60 fps. Per-second repaint of the seconds ~0.77 ms either way
+(scene walk dominates).
+
+Correctness: `shot layer n` after `uibench n 0` vs `uibench n 1`, PSNR
+50–55 dB (face, music), 34–39 dB (weather, list): remaining differences
+only in icons drawn scaled (linear filter vs Slint's own). Fixes found
+on the way: Slint ignores the alpha of `colorize` (it is already in
+`alpha`), border width and radii are truncated, not rounded.
+
+Coherency: CPU-written rows are cleaned+invalidated before the GPU draws
+(`paint_cpu`, from `line_slice`), GPU-drawn rows invalidated after the
+wait (`paint_sync`); `render_buffer_impl` calls `line_slice(0)` once for
+the width, so row 0 is always cleaned. Layers are cleaned+invalidated
+after the initial clear in `open()`.
+
+GPU off (asleep): `paint_begin` returns false and every hook declines, so
+the software renderer draws (seen: `uibench 0 1` while asleep, 4.8 ms, no
+hang). Before that check, painting while the GPU was suspended timed out
+(`paint: draw did not complete`).
+
+Not done: async paint (CPU still spins in `gpu_draw_end` for the GPU
+part, ~1–2 ms of a repaint); GMEM rendering; image atlas eviction beyond
+"reset both when full".
