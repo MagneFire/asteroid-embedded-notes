@@ -607,8 +607,12 @@ the always-on face not done.
 - Quick settings toggles were dead since 2f0d1e1 (paging TouchArea on top); 87b0364.
 - Alarm app now asteroid-alarmclock's layout (3bc5128, e431b7e): pager per alarm, CircularSpinner
   time picker, Repetition day buttons, 12 h AM/PM wheel.
-- Licence review: keep GPL-3.0 (Darrel). Open: 4343A0.hcd has no redistribution licence;
-  NOTICE.qcom missing.
+- Licence review: keep GPL-3.0 (Darrel). 4343A0.hcd had no redistribution licence (linux-firmware's
+  LICENCE.broadcom_bcm43xx / LICENCE.cypress cover the 43430 Wi-Fi files and BCM-0bb4-0306.hcd,
+  not this Huawei build "wlbga_eLG_lite_0065"). Resolved in 57843eb: a330_pm4/pfp and 4343A0.hcd
+  are read from system:/vendor/firmware (stock Android system partition, ext4), no ramdisk; eMMC
+  init 26 ms, UI ready 2.34 s. adsp.b0x is not in system/vendor/firmware (only in the AsteroidOS
+  rootfs). The blobs remain in the pushed history (origin/main 495e293).
 
 ## App fidelity rework (2026-10-31, main 03d1545..582d59f)
 
