@@ -808,3 +808,10 @@ On-watch checklist for sturgeon (`make run` from the arch worktree):
 4. Timer and stopwatch survive a reboot; an alarm rings from sleep and snoozes after 30 s.
 5. `make TEST=hang`: the bark record still carries the pc.
 6. Touch feels the same (the attention chain is unchanged); `status` shows no i2c errors.
+- Console (b93c51b): sinks report room, `log` streams over main-loop passes
+  (log 3000: 4.1 s blocked -> 0.18 s), stall limit 2 s; Fable review
+  findings 1-4 applied (stall, CDC room, pos past end, cancel). Open,
+  pre-existing (also on 1eb49a2): an interactive `adb shell` fed from a
+  pipe stalls after a few sessions (`log 30` gives only the echo); exec
+  form (`adb shell log N`) is fine. Still synchronous and > 4 KiB: mem
+  1024, emmcrd 8, big ls/kv.
