@@ -728,3 +728,73 @@ Wren: same family, X145ALN01 280x280 panel (`dsi-panel-x145aln01-280x280-cmd.dts
 Unverified until a sparrow is on the bench: key wiring, bootloader framebuffer orientation,
 whether lk2nd's cont-splash keeps the panel lit, the BT GPIOs, the MPM pins, scratch/ramoops
 placement in 512 MB.
+
+## Architecture fixes (2026-10-31, Fable, arch de825db..2c65e4d)
+
+The review above plus a second, critical pass (control flow, not layering, was the weak
+point) became a 13-commit series on the `arch` branch (worktree `../asteroid-embedded-arch`),
+each building for sturgeon and passing `make test`. Not yet run on a watch: see the checklist.
+
+- **Build** (de825db): only `version.c` depends on `gitrev.h`, so a commit no longer rebuilds
+  NimBLE and mbedtls; `-Werror` for `src/` (the tree was already warning-free).
+- **Memory map** (b1323c8): `soc/memmap.h` owns every fixed DRAM region with static asserts
+  against overlap; `mmu.c` and the (now preprocessed) linker script use it. Image byte-identical.
+- **Log from interrupts** (d10558f): `log_write` masks IRQs around the ramoops ring update
+  (new `irq_save`/`irq_restore`, `in_irq`), and `i2c_qup.c` records a failure seen in the
+  touch attention chain for `i2c_qup_poll` to log, instead of `log_printf` in IRQ context.
+  The touch I2C chain itself stays in IRQ context: its state waits are microseconds normally.
+- **Watchdog** (c42f9f0): a long sleep arms the watchdog for `next + 3 s` (28-bit register,
+  max ~2.3 h) instead of `wdt_stop()`, so a resume that never comes reboots. The NimBLE
+  eventq/semaphore waits feed it for 10 s only, then let it bite with a log line; `hci_cmd`
+  already had a timeout. Open: whether the APCS watchdog counts through a cluster collapse
+  (POWER.md §7); the long-sleep test below answers it (a spurious reboot = it does, and the
+  margin needs the collapse time).
+- **Settings** (722be06): `setting_set` marks dirty; `settings_poll` writes after 2 s quiet,
+  `settings_flush` before sleep, in `reboot()` and from the console. A brightness scrub was up
+  to nine eMMC commits (each a slot rewrite plus read-back).
+- **Console** (ba39d0a): lines are queued and run by `console_poll()` from the main loop, no
+  longer inside the USB callbacks (which `pp_wait`'s idle hook also pumps: `bright` re-entered
+  `tud_task`, `bt` ran the patchram from USB context). adb `shell:<cmd>` closes on completion
+  via a done callback; a stream freed first cancels/mutes the job; a second line while one is
+  pending gets "busy". `cdc_out` no longer nests `tud_task` from inside a callback. Test
+  expectation change: typed-ahead input is echoed before the earlier command's output.
+- **main.c split** (872ee78, 67c2b8d): `clockapps.c` (timer, stopwatch, ringing, persistence,
+  `clockapps_next_ms`) and `power.c` (sleep/wake transition, ambient face, nightstand, charger
+  wake, idle wait) out of the loop; `main.c` 1152 → 743 lines. `clockapps_test` covers timer,
+  stopwatch, snooze, ring timeout and the reboot round trip. Behaviour kept except: the GPU
+  suspend/resume now happens after the transition (was between display and ambient draw), and
+  the alarm clamp on the sleep length is exact to the millisecond instead of the second.
+- **stack test** (3dadd56): `stack_init` takes the layer base, so `stack_test` drives the
+  gesture machine and the band scan on a host buffer. Found while writing it: a back swipe on
+  the notifications is a scroll unless `ui_notes_edges()` bit 4 is set.
+- **Codes** (e3bdd4a): `build.rs` reads `enum setting`, `ui_action`, `ui_clock_action`,
+  `ui_media_action`, `ui_alarm_action`, `ui_event_kind` from the headers into a `Codes` Slint
+  global and Rust constants; the `.slint` literals (37, 48 + i, ...) and watch.rs's `EVENT_*`
+  copy are gone. `ui_event` gained an `arg` field for `setting-set` (was `setting << 8 | value`).
+- **Rust aliasing** (3416221): `ui()` returned `&'static mut Ui` and `ui_tick` nested calls
+  through it; now `with_ui(|ui| ..)` lends it for a closure and panics on re-entry.
+- **Board layer** (8d65f06): `src/board/<watch>/board.h` (pins, buses, panel lines/Hz/TE,
+  BT patch name, MPM pins), `battery.h` (the OCV tables), `board.mk` (the watch's own drivers:
+  touch, haptics, hub, speaker for sturgeon) and weak `board/stubs.c` for drivers a board lacks.
+  Sturgeon's driver objects disassemble identically; the image differs only by link order and
+  the `Codes.board` string. `ASTEROID_BOARD`/`ASTEROID_UI_SIZE` reach `build.rs` (ring size,
+  About page codename); a `WATCH=` switch rebuilds every object via `build/watch.mk`.
+  Sparrow is a scaffold: `make WATCH=sparrow` links with stubbed touch/haptics/hub, the BT pins
+  from mainline (unverified), the MPM pins copied from sturgeon (to re-derive), sturgeon's
+  battery curve standing in, the patch name from the downstream tree (it lives in
+  `/system/etc/firmware/bt`, not `/vendor/firmware`: `firmware.c` needs a per-board path).
+- **Firmware pool** (2c65e4d): 64 → 128 KiB, six files, for the BCM4343A1 patch.
+
+Commit messages: the ones for the three "move" commits and the tests score badly on the
+load-bearing detector however worded; reword before pushing if it matters.
+
+On-watch checklist for sturgeon (`make run` from the arch worktree):
+1. `bright 50` and `bt` over `adb shell` while dragging the brightness slider: no reboot, no
+   console hang, output arrives; two quick commands give "busy" for the second.
+2. `set brightness 60` then `set`: value shown; a slider drag followed by a reboot within 2 s
+   keeps the last value (flush in `reboot()`).
+3. Sleep with tilt and tap off and Bluetooth off for > 5 s, then the power key: wakes without a
+   watchdog reboot. If it reboots, the watchdog counts through the collapse.
+4. Timer and stopwatch survive a reboot; an alarm rings from sleep and snoozes after 30 s.
+5. `make TEST=hang`: the bark record still carries the pc.
+6. Touch feels the same (the attention chain is unchanged); `status` shows no i2c errors.
