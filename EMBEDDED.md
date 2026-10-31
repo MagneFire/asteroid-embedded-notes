@@ -656,8 +656,8 @@ launcher; considered a bug). Settings gap review (Fable) and an audio feasibilit
   Fahrenheit, Time/Date (RTC write), Power (PON PS_HOLD reset type 0x4 = shutdown; verified
   poff reason PS_HOLD, then USB_CHG power-on), About rows. ui_action codes moved to 32+.
 - Unanswered alarms snooze after 30 s (16c73dc), verified with the motor disabled in a test build.
-- Not committed: pairing confirm/cancel buttons (numeric comparison now waits for the user);
-  needs a real pairing to test.
+- Pairing confirm/cancel buttons (be63cbe; numeric comparison waits for the user): verified
+  with a real pairing on 2026-10-31 (Darrel), works well.
 - Test gotchas: an `adb shell` helper that always slept 6 s made "cancel within 3 s" tests
   reboot the watch; adb stalled for a minute while two background `adb shell log` pollers ran.
   Corner pixels outside the round panel keep stale content (mesh only covers the circle).
