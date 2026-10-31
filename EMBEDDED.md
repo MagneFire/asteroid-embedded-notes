@@ -671,3 +671,60 @@ launcher; considered a bug). Settings gap review (Fable) and an audio feasibilit
   customer Huawei/Watch, type 95, 1 device ("left"), 2 profiles. Kernel DT deletes slim@fe12f000,
   so no WCD codec; mic on quaternary MI2S (vcc_mic LVS1). Copies in hw/sturgeon/audio/ (pulled
   with a temporary `get` console command + system: path, not committed).
+
+## Architecture review and the sparrow port (2026-10-31, Fable, main c2a493f)
+
+Where the code stands: one flat binary, one core, one superloop in `main.c`; interrupt
+handlers only fill ring buffers. Layers: `soc/` (register drivers, `msm8226.h` address map) →
+device drivers (display, touch, haptics, bcm, hub, usb, emmc) → services (ext4 reader, kv
+store, firmware loader, ramoops log, console) → NimBLE host and the AsteroidOS profile
+parsers → Slint UI (`ui/`, per-panel RGBA layers) with `stack.c` navigation and `gpu/`
+compositing. Fixed regions: image < 0x01e00000, fb 0x05000000, UI heap 0x06000000 (64 MiB),
+layers 0x0a000000, GPU 0x1e000000, ramoops 0x1ef80000.
+
+Weak spots for a second board:
+
+- **No board layer.** `WATCH=` only picks the DTB. Every sturgeon fact is a `#define` in the
+  driver that uses it: `touch.c` (QUP5, gpio 16/17), `bcm.c` (UART4, gpio 12-15/63/64/67,
+  MPM 28), `hub.c` (UART1, gpio 0-3/62/65/87/106/108/111/114, MPM 29), `haptics.c` (QUP2,
+  gpio 59/60), `spm.c` (MPM 8/62), `display.c` (434 lines at 60 Hz), `bms.c` (HB442528EBC
+  tables), `usb.c` / `syscfg.h` (names), `face.slint` (`size/400`), `build.rs` (400 px ring).
+  `display.c` reading the geometry back from the bootloader's pipe is the right precedent.
+- **`main.c`** (1092 lines) mixes sleep policy, timer/stopwatch/alarm state, event dispatch
+  and statistics; split the power policy and the app state out before board conditionals land.
+
+Plan: (1) `src/board/<watch>.h` selected by `WATCH=`, moving the defines above with sturgeon
+byte-identical, verified on the watch, one refactor commit; (2) driver variants chosen in the
+Makefile behind the existing narrow interfaces (`touch_*`, `haptics_*`, `hub_*`); (3) UI size
+as a build property; (4) bring-up in the sturgeon order (lk2nd already has the sparrow DTS).
+
+### Sparrow hardware (downstream `sparrow_pr_*`, board-id `<8 3005>`)
+
+Source: Android kernel `android-msm-sparrow-3.10-marshmallow-mr1-wear-release` @ 3d2fa521
+(mirror on pc: `asteroid-2.0/build/downloads/git2/android.googlesource.com.kernel.msm`),
+copies in `dts/android-sparrow/` (pr set, both panels, battery data, memory, gpu; the wren
+pr3 top-level dts for its board-id). Board-ids: sparrow evb 3000, sr 3001-3003, er 3004, pr
+3005 (lk2nd's choice), pr3 3006, `_105` variants +100; wren er 4001, pr 4002, pr3 4003.
+Mainline `qcom-apq8026-asus-sparrow.dts` (copy in `dts/mainline/`) has only BT, WLAN,
+regulators, charger and vibrator: no panel, touch or hub nodes.
+
+| | sturgeon (in code) | sparrow |
+|---|---|---|
+| Panel | RM69080 400x400 cmd, 434 lines / 60 Hz | Raydium RM69032 320x320 cmd, 57 Hz, porches 4/4/4 h, 2/2/2 v, h-right-border 160, TE gpio 24, reset gpio 25 (seq 1 20 / 0 1 / 1 20), `bl_ctrl_dcs`, on/off and idle-on/off sequences in `dsi-panel-rm69032-320x320-cmd.dtsi`, lane map 3012, cont-splash |
+| Touch | Synaptics RMI4 0x20, QUP5 gpio 18/19, attn 17, reset 16 | ITE IT7260 at 0x46, same QUP5, irq gpio 17 (edge), reset 16; driver `drivers/input/touchscreen/it7260_ts_i2c.c` |
+| Haptics | DRV2605 on QUP2, gpio 59/60 | PM8226 vibrator (SPMI sid 1, 0xc000, 3.1 V, 15 s timeout) |
+| Bluetooth | BCM43430A0, UART4 gpio 12-15, reg-on 67, dev-wake 63, host-wake 64, `4343A0.hcd` | BCM4343A1 on BLSP1 UART1 (gpio 0-3); mainline: host-wake 48, dev-wake 61, shutdown 34 (downstream keeps them in `drivers/BCM_LPM/bluesleep.c` + `bcm-rfkill`, not the DTS: verify); patch `/system/etc/firmware/bt/BCM4343A1_001.002.009.0053.0240.hcd`, patchram 3000000 baud `--enable_lpm --no2bytes` |
+| Sensor hub | STM32 on UART1, HDLC | PNI EM7184 (SENtral) on BLSP1 QUP2 (0xf9924000) at 0x28, irq gpio 111, `em7184.fw` in `/system/etc/firmware`; `bmd101` (NeuroSky) node for heart rate |
+| Power key | PON KPDPWR | `gpio-keys` on msmgpio 37, active low, wakeup, 120 ms debounce; PON kpdpwr also configured (which one the button drives: [U]) |
+| Battery | 300 mAh HB442528EBC | pr: C11N1502 400 mAh; pr3: C11N1540 380 mAh (tables in the dtsi); mainline charger 350 mA fast, 4.43 V safe, 4.4 V vin min |
+| Audio | none (TFA98xx amp) | WCD9302 "tapan" over SlimBus, speaker and mic, PMIC gpio 1/2 for mclk and spkr rail: ADSP needed, out of scope |
+| USB | ci-hdrc, IRQ 134 | same, plus async IRQ 140, otg mode 3 |
+| GPU firmware | `/system/vendor/firmware/a330_*.fw` | same path (checked in the sparrow lollipop system image on pc) |
+| MPM wake pins | touch 8, PMIC 62, BT 28, MCU 29 | re-derive for gpio 17, 48, 111 and the key |
+| Memory | fb at 0x03200000 | same reservation (`qcom,memblock-reserve <0x03200000 0xFA0000>`), sbl 0x02f00000, adsp 0x03900000 |
+
+Wren: same family, X145ALN01 280x280 panel (`dsi-panel-x145aln01-280x280-cmd.dtsi`), 290/300 mAh.
+
+Unverified until a sparrow is on the bench: key wiring, bootloader framebuffer orientation,
+whether lk2nd's cont-splash keeps the panel lit, the BT GPIOs, the MPM pins, scratch/ramoops
+placement in 512 MB.
