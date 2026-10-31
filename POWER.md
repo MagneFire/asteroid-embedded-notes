@@ -574,3 +574,31 @@ in rbatt (496/487 mOhm and the SF table); picked by the ID resistor
 First run: boot estimate under charge gave 92% (charging current lowers
 V + I*R), then a new hardware OCV (4.3765 V) at the end of the charge gave
 100% at once (soc 100 is not rate limited, as in the vendor driver).
+
+## 10. AOD / BT split, 2026-10-31 (main df6edb7 + temporary powertest)
+
+Automated run, unplugged, untouched apart from one accidental wake, phone
+connected nearby: 30 min settle, then 15 min arms; per-arm mean of the
+asleep lines, dropping the first after each sleep entry (Fable review of
+the method: the CC delta is per line, no BMS settling; order is the weak
+point, BT-off arms last). Log: logs-powertest-2026-10-31.txt.
+
+| arm | AOD | BT | mean | median | wakeups/min |
+|---|---|---|---|---|---|
+| 0 | off | connected | 9.3 | 10 | 3.0 |
+| 1 | on | connected | 9.6 | 9 | 3.2 |
+| 2 | on | chip off | 4.6 | 5 | 2.0 |
+| 3 | off | chip off | 2.9 | 3 | 1.0 |
+
+- BT (link + chip standby): 5.0-6.5 mA, the largest item. The vendor's
+  bluesleep keeps the UART up 3 s + 0.5 s after traffic (TX_TIMER_INTERVAL
+  3, bluesleep.c:126,293), longer than our 1 s tail, so the tail was not
+  shortened.
+- AOD (display_rest gating, minute redraws): 0.3 (arm1-arm0) to 1.8
+  (arm2-arm3); arm 2 still falling 5.2 -> 4.1 over its halves.
+- Floor with BT off and AOD off reads 2.9 mA vs 0 +/- 1 mA (BT
+  advertising) on 2026-10-30 (§9): either a 2-3 mA regression since
+  efae487 or not comparable (battery 87 %, 24 C). Next: same arm on
+  efae487, and a reverse-order repeat.
+- Awake with the 90 ms mesh step (df6edb7): ~140 mA with taps, no clear
+  change from 136-140 mA.
