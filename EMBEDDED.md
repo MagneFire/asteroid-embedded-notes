@@ -810,11 +810,10 @@ On-watch checklist for sturgeon (`make run` from the arch worktree):
 6. Touch feels the same (the attention chain is unchanged); `status` shows no i2c errors.
 - Console (b93c51b): sinks report room, `log` streams over main-loop passes
   (log 3000: 4.1 s blocked -> 0.18 s), stall limit 2 s; Fable review
-  findings 1-4 applied (stall, CDC room, pos past end, cancel). Open,
-  pre-existing (also on 1eb49a2): an interactive `adb shell` fed from a
-  pipe stalls after a few sessions (`log 30` gives only the echo); exec
-  form (`adb shell log N`) is fine. Still synchronous and > 4 KiB: mem
-  1024, emmcrd 8, big ls/kv.
+  findings 1-4 applied (stall, CDC room, pos past end, cancel). The
+  interactive `adb shell` stall is fixed on the apps branch (see "adb
+  asleep" below). Still synchronous and > 4 KiB: mem 1024, emmcrd 8, big
+  ls/kv.
 
 ## Missing stock apps (2026-10-31, Fable, apps branch 1fcd7bf..cfbb19b)
 
@@ -855,3 +854,31 @@ calendars, so events could only be typed on the watch.
   2,469,134 and the held-key lift; Diamonds moves on the diagonals, board kept across close,
   reopen and a reboot; flashlight toggles and closes (brightness not observable in a shot).
   Speed dial shows 8 of the 10 apps at a time and wraps, so all are reachable.
+
+## adb asleep and the interactive shell stall (2026-10-31, Fable, apps branch)
+
+The "interactive adb shell fed from a pipe stalls" item had two causes, found with an
+ADB_TRACE=1 server log and timestamps in adb_rx/step/usb_irq/usb_poll:
+- Asleep, the loop runs once a second (068d007) and polls USB only at the top of a pass. The USB
+  IRQ does wake the collapsed core (~25 ms), but a completion that lands after the pass's poll
+  (the IN completion of a header just sent, the payload after a header received) is only seen
+  at the next tick. An adb message is two transfers each way, so `adb shell echo hi` took 6 s
+  asleep (40 ms awake) and a `log 30` in an interactive shell got one WRTE out before the
+  session ended. `power_idle` now returns, with the CPU clock at full speed, while
+  `usb_busy()`: `tud_task_event_ready()`, an adb IN transfer in flight, or `adb_pending()` (a
+  message half sent, ctrl queued, or a stream with output or a close to send, including one
+  waiting for the host's OKAY, so long output does not sleep between WRTEs). Asleep: echo
+  0.1 s, `log 3000` 0.17 s (same as awake; 10 s with only the busy check, 7.6 s with the fast
+  clock, because a pass on the sleep clock takes >100 ms and each WRTE round trip slept).
+- A ctrl-D in the same WRTE as the line (what a piped `adb shell` sends, and what the slow
+  OPEN made happen for the second session on) closed the shell at once and dropped the queued
+  line ("a shell that closes in between gets nothing"). The stream now keeps an `eof` flag and
+  closes from next_message once `console_busy()` is false, so the line runs and its output goes
+  out first; adb_test covers "echo bye\n\x04junk".
+- Plain `echo cmd | adb shell` with the legacy shell never ends: adb sends nothing on stdin EOF
+  (shell_v2 would be needed); `printf 'cmd\n\004' | adb shell` or `adb shell cmd` (exec) do.
+- Seen once: a watchdog bark at t=5.3 s during boot in display_init's framebuffer memset
+  (pc in memset, lr display_init:110, build e3929854c9+); the next boot of the same image was
+  fine. Not investigated.
+- Checked after the change: the watch still sleeps and collapses with adb idle (`power: asleep`
+  stats).
