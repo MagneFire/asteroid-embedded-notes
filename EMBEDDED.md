@@ -788,6 +788,16 @@ each building for sturgeon and passing `make test`. Not yet run on a watch: see 
 Commit messages: the ones for the three "move" commits and the tests score badly on the
 load-bearing detector however worded; reword before pushing if it matters.
 
+Verified on sturgeon the same day (plugged in, then 11 minutes unplugged): no reset or
+fault, the watchdog held through 22 cluster collapses, 11-13 mA asleep with AOD and the phone
+connected, tap and plug-in wake fine. A sleep 2 s after a tap wake was `touch: palm`, as on
+main. Two follow-ups from the test, on `arch` after 2c65e4d: adb exec output was cut at the
+stream's 4 KiB ring (`log 300` gave the first 4 KiB, old lines); `stream_out` now waits for
+the host through a transport `pump` (usb_poll) while a command runs from the main loop, and
+echo/prompts go to the terminal sink so input during a command cannot redirect its output.
+And the touch that wakes the watch is dropped whole, so its release no longer reaches the
+stack or logs a tap with a stale start time.
+
 On-watch checklist for sturgeon (`make run` from the arch worktree):
 1. `bright 50` and `bt` over `adb shell` while dragging the brightness slider: no reboot, no
    console hang, output arrives; two quick commands give "busy" for the second.
