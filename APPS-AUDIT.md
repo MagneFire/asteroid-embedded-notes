@@ -490,3 +490,21 @@ ios-watchface-outline, ios-launcher-outline, ios-clock-outline, ios-date-outline
 ios-units-outline, ios-earth-outline, ios-globe-outline, ios-wifi-outline, ios-usb,
 ios-power-outline, ios-help-circle-outline (all present in the Ionicons set). For the ringing
 overlay also ios-sleep-circle-outline, ios-refresh-circle-outline, ios-close-circle-outline.
+
+---
+
+## 9. Flashlight, Calculator, Diamonds (added 2026-10-31)
+
+Ports of asteroid-flashlight (main.qml, 78 lines), asteroid-calculator (main.qml, CalcButton.qml,
+Display.qml, calculator.js) and asteroid-diamonds (Game.qml, 612 lines, master). Deviations:
+- Flashlight: none visible. Brightness goes to 255 while lit (the QML uses the display's
+  maximum) and back to the setting when off or closed.
+- Calculator: display font is Noto Sans Condensed Medium (the QML asks ExtraCondensed Medium,
+  not embedded); the pressed label's "Bold" is Noto Sans Bold. Number formatting follows the
+  C locale (comma grouping, point). Qt would show "nan"/"inf"; ours shows "NaN"/"Infinity"
+  like the engine's text, and a lone "-" instead of Qt's "nan".
+- Diamonds: tiles, boxes, captions and digits are build-time images (no rotation in the
+  renderer); the 2 and 4 tiles use opacity 0.6 for their #99 alpha; the Game Over overlay's
+  scale animation is a growing disc; the board does not dim to 0.8 under it (no group opacity).
+  The swipe threshold is 1 % of the board width as in the QML.
+- Not ported: Agenda (asteroid-calendar), which needs text input and has no sync.

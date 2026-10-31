@@ -815,3 +815,43 @@ On-watch checklist for sturgeon (`make run` from the arch worktree):
   pipe stalls after a few sessions (`log 30` gives only the echo); exec
   form (`adb shell log N`) is fine. Still synchronous and > 4 KiB: mem
   1024, emmcrd 8, big ls/kv.
+
+## Missing stock apps (2026-10-31, Fable, apps branch 1fcd7bf..cfbb19b)
+
+Against sturgeon's stock image (asteroid-image.bbclass plus asteroid-hrm from meta-sturgeon)
+four apps were missing: Flashlight, Calculator, Diamonds (2048, launcher name "Diamonds") and
+Agenda (asteroid-calendar). Compass and Camera are not on sturgeon's image. Darrel skipped
+Agenda: its event dialog needs the handwriting keyboard and the Sync app does not sync
+calendars, so events could only be typed on the watch.
+- Flashlight: one screen; the firmware polls `ui_flashlight_on()` and sets brightness 255 while
+  lit, `power_set_brightness()` when not; `power_activity()` every loop while open (the QML
+  prevents blanking). Reapplied after a wake (`was_lit = false` on POWER_WOKE) since the wake
+  path restores the setting.
+- Calculator: engine in `src/calc.c` (host test `calc_test`), a port of calculator.js: 14 chars,
+  results `parseFloat(x.toPrecision(13))`, the shown number grouped in threes as
+  `toLocaleString(locale, 'f', decimals-as-typed)` does (so "1." shows "1", exponent forms show
+  with 0 decimals: 1e-10 → "0"). No libc floats in the firmware, so `calc_format` is a hand
+  13-significant-digit formatter with JS's exponent thresholds (≥ 1e21, < 1e-6); `strcpy` was
+  added to libc.c. The pressed key lifts a bold label on a dark disc like CalcButton.qml, with its
+  per-key offsets. The app starts over on each open (the original quits on close).
+- Diamonds: logic in `src/game.c` (host test `game_test`), a port of Game.qml's `logic` with the
+  same 16 tile slots so the UI animates slides (100 ms), pops (1.1) and spawns; settle 200 ms,
+  then duplicates dropped and a 2/4 placed; game over when full with no merge. kv `2048` (16 ×
+  u16 cells + score + best, 40 bytes), written when the app closes or the watch sleeps
+  (POWER_SLEPT), not per move. The board is turned 45°, which the software renderer cannot do:
+  `build.rs` `game_shapes()` emits the tile and box shapes as rotated SVGs and, with skrifa (a
+  build-dependency, already in the tree through Slint), the BEST/SCORE captions and the digits
+  0-9 as rotated glyph outlines of NotoSans-Bold; the number is laid out digit by digit along
+  the box in Slint. Swipes are read in screen space and mapped to the board's diagonals.
+- Gotcha: when the stack takes a drag (top-edge close, left-edge back) it ends the app's press
+  with an UP at (-10000, -10000) (`cancel_press`); a TouchArea `pointer-event` up handler sees
+  that as a huge swipe. game.slint ignores an up outside its area. Any future app with swipe
+  detection needs the same guard.
+- Console `awake on|off` (`power_keep_awake`) holds off the 10 s sleep timeout for adb-driven
+  tests; `set launcher 0` plus slow `touch swipe` drags (500 ms, one page each) and
+  `touch tap 200 200` open an app; `shot` then `adb pull screen.jpg`. The launcher keeps its
+  page across opens but not across boots.
+- Verified on sturgeon: all three apps open from the launcher; calculator 1234567 × 2 =
+  2,469,134 and the held-key lift; Diamonds moves on the diagonals, board kept across close,
+  reopen and a reboot; flashlight toggles and closes (brightness not observable in a shot).
+  Speed dial shows 8 of the 10 apps at a time and wraps, so all are reachable.
