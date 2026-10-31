@@ -630,3 +630,33 @@ notifications one per page with stack routing via ui_notes_edges (32f3d29), sett
   wake), nightstand brightness/delay, Time/Date/Language pages, launcher preview flipping.
 - Vibration was turned off on the watch while testing (Darrel: avoid buzzing). Ringing still
   buzzes regardless of that setting.
+
+## Consistency round 2 (2026-10-31, main 1810a8f..fdc115e)
+
+Codex + Fable 5.1 consistency review against asteroid-launcher/qml-asteroid/asteroid-settings;
+Darrel kept "back from an app's first page goes to the watchface" (AsteroidOS minimizes to the
+launcher; considered a bug). Settings gap review (Fable) and an audio feasibility study (Fable).
+- Back gesture peeks (d9acb53, 180c67b): Face.peek moves the top page, the page below kept and
+  slid in from the left like LayerStack contentX. Pager settle time from distance and speed.
+- Stack follows GestureFilterArea/PanelsGrid (d6c13fc): mean move per event locks at 1 % width
+  (+8 px floor), switch past half (vertical only while moving that way) or > 10 px/event,
+  linear 100 ms. Apps slide in, keep 5 s through sleep, close with ui_set_app(-1), left/top
+  indicators 4.8 px (cdd2cd4). ui_set_screen → Face.screen (a40ca86).
+- Condensed Noto styles (43c64db): fontique matches typographic family (name ID 16), so
+  tools/notofont.py renames each style to its own family and subsets Latin/Greek/Cyrillic
+  without hinting, ~136 KB each (6 styles, image 8.05 MB).
+- Notifications: icon strip, actions panel above each page, snooze kept aside in notify.c
+  (b4e6a13, f23c4ec). Quick panel: brightness 10/100 + hold-scrub, cinema, power off/reboot.
+- Settings: tilt/tap wake gates, burn-in shift of the AOD face (per-face margin × 1/½/¼),
+  nightstand brightness/delay/AOD (nightstand_on() keeps it for the delay after unplugging),
+  Fahrenheit, Time/Date (RTC write), Power (PON PS_HOLD reset type 0x4 = shutdown; verified
+  poff reason PS_HOLD, then USB_CHG power-on), About rows. ui_action codes moved to 32+.
+- Unanswered alarms snooze after 30 s (16c73dc), verified with the motor disabled in a test build.
+- Not committed: pairing confirm/cancel buttons (numeric comparison now waits for the user);
+  needs a real pairing to test.
+- Test gotchas: an `adb shell` helper that always slept 6 s made "cancel within 3 s" tests
+  reboot the watch; adb stalled for a minute while two background `adb shell log` pollers ran.
+  Corner pixels outside the round panel keep stale content (mesh only covers the circle).
+- Audio (Fable): speaker is a TFA98xx on BLSP QUP3 (GPIO 10/11) fed by tertiary MI2S, mic on
+  quaternary MI2S; no WCD codec, so playback needs the LPASS ADSP (PIL via TZ, APR, AFE/ADM/ASM),
+  ~6–10 weeks, proprietary adsp blobs. Suggested first step: probe the amp's ID over I2C.
