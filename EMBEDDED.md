@@ -664,3 +664,10 @@ launcher; considered a bug). Settings gap review (Fable) and an audio feasibilit
 - Audio (Fable): speaker is a TFA98xx on BLSP QUP3 (GPIO 10/11) fed by tertiary MI2S, mic on
   quaternary MI2S; no WCD codec, so playback needs the LPASS ADSP (PIL via TZ, APR, AFE/ADM/ASM),
   ~6–10 weeks, proprietary adsp blobs. Suggested first step: probe the amp's ID over I2C.
+- Speaker amp confirmed (78e21a3): NXP TFA9895 at 0x34 on BLSP1 QUP3 (gpio 10/11 func 3, Linux
+  i2c-2), revision reg 0x03 = 0x0012. No DT node: Android's audio.primary.sturgeon.so +
+  libexTfa98xx.so drive it from user space via /dev/i2c-2 (AsteroidOS: 60-i2c.rules, pulseaudio
+  droid modules, /etc/Tfa98xx.cnt symlink; MACHINE_HAS_SPEAKER). Tfa98xx.cnt: "PM1_00" container,
+  customer Huawei/Watch, type 95, 1 device ("left"), 2 profiles. Kernel DT deletes slim@fe12f000,
+  so no WCD codec; mic on quaternary MI2S (vcc_mic LVS1). Copies in hw/sturgeon/audio/ (pulled
+  with a temporary `get` console command + system: path, not committed).
