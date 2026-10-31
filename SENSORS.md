@@ -595,3 +595,24 @@ Still to check with the watch worn/walked: the step event sample (assumed
 u32, last sample of a batch used), the heart rate sample layout (assumed
 u32 bpm + u8 status at +4), whether steps taken while asleep arrive on the
 wake flush, and the status values.
+
+## 9. Steps and heart rate on main (2026-10-31, a5eac3a, 8f8b3dd, 1eb49a2)
+
+Ported from the `health` worktree onto main after the arch refactor
+(steps.c common, hub stubs in src/board/stubs.c). Battery-row UI dropped;
+heart rate is a Heart Rate app after asteroid-hrm (screenshots taken on
+AsteroidOS on this watch: it reads ~97 bpm even on the charger).
+
+- 0x32 events confirmed: `01 02 32 10` + uint32 bpm + uint8 status (3),
+  first one ~25 s after activation, then every 8-40 s. Readings on the
+  desk/charger too (no wear detection gate seen).
+- Activated again after a deactivate, the MCU sent nothing for > 1 min;
+  with set delay `01 00 32 02` + 200 ms before activate (vendor order,
+  sensorfw 200 ms) it reads every time (8f8b3dd).
+- The app keeps the screen on until the second reading, like
+  asteroid-hrm's preventBlanking.
+- Steps: counter on + time set at boot verified; step events still
+  unverified (needs walking).
+- Side effect found: console commands run from the main loop since
+  ba39d0a, so `log 3000` blocks the loop (and the screen) for ~4 s.
+  Output should be produced in chunks.
