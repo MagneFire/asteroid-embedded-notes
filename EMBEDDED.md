@@ -883,7 +883,7 @@ ADB_TRACE=1 server log and timestamps in adb_rx/step/usb_irq/usb_poll:
 - Checked after the change: the watch still sleeps and collapses with adb idle (`power: asleep`
   stats).
 
-## Silent resets asleep: watchdog off across long sleeps (2026-11-01, Fable, main eaa6802)
+## Silent resets asleep: watchdog off across long sleeps (2026-11-01, Fable, main c752d86)
 
 Two sturgeon resets on 2026-10-31 with no fault record, both 1-2 minutes into a
 cluster-collapse sleep, one on battery and one on a wall charger (a charger sets no USB
@@ -894,7 +894,7 @@ through the collapse and the bark IRQ is not an MPM wake pin, so a wake that sli
 margin bites without a bark record. The vendor kernel does not do this: `watchdog_v2.c`
 pets every 10 s while idle and disables the dog in `suspend_noirq` (`:114-125`).
 
-eaa6802 stops the watchdog (`wdt_stop`: EN=0, RST=1) for a long sleep, re-arms 3/4 s on wake,
+c752d86 stops the watchdog (`wdt_stop`: EN=0, RST=1) for a long sleep, re-arms 3/4 s on wake,
 and logs `power: woke <ms> after a <ms> sleep` when the sleep overran by more than 1 s.
 Result: 2.1 h on the wall charger (06:50-08:57; the 6.5 h before it were on the Mac, where
 the watch never takes the long-sleep path, 64 wakeups a minute), 253 long sleeps, no reset, no

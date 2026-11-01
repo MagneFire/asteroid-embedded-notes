@@ -514,7 +514,7 @@ turns every future day run into data for §1.2's unexplained drift.
   AsteroidOS 1.6 mA reference had a phone connected.
 - Whether the APCS watchdog counts through a cluster collapse (L2OFF.md
   §5 E2); F1 stops it either way.
-  Moot since main eaa6802: the dog is stopped across long sleeps, as
+  Moot since main c752d86: the dog is stopped across long sleeps, as
   the vendor kernel does in suspend, after two silent resets with it
   armed (EMBEDDED.md "Silent resets asleep").
 
@@ -605,3 +605,48 @@ point, BT-off arms last). Log: logs-powertest-2026-10-31.txt.
   efae487, and a reverse-order repeat.
 - Awake with the 90 ms mesh step (df6edb7): ~140 mA with taps, no clear
   change from 136-140 mA.
+
+## 11. Battery run 2026-11-01: the counter and the voltage disagree (main c752d86)
+
+sturgeon, unplugged 09:08-16:42 (7.5 h; the log covers 7.3 h of it), worn,
+phone connected nearly all the time (one drop and reconnect at 11:52,
+media updates while the phone played video around 15:10), AOD on,
+brightness 40, tilt and tap wake off. Watchdog off across long sleeps
+(c752d86): no reset, no late wake. Steps kv: 584 total. Log and
+kv dump: logs-battery-2026-11-01-sturgeon.txt.
+
+| source | what it says | average |
+|---|---|---|
+| asleep lines (SW_CC delta per minute, 436 lines) | mean 3.2, median 2 mA; hourly 2.6, 2.0, 1.0, 0.7, 3.7, 1.1, 11.4 (media), 3.3 | 3.2 mA |
+| BMS CC (CC_DATA, summed between OCVs, 183 OCVs) | 24.7 mAh | 3.4 mA |
+| BMS hardware OCV | 4.264 V -> 3.904 V, 97% -> 58% of fcc 321 mAh = ~125 mAh | ~17 mA |
+| awake 18 s, IADC instant vs CC | 105-137 mA vs 70-120 mA | CC ~0.65x |
+
+Wakeups: 2/min in 316 of 436 minutes; 7.4/min mean. Long sleeps 1289,
+collapses 27092 (core) / 390 (L2).
+
+The two counters agree with each other and with the 1.6 mA AsteroidOS
+reference's method (summary item 5 at the top), but the voltage says five times more
+charge left the cell, and Darrel finds the battery life short against
+AsteroidOS. Open, in order of what would settle it:
+
+- **Cell capacity.** If the CC is right, 24.7 mAh moved the OCV by 39
+  points: an effective capacity of ~65 mAh, a fifth of fcc. rbatt reads
+  510-750 mOhm (§10: 496/487 mOhm in the table's SF); a ten-year-old cell
+  may hold far less than the profile assumes, and then the % figure (and
+  the 1-day feel) is the cell, not the firmware. Test: count the charge
+  into the cell over a full charge from a low OCV (the CC is frozen with
+  USB present, §3, so use the charger IADC or time x charge current), or
+  run AsteroidOS for the same hours from the same OCV and compare the
+  OCV drop.
+- **Counter under-reading.** Awake, CC averaged ~0.65x the IADC instant
+  current; a gain or offset error in `iadc_comp`/`sense_uv` that grows at
+  low current would hide most of a ~15 mA load. Test: a fixed known load
+  (screen on at 255, `awake on`) for 10 min, CC vs IADC vs OCV slope.
+- **The AsteroidOS comparison has to be voltage based too.** The 1.6 mA
+  reference used the same counter, so it carries the same error, if any.
+  A like-for-like comparison is OCV (or %) drop per hour on each OS from
+  the same start voltage, same AOD and BT state.
+
+Sparrow ran the same build on battery in parallel; its run is in §12 once
+it is back on USB.
