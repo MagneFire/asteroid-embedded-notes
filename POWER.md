@@ -703,3 +703,22 @@ watch sleeps (a path around the sense resistor with the BATFET in LPM,
 low-power sampling). Whatever it is applied to the 1.6 mA AsteroidOS
 figure too, which came from the same counter. The full-charge count is in
 the next entry.
+
+### 12.2 sturgeon full-charge count (2026-11-01, 16:43-17:53)
+
+From the 3.904 V OCV of the §11 run the CC counted 99.9 mAh in up to 95%
+(gauge), when an adb reboot (another session flashing the rotate build)
+restarted the counters; after it, from a 4.221 V OCV, 15.3 mAh more to the
+end of charge (4341 mV, -19 mA). So 3.904 V to full took ~116 mAh. The
+profile puts 3.904 V at ~58%, which makes the cell ~275 mAh (86% of the
+321 mAh fcc): a usable cell, not a worn one.
+
+The §11 discharge, 97% -> 58% on the same scale, is therefore ~105 mAh in
+7.3 h, ~14 mA average, while the CC counted 24.7 mAh. **The CC is right
+charging (and awake: -148 vs -149 mA) but misses about three quarters of
+the charge while the watch sleeps on battery.** Every asleep figure in
+§9-§11, and the 1.6 mA AsteroidOS reference, came from that counter.
+Candidates: the BATFET LPM set on unplug (`pmic.c` usb_changed, 0x1293
+bits 7:6 = 01), if part of the load then bypasses the external sense
+resistor; or the BMS's low-power sampling losing low currents. Test:
+unplugged, asleep for 30 min with 0x1293 left at 00, CC against OCV drop.
