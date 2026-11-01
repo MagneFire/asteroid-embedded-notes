@@ -902,6 +902,37 @@ the watch never takes the long-sleep path, 64 wakeups a minute), 253 long sleeps
 (or whether the bite came from something else) stays open. Apply the same to sparrow; its
 `power_idle` is shared, so it already has the fix once the branch is on main.
 
+## Nightstand auto-rotate (2026-11-01, Fable, `rotate` branch 629131f..3b10dea, worktree `../asteroid-embedded-rotate`)
+
+Port of asteroid-launcher PR #299 and asteroid-settings PR #147: in nightstand mode the whole
+screen turns 0/90/180/270 degrees with the watch, 150 ms OutQuad shortest-way animation, switch
+"Auto rotate" on the Nightstand page (`nightstand.rotate`, default on). Qt's OrientationReading
+FaceUp/FaceDown map to the primary orientation in the launcher, so flat = upright here too
+(first version kept the angle when flat; Darrel caught it).
+
+- **Accelerometer:** sturgeon STM32 tag 0x10 (SENSORS.md §5.5: x = b, y = -a, z = c, 2048/g),
+  100 ms delay + activate as for heart rate. sparrow EM7184 sensor id 1 at 10 Hz, 3 x s16 in
+  the HAL's Android axes, about 8000/g (scale unused: only ratios count). Both verified on the
+  watches by Darrel turning them: no per-board axis remap needed. Runs only while awake in
+  nightstand mode with the switch on; `hub` prints the last sample.
+- **Orientation** (`src/sensors/orient.c`): flat within 30 degrees -> 0; dominant edge axis >= 2x
+  the other (about 27 degrees off the diagonal) else keep; 400 ms hold.
+- **Rendering:** turned at GPU composition, not in Slint. `set_rendering_rotation` exists but
+  sends every texture/glyph to the CPU in our GpuLayer and does not map input. `gpu_draw_turn`
+  rotates clip-space x/y of layer quads and mesh vertices, reset at each `gpu_draw_begin` so
+  paint.c's layer drawing is unaffected. Square targets only (both panels are). Quarter turns are
+  exact (own sin/cos series, no libm). The square-panel mesh (scale 1.45) still covers the corners
+  mid-turn.
+- **AOD / no-GPU path:** CPU frame turned in place by quarter turns (`rotation_buffer`); the
+  AOD keeps the last angle, as the launcher keeps screenOrientation while the sensor is off.
+- **Touch:** mapped in main.c before `stack_touch`, so the stack's swipes follow the picture.
+  `touch` console injection goes through the driver, so it is physical coordinates.
+- **Testing:** `rotate 0|90|180|270|auto` holds an angle. Checked on sturgeon (screenshots at 0
+  and 90, swipe into Today at 90, AOD at 90) and sparrow (auto 90 standing on its edge, back to
+  0 flat). The black corners of sturgeon's framebuffer hold stale bits at 0 as well (invisible
+  on the round panel).
+- Open: sturgeon hub restart leaves `accel_on` set (as heart rate); 180/270 not screenshotted.
+
 ## Sparrow bring-up (2026-10-31, Fable, `sparrow` branch, worktree `../asteroid-embedded-sparrow`)
 
 Bench unit: serial G3NZCJ015551123, `HW_ID=SPARROW_PR3` (board-id 3006; the kernel's
