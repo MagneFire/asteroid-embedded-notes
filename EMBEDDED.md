@@ -1038,3 +1038,14 @@ So SMEM can never tell them apart, but each stock bootloader matches its own QCD
 (ASUS aboot by its HW_ID-derived 3006), and the root `compatible` of the passed tree names
 the watch. Sturgeon's tree lands at 0x08600000, inside UI_HEAP: read it before the UI starts
 (memmap.h's "device tree at IMG_END" holds only for sparrow).
+
+C side done on `one-image` (4535751, 5240ccd, faa2225): board tables, driver tables, detection
+by the passed tree's `compatible` (panel size as fallback), tested on both watches. Stale
+objects after deleting `build/**/*.d` once kept `BT_UART` = 1 in hci.o (BT reset failed on
+sturgeon); `make clean` after include-layout changes.
+
+Vector icon spike (Slint `path` feature; builds no_std after `num_traits::Euclid::rem_euclid`
+in `i-slint-core/graphics/path.rs`): speed-dial icons as `Path`, sturgeon, `uibench 3`:
+bitmaps 11.1-11.7 ms CPU / 7.2 ms GPU, paths 17.4-18.0 ms CPU / 16.5 ms GPU. Paths render
+cleanly but cost ~0.7 ms (CPU) to ~1.2 ms (GPU path) per icon per repaint, every frame while the
+dial turns. Spike diff kept in the session scratchpad only.
