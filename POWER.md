@@ -514,6 +514,9 @@ turns every future day run into data for §1.2's unexplained drift.
   AsteroidOS 1.6 mA reference had a phone connected.
 - Whether the APCS watchdog counts through a cluster collapse (L2OFF.md
   §5 E2); F1 stops it either way.
+  Moot since main eaa6802: the dog is stopped across long sleeps, as
+  the vendor kernel does in suspend, after two silent resets with it
+  armed (EMBEDDED.md "Silent resets asleep").
 
 ## 9. F1 result 2026-10-30 (main efae487, combined test build)
 

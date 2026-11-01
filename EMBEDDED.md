@@ -882,3 +882,22 @@ ADB_TRACE=1 server log and timestamps in adb_rx/step/usb_irq/usb_poll:
   fine. Not investigated.
 - Checked after the change: the watch still sleeps and collapses with adb idle (`power: asleep`
   stats).
+
+## Silent resets asleep: watchdog off across long sleeps (2026-11-01, Fable, main eaa6802)
+
+Two sturgeon resets on 2026-10-31 with no fault record, both 1-2 minutes into a
+cluster-collapse sleep, one on battery and one on a wall charger (a charger sets no USB
+connect bit, so `usb_connected()` is false and the watch collapses as on battery). A sparrow
+reset after unplugging USB on AOD looks the same. Cause, inferred: c42f9f0 armed the APCS
+watchdog across the sleep (bark next+3 s, bite next+4 s). It counts on the 32 kHz sleep clock
+through the collapse and the bark IRQ is not an MPM wake pin, so a wake that slips past the
+margin bites without a bark record. The vendor kernel does not do this: `watchdog_v2.c`
+pets every 10 s while idle and disables the dog in `suspend_noirq` (`:114-125`).
+
+eaa6802 stops the watchdog (`wdt_stop`: EN=0, RST=1) for a long sleep, re-arms 3/4 s on wake,
+and logs `power: woke <ms> after a <ms> sleep` when the sleep overran by more than 1 s.
+Result: 2.1 h on the wall charger (06:50-08:57; the 6.5 h before it were on the Mac, where
+the watch never takes the long-sleep path, 64 wakeups a minute), 253 long sleeps, no reset, no
+`power: woke` line. A battery run is still to do. So no overrun was caught; why the earlier wakes were late
+(or whether the bite came from something else) stays open. Apply the same to sparrow; its
+`power_idle` is shared, so it already has the fix once the branch is on main.
