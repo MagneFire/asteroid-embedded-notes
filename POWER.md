@@ -722,3 +722,36 @@ Candidates: the BATFET LPM set on unplug (`pmic.c` usb_changed, 0x1293
 bits 7:6 = 01), if part of the load then bypasses the external sense
 resistor; or the BMS's low-power sampling losing low currents. Test:
 unplugged, asleep for 30 min with 0x1293 left at 00, CC against OCV drop.
+
+## 13. The asleep counter error was the IADC offset trim (2026-11-01, main 1c7378a)
+
+- **BATFET LPM is not it.** 30 min arms on sturgeon, LPM on/off/on/off
+  (0x1293 = 40/00): CC 1.9-2.3 mA in every arm, OCV slope 13-21 mA in
+  every arm (the first arm, straight off the charger, is surface charge).
+  Log: logs-batfet-lpm-2026-11-01-sturgeon.txt.
+- **The trim was stale.** The BMS counters take their zero from the IADC
+  offset trim at 0x36F2/F3, which the vendor's qpnp-adc-current.c
+  (calibrate_for_trim) rewrites at probe and every 300 s from a shorted
+  input conversion (channel 5). The firmware never wrote it. sturgeon:
+  live offset 0xBBCA, stored 0xBBBF (11 counts, ~6 mA by the IADC
+  scale, in the direction that hides discharge). sparrow: 0xBB08 against
+  0xBB0A.
+- **With the trim rewritten (1c7378a)** sturgeon's asleep lines read
+  12-16 mA (30 min unplugged, phone connected, AOD on), against 2-3 mA
+  before and the 13-21 mA OCV slopes: the counter and the voltage now
+  agree. Log: logs-iadc-trim-2026-11-01-sturgeon.txt. That the effect is
+  larger than the 6 mA estimate suggests the low-current (S2/S3)
+  sampling depends on the trim more than the IADC scale does.
+- So the real asleep current with AOD and a phone link is ~13 mA, not 3,
+  and the 1.6 mA AsteroidOS figure (same counter, its own trim, in
+  suspend) can't be compared until it is re-measured. Everything in
+  §9-§11 that came from the counter is low by roughly 10 mA.
+
+Sparrow under AsteroidOS (same session): 0x3848 = 1 (external rsense, as
+0084d42 now sets), trim rewritten by the driver (0xBB02 -> 0xBB04 over the
+run), BMS thresholds identical to ours, r_sense 10000 uOhm in its probe
+log (83572ad makes that a board setting; the firmware used 9700). Its
+OCV register did not change in a 32 min unplugged suspend either, so
+sparrow's missing hardware OCVs are not a firmware bug. The run itself
+gave no current: it went onto a wall charger halfway, and the charge
+counter only has the two end points.
