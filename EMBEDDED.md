@@ -1017,3 +1017,24 @@ covered. The Heart Rate app is hidden on sparrow (`BOARD_HEART_RATE`, `Codes.hea
 Open: hub step events, BT LPM with a phone, deep-sleep current, the idle
 (AOD) commands on the RM69032, wrist tilt wake, `BOARD_TOUCH_MPM` 8 armed level-low against an
 edge interrupt (a short INT pulse would be missed while collapsed).
+
+## One image for both watches (2026-11-01, `one-image` branch, worktree `../asteroid-embedded-oneimage`)
+
+Goal: drop `WATCH=`; one `asteroid.img` picks the board at runtime, UI sized from the screen
+(relative units, no reference resolution); board data stays in C tables. Plan:
+`~/.claude/plans/would-it-be-possible-merry-pond.md`.
+
+Detection experiment (r1/r2 saved in `start.S`, logged by `board_detect`), QCDT with both
+DTBs and `<8 4>` dropped from sparrow's board-id list:
+
+| | sturgeon | sparrow PR3 |
+|---|---|---|
+| machtype (r1) | 0 | 0 |
+| DTB passed (r2) | 0x08600000, `huawei,sturgeon`, `<8 4>` | 0x01e00000, `asus,sparrow`, `<8 3006> <8 3005>` |
+| SMEM socinfo | id 199 v2.0, platform 8 v1.0, subtype 4 | identical |
+| bootargs | `androidboot.bootloader=STURGEONV3.4`, `mdss_mdp.panel=...rm69080...` | `androidboot.bootloader=SPARROW4000602 HW_ID=SPARROW_PR3 ...` |
+
+So SMEM can never tell them apart, but each stock bootloader matches its own QCDT entry
+(ASUS aboot by its HW_ID-derived 3006), and the root `compatible` of the passed tree names
+the watch. Sturgeon's tree lands at 0x08600000, inside UI_HEAP: read it before the UI starts
+(memmap.h's "device tree at IMG_END" holds only for sparrow).
