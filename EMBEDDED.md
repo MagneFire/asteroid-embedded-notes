@@ -1049,3 +1049,16 @@ in `i-slint-core/graphics/path.rs`): speed-dial icons as `Path`, sturgeon, `uibe
 bitmaps 11.1-11.7 ms CPU / 7.2 ms GPU, paths 17.4-18.0 ms CPU / 16.5 ms GPU. Paths render
 cleanly but cost ~0.7 ms (CPU) to ~1.2 ms (GPU path) per icon per repaint, every frame while the
 dial turns. Spike diff kept in the session scratchpad only.
+
+UI done (eb68366, 1ed3d2e, 441d93e): no `WATCH` left. Icons and the generated shapes (ring,
+heart arc, Diamonds) are outlines in `icons.rs`, drawn by `ui/src/icons.rs` with zeno at the
+size shown and kept in a 4 MiB LRU of RGBA images (white, colorized). Launcher full repaint on
+sturgeon, `uibench 3`, CPU and GPU: embedded bitmaps 11.1-11.7 ms (the 7.2 ms GPU figure above
+was an outlier), runtime icons 12.2-13.1 ms, Paths every frame 16.5-18 ms. Leaked
+StaticTextures alpha maps measured the same as RGBA, so the freeable RGBA cache stayed.
+Every `px` in the .slint files is `N/4 * Theme.unit` (unit = short side / 100), `1px`
+conversions included: compile-time scaling scaled those too, and keeping them physical made
+`Math.round(36 * k) * 1px` labels too big on sparrow. An Image whose size animates must ask
+`Icons.get` for a fixed size (the Diamonds tile does), or every frame draws a new image.
+Untested on the watch: heart rate and Diamonds screens; `make preview` shows no icons
+(the viewer has no `Icons.get`) and lays out at Theme's 400 px default only.
