@@ -901,3 +901,88 @@ the watch never takes the long-sleep path, 64 wakeups a minute), 253 long sleeps
 `power: woke` line. A battery run is still to do. So no overrun was caught; why the earlier wakes were late
 (or whether the bite came from something else) stays open. Apply the same to sparrow; its
 `power_idle` is shared, so it already has the fix once the branch is on main.
+
+## Sparrow bring-up (2026-10-31, Fable, `sparrow` branch, worktree `../asteroid-embedded-sparrow`)
+
+Bench unit: serial G3NZCJ015551123, `HW_ID=SPARROW_PR3` (board-id 3006; the kernel's
+platform subtype reads 4), C11N1540 380 mAh cell, AsteroidOS on `boot` (mmcblk0p11; no
+by-name directory, nodes are `/dev/mmcblk0pN`; names in `hw/sparrow/partnames.txt`). Backups
+with checksums in `backup/sparrow/` (boot-asteroidos.img, recovery.img, aboot.img). Vendor
+sources and firmware copied to `hw/sparrow/` (it7260_ts_i2c.c, bluesleep.c, rfkill.c,
+qpnp-vibrator.c, em718x_*.c, sentral-iio.[ch], bmd101.c, msm8226-v2-pm.dtsi with the MPM map,
+firmware/ from `system-sparrow-m.tar.gz` on pc); per-topic findings in `hw/sparrow/*.md`
+(it7260, em7184, battery, bluetooth), written by research agents against those sources.
+
+Boot: **no lk2nd needed.** The stock ASUS bootloader boots the image with `fastboot boot`;
+its cont-splash leaves the RM69032 lit with the MDP pipe at 320x320, which `display_init`
+reads back as on sturgeon. `qcom,board-id` in `dts/sparrow.dts` lists 3006, 3005 and 4 (which
+entry aboot matched is unknown; the AsteroidOS image uses appended DTBs). `adb reboot
+bootloader` from AsteroidOS enters fastboot; from the firmware it needed the fastboot restart
+reason (0x77665500) in IMEM, now written by `reboot bootloader` / `adb reboot bootloader`
+(run.py uses it; lk2nd on sturgeon ignores it). A 3 s button hold reboots (firmware), ~10 s is
+the PMIC's own reset. No `oem ramoops` on the stock bootloader: a crash leaves only the fault
+record the next boot prints.
+
+Verified on the watch, in order:
+- Display upright only without sturgeon's `PIPE_FLIP_UD` (`BOARD_PANEL_FLIP_UD`); UI scaled
+  to 320 px with Slint's compile-time scale factor (shapes generated at the target size),
+  touch mapped back through the scale factor. `stack.c`'s swipe thresholds stay physical px.
+- Firmware files: GPU microcode in `/vendor/firmware`, the 35-character BT patch in
+  `/etc/firmware/bt`, `em7184.fw` in `/etc/firmware` (`BOARD_FIRMWARE_DIRS`, name field 40).
+- Bluetooth: BCM4343A1 comes up with the unchanged patchram flow at 3 Mbaud (LMP subversion
+  2209, name "BCM4343WA1 37.4MHz Murata Type-"). Wake lines are active high (vendor
+  bluesleep.c, mainline dts): `BOARD_BT_*_ACTIVE`, sleep-mode bytes per board, MPM pin 20 for
+  gpio 48. Both lines read low when idle. LPM sleep/wake with a phone not yet tested.
+- Power key: PON KPDPWR sees the button (`pmic 000810` bit 0), so the gpio-keys line (37) is
+  unused and no driver was needed.
+- Touch: IT7260 identifies (fw 05 0d 00 15, cfg 07 01 24 0f) but produced nothing until
+  **LDO19 was set to 2.85 V** (the bootloader leaves it at 2.70 V: range 3 step 0x30; vendor
+  DT says 2.85) and the active-mode command `04 00 00` sent; which of the two mattered was not
+  separated. Taps and all four swipes reach the gesture layer.
+  **The chip sleeps by itself ~10 s after the last touch** and then NACKs its address (I2C
+  error -2) until a finger wakes it; a hardware reset in that state does not help (it NACKs
+  again within seconds) and a command sent while it is busy gets a bus error. This looked like
+  the panel's idle command, the cluster collapse, the RPM sleep set, an eMMC write (a kv write
+  happened to land at the 10 s mark) and the slow CPU clock in turn; all were ruled out one by
+  one with console-driven experiments while awake. The vendor driver never sees it because it
+  only reads after an interrupt (the chip is awake then) and retries NACKs; on screen-off it
+  queues its idle command 5 s later and on the first screen-on it resets the chip. The
+  driver now: `touch_sleep(on)` from main.c on POWER_SLEPT/POWER_WOKE; screen-off waits 5 s
+  then tries palm threshold 0x70 + mode 1, screen-on mode 0 + 0xA0; a mode that NACKs is
+  retried 3 times 2 s apart and then again right after the next round (the interrupt wakes
+  the main loop, the chip is awake for ~10 s after reporting). A type-0x10 record (the chip's
+  wake gesture, status 0x88) is turned into DOWN+UP, which main.c's tap-to-wake accepts:
+  verified, a tap on the AOD face wakes the watch. Dead ends worth not repeating: a
+  synchronous I2C read under `irq_save()` cannot complete (the QUP completion interrupt is
+  masked) and times out every 20 ms; the unsigned `time_ms() - t >= wait` idiom cannot express
+  a future `t`.
+- Sensor hub: EM7184 firmware upload (22012 bytes, 16-byte writes, CRC fe09f79b matches),
+  rom 1f9d, step counter and wrist tilt enabled. Tilt-to-wake works (interrupt on gpio 111,
+  MPM pin 54); steps not yet seen (no walking done).
+- Haptics: PM8226 vibrator through `0x01c041` (level 0x1e = 3.0 V) and `0x01c046` bit 7,
+  the two registers the vendor driver uses in manual mode. The first `buzz` on the bench was
+  not felt (unexplained; the registers read back right), later ones and the settings toggle
+  vibrate.
+- Charger/gauge: `charger:` line shows vmax 0x6f, vsafe 0x72, vinmin 0x13, imax 6, isafe 12,
+  vbatdet 50 as computed from the PR3 limits; `bms: cell C11N1540 (id 0 kOhm)`: the battery
+  ID channel reads 0, so the cell is chosen per build (both ASUS cells claim 75 kOhm anyway).
+- Display idle: the simple `0x39`/`0x38` left the AOD face dark; the vendor's ambient
+  sequence (`idle-on-command-V2`, used for V2 and V3 panels by `mdss_dsi_panel.c`) shows it.
+  `display_idle` now runs per-board DCS tables from `src/board/<watch>/panel.h`.
+- Square panel: the mesh (a disc of points, SCALE 1.2) and the app-page background (a mesh
+  cut to a 64-gon of radius 0.5) never painted the corners, which showed slices of the
+  previous page after a swipe (invisible on sturgeon's round panel). `BOARD_PANEL_ROUND`
+  scales the mesh to 1.45 and the window to 0.72 on square panels. The Slint UI itself is
+  still round-designed (dark disc on the face); the corners show the mesh.
+- Sleep: the watch sleeps at the 10 s timeout and collapses (~1 collapse/s, 60-250 wakeups
+  per minute, source not identified: hub and BT lines are low when idle).
+
+Apps: the hub exposes accelerometer, gyroscope, gravity, linear acceleration, game rotation
+vector, significant motion, step detector/counter, tilt detector, wrist tilt, sleep, coach,
+inactivity alarm and activity (`hw/sparrow/em7184.md`); no magnetometer and no heart rate, so
+neither Compass nor the HRM app can be ported, and the stock image's app list is already
+covered. The Heart Rate app is hidden on sparrow (`BOARD_HEART_RATE`, `Codes.heart-rate`).
+
+Open: hub step events, BT LPM with a phone, deep-sleep current, the idle
+(AOD) commands on the RM69032, wrist tilt wake, `BOARD_TOUCH_MPM` 8 armed level-low against an
+edge interrupt (a short INT pulse would be missed while collapsed).
