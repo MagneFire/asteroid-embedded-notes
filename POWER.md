@@ -664,16 +664,20 @@ wake. Steps kv: 432 total. Log: logs-battery-2026-11-01-sparrow.txt.
 | BMS CC | -124.2 mAh | 16 mA, sign inverted |
 | BMS SOC | 100% (made up at the end of the charge, 4.335 V) -> 45% (one hardware OCV all run, 3.825 V at 23755 s) = ~211 mAh | ~30 mA, upper bound |
 
-- **The counter's sign is inverted on sparrow**: discharge reads
-  negative, also in the overnight run on 0bb4497 (-6 to -8 mA). The sense
-  resistor is wired the other way round, or the board needs a different
-  sign. The BMS adds that cc to its charge, so between OCVs it counts the
-  wrong way. Needs a board setting before any sparrow figure is used.
-- The per-minute asleep lines (5.9 mA) and the BMS CC sum (16 mA) disagree
-  on sparrow, unlike sturgeon (3.2 vs 3.4). Not explained; the sign may be
-  part of it (the SW_CC delta and the CC_DATA sum are read differently).
+- **Not a sign error: the wrong sense resistor.** Awake on battery the
+  counter read +100 mA against 120 mA instant, so only the low currents
+  went negative. Register diff against sturgeon: `IADC1_BMS_ADC_CH_SEL_CTL`
+  (0x3848) was 0 (internal rsense) on sparrow, 1 (external) on sturgeon;
+  the vendor driver moves it to external at probe when
+  `qcom,use-external-rsense` (both DTs) and clears both counters
+  (qpnp-bms.c read_iadc_channel_select). Fixed in 0084d42; after it
+  VSENSE_AVG reads -279 mA against -292 mA instant, charging. The rest of
+  0x3800/0x4000 matches sturgeon apart from Android's leftover
+  OCV_THR/SW_CC_THR wakeup thresholds.
 - **Only one hardware OCV in 7.4 h** (sturgeon: one every ~2 min). The
-  sparrow's BMS sleep thresholds or OCV timer are not set like sturgeon's;
+  OCV timer and S1-S3 thresholds match sturgeon's, so the likely cause is
+  the same internal channel (the S3 entry is decided on the sensed
+  current); to check on the next run;
   the % comes from a made-up 100% start and a single reading, so the 30 mA
   is a bound, not a measurement.
 - **IT7260 idle mode is never set on battery.** With 8ed1519 the attempts
@@ -683,5 +687,19 @@ wake. Steps kv: 432 total. Log: logs-battery-2026-11-01-sparrow.txt.
   sleep is as cheap as the idle mode is not known.
 - Hub: one wrist tilt, no restart, no fatal error.
 
-Next for sparrow: fix the counter sign, then get the BMS to take OCVs
-(compare the BMS sleep/OCV registers with sturgeon's), then repeat.
+Next for sparrow: repeat the battery run on 0084d42 and check the OCV
+rate and the counter against the OCV drop.
+
+### 12.1 sturgeon counter while charging (2026-11-01 evening)
+
+Charging awake: instant -148 mA, CC average -149 mA; asleep, CC -158 mA
+and iavg -159. From the 3.904 V OCV (58%) the CC counted 64.7 mAh in by
+80% and the charge was still at ~150 mA, so the cell holds well over the
+~65 mAh the §11 'cell capacity' reading needed: that explanation is out.
+The counter is right at -150 mA and reads a fifth of the voltage drop
+over a sleeping day, so the open question is what it misses while the
+watch sleeps (a path around the sense resistor with the BATFET in LPM,
+0x1293 bits 7:6 = 01 on unplug as the vendor charger does; or the BMS's
+low-power sampling). Whatever it is applied to the 1.6 mA AsteroidOS
+figure too, which came from the same counter. The full-charge count is in
+the next entry.
