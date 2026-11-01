@@ -650,3 +650,38 @@ AsteroidOS. Open, in order of what would settle it:
 
 Sparrow ran the same build on battery in parallel; its run is in §12 once
 it is back on USB.
+
+## 12. Sparrow battery run 2026-11-01 (main 158ad1e)
+
+sparrow (PR3, C11N1540 380 mAh, fcc 384000 uAh), unplugged 09:28-16:49
+(7.4 h) in parallel with §11, mostly lying still, phone connected (three
+drops with reason 0208, reconnected each time), AOD on. No reset, no late
+wake. Steps kv: 432 total. Log: logs-battery-2026-11-01-sparrow.txt.
+
+| source | what it says | average |
+|---|---|---|
+| asleep lines (441) | mean -5.9, median -7 mA | 5.9 mA, sign inverted |
+| BMS CC | -124.2 mAh | 16 mA, sign inverted |
+| BMS SOC | 100% (made up at the end of the charge, 4.335 V) -> 45% (one hardware OCV all run, 3.825 V at 23755 s) = ~211 mAh | ~30 mA, upper bound |
+
+- **The counter's sign is inverted on sparrow**: discharge reads
+  negative, also in the overnight run on 0bb4497 (-6 to -8 mA). The sense
+  resistor is wired the other way round, or the board needs a different
+  sign. The BMS adds that cc to its charge, so between OCVs it counts the
+  wrong way. Needs a board setting before any sparrow figure is used.
+- The per-minute asleep lines (5.9 mA) and the BMS CC sum (16 mA) disagree
+  on sparrow, unlike sturgeon (3.2 vs 3.4). Not explained; the sign may be
+  part of it (the SW_CC delta and the CC_DATA sum are read differently).
+- **Only one hardware OCV in 7.4 h** (sturgeon: one every ~2 min). The
+  sparrow's BMS sleep thresholds or OCV timer are not set like sturgeon's;
+  the % comes from a made-up 100% start and a single reading, so the 30 mA
+  is a bound, not a measurement.
+- **IT7260 idle mode is never set on battery.** With 8ed1519 the attempts
+  now come on time (sleep + 5 s, then 2 s retries, last at sleep + ~11 s),
+  but every one gets -2 (no ACK): the chip has already put itself to sleep.
+  Each wake sets the active mode at once (0, try 0). Whether the chip's own
+  sleep is as cheap as the idle mode is not known.
+- Hub: one wrist tilt, no restart, no fatal error.
+
+Next for sparrow: fix the counter sign, then get the BMS to take OCVs
+(compare the BMS sleep/OCV registers with sturgeon's), then repeat.
