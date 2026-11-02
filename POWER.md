@@ -755,3 +755,35 @@ OCV register did not change in a 32 min unplugged suspend either, so
 sparrow's missing hardware OCVs are not a firmware bug. The run itself
 gave no current: it went onto a wall charger halfway, and the charge
 counter only has the two end points.
+
+## 14. DSI PLL off between AOD frames (2026-11-02, branch aod-display-rest 1c686b1)
+
+The AOD comparison with the vendor kernel (end of the 11-01 session):
+between always-on frames `display_rest()` gated the DSI and MDP clocks
+but left the DSI PLL, the MDSS AHB clock, the DSI PHY and the MDSS GDSC
+on. Stage A (1c686b1) turns the PLL off (GLB_CFG 0xfd922a20 = 0) and gates
+AHB at every rest, and the PHY (0xfd922c70 / 0xd98 = 0) only while the
+panel sleeps, as the vendor keeps it on under ULPS for AOD.
+
+- **PLL power-up:** the sequence must be msm8226's own,
+  `dsi_vco_clk_8226` in `K:arch/arm/mach-msm/clock-mdss-8974.c:1652`
+  (seq M x2 with 7 PWRGEN retries, D x2, F1, C, E). The 8974/28hpm one in
+  `K:drivers/clk/qcom/mdss/` (not used on 8226) failed to lock about one
+  redraw in three on both watches: byte/pclk stuck off, the frame lands
+  offset on the panel. The PLL registers were not lost across the
+  software reset. With the 8226 chain: no failure and no retry in 6.8 h.
+- **Measurement (sturgeon):** overnight `powertest 15 25 dsi` (harness
+  knob, ABBA, BT off, AOD on), 16 arms of 25 min, first 2 min trimmed.
+  PLL off 8.71 ± 0.18 mA (n=8), PLL on 8.85 ± 0.20 mA (n=8): difference
+  -0.14 mA, 2 SE 0.54, so **below the MDD**. OCV slopes ~-32 mV/h agree
+  with ~9 mA. Log: logs-dsi-rest-2026-11-02-sturgeon.txt, analysis
+  tools/powerlog.py.
+- So the 10-27 "DSI PLL/PHY off -2 mA" (screen off, pre-trim counter)
+  does not carry over to the AOD rest: in VDD min the PLL's reference
+  is gone anyway. The AOD-off case (PHY off too) is not measured yet.
+- Asleep total with AOD on and BT off: ~8.8 mA on sturgeon (vs the 12-16
+  mA with a phone link in §13).
+- **Sparrow:** functionally fine overnight (log ring kept arms 10-15
+  only). Its counter reads -3..0 mA while the OCV falls ~30 mV/h, so the
+  sparrow CC is still wrong. It did take 58 hardware OCVs overnight,
+  unlike the 11-01 runs (§12/§13). Log: logs-dsi-rest-2026-11-02-sparrow.txt.

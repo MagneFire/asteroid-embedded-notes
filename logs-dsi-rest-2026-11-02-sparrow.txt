@@ -1,0 +1,610 @@
+[14822.256] bms: 78% (calculated 78%), ocv 4086832 uV, cc -75 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 697 mOhm, 17.7 C
+[14840.271] power: asleep, 2 wakeups, 71/493/0 collapses, -2 mA average
+[14882.281] bms: new ocv 4085965 uV
+[14882.289] bms: 78% (calculated 78%), ocv 4085965 uV, cc -4 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 697 mOhm, 17.7 C
+[14900.287] power: asleep, 2 wakeups, 71/495/0 collapses, -1 mA average
+[14942.301] bms: 78% (calculated 78%), ocv 4085965 uV, cc -42 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 697 mOhm, 17.7 C
+[14960.315] power: asleep, 2 wakeups, 71/497/0 collapses, -2 mA average
+[15002.326] bms: new ocv 4084624 uV
+[15002.334] bms: 78% (calculated 78%), ocv 4084624 uV, cc 0 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 697 mOhm, 17.7 C
+[15020.344] power: asleep, 2 wakeups, 71/499/0 collapses, -1 mA average
+[15062.358] bms: 78% (calculated 78%), ocv 4084624 uV, cc -14 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 697 mOhm, 17.7 C
+[15080.372] power: asleep, 2 wakeups, 71/501/0 collapses, 0 mA average
+[15122.386] bms: 78% (calculated 78%), ocv 4084624 uV, cc -14 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 697 mOhm, 17.7 C
+[15140.399] power: asleep, 2 wakeups, 71/503/0 collapses, 0 mA average
+[15182.410] bms: new ocv 4080661 uV
+[15182.417] bms: 77% (calculated 77%), ocv 4080661 uV, cc 17 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 709 mOhm, 17.7 C
+[15200.427] power: asleep, 2 wakeups, 71/505/0 collapses, 0 mA average
+[15242.441] bms: 77% (calculated 77%), ocv 4080661 uV, cc 6 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 709 mOhm, 17.7 C
+[15260.445] power: asleep, 2 wakeups, 71/507/0 collapses, 0 mA average
+[15302.456] bms: new ocv 4081579 uV
+[15302.463] bms: 77% (calculated 77%), ocv 4081579 uV, cc 18 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 709 mOhm, 17.7 C
+[15320.474] power: asleep, 2 wakeups, 71/509/0 collapses, 1 mA average
+[15362.488] bms: 77% (calculated 77%), ocv 4081579 uV, cc 8 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 709 mOhm, 17.7 C
+[15380.493] power: asleep, 2 wakeups, 71/511/0 collapses, -1 mA average
+[15422.504] bms: new ocv 4080136 uV
+[15422.512] bms: 77% (calculated 77%), ocv 4080136 uV, cc -6 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 701 mOhm, 17.7 C
+[15440.505] power: asleep, 2 wakeups, 71/513/0 collapses, 0 mA average
+[15482.519] bms: 77% (calculated 77%), ocv 4080136 uV, cc -45 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 701 mOhm, 17.7 C
+[15500.533] power: asleep, 2 wakeups, 71/515/0 collapses, -3 mA average
+[15542.544] bms: new ocv 4080184 uV
+[15542.552] bms: 77% (calculated 77%), ocv 4080184 uV, cc -4 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 701 mOhm, 17.7 C
+[15560.548] power: asleep, 2 wakeups, 71/517/0 collapses, -3 mA average
+[15602.562] bms: 77% (calculated 77%), ocv 4080184 uV, cc -42 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 701 mOhm, 17.7 C
+[15620.576] power: asleep, 2 wakeups, 71/519/0 collapses, -1 mA average
+[15662.590] bms: 77% (calculated 77%), ocv 4080184 uV, cc -74 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 701 mOhm, 17.7 C
+[15680.598] power: asleep, 2 wakeups, 71/521/0 collapses, -2 mA average
+[15722.609] bms: new ocv 4078351 uV
+[15722.616] bms: 77% (calculated 77%), ocv 4078351 uV, cc -43 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 701 mOhm, 17.7 C
+[15740.626] power: asleep, 2 wakeups, 71/523/0 collapses, -3 mA average
+[15782.640] bms: 77% (calculated 77%), ocv 4078351 uV, cc -97 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 701 mOhm, 17.7 C
+[15800.638] power: asleep, 2 wakeups, 71/525/0 collapses, -2 mA average
+[15842.648] bms: new ocv 4076428 uV
+[15842.656] bms: 77% (calculated 77%), ocv 4076428 uV, cc -12 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 701 mOhm, 17.7 C
+[15860.658] power: asleep, 2 wakeups, 71/527/0 collapses, -1 mA average
+[15902.672] bms: 77% (calculated 77%), ocv 4076428 uV, cc -46 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 701 mOhm, 17.7 C
+[15920.685] power: asleep, 2 wakeups, 71/529/0 collapses, -2 mA average
+[15962.696] bms: new ocv 4076380 uV
+[15962.704] bms: 77% (calculated 77%), ocv 4076380 uV, cc -27 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 701 mOhm, 17.7 C
+[15980.705] power: asleep, 2 wakeups, 71/531/0 collapses, -4 mA average
+[16022.719] bms: 77% (calculated 77%), ocv 4076380 uV, cc -82 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 701 mOhm, 17.7 C
+[16040.733] powertest: arm 10 dsi=on bt=off
+[16040.733] power: asleep, 2 wakeups, 71/533/0 collapses, -3 mA average
+[16082.744] bms: new ocv 4074694 uV
+[16082.752] bms: 76% (calculated 76%), ocv 4074694 uV, cc 0 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 709 mOhm, 17.7 C
+[16100.758] power: asleep, 2 wakeups, 71/535/0 collapses, -5 mA average
+[16142.772] bms: 76% (calculated 76%), ocv 4074694 uV, cc -84 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -5 mA, rbatt 709 mOhm, 17.7 C
+[16160.779] power: asleep, 2 wakeups, 71/537/0 collapses, -4 mA average
+[16202.793] bms: 76% (calculated 76%), ocv 4074694 uV, cc -171 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -5 mA, rbatt 709 mOhm, 17.7 C
+[16220.794] power: asleep, 2 wakeups, 71/539/0 collapses, -4 mA average
+[16262.808] bms: 76% (calculated 76%), ocv 4074694 uV, cc -197 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 709 mOhm, 17.7 C
+[16280.821] power: asleep, 2 wakeups, 71/541/0 collapses, 0 mA average
+[16322.835] bms: 76% (calculated 76%), ocv 4074694 uV, cc -198 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 709 mOhm, 17.7 C
+[16340.848] power: asleep, 2 wakeups, 71/543/0 collapses, 0 mA average
+[16382.862] bms: 76% (calculated 76%), ocv 4074694 uV, cc -198 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 709 mOhm, 17.7 C
+[16400.871] power: asleep, 2 wakeups, 71/545/0 collapses, 0 mA average
+[16442.882] bms: new ocv 4070551 uV
+[16442.889] bms: 76% (calculated 76%), ocv 4070551 uV, cc 29 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 713 mOhm, 17.7 C
+[16460.899] power: asleep, 2 wakeups, 71/547/0 collapses, 1 mA average
+[16502.913] bms: 76% (calculated 76%), ocv 4070551 uV, cc 61 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 713 mOhm, 17.7 C
+[16520.928] power: asleep, 2 wakeups, 71/549/0 collapses, 2 mA average
+[16562.939] bms: new ocv 4070551 uV
+[16562.946] bms: 76% (calculated 76%), ocv 4070551 uV, cc 19 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 713 mOhm, 17.7 C
+[16580.956] power: asleep, 2 wakeups, 71/551/0 collapses, 1 mA average
+[16621.969] bms: 76% (calculated 76%), ocv 4070551 uV, cc 41 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 713 mOhm, 17.7 C
+[16640.979] power: asleep, 2 wakeups, 71/553/0 collapses, 1 mA average
+[16681.990] bms: new ocv 4069057 uV
+[16681.997] bms: 76% (calculated 76%), ocv 4069057 uV, cc 19 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 2 mA, rbatt 713 mOhm, 17.7 C
+[16701.019] bms: 76% (calculated 76%), ocv 4069057 uV, cc 28 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 713 mOhm, 17.7 C
+[16701.019] power: asleep, 2 wakeups, 71/555/0 collapses, 1 mA average
+[16742.033] bms: 76% (calculated 76%), ocv 4069057 uV, cc 50 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 713 mOhm, 17.7 C
+[16761.035] power: asleep, 2 wakeups, 71/557/0 collapses, 2 mA average
+[16802.045] bms: new ocv 4068481 uV
+[16802.056] bms: 76% (calculated 76%), ocv 4068481 uV, cc 3 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 2 mA, rbatt 713 mOhm, 17.7 C
+[16821.063] power: asleep, 2 wakeups, 71/559/0 collapses, 2 mA average
+[16862.077] bms: 76% (calculated 76%), ocv 4068481 uV, cc -3 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 709 mOhm, 17.7 C
+[16881.085] power: asleep, 2 wakeups, 71/561/0 collapses, -3 mA average
+[16922.099] bms: 76% (calculated 76%), ocv 4068481 uV, cc -86 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 709 mOhm, 17.7 C
+[16941.111] power: asleep, 2 wakeups, 71/563/0 collapses, -5 mA average
+[16982.122] bms: new ocv 4065931 uV
+[16982.129] bms: 75% (calculated 75%), ocv 4065931 uV, cc -75 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 713 mOhm, 17.7 C
+[17001.139] power: asleep, 2 wakeups, 71/565/0 collapses, -4 mA average
+[17042.153] bms: 75% (calculated 75%), ocv 4065931 uV, cc -133 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 713 mOhm, 17.7 C
+[17061.158] power: asleep, 2 wakeups, 71/567/0 collapses, -3 mA average
+[17102.168] bms: new ocv 4065931 uV
+[17102.180] bms: 75% (calculated 75%), ocv 4065931 uV, cc -48 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -6 mA, rbatt 713 mOhm, 17.7 C
+[17121.186] power: asleep, 2 wakeups, 71/569/0 collapses, -3 mA average
+[17162.200] bms: 75% (calculated 75%), ocv 4065931 uV, cc -89 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 713 mOhm, 17.7 C
+[17181.205] power: asleep, 2 wakeups, 71/571/0 collapses, -2 mA average
+[17222.215] bms: new ocv 4065400 uV
+[17222.223] bms: 75% (calculated 75%), ocv 4065400 uV, cc -10 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 713 mOhm, 17.7 C
+[17241.227] power: asleep, 2 wakeups, 71/573/0 collapses, -2 mA average
+[17282.241] bms: 75% (calculated 75%), ocv 4065400 uV, cc -55 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 713 mOhm, 17.7 C
+[17301.255] power: asleep, 2 wakeups, 71/575/0 collapses, -1 mA average
+[17342.269] bms: 75% (calculated 75%), ocv 4065400 uV, cc -99 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 713 mOhm, 17.7 C
+[17361.273] power: asleep, 2 wakeups, 71/577/0 collapses, -2 mA average
+[17402.283] bms: new ocv 4061890 uV
+[17402.291] bms: 75% (calculated 75%), ocv 4061890 uV, cc -30 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 713 mOhm, 17.7 C
+[17421.301] power: asleep, 2 wakeups, 71/579/0 collapses, 0 mA average
+[17462.315] bms: 75% (calculated 75%), ocv 4061890 uV, cc -82 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 713 mOhm, 17.7 C
+[17481.328] power: asleep, 2 wakeups, 71/581/0 collapses, -4 mA average
+[17522.339] bms: new ocv 4062418 uV
+[17522.346] bms: 75% (calculated 75%), ocv 4062418 uV, cc -31 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 713 mOhm, 17.7 C
+[17541.356] powertest: arm 11 dsi=off bt=off
+[17541.357] power: asleep, 2 wakeups, 71/583/0 collapses, -3 mA average
+[17582.371] bms: 75% (calculated 75%), ocv 4062418 uV, cc -121 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -5 mA, rbatt 713 mOhm, 17.7 C
+[17601.384] power: asleep, 2 wakeups, 71/585/0 collapses, -3 mA average
+[17642.398] bms: 75% (calculated 75%), ocv 4062418 uV, cc -153 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 713 mOhm, 17.7 C
+[17661.412] power: asleep, 2 wakeups, 71/587/0 collapses, -2 mA average
+[17702.426] bms: 75% (calculated 75%), ocv 4062418 uV, cc -231 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 713 mOhm, 17.7 C
+[17721.439] power: asleep, 2 wakeups, 71/589/0 collapses, -4 mA average
+[17762.453] bms: 75% (calculated 75%), ocv 4062418 uV, cc -239 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 713 mOhm, 17.7 C
+[17781.466] power: asleep, 2 wakeups, 71/591/0 collapses, 1 mA average
+[17822.480] bms: 75% (calculated 75%), ocv 4062418 uV, cc -205 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 2 mA, rbatt 717 mOhm, 17.6 C
+[17841.490] power: asleep, 2 wakeups, 71/593/0 collapses, 1 mA average
+[17882.501] bms: new ocv 4058998 uV
+[17882.509] bms: 74% (calculated 74%), ocv 4058998 uV, cc -8 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 721 mOhm, 17.7 C
+[17901.517] power: asleep, 2 wakeups, 71/595/0 collapses, 0 mA average
+[17942.531] bms: 74% (calculated 74%), ocv 4058998 uV, cc 34 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 2 mA, rbatt 713 mOhm, 17.7 C
+[17961.544] power: asleep, 2 wakeups, 71/597/0 collapses, 0 mA average
+[18002.555] bms: new ocv 4058470 uV
+[18002.563] bms: 74% (calculated 74%), ocv 4058470 uV, cc -3 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 721 mOhm, 17.7 C
+[18021.572] power: asleep, 2 wakeups, 71/599/0 collapses, 0 mA average
+[18062.586] bms: 74% (calculated 74%), ocv 4058470 uV, cc -22 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 721 mOhm, 17.7 C
+[18081.599] power: asleep, 2 wakeups, 71/601/0 collapses, -1 mA average
+[18122.609] bms: new ocv 4057696 uV
+[18122.617] bms: 74% (calculated 74%), ocv 4057696 uV, cc -8 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 721 mOhm, 17.7 C
+[18141.616] power: asleep, 2 wakeups, 71/603/0 collapses, -2 mA average
+[18182.630] bms: 74% (calculated 74%), ocv 4057696 uV, cc -72 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 725 mOhm, 17.6 C
+[18201.638] power: asleep, 2 wakeups, 71/605/0 collapses, -3 mA average
+[18242.652] bms: 74% (calculated 74%), ocv 4057696 uV, cc -145 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 721 mOhm, 17.7 C
+[18261.657] power: asleep, 2 wakeups, 71/607/0 collapses, -4 mA average
+[18302.668] bms: new ocv 4055245 uV
+[18302.676] bms: 74% (calculated 74%), ocv 4055245 uV, cc -42 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 721 mOhm, 17.7 C
+[18321.684] power: asleep, 2 wakeups, 71/609/0 collapses, -2 mA average
+[18362.698] bms: 74% (calculated 74%), ocv 4055245 uV, cc -64 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 725 mOhm, 17.6 C
+[18381.711] power: asleep, 2 wakeups, 71/611/0 collapses, 0 mA average
+[18422.722] bms: new ocv 4053559 uV
+[18422.729] bms: 74% (calculated 74%), ocv 4053559 uV, cc 20 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 2 mA, rbatt 717 mOhm, 17.6 C
+[18441.737] power: asleep, 2 wakeups, 71/613/0 collapses, 1 mA average
+[18482.751] bms: 74% (calculated 74%), ocv 4053559 uV, cc 40 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 717 mOhm, 17.6 C
+[18501.759] power: asleep, 2 wakeups, 71/615/0 collapses, 1 mA average
+[18542.770] bms: new ocv 4053271 uV
+[18542.778] bms: 74% (calculated 74%), ocv 4053271 uV, cc 0 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 725 mOhm, 17.6 C
+[18561.779] power: asleep, 2 wakeups, 71/617/0 collapses, 0 mA average
+[18602.793] bms: 74% (calculated 74%), ocv 4053271 uV, cc -17 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 725 mOhm, 17.6 C
+[18621.807] power: asleep, 2 wakeups, 71/619/0 collapses, 0 mA average
+[18662.818] bms: new ocv 4052887 uV
+[18662.825] bms: 74% (calculated 74%), ocv 4052887 uV, cc -1 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 725 mOhm, 17.6 C
+[18681.832] power: asleep, 2 wakeups, 71/621/0 collapses, 0 mA average
+[18722.846] bms: 74% (calculated 74%), ocv 4052887 uV, cc -28 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 725 mOhm, 17.6 C
+[18741.853] power: asleep, 2 wakeups, 71/623/0 collapses, -1 mA average
+[18782.867] bms: 74% (calculated 74%), ocv 4052887 uV, cc -50 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 725 mOhm, 17.6 C
+[18801.880] power: asleep, 2 wakeups, 71/625/0 collapses, 0 mA average
+[18842.891] bms: new ocv 4049134 uV
+[18842.898] bms: 74% (calculated 74%), ocv 4049134 uV, cc -17 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 725 mOhm, 17.6 C
+[18861.906] power: asleep, 2 wakeups, 71/627/0 collapses, 0 mA average
+[18902.920] bms: 74% (calculated 74%), ocv 4049134 uV, cc -3 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 725 mOhm, 17.6 C
+[18921.934] power: asleep, 2 wakeups, 71/629/0 collapses, 0 mA average
+[18962.945] bms: new ocv 4050046 uV
+[18962.952] bms: 74% (calculated 74%), ocv 4050046 uV, cc 32 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 3 mA, rbatt 717 mOhm, 17.6 C
+[18981.949] power: asleep, 2 wakeups, 71/631/0 collapses, 2 mA average
+[19022.963] bms: 74% (calculated 74%), ocv 4050046 uV, cc 69 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 2 mA, rbatt 717 mOhm, 17.6 C
+[19041.961] powertest: arm 12 dsi=off bt=off
+[19041.962] power: asleep, 2 wakeups, 71/633/0 collapses, 1 mA average
+[19081.972] bms: new ocv 4047445 uV
+[19081.980] bms: 74% (calculated 74%), ocv 4047445 uV, cc 23 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 4 mA, rbatt 717 mOhm, 17.6 C
+[19102.001] bms: 74% (calculated 74%), ocv 4047445 uV, cc 38 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 2 mA, rbatt 717 mOhm, 17.6 C
+[19102.001] power: asleep, 2 wakeups, 71/635/0 collapses, 2 mA average
+[19142.015] bms: 74% (calculated 74%), ocv 4047445 uV, cc 60 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 717 mOhm, 17.6 C
+[19162.028] bms: 74% (calculated 74%), ocv 4047445 uV, cc 65 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 717 mOhm, 17.6 C
+[19162.028] power: asleep, 2 wakeups, 71/637/0 collapses, 1 mA average
+[19202.039] bms: new ocv 4047490 uV
+[19202.047] bms: 74% (calculated 74%), ocv 4047490 uV, cc 3 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 717 mOhm, 17.6 C
+[19222.049] bms: 74% (calculated 74%), ocv 4047490 uV, cc 6 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 717 mOhm, 17.6 C
+[19222.050] power: asleep, 2 wakeups, 71/639/0 collapses, 0 mA average
+[19262.064] bms: 74% (calculated 74%), ocv 4047490 uV, cc -6 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 725 mOhm, 17.6 C
+[19282.075] bms: 74% (calculated 74%), ocv 4047490 uV, cc -8 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 725 mOhm, 17.6 C
+[19282.076] power: asleep, 2 wakeups, 71/641/0 collapses, 0 mA average
+[19322.090] bms: 74% (calculated 74%), ocv 4047490 uV, cc -21 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 725 mOhm, 17.6 C
+[19342.092] bms: new ocv 4044799 uV
+[19342.100] bms: 74% (calculated 74%), ocv 4044799 uV, cc -6 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 725 mOhm, 17.6 C
+[19342.100] power: asleep, 2 wakeups, 71/643/0 collapses, -1 mA average
+[19382.114] bms: 74% (calculated 74%), ocv 4044799 uV, cc -14 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 725 mOhm, 17.6 C
+[19402.122] bms: 74% (calculated 74%), ocv 4044799 uV, cc -29 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 725 mOhm, 17.6 C
+[19402.123] power: asleep, 2 wakeups, 71/645/0 collapses, -1 mA average
+[19442.136] bms: 74% (calculated 74%), ocv 4044799 uV, cc -62 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 725 mOhm, 17.6 C
+[19462.130] bms: new ocv 4044754 uV
+[19462.138] bms: 74% (calculated 74%), ocv 4044754 uV, cc -4 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 725 mOhm, 17.6 C
+[19462.139] power: asleep, 2 wakeups, 71/647/0 collapses, -2 mA average
+[19502.153] bms: 74% (calculated 74%), ocv 4044754 uV, cc -43 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 725 mOhm, 17.6 C
+[19522.162] bms: 74% (calculated 74%), ocv 4044754 uV, cc -60 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 725 mOhm, 17.6 C
+[19522.163] power: asleep, 2 wakeups, 71/649/0 collapses, -3 mA average
+[19562.177] bms: 74% (calculated 74%), ocv 4044754 uV, cc -55 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 725 mOhm, 17.6 C
+[19582.189] bms: 74% (calculated 74%), ocv 4044754 uV, cc -45 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 725 mOhm, 17.6 C
+[19582.189] power: asleep, 2 wakeups, 71/651/0 collapses, 0 mA average
+[19622.200] bms: new ocv 4044226 uV
+[19622.208] bms: 74% (calculated 74%), ocv 4044226 uV, cc 0 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 725 mOhm, 17.6 C
+[19642.216] bms: 74% (calculated 74%), ocv 4044226 uV, cc -1 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 725 mOhm, 17.6 C
+[19642.217] power: asleep, 2 wakeups, 71/653/0 collapses, 0 mA average
+[19682.231] bms: 74% (calculated 74%), ocv 4044226 uV, cc 5 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 717 mOhm, 17.6 C
+[19702.237] bms: 74% (calculated 74%), ocv 4044226 uV, cc 13 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 717 mOhm, 17.6 C
+[19702.237] power: asleep, 2 wakeups, 71/655/0 collapses, 0 mA average
+[19742.248] bms: new ocv 4043494 uV
+[19742.256] bms: 74% (calculated 74%), ocv 4043494 uV, cc 4 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 717 mOhm, 17.6 C
+[19762.264] bms: 74% (calculated 74%), ocv 4043494 uV, cc 5 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 717 mOhm, 17.6 C
+[19762.265] power: asleep, 2 wakeups, 71/657/0 collapses, 1 mA average
+[19802.279] bms: 74% (calculated 74%), ocv 4043494 uV, cc -6 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 725 mOhm, 17.6 C
+[19822.278] bms: 74% (calculated 74%), ocv 4043494 uV, cc -7 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 725 mOhm, 17.6 C
+[19822.279] power: asleep, 2 wakeups, 71/659/0 collapses, 0 mA average
+[19862.289] bms: new ocv 4042294 uV
+[19862.298] bms: 74% (calculated 74%), ocv 4042294 uV, cc 2 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 77 mA, rbatt 717 mOhm, 17.6 C
+[19882.299] bms: 74% (calculated 74%), ocv 4042294 uV, cc 24 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 3 mA, rbatt 717 mOhm, 17.6 C
+[19882.299] power: asleep, 2 wakeups, 71/661/0 collapses, 1 mA average
+[19922.313] bms: 74% (calculated 74%), ocv 4042294 uV, cc 9 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 717 mOhm, 17.6 C
+[19942.326] bms: 74% (calculated 74%), ocv 4042294 uV, cc -3 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 725 mOhm, 17.6 C
+[19942.327] power: asleep, 2 wakeups, 71/663/0 collapses, -1 mA average
+[19982.341] bms: 74% (calculated 74%), ocv 4042294 uV, cc -25 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 725 mOhm, 17.6 C
+[20002.346] bms: new ocv 4040227 uV
+[20002.354] bms: 73% (calculated 73%), ocv 4040227 uV, cc -3 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 717 mOhm, 17.6 C
+[20002.354] power: asleep, 2 wakeups, 71/665/0 collapses, -1 mA average
+[20042.368] bms: 73% (calculated 73%), ocv 4040227 uV, cc -25 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 717 mOhm, 17.6 C
+[20062.376] bms: 73% (calculated 73%), ocv 4040227 uV, cc -35 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 717 mOhm, 17.6 C
+[20062.376] power: asleep, 2 wakeups, 71/667/0 collapses, -1 mA average
+[20102.390] bms: 73% (calculated 73%), ocv 4040227 uV, cc -51 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 717 mOhm, 17.6 C
+[20122.395] bms: 73% (calculated 73%), ocv 4040227 uV, cc -56 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 717 mOhm, 17.6 C
+[20122.395] power: asleep, 2 wakeups, 71/669/0 collapses, -1 mA average
+[20162.406] bms: new ocv 4038358 uV
+[20162.416] bms: 73% (calculated 73%), ocv 4038358 uV, cc 15 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 709 mOhm, 17.6 C
+[20182.423] bms: 73% (calculated 73%), ocv 4038358 uV, cc 48 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 5 mA, rbatt 709 mOhm, 17.6 C
+[20182.423] power: asleep, 2 wakeups, 71/671/0 collapses, 2 mA average
+[20222.437] bms: 73% (calculated 73%), ocv 4038358 uV, cc 60 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 709 mOhm, 17.6 C
+[20242.435] bms: 73% (calculated 73%), ocv 4038358 uV, cc 70 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 709 mOhm, 17.6 C
+[20242.435] power: asleep, 2 wakeups, 71/673/0 collapses, 1 mA average
+[20282.446] bms: new ocv 4037005 uV
+[20282.454] bms: 73% (calculated 73%), ocv 4037005 uV, cc 16 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 709 mOhm, 17.6 C
+[20302.462] bms: 73% (calculated 73%), ocv 4037005 uV, cc 23 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 709 mOhm, 17.6 C
+[20302.463] power: asleep, 2 wakeups, 71/675/0 collapses, 2 mA average
+[20342.477] bms: 73% (calculated 73%), ocv 4037005 uV, cc 53 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 2 mA, rbatt 709 mOhm, 17.6 C
+[20362.489] bms: 73% (calculated 73%), ocv 4037005 uV, cc 73 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 3 mA, rbatt 709 mOhm, 17.6 C
+[20362.490] power: asleep, 2 wakeups, 71/677/0 collapses, 2 mA average
+[20402.501] bms: new ocv 4039159 uV
+[20402.508] bms: 73% (calculated 73%), ocv 4039159 uV, cc 4 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 709 mOhm, 17.6 C
+[20422.516] bms: 73% (calculated 73%), ocv 4039159 uV, cc 8 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 709 mOhm, 17.6 C
+[20422.517] power: asleep, 2 wakeups, 71/679/0 collapses, 2 mA average
+[20462.531] bms: 73% (calculated 73%), ocv 4039159 uV, cc -53 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -5 mA, rbatt 717 mOhm, 17.6 C
+[20482.543] bms: 73% (calculated 73%), ocv 4039159 uV, cc -56 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 717 mOhm, 17.6 C
+[20482.543] power: asleep, 2 wakeups, 71/681/0 collapses, -3 mA average
+[20522.557] bms: 73% (calculated 73%), ocv 4039159 uV, cc -123 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -6 mA, rbatt 717 mOhm, 17.6 C
+[20542.555] powertest: arm 13 dsi=on bt=off
+[20542.568] bms: 73% (calculated 73%), ocv 4039159 uV, cc -156 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -5 mA, rbatt 717 mOhm, 17.6 C
+[20542.568] power: asleep, 2 wakeups, 71/683/0 collapses, -5 mA average
+[20582.582] bms: 73% (calculated 73%), ocv 4039159 uV, cc -207 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 717 mOhm, 17.6 C
+[20602.595] bms: 73% (calculated 73%), ocv 4039159 uV, cc -226 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 717 mOhm, 17.6 C
+[20602.596] power: asleep, 2 wakeups, 71/685/0 collapses, -4 mA average
+[20642.610] bms: 73% (calculated 73%), ocv 4039159 uV, cc -265 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 717 mOhm, 17.6 C
+[20662.623] bms: 73% (calculated 73%), ocv 4039159 uV, cc -271 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 717 mOhm, 17.6 C
+[20662.623] power: asleep, 2 wakeups, 71/687/0 collapses, -2 mA average
+[20702.637] bms: 73% (calculated 73%), ocv 4039159 uV, cc -338 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -6 mA, rbatt 717 mOhm, 17.6 C
+[20722.649] bms: 73% (calculated 73%), ocv 4039159 uV, cc -369 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -5 mA, rbatt 717 mOhm, 17.6 C
+[20722.650] power: asleep, 2 wakeups, 71/689/0 collapses, -5 mA average
+[20762.664] bms: 73% (calculated 73%), ocv 4039159 uV, cc -419 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 717 mOhm, 17.6 C
+[20782.667] bms: 73% (calculated 73%), ocv 4039159 uV, cc -447 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -5 mA, rbatt 717 mOhm, 17.6 C
+[20782.667] power: asleep, 2 wakeups, 71/691/0 collapses, -4 mA average
+[20822.681] bms: 73% (calculated 73%), ocv 4039159 uV, cc -479 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 717 mOhm, 17.6 C
+[20842.695] bms: 73% (calculated 73%), ocv 4039159 uV, cc -500 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 717 mOhm, 17.6 C
+[20842.696] power: asleep, 2 wakeups, 71/693/0 collapses, -3 mA average
+[20882.710] bms: 73% (calculated 73%), ocv 4039159 uV, cc -550 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 717 mOhm, 17.6 C
+[20902.708] bms: 73% (calculated 73%), ocv 4039159 uV, cc -568 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 717 mOhm, 17.6 C
+[20902.708] power: asleep, 2 wakeups, 71/695/0 collapses, -3 mA average
+[20942.722] bms: 73% (calculated 73%), ocv 4039159 uV, cc -619 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 717 mOhm, 17.6 C
+[20962.736] bms: 73% (calculated 73%), ocv 4039159 uV, cc -633 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 717 mOhm, 17.6 C
+[20962.737] power: asleep, 2 wakeups, 71/697/0 collapses, -3 mA average
+[21002.748] bms: new ocv 4031848 uV
+[21002.755] bms: 73% (calculated 73%), ocv 4031848 uV, cc -22 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 717 mOhm, 17.6 C
+[21022.765] bms: 73% (calculated 73%), ocv 4031848 uV, cc -33 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 717 mOhm, 17.6 C
+[21022.765] power: asleep, 2 wakeups, 71/699/0 collapses, -2 mA average
+[21062.779] bms: 73% (calculated 73%), ocv 4031848 uV, cc -43 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 721 mOhm, 17.5 C
+[21082.783] bms: 73% (calculated 73%), ocv 4031848 uV, cc -37 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 717 mOhm, 17.6 C
+[21082.783] power: asleep, 2 wakeups, 71/701/0 collapses, 0 mA average
+[21122.794] bms: new ocv 4028830 uV
+[21122.802] bms: 73% (calculated 73%), ocv 4028830 uV, cc 0 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 717 mOhm, 17.6 C
+[21142.804] bms: 73% (calculated 73%), ocv 4028830 uV, cc -9 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 717 mOhm, 17.6 C
+[21142.804] power: asleep, 2 wakeups, 71/703/0 collapses, -1 mA average
+[21182.818] bms: 73% (calculated 73%), ocv 4028830 uV, cc -10 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 721 mOhm, 17.5 C
+[21202.816] bms: 73% (calculated 73%), ocv 4028830 uV, cc -18 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 717 mOhm, 17.6 C
+[21202.817] power: asleep, 2 wakeups, 71/705/0 collapses, 0 mA average
+[21242.831] bms: 73% (calculated 73%), ocv 4028830 uV, cc -27 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 721 mOhm, 17.5 C
+[21262.841] bms: new ocv 4030072 uV
+[21262.849] bms: 73% (calculated 73%), ocv 4030072 uV, cc 0 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 717 mOhm, 17.6 C
+[21262.849] power: asleep, 2 wakeups, 71/707/0 collapses, 0 mA average
+[21302.863] bms: 73% (calculated 73%), ocv 4030072 uV, cc -15 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 717 mOhm, 17.6 C
+[21322.872] bms: 73% (calculated 73%), ocv 4030072 uV, cc -23 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 717 mOhm, 17.6 C
+[21322.873] power: asleep, 2 wakeups, 71/709/0 collapses, -1 mA average
+[21362.887] bms: 73% (calculated 73%), ocv 4030072 uV, cc -71 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 721 mOhm, 17.5 C
+[21382.886] bms: 73% (calculated 73%), ocv 4030072 uV, cc -93 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 717 mOhm, 17.6 C
+[21382.886] power: asleep, 2 wakeups, 71/711/0 collapses, -4 mA average
+[21422.897] bms: new ocv 4028011 uV
+[21422.904] bms: 73% (calculated 73%), ocv 4028011 uV, cc -33 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 717 mOhm, 17.6 C
+[21442.914] bms: 73% (calculated 73%), ocv 4028011 uV, cc -58 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 721 mOhm, 17.5 C
+[21442.915] power: asleep, 2 wakeups, 71/713/0 collapses, -3 mA average
+[21482.929] bms: 73% (calculated 73%), ocv 4028011 uV, cc -124 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -5 mA, rbatt 717 mOhm, 17.6 C
+[21502.942] bms: 73% (calculated 73%), ocv 4028011 uV, cc -151 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 717 mOhm, 17.6 C
+[21502.943] power: asleep, 2 wakeups, 71/715/0 collapses, -5 mA average
+[21542.957] bms: 73% (calculated 73%), ocv 4028011 uV, cc -201 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 717 mOhm, 17.6 C
+[21562.970] bms: 73% (calculated 73%), ocv 4028011 uV, cc -230 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -5 mA, rbatt 721 mOhm, 17.5 C
+[21562.970] power: asleep, 2 wakeups, 71/717/0 collapses, -4 mA average
+[21601.984] bms: 73% (calculated 73%), ocv 4028011 uV, cc -287 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -5 mA, rbatt 717 mOhm, 17.6 C
+[21622.984] bms: 73% (calculated 73%), ocv 4028011 uV, cc -319 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -5 mA, rbatt 717 mOhm, 17.6 C
+[21622.985] power: asleep, 2 wakeups, 71/719/0 collapses, -5 mA average
+[21661.999] bms: 73% (calculated 73%), ocv 4028011 uV, cc -336 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 717 mOhm, 17.6 C
+[21683.012] bms: 73% (calculated 73%), ocv 4028011 uV, cc -336 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 721 mOhm, 17.5 C
+[21683.013] power: asleep, 2 wakeups, 71/721/0 collapses, 0 mA average
+[21722.026] bms: 73% (calculated 73%), ocv 4028011 uV, cc -354 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 721 mOhm, 17.5 C
+[21743.039] bms: 73% (calculated 73%), ocv 4028011 uV, cc -369 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 721 mOhm, 17.5 C
+[21743.039] power: asleep, 2 wakeups, 71/723/0 collapses, -1 mA average
+[21782.050] bms: new ocv 4025536 uV
+[21782.058] bms: 73% (calculated 73%), ocv 4025536 uV, cc -1 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 717 mOhm, 17.6 C
+[21803.067] bms: 73% (calculated 73%), ocv 4025536 uV, cc 17 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 3 mA, rbatt 709 mOhm, 17.5 C
+[21803.068] power: asleep, 2 wakeups, 71/725/0 collapses, 0 mA average
+[21842.082] bms: 73% (calculated 73%), ocv 4025536 uV, cc 11 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 709 mOhm, 17.6 C
+[21863.094] bms: 73% (calculated 73%), ocv 4025536 uV, cc 5 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 709 mOhm, 17.5 C
+[21863.094] power: asleep, 2 wakeups, 71/727/0 collapses, 0 mA average
+[21902.108] bms: 73% (calculated 73%), ocv 4025536 uV, cc -22 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 717 mOhm, 17.6 C
+[21923.115] bms: new ocv 4023805 uV
+[21923.123] bms: 73% (calculated 73%), ocv 4023805 uV, cc -6 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 721 mOhm, 17.5 C
+[21923.124] power: asleep, 2 wakeups, 71/729/0 collapses, -2 mA average
+[21962.138] bms: 73% (calculated 73%), ocv 4023805 uV, cc -21 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 721 mOhm, 17.5 C
+[21983.131] bms: 73% (calculated 73%), ocv 4023805 uV, cc -24 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 721 mOhm, 17.5 C
+[21983.131] power: asleep, 2 wakeups, 71/731/0 collapses, -1 mA average
+[22022.145] bms: 73% (calculated 73%), ocv 4023805 uV, cc -20 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 721 mOhm, 17.5 C
+[22043.142] powertest: arm 14 dsi=on bt=off
+[22043.152] bms: new ocv 4025251 uV
+[22043.160] bms: 73% (calculated 73%), ocv 4025251 uV, cc 0 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 721 mOhm, 17.5 C
+[22043.160] power: asleep, 2 wakeups, 71/733/0 collapses, 0 mA average
+[22082.174] bms: 73% (calculated 73%), ocv 4025251 uV, cc -3 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 721 mOhm, 17.5 C
+[22103.183] bms: 73% (calculated 73%), ocv 4025251 uV, cc 14 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 2 mA, rbatt 709 mOhm, 17.5 C
+[22103.183] power: asleep, 2 wakeups, 71/735/0 collapses, 0 mA average
+[22142.197] bms: 73% (calculated 73%), ocv 4025251 uV, cc -4 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 721 mOhm, 17.5 C
+[22163.208] bms: 73% (calculated 73%), ocv 4025251 uV, cc -4 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 721 mOhm, 17.5 C
+[22163.209] power: asleep, 2 wakeups, 71/737/0 collapses, -1 mA average
+[22202.220] bms: new ocv 4022275 uV
+[22202.227] bms: 72% (calculated 72%), ocv 4022275 uV, cc 10 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 701 mOhm, 17.5 C
+[22223.227] bms: 72% (calculated 72%), ocv 4022275 uV, cc 17 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 701 mOhm, 17.5 C
+[22223.228] power: asleep, 2 wakeups, 71/739/0 collapses, 1 mA average
+[22262.241] bms: 72% (calculated 72%), ocv 4022275 uV, cc -45 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -5 mA, rbatt 709 mOhm, 17.5 C
+[22283.247] bms: 72% (calculated 72%), ocv 4022275 uV, cc -81 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -6 mA, rbatt 709 mOhm, 17.5 C
+[22283.248] power: asleep, 2 wakeups, 71/741/0 collapses, -5 mA average
+[22322.262] bms: 72% (calculated 72%), ocv 4022275 uV, cc -147 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -6 mA, rbatt 709 mOhm, 17.5 C
+[22343.275] bms: 72% (calculated 72%), ocv 4022275 uV, cc -172 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 709 mOhm, 17.5 C
+[22343.276] power: asleep, 2 wakeups, 71/743/0 collapses, -5 mA average
+[22382.290] bms: 72% (calculated 72%), ocv 4022275 uV, cc -233 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -5 mA, rbatt 709 mOhm, 17.6 C
+[22403.302] bms: 72% (calculated 72%), ocv 4022275 uV, cc -265 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -5 mA, rbatt 709 mOhm, 17.5 C
+[22403.303] power: asleep, 2 wakeups, 71/745/0 collapses, -5 mA average
+[22442.317] bms: 72% (calculated 72%), ocv 4022275 uV, cc -334 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -6 mA, rbatt 709 mOhm, 17.6 C
+[22463.330] bms: 72% (calculated 72%), ocv 4022275 uV, cc -363 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 709 mOhm, 17.6 C
+[22463.331] power: asleep, 2 wakeups, 71/747/0 collapses, -5 mA average
+[22502.345] bms: 72% (calculated 72%), ocv 4022275 uV, cc -436 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -6 mA, rbatt 709 mOhm, 17.5 C
+[22523.358] bms: 72% (calculated 72%), ocv 4022275 uV, cc -468 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -5 mA, rbatt 709 mOhm, 17.5 C
+[22523.359] power: asleep, 2 wakeups, 71/749/0 collapses, -6 mA average
+[22562.373] bms: 72% (calculated 72%), ocv 4022275 uV, cc -479 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 709 mOhm, 17.6 C
+[22583.386] bms: 72% (calculated 72%), ocv 4022275 uV, cc -488 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 709 mOhm, 17.6 C
+[22583.386] power: asleep, 2 wakeups, 71/751/0 collapses, -1 mA average
+[22622.400] bms: 72% (calculated 72%), ocv 4022275 uV, cc -506 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 709 mOhm, 17.6 C
+[22643.409] bms: 72% (calculated 72%), ocv 4022275 uV, cc -513 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 709 mOhm, 17.6 C
+[22643.410] power: asleep, 2 wakeups, 71/753/0 collapses, -1 mA average
+[22682.424] bms: 72% (calculated 72%), ocv 4022275 uV, cc -541 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 709 mOhm, 17.6 C
+[22703.436] bms: 72% (calculated 72%), ocv 4022275 uV, cc -562 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 709 mOhm, 17.5 C
+[22703.436] power: asleep, 2 wakeups, 71/755/0 collapses, -2 mA average
+[22742.450] bms: 72% (calculated 72%), ocv 4022275 uV, cc -603 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 709 mOhm, 17.6 C
+[22763.446] bms: new ocv 4017121 uV
+[22763.454] bms: 72% (calculated 72%), ocv 4017121 uV, cc -2 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 709 mOhm, 17.5 C
+[22763.455] power: asleep, 2 wakeups, 71/757/0 collapses, -3 mA average
+[22802.468] bms: 72% (calculated 72%), ocv 4017121 uV, cc -43 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 709 mOhm, 17.5 C
+[22823.479] bms: 72% (calculated 72%), ocv 4017121 uV, cc -64 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 709 mOhm, 17.5 C
+[22823.479] power: asleep, 2 wakeups, 71/759/0 collapses, -3 mA average
+[22862.493] bms: 72% (calculated 72%), ocv 4017121 uV, cc -74 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 709 mOhm, 17.6 C
+[22883.506] bms: 72% (calculated 72%), ocv 4017121 uV, cc -78 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 709 mOhm, 17.6 C
+[22883.507] power: asleep, 2 wakeups, 71/761/0 collapses, 0 mA average
+[22922.521] bms: 72% (calculated 72%), ocv 4017121 uV, cc -79 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 709 mOhm, 17.6 C
+[22943.534] bms: 72% (calculated 72%), ocv 4017121 uV, cc -79 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 709 mOhm, 17.6 C
+[22943.534] power: asleep, 2 wakeups, 71/763/0 collapses, 0 mA average
+[22982.548] bms: 72% (calculated 72%), ocv 4017121 uV, cc -84 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 709 mOhm, 17.6 C
+[23003.562] bms: 72% (calculated 72%), ocv 4017121 uV, cc -87 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 709 mOhm, 17.6 C
+[23003.563] power: asleep, 2 wakeups, 71/765/0 collapses, 0 mA average
+[23042.573] bms: new ocv 4015099 uV
+[23042.581] bms: 72% (calculated 72%), ocv 4015099 uV, cc -3 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 709 mOhm, 17.6 C
+[23063.574] bms: 72% (calculated 72%), ocv 4015099 uV, cc -3 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 709 mOhm, 17.6 C
+[23063.574] power: asleep, 2 wakeups, 71/767/0 collapses, 0 mA average
+[23102.588] bms: 72% (calculated 72%), ocv 4015099 uV, cc 11 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 697 mOhm, 17.6 C
+[23123.603] bms: 72% (calculated 72%), ocv 4015099 uV, cc 9 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 697 mOhm, 17.6 C
+[23123.603] power: asleep, 2 wakeups, 71/769/0 collapses, 0 mA average
+[23162.614] bms: new ocv 4014976 uV
+[23162.622] bms: 72% (calculated 72%), ocv 4014976 uV, cc 0 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 709 mOhm, 17.6 C
+[23183.630] bms: 72% (calculated 72%), ocv 4014976 uV, cc -21 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 709 mOhm, 17.6 C
+[23183.630] power: asleep, 2 wakeups, 71/771/0 collapses, -3 mA average
+[23222.644] bms: 72% (calculated 72%), ocv 4014976 uV, cc -46 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 709 mOhm, 17.6 C
+[23243.642] bms: 72% (calculated 72%), ocv 4014976 uV, cc -72 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 709 mOhm, 17.6 C
+[23243.643] power: asleep, 2 wakeups, 71/773/0 collapses, -2 mA average
+[23282.657] bms: 72% (calculated 72%), ocv 4014976 uV, cc -114 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -3 mA, rbatt 709 mOhm, 17.6 C
+[23303.667] bms: new ocv 4012252 uV
+[23303.675] bms: 72% (calculated 72%), ocv 4012252 uV, cc -5 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 709 mOhm, 17.6 C
+[23303.675] power: asleep, 2 wakeups, 71/775/0 collapses, -3 mA average
+[23342.689] bms: 72% (calculated 72%), ocv 4012252 uV, cc -22 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 709 mOhm, 17.6 C
+[23363.691] bms: 72% (calculated 72%), ocv 4012252 uV, cc -46 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 709 mOhm, 17.6 C
+[23363.692] power: asleep, 2 wakeups, 71/777/0 collapses, -2 mA average
+[23402.706] bms: 72% (calculated 72%), ocv 4012252 uV, cc -96 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 705 mOhm, 17.7 C
+[23423.720] bms: 72% (calculated 72%), ocv 4012252 uV, cc -120 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -4 mA, rbatt 705 mOhm, 17.7 C
+[23423.721] power: asleep, 2 wakeups, 71/779/0 collapses, -4 mA average
+[23462.731] bms: new ocv 4011055 uV
+[23462.739] bms: 72% (calculated 72%), ocv 4011055 uV, cc -8 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 705 mOhm, 17.7 C
+[23483.731] bms: 72% (calculated 72%), ocv 4011055 uV, cc -21 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 705 mOhm, 17.7 C
+[23483.732] power: asleep, 2 wakeups, 71/781/0 collapses, -1 mA average
+[23522.746] bms: 72% (calculated 72%), ocv 4011055 uV, cc -48 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 705 mOhm, 17.7 C
+[23543.735] powertest: arm 15 dsi=off bt=off
+[23543.748] bms: 72% (calculated 72%), ocv 4011055 uV, cc -56 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 705 mOhm, 17.7 C
+[23543.749] power: asleep, 2 wakeups, 71/783/0 collapses, -1 mA average
+[23582.760] bms: new ocv 4011385 uV
+[23582.767] bms: 72% (calculated 72%), ocv 4011385 uV, cc -4 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 705 mOhm, 17.7 C
+[23603.762] bms: 72% (calculated 72%), ocv 4011385 uV, cc -7 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 705 mOhm, 17.7 C
+[23603.762] power: asleep, 2 wakeups, 71/785/0 collapses, -1 mA average
+[23642.776] bms: 72% (calculated 72%), ocv 4011385 uV, cc -10 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 705 mOhm, 17.7 C
+[23663.776] bms: 72% (calculated 72%), ocv 4011385 uV, cc -20 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 705 mOhm, 17.7 C
+[23663.776] power: asleep, 2 wakeups, 71/787/0 collapses, 0 mA average
+[23702.787] bms: new ocv 4009321 uV
+[23702.795] bms: 72% (calculated 72%), ocv 4009321 uV, cc 0 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 1 mA, rbatt 705 mOhm, 17.7 C
+[23723.803] bms: 72% (calculated 72%), ocv 4009321 uV, cc -12 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -2 mA, rbatt 705 mOhm, 17.7 C
+[23723.803] power: asleep, 2 wakeups, 71/789/0 collapses, -2 mA average
+[23762.817] bms: 72% (calculated 72%), ocv 4009321 uV, cc 59 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 6 mA, rbatt 693 mOhm, 17.7 C
+[23783.829] bms: 72% (calculated 72%), ocv 4009321 uV, cc 101 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 7 mA, rbatt 693 mOhm, 17.7 C
+[23783.829] power: asleep, 2 wakeups, 71/791/0 collapses, 6 mA average
+[23822.844] bms: 72% (calculated 72%), ocv 4009321 uV, cc 174 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 6 mA, rbatt 693 mOhm, 17.7 C
+[23843.846] bms: new ocv 4007917 uV
+[23843.854] bms: 71% (calculated 71%), ocv 4007917 uV, cc 12 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 6 mA, rbatt 685 mOhm, 17.7 C
+[23843.854] power: asleep, 2 wakeups, 71/793/0 collapses, 7 mA average
+[23882.868] bms: 71% (calculated 71%), ocv 4007917 uV, cc 78 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 6 mA, rbatt 685 mOhm, 17.7 C
+[23903.876] bms: 71% (calculated 71%), ocv 4007917 uV, cc 109 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 5 mA, rbatt 685 mOhm, 17.7 C
+[23903.876] power: asleep, 2 wakeups, 71/795/0 collapses, 5 mA average
+[23942.890] bms: 71% (calculated 71%), ocv 4007917 uV, cc 158 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 4 mA, rbatt 685 mOhm, 17.7 C
+[23963.900] bms: 71% (calculated 71%), ocv 4007917 uV, cc 189 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 5 mA, rbatt 685 mOhm, 17.7 C
+[23963.901] power: asleep, 2 wakeups, 71/797/0 collapses, 4 mA average
+[24002.915] bms: 71% (calculated 71%), ocv 4007917 uV, cc 238 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 4 mA, rbatt 681 mOhm, 17.8 C
+[24023.917] bms: 71% (calculated 71%), ocv 4007917 uV, cc 267 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 4 mA, rbatt 685 mOhm, 17.7 C
+[24023.918] power: asleep, 2 wakeups, 71/799/0 collapses, 5 mA average
+[24062.932] bms: 71% (calculated 71%), ocv 4007917 uV, cc 251 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 681 mOhm, 17.8 C
+[24083.944] bms: 71% (calculated 71%), ocv 4007917 uV, cc 244 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 681 mOhm, 17.8 C
+[24083.945] power: asleep, 2 wakeups, 71/801/0 collapses, -1 mA average
+[24122.956] bms: new ocv 4007629 uV
+[24122.963] bms: 71% (calculated 71%), ocv 4007629 uV, cc 1 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 685 mOhm, 17.7 C
+[24143.971] bms: 71% (calculated 71%), ocv 4007629 uV, cc 4 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 685 mOhm, 17.7 C
+[24143.971] power: asleep, 2 wakeups, 71/803/0 collapses, 0 mA average
+[24182.985] bms: 71% (calculated 71%), ocv 4007629 uV, cc -11 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 689 mOhm, 17.8 C
+[24203.988] bms: 71% (calculated 71%), ocv 4007629 uV, cc -14 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 689 mOhm, 17.8 C
+[24203.988] power: asleep, 2 wakeups, 71/805/0 collapses, -1 mA average
+[24241.999] bms: new ocv 4005937 uV
+[24242.007] bms: 71% (calculated 71%), ocv 4005937 uV, cc 0 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 689 mOhm, 17.8 C
+[24264.011] bms: 71% (calculated 71%), ocv 4005937 uV, cc -12 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 689 mOhm, 17.8 C
+[24264.011] power: asleep, 2 wakeups, 71/807/0 collapses, -1 mA average
+[24302.025] bms: 71% (calculated 71%), ocv 4005937 uV, cc -17 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 689 mOhm, 17.8 C
+[24324.039] bms: 71% (calculated 71%), ocv 4005937 uV, cc -14 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 689 mOhm, 17.8 C
+[24324.039] power: asleep, 2 wakeups, 71/809/0 collapses, 0 mA average
+[24362.053] bms: 71% (calculated 71%), ocv 4005937 uV, cc -23 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 689 mOhm, 17.8 C
+[24384.062] bms: new ocv 4003837 uV
+[24384.070] bms: 71% (calculated 71%), ocv 4003837 uV, cc -6 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -1 mA, rbatt 689 mOhm, 17.8 C
+[24384.070] power: asleep, 2 wakeups, 71/811/0 collapses, -1 mA average
+[24422.084] bms: 71% (calculated 71%), ocv 4003837 uV, cc -6 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 689 mOhm, 17.8 C
+[24444.092] bms: 71% (calculated 71%), ocv 4003837 uV, cc 15 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 3 mA, rbatt 681 mOhm, 17.8 C
+[24444.092] power: asleep, 2 wakeups, 71/813/0 collapses, 1 mA average
+[24482.106] bms: 71% (calculated 71%), ocv 4003837 uV, cc 5 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 681 mOhm, 17.8 C
+[24586.965] gpu: resumed in 1433 us
+[24586.973] tick 24581, 422 fps, rtc 1793603204, battery 4056 mV, usb valid, battery present, not charging, usb 490/310, touch 1/1
+[24586.977] power: awake, asleep 100% of the last second, 1 wakeups, 71/818/0 collapses, battery -6 mA, 0 mA average
+[24586.977] gpu: 12 frames, 2266 us submit to idle, 173 us vertices
+[24586.977] ui: 1 of 1012 frames repainted, update 7 us avg, 3095 us per repaint
+[24586.977] bt: connected to 6d:63:99:48:0c:67 (type 1)
+[24586.977] bt: interval 28 x 1.25 ms, latency 0, timeout 500 x 10 ms
+[24586.984] hub: accelerometer on
+[24587.009] usb: configured, high speed
+[24587.079] hub: meta rate changed 01 00
+[24587.348] bt: connection update 0, interval 6, latency 0, timeout 500
+[24587.404] adb: host connected, max payload 1048576
+[24587.968] tick 24582, 41 fps, rtc 1793603205, battery 4275 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24587.970] power: awake, asleep 0% of the last second, 0 wakeups, 71/818/0 collapses, battery -271 mA, 0 mA average
+[24587.970] gpu: 41 frames, 2478 us submit to idle, 170 us vertices
+[24587.971] ui: 1 of 380 frames repainted, update 42 us avg, 14316 us per repaint
+[24588.029] bms: 71% (calculated 71%), ocv 4003297 uV, cc -16 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg 0 mA, rbatt 689 mOhm, 17.8 C
+[24588.183] bt: subscribe handle 34, notify 1, indicate 0
+[24588.238] bt: pairing, passkey 682353
+[24588.297] bt: connection update 0, interval 28, latency 0, timeout 500
+[24588.968] tick 24583, 26 fps, rtc 1793603206, battery 4299 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24588.970] power: awake, asleep 0% of the last second, 0 wakeups, 71/818/0 collapses, battery -268 mA, -219 mA average
+[24588.970] gpu: 26 frames, 4045 us submit to idle, 171 us vertices
+[24588.970] ui: 2 of 681 frames repainted, update 29 us avg, 8440 us per repaint
+[24589.967] tick 24584, 12 fps, rtc 1793603207, battery 4305 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24589.969] power: awake, asleep 0% of the last second, 0 wakeups, 71/818/0 collapses, battery -274 mA, -248 mA average
+[24589.969] gpu: 12 frames, 4321 us submit to idle, 171 us vertices
+[24589.970] ui: 0 of 990 frames repainted, update 4 us avg, 0 us per repaint
+[24590.968] tick 24585, 11 fps, rtc 1793603208, battery 4305 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24590.970] power: awake, asleep 0% of the last second, 0 wakeups, 71/818/0 collapses, battery -270 mA, -250 mA average
+[24590.970] gpu: 11 frames, 4311 us submit to idle, 170 us vertices
+[24590.970] ui: 0 of 998 frames repainted, update 4 us avg, 0 us per repaint
+[24590.984] touch: active mode not set (-2, try 3)
+[24591.968] tick 24586, 11 fps, rtc 1793603209, battery 4311 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24591.970] power: awake, asleep 0% of the last second, 0 wakeups, 71/818/0 collapses, battery -276 mA, -248 mA average
+[24591.970] gpu: 11 frames, 4314 us submit to idle, 170 us vertices
+[24591.971] ui: 0 of 995 frames repainted, update 4 us avg, 0 us per repaint
+[24592.968] tick 24587, 11 fps, rtc 1793603210, battery 4311 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24592.970] power: awake, asleep 0% of the last second, 0 wakeups, 71/818/0 collapses, battery -273 mA, -250 mA average
+[24592.970] gpu: 11 frames, 4306 us submit to idle, 170 us vertices
+[24592.970] ui: 0 of 995 frames repainted, update 4 us avg, 0 us per repaint
+[24593.968] tick 24588, 11 fps, rtc 1793603211, battery 4314 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24593.970] power: awake, asleep 0% of the last second, 0 wakeups, 71/818/0 collapses, battery -272 mA, -250 mA average
+[24593.970] gpu: 11 frames, 4300 us submit to idle, 172 us vertices
+[24593.971] ui: 0 of 996 frames repainted, update 4 us avg, 0 us per repaint
+[24594.968] tick 24589, 11 fps, rtc 1793603212, battery 4320 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24594.970] power: awake, asleep 0% of the last second, 0 wakeups, 71/818/0 collapses, battery -271 mA, -249 mA average
+[24594.970] gpu: 11 frames, 4301 us submit to idle, 170 us vertices
+[24594.970] ui: 0 of 998 frames repainted, update 4 us avg, 0 us per repaint
+[24595.968] tick 24590, 11 fps, rtc 1793603213, battery 4320 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24595.972] power: awake, asleep 0% of the last second, 0 wakeups, 71/818/0 collapses, battery -273 mA, -249 mA average
+[24595.972] gpu: 11 frames, 4309 us submit to idle, 170 us vertices
+[24595.972] ui: 0 of 996 frames repainted, update 4 us avg, 0 us per repaint
+[24596.968] tick 24591, 11 fps, rtc 1793603214, battery 4323 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24596.972] power: awake, asleep 0% of the last second, 0 wakeups, 71/818/0 collapses, battery -261 mA, -248 mA average
+[24596.972] gpu: 11 frames, 4310 us submit to idle, 170 us vertices
+[24596.972] ui: 0 of 996 frames repainted, update 4 us avg, 0 us per repaint
+[24597.968] tick 24592, 11 fps, rtc 1793603215, battery 4326 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24597.972] power: awake, asleep 0% of the last second, 0 wakeups, 71/818/0 collapses, battery -266 mA, -249 mA average
+[24597.972] gpu: 11 frames, 4312 us submit to idle, 170 us vertices
+[24597.972] ui: 0 of 994 frames repainted, update 4 us avg, 0 us per repaint
+[24598.404] sleep
+[24598.404] rpm: msg 18 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000012
+[24598.427] hub: accelerometer off
+[24629.688] ui: 0 of 992 frames repainted, update 4 us avg, 0 us per repaint
+[24630.685] tick 24625, 11 fps, rtc 1793603248, battery 4350 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24630.689] power: awake, asleep 0% of the last second, 0 wakeups, 150/818/1 collapses, battery -233 mA, -221 mA average
+[24630.689] gpu: 11 frames, 4317 us submit to idle, 170 us vertices
+[24630.689] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[24631.684] tick 24626, 11 fps, rtc 1793603249, battery 4350 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24631.688] power: awake, asleep 0% of the last second, 0 wakeups, 150/818/1 collapses, battery -232 mA, -220 mA average
+[24631.688] gpu: 11 frames, 4316 us submit to idle, 170 us vertices
+[24631.688] ui: 0 of 1005 frames repainted, update 4 us avg, 0 us per repaint
+[24631.852] nimble: GAP procedure initiated: stop advertising.
+[24631.853] bt: encryption 0: encrypted 1, authenticated 1, bonded 1, key size 16
+[24631.853] bt: peer identity bc:32:b2:3d:2c:0a (type 0)
+[24632.405] bt: subscribe handle 22, notify 1, indicate 0
+[24632.685] tick 24627, 27 fps, rtc 1793603250, battery 4350 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24632.688] power: awake, asleep 0% of the last second, 0 wakeups, 150/818/1 collapses, battery -233 mA, -219 mA average
+[24632.688] gpu: 27 frames, 3944 us submit to idle, 170 us vertices
+[24632.688] ui: 1 of 687 frames repainted, update 7 us avg, 2302 us per repaint
+[24632.755] bt: subscribe handle 56, notify 1, indicate 0
+[24632.895] bt: time set to 2026-11-02 07:07:16 (rtc 1793603236)
+[24633.248] bt: subscribe handle 8, notify 0, indicate 1
+[24633.359] bt: connection update 0, interval 28, latency 0, timeout 500
+[24633.684] tick 24628, 11 fps, rtc 1793603237, battery 4350 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24633.688] power: awake, asleep 0% of the last second, 0 wakeups, 150/818/1 collapses, battery -226 mA, -218 mA average
+[24633.688] gpu: 11 frames, 2908 us submit to idle, 170 us vertices
+[24633.688] ui: 0 of 1019 frames repainted, update 4 us avg, 0 us per repaint
+[24634.684] tick 24629, 11 fps, rtc 1793603238, battery 4350 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24634.687] power: awake, asleep 0% of the last second, 0 wakeups, 150/818/1 collapses, battery -232 mA, -218 mA average
+[24634.687] gpu: 11 frames, 2904 us submit to idle, 170 us vertices
+[24634.688] ui: 0 of 1007 frames repainted, update 4 us avg, 0 us per repaint
+[24635.684] tick 24630, 12 fps, rtc 1793603239, battery 4350 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24635.688] power: awake, asleep 0% of the last second, 0 wakeups, 150/818/1 collapses, battery -228 mA, -216 mA average
+[24635.688] gpu: 12 frames, 2904 us submit to idle, 170 us vertices
+[24635.688] ui: 0 of 1007 frames repainted, update 4 us avg, 0 us per repaint
+[24636.684] tick 24631, 11 fps, rtc 1793603240, battery 4350 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24636.688] power: awake, asleep 0% of the last second, 0 wakeups, 150/818/1 collapses, battery -233 mA, -216 mA average
+[24636.688] gpu: 11 frames, 2904 us submit to idle, 170 us vertices
+[24636.688] ui: 0 of 1004 frames repainted, update 4 us avg, 0 us per repaint
+[24637.685] tick 24632, 11 fps, rtc 1793603241, battery 4350 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24637.688] power: awake, asleep 0% of the last second, 0 wakeups, 150/818/1 collapses, battery -231 mA, -215 mA average
+[24637.688] gpu: 11 frames, 2909 us submit to idle, 170 us vertices
+[24637.688] ui: 0 of 1008 frames repainted, update 4 us avg, 0 us per repaint
+[24638.684] tick 24633, 11 fps, rtc 1793603242, battery 4350 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24638.688] power: awake, asleep 0% of the last second, 0 wakeups, 150/818/1 collapses, battery -236 mA, -214 mA average
+[24638.688] gpu: 11 frames, 2907 us submit to idle, 170 us vertices
+[24638.688] ui: 0 of 1006 frames repainted, update 4 us avg, 0 us per repaint
+[24639.685] tick 24634, 11 fps, rtc 1793603243, battery 4350 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24639.688] power: awake, asleep 0% of the last second, 0 wakeups, 150/818/1 collapses, battery -227 mA, -214 mA average
+[24639.688] gpu: 11 frames, 2910 us submit to idle, 170 us vertices
+[24639.689] ui: 0 of 1010 frames repainted, update 4 us avg, 0 us per repaint
+[24640.684] tick 24635, 11 fps, rtc 1793603244, battery 4350 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24640.688] power: awake, asleep 0% of the last second, 0 wakeups, 150/818/1 collapses, battery -221 mA, -212 mA average
+[24640.688] gpu: 11 frames, 2910 us submit to idle, 170 us vertices
+[24640.688] ui: 0 of 1000 frames repainted, update 4 us avg, 0 us per repaint
+[24641.684] tick 24636, 11 fps, rtc 1793603245, battery 4350 mV, usb valid, battery present, fast charging, usb 800/436, touch 1/1
+[24641.687] power: awake, asleep 0% of the last second, 0 wakeups, 150/818/1 collapses, battery -227 mA, -212 mA average
+[24641.687] gpu: 11 frames, 2908 us submit to idle, 170 us vertices
+[24641.687] ui: 0 of 1007 frames repainted, update 4 us avg, 0 us per repaint
+[24642.026] sleep
+[24642.027] rpm: msg 20 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000014
+[24642.084] hub: accelerometer off
+[24648.116] bms: 72% (calculated 72%), ocv 4003297 uV, cc -4096 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -227 mA, rbatt 637 mOhm, 19.5 C
+[24651.093] touch: idle mode not set (-2, try 3)
+[24668.128] bms: 73% (calculated 73%), ocv 4003297 uV, cc -5292 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -215 mA, rbatt 637 mOhm, 19.5 C
+[24688.139] bms: 73% (calculated 73%), ocv 4003297 uV, cc -6444 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -207 mA, rbatt 637 mOhm, 19.6 C
+[24702.118] power: asleep, 61 wakeups, 211/818/1 collapses, -199 mA average
+[24708.120] nimble: GATT procedure initiated: notify; att_handle=56
+[24708.152] bms: 73% (calculated 73%), ocv 4003297 uV, cc -7574 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -203 mA, rbatt 633 mOhm, 19.7 C
+[24728.918] bms: 73% (calculated 73%), ocv 4003297 uV, cc -8725 uAh, fcc 384000 uAh, uuc 11520 uAh, iavg -207 mA, rbatt 633 mOhm, 19.9 C
