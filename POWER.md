@@ -809,8 +809,12 @@ idle power collapse does (`K:mdss_mdp.c:2960` footswitch with
   Pooled: collapse 8.64, pll 8.64, old 8.90 mA. **Neither is above the
   MDD.** With the overnight PLL result (§14) the AOD rest's DSI/MDSS
   share is < ~0.5 mA. Log: logs-mdss-collapse-2026-11-02-sturgeon.txt.
-- **Sparrow (AOD off):** 10 h of collapse/restore without an error; counter
-  unusable as in §14, OCV slopes show no difference. Log (arms 13-23):
+- **Sparrow (AOD off):** 10 h without an error, but the arms compared
+  nothing: with the screen off nothing redraws, and the harness only
+  applied a new level at the next rest, so sparrow most likely stayed
+  collapsed all day (Codex review). The harness now re-rests the display
+  hardware on a level change (`display_set_rest_level`, console `rest`).
+  Its counter is unusable as in §14 anyway. Log (arms 13-23):
   logs-mdss-collapse-2026-11-02-sparrow.txt.
 - So the 10-27 "DSI PLL/PHY -2 mA, GDSC -1 mA" do not hold for the
   asleep state with a trustworthy counter. The asleep total with AOD and
