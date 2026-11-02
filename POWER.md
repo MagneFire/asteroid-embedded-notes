@@ -787,3 +787,31 @@ panel sleeps, as the vendor keeps it on under ULPS for AOD.
   only). Its counter reads -3..0 mA while the OCV falls ~30 mV/h, so the
   sparrow CC is still wrong. It did take 58 hardware OCVs overnight,
   unlike the 11-01 runs (§12/§13). Log: logs-dsi-rest-2026-11-02-sparrow.txt.
+
+## 15. MDSS power collapse between frames (2026-11-02, aod-display-rest ac097aa)
+
+Stage B (ac097aa) collapses the MDSS GDSC between frames as the vendor's
+idle power collapse does (`K:mdss_mdp.c:2960` footswitch with
+`idle_pc`, 50 ms autosuspend; msm8226-mdss.dtsi enables it).
+
+- **What a collapse needs:** after the GDSC comes back, every MDSS register
+  read hangs until TZ restores the display SMMU's secure config
+  (buffer-based SCM, SVC_MP 0x0c cmd 2, device 1), with MDSS AHB and AXI
+  on (calling it with the clocks off hangs too). A diff of the register
+  space across a collapse showed ~150 registers reset (VBIF, MDP top/SMP/QoS,
+  CTL0, RGB0, LM0, INTF1, PP0, DSI PLL, PHY, controller); `kept_regs` in
+  display.c saves and rewrites them. For AOD the PHY is clamped (MMSS misc
+  0xfd828014 bits 9/8/5/4 + 15, phy reset hold +0x108), which needs
+  MMSS_MISC_AHB_CBCR on or the write hangs. Reading VBIF past ~0x580 hangs.
+- **Measurement (sturgeon, AOD on, BT off):** day run, 24 arms of 25 min,
+  mirrored collapse/pll/old/old/pll/collapse. Paired within 4 blocks:
+  collapse - old -0.08 mA (2 SE 0.63), pll - old -0.26 mA (2 SE 0.74).
+  Pooled: collapse 8.64, pll 8.64, old 8.90 mA. **Neither is above the
+  MDD.** With the overnight PLL result (§14) the AOD rest's DSI/MDSS
+  share is < ~0.5 mA. Log: logs-mdss-collapse-2026-11-02-sturgeon.txt.
+- **Sparrow (AOD off):** 10 h of collapse/restore without an error; counter
+  unusable as in §14, OCV slopes show no difference. Log (arms 13-23):
+  logs-mdss-collapse-2026-11-02-sparrow.txt.
+- So the 10-27 "DSI PLL/PHY -2 mA, GDSC -1 mA" do not hold for the
+  asleep state with a trustworthy counter. The asleep total with AOD and
+  BT off is ~8.7-8.9 mA; the screen-off case on sturgeon is not measured.
