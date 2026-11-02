@@ -1,0 +1,555 @@
+diff --git a/src/asteroid.h b/src/asteroid.h
+index 2f54c0e..cff929c 100644
+--- a/src/asteroid.h
++++ b/src/asteroid.h
+@@ -168,7 +168,11 @@ enum { BAT_DISCHARGING, BAT_CHARGING, BAT_FULL };
+ int pmic_battery_status(void);
+ int32_t pmic_battery_ua(void);
+ int32_t pmic_battery_avg_ua(void);
++void pmic_batfet_lpm(bool on);
++extern int display_rest_level;
++void display_set_rest_level(int level);
+ void pmic_iadc_trim(void);
++void pmic_iadc_raws(int *gain, int *off, int *ext, unsigned *trim);
+ void pmic_charger_configure(void);
+ void pmic_charger_poll(void);
+ void bms_init(void);
+diff --git a/src/bt/bt.h b/src/bt/bt.h
+index eec3d1c..1d37244 100644
+--- a/src/bt/bt.h
++++ b/src/bt/bt.h
+@@ -65,6 +65,10 @@ void bt_host_stop(void);
+ bool bt_host_running(void);
+ void bt_host_status(struct bt_status *s);
+ bool bt_host_connected(void);
++/* Ask the phone for a slow connection (100-125 ms, latency 4) or its
++ * usual one, now and after each connect. */
++void bt_host_slow(bool slow);
++bool bt_host_is_slow(void);
+ void bt_host_disconnect(void);
+ void bt_poll(void);
+ int32_t bt_passkey(void);
+diff --git a/src/bt/host.c b/src/bt/host.c
+index 536e27c..f095a27 100644
+--- a/src/bt/host.c
++++ b/src/bt/host.c
+@@ -23,6 +23,12 @@
+ static bool initialised, host_on;
+ static enum bt_host_state state;
+ static uint16_t conn = BLE_HS_CONN_HANDLE_NONE;
++/* Connection parameters to ask for: the phone's choice (Android's 30-50
++ * ms, latency 0) or a slow link for the radio's sake, requested
++ * PARAMS_DELAY_MS after a connect so the phone's own setup is done. */
++#define PARAMS_DELAY_MS	5000
++static bool slow_params;
++static uint32_t params_due;
+ static uint16_t mtu;
+ static uint8_t own_addr_type;
+ static uint32_t battery_t, start_t, resets;
+@@ -103,6 +109,7 @@ static int gap_event(struct ble_gap_event *ev, void *arg)
+ 		conn = ev->connect.conn_handle;
+ 		mtu = BLE_ATT_MTU_DFLT;
+ 		state = BT_HOST_CONNECTED;
++		params_due = slow_params ? time_ms() + PARAMS_DELAY_MS : 0;
+ 		if (!ble_gap_conn_find(conn, &d)) {
+ 			log_addr("connected to", &d.peer_ota_addr);
+ 			log_printf("bt: interval %u x 1.25 ms, latency %u, timeout %u x 10 ms\n", d.conn_itvl, d.conn_latency,
+@@ -267,10 +274,37 @@ void bt_host_stop(void)
+ 	bt_transport_detach();
+ }
+ 
++static void request_params(void)
++{
++	if (conn == BLE_HS_CONN_HANDLE_NONE)
++		return;
++	struct ble_gap_upd_params p = {
++		.itvl_min = slow_params ? 80 : 24,
++		.itvl_max = slow_params ? 100 : 40,
++		.latency = slow_params ? 4 : 0,
++		.supervision_timeout = slow_params ? 600 : 500,
++	};
++	int r = ble_gap_update_params(conn, &p);
++	log_printf("bt: asking for interval %u-%u x 1.25 ms, latency %u: %d\n", p.itvl_min, p.itvl_max, p.latency, r);
++}
++
++void bt_host_slow(bool slow)
++{
++	slow_params = slow;
++	params_due = 0;
++	request_params();
++}
++
++bool bt_host_is_slow(void) { return slow_params; }
++
+ void bt_poll(void)
+ {
+ 	if (!host_on)
+ 		return;
++	if (params_due && (int32_t)(time_ms() - params_due) >= 0) {
++		params_due = 0;
++		request_params();
++	}
+ 	hci_poll();
+ 	bt_lpm_poll();
+ 	bool boost = cpu_clock_is_slow() && bt_idle_ms() == 0;
+diff --git a/src/console/console.c b/src/console/console.c
+index 5c3b5a4..b657596 100644
+--- a/src/console/console.c
++++ b/src/console/console.c
+@@ -394,6 +394,13 @@ static void cmd_bt(const char *args)
+ 		say(bt_store_clear() ? "bt: could not clear the bonds\n" : "bt: bonds cleared\n");
+ 		return;
+ 	}
++	if (!strncmp(args, "slow", 4)) {
++		const char *v = skip_spaces(args + 4);
++		if (*v)
++			bt_host_slow(!strcmp(v, "on"));
++		say("bt slow %s\n", bt_host_is_slow() ? "on" : "off");
++		return;
++	}
+ 	if (!strcmp(args, "off")) {
+ 		bt_host_stop();
+ 		bt_stop();
+@@ -402,7 +409,7 @@ static void cmd_bt(const char *args)
+ 	}
+ 	if (*args) {
+ 		if (!parse_bdaddr(args, addr)) {
+-			say("usage: bt [off | status | forget | <bd_addr>]\n");
++			say("usage: bt [off | status | forget | slow [on|off] | <bd_addr>]\n");
+ 			return;
+ 		}
+ 		have_addr = true;
+@@ -834,6 +841,14 @@ static void cmd_amp(const char *args)
+ 		say("amp: revision %04x\n", rev);
+ }
+ 
++static void cmd_iadc(const char *args)
++{
++	int gain, off, ext;
++	unsigned trim;
++	pmic_iadc_raws(&gain, &off, &ext, &trim);
++	say("iadc: gain %04x offset %04x ext %04x trim %04x\n", gain & 0xffff, off & 0xffff, ext & 0xffff, trim);
++}
++
+ static void cmd_buzz(const char *args)
+ {
+ 	static uint16_t ms;
+@@ -923,6 +938,21 @@ static void cmd_uibench(const char *args)
+ 	say("panel %lu: %lu us per repaint\n", p, (time_us() - t0) / n);
+ }
+ 
++static void cmd_powertest(const char *args);
++
++static void cmd_rest(const char *args)
++{
++	uint32_t level;
++	if (*args) {
++		if (!parse_num(&args, 10, &level) || level > 2) {
++			say("usage: rest [0|1|2]\n");
++			return;
++		}
++		display_set_rest_level((int)level);
++	}
++	say("rest %d, gdsc %08lx, ahb %08lx\n", display_rest_level, readl(MDP_GDSCR), readl(MDSS_AHB_CBCR));
++}
++
+ static void cmd_echo(const char *args)
+ {
+ 	say("%s\n", args);
+@@ -955,6 +985,7 @@ static const struct command commands[] = {
+ 	{ "kv", "[set <key> <text> | del <key>]", cmd_kv },
+ 	{ "btinfo", "", cmd_btinfo },
+ 	{ "amp", "", cmd_amp },
++	{ "iadc", "", cmd_iadc },
+ 	{ "buzz", "[ms]", cmd_buzz },
+ 	{ "hub", "[send <hex bytes>]", cmd_hub },
+ 	{ "touch", "tap <x> <y> | swipe <x0> <y0> <x1> <y1> [ms]", cmd_touch },
+@@ -963,6 +994,8 @@ static const struct command commands[] = {
+ 	{ "media", "<volume> <playing> <title>|<artist>", cmd_media },
+ 	{ "uibench", "<panel> <gpu> [times]", cmd_uibench },
+ 	{ "echo", "<text>", cmd_echo },
++	{ "rest", "[0|1|2]", cmd_rest },
++	{ "powertest", "<settle_min> <arm_min> [lpm|dsi]", cmd_powertest },
+ };
+ 
+ static void cmd_help(const char *args)
+@@ -1132,8 +1165,114 @@ static void finish(void)
+ 		done(ctx);
+ }
+ 
++/* powertest <settle_min> <arm_min>: from the unplug, a settle, then arms
++ * of fast and slow connection parameters and Bluetooth off, round and
++ * round until the cable is back, each logged. */
++static uint32_t pt_t0, pt_settle_ms, pt_arm_ms;
++static int pt_arm = -1;
++static bool pt_waiting, pt_lpm, pt_dsi;
++
++static void cmd_powertest(const char *args)
++{
++	uint32_t settle, arm;
++	if (!parse_num(&args, 10, &settle) || !parse_num(&args, 10, &arm)) {
++		say("usage: powertest <settle_min> <arm_min>\n");
++		return;
++	}
++	while (*args == ' ')
++		args++;
++	pt_lpm = !strcmp(args, "lpm");
++	pt_dsi = !strcmp(args, "dsi");
++	pt_settle_ms = settle * 60000;
++	pt_arm_ms = arm * 60000;
++	pt_waiting = true;
++	pt_arm = -1;
++	log_printf("powertest: settle %lu min, arms %lu min, from each unplug\n", settle, arm);
++	say("powertest armed, unplug to start\n");
++}
++
++static void powertest_bt(bool on)
++{
++	struct bt_info info;
++	uint8_t addr[6];
++	bt_host_stop();
++	bt_stop();
++	if (!on)
++		return;
++	bool have_addr = !bt_addr_load(addr);
++	if (bt_start(have_addr ? addr : NULL, &info))
++		log_printf("powertest: bt %s failed (%d)\n", info.failed, info.status);
++	else if (bt_host_start())
++		log_printf("powertest: bt host failed\n");
++}
++
++static void powertest_poll(void)
++{
++	static const char *const names[] = { "fast", "slow", "bt off" };
++	static uint32_t checked;
++	if (pt_arm < 0 && !pt_waiting)
++		return;
++	/* The charger state is a PMIC read, once a second is plenty. */
++	if (time_ms() - checked < 1000)
++		return;
++	checked = time_ms();
++	if (pt_waiting) {
++		if (pmic_usb_present())
++			return;
++		pt_waiting = false;
++		pt_t0 = time_ms();
++		pt_arm = 0;
++		log_printf("powertest: unplugged, settling\n");
++	}
++	if (pt_arm < 0)
++		return;
++	if (pmic_usb_present()) {
++		log_printf("powertest: plugged in, waiting for the next unplug\n");
++		pt_arm = -1;
++		pt_waiting = true;
++		if (!bt_host_running())
++			powertest_bt(true);
++		display_set_rest_level(2);
++		return;
++	}
++	uint32_t at = pt_settle_ms + (uint32_t)pt_arm * pt_arm_ms;
++	if (time_ms() - pt_t0 < at)
++		return;
++	if (pt_lpm) {
++		bool lpm = pt_arm % 2 == 0;
++		pmic_batfet_lpm(lpm);
++		log_printf("powertest: arm %d batfet lpm %s, ctrl4 %02x\n", pt_arm, lpm ? "on" : "off", pmic_read(0x001293));
++		pt_arm++;
++		return;
++	}
++	if (pt_dsi) {
++		/* Bluetooth off, the three rests mirrored: collapse, PLL off,
++		 * as before, as before, PLL off, collapse. */
++		static const int8_t order[] = { 2, 1, 0, 0, 1, 2 };
++		static const char *const names[] = { "rest=old", "rest=pll", "rest=collapse" };
++		if (pt_arm == 0)
++			powertest_bt(false);
++		display_set_rest_level(order[pt_arm % 6]);
++		log_printf("powertest: arm %d %s aod=%s bt=off\n", pt_arm, names[display_rest_level],
++			   setting_get(SETTING_AOD) ? "on" : "off");
++		pt_arm++;
++		return;
++	}
++	int kind = pt_arm % 3;
++	log_printf("powertest: arm %d %s\n", pt_arm, names[kind]);
++	if (kind == 2)
++		powertest_bt(false);
++	else {
++		if (!bt_host_running())
++			powertest_bt(true);
++		bt_host_slow(kind == 1);
++	}
++	pt_arm++;
++}
++
+ void console_poll(void)
+ {
++	powertest_poll();
+ 	if (running) {
+ 		if (more && more())
+ 			return;
+diff --git a/src/display/display.c b/src/display/display.c
+index 100eefa..7b3a4e7 100644
+--- a/src/display/display.c
++++ b/src/display/display.c
+@@ -16,6 +16,9 @@
+ struct fb fb;
+ static bool cmd_mode, kicked, dsi_pending;
+ static uint32_t frames, waits, timeouts;
++static uint32_t phy_ctrl, phy_regulator;
++void display_active(void);
++bool display_rest(void);
+ static void (*idle_hook)(void);
+ void display_set_idle_hook(void (*fn)(void)) { idle_hook = fn; }
+ uint32_t display_timeouts(void) { return timeouts; }
+@@ -128,26 +131,28 @@ bool display_init(void)
+ 	       PIPE + PIPE_SRC_OP_MODE);
+ 	writel((uint32_t)(uintptr_t)fb.buf[1], PIPE + PIPE_SRC0_ADDR);
+ 	writel(MDP_INTR_PP0_DONE, MDP_INTR_CLEAR);
++	phy_ctrl = readl(DSI_PHY_CTRL_0);
++	phy_regulator = readl(DSI_PHY_REGULATOR_CTRL_6);
++	log_printf("display: phy ctrl_0 %02lx regulator_6 %02lx\n", phy_ctrl, phy_regulator);
+ 	return true;
+ }
+ 
+ uint32_t *display_backbuffer(void) { return fb.buf[fb.back]; }
+ 
+ /* While the screen sleeps, between frames, the display rests as the
+- * vendor's idle power collapse leaves it: the last frame done on the
++ * vendor's command-mode idle path leaves it: the last frame done on the
+  * DSI side too, the clock lane and data lane 0 in ultra-low-power state,
+- * the registers the power domain loses saved, the DSI PHY clamped so the
+- * lanes hold their state (not with the panel asleep), the DSI and MDP
+- * clocks gated, the DSI PLL and the register bus clock off and the MDSS
+- * power domain collapsed, so nothing in MDSS reads memory when the
+- * cluster powers down and XO stops.
+- * Waking, the power domain comes back with its clocks, then the secure
+- * world restores its SMMU configuration, without which no MDSS register
+- * answers, and the saved registers are written back. The controller is
+- * put back into ULPS to match the PHY before the clamps are released,
+- * the PLL goes through its power-up sequence until it reports lock, then
+- * escape, byte and pixel follow; leaving ULPS takes 1 ms after clearing
+- * lane 0's PHY errors, then the lanes are forced to the stop state.
++ * the DSI and MDP clocks gated, the DSI PLL behind them powered down and
++ * the register bus clock gated last, so nothing in MDSS reads memory
++ * when the cluster powers down and XO stops. With the panel asleep the
++ * DSI PHY is powered down too; under the always-on face it stays up and
++ * keeps the lanes in ULPS. The power domain stays on and keeps the
++ * registers the bootloader set up, the PLL's dividers among them.
++ * Waking, the register bus, then the bus and MDP clocks come back, the
++ * PHY's regulator and lanes are switched back on and the PLL goes
++ * through its power-up sequence until it reports lock, then escape,
++ * byte and pixel follow; leaving ULPS takes 1 ms after clearing lane
++ * 0's PHY errors, then the lanes are forced to the stop state.
+  * display_rest says whether the cluster may power down: not while a
+  * frame is still on its way to the panel; if only the lanes refuse
+  * ULPS, the display stays clocked and the cluster may still go. */
+@@ -163,7 +168,22 @@ uint32_t *display_backbuffer(void) { return fb.buf[fb.back]; }
+ 
+ static const uint32_t mdp_clocks[] = { MDSS_AXI_CBCR, MDSS_MDP_CBCR, MDSS_MDP_LUT_CBCR, MDSS_VSYNC_CBCR };
+ static const uint32_t dsi_clocks[] = { MDSS_ESC0_CBCR, MDSS_BYTE0_CBCR, MDSS_PCLK0_CBCR };
+-static bool resting, panel_asleep;
++static bool resting, panel_asleep, phy_off, pll_off, collapsed;
++int display_rest_level = 2;
++
++/* Harness: a new rest level takes effect at once, also while resting, by
++ * waking the display hardware (not the panel) and resting it again. */
++void display_set_rest_level(int level)
++{
++	if (level == display_rest_level)
++		return;
++	bool was = resting;
++	if (was)
++		display_active();
++	display_rest_level = level;
++	if (was)
++		display_rest();
++}
+ 
+ /* The registers the MDSS power domain loses when it collapses, in the
+  * order they are written back: VBIF, MDP top (interface select, the
+@@ -306,25 +326,38 @@ bool display_rest(void)
+ 		writel(0, DSI_LANE_CTRL);
+ 		return true;
+ 	}
+-	for (unsigned i = 0; i < ARRAY_SIZE(kept_regs); i++)
+-		kept[i] = readl(kept_regs[i]);
+-	if (!panel_asleep) {
+-		clock_set(MMSS_MISC_AHB_CBCR, true);
+-		writel(readl(MMSS_DSI_CLAMP) | DSI_CLAMPS, MMSS_DSI_CLAMP);
+-		writel(readl(MMSS_DSI_CLAMP) | DSI_CLAMPS | DSI_CLAMP_EN, MMSS_DSI_CLAMP);
+-		writel(1, MMSS_DSI_PHY_RESET);
+-		clock_set(MMSS_MISC_AHB_CBCR, false);
++	collapsed = display_rest_level >= 2;
++	if (collapsed) {
++		for (unsigned i = 0; i < ARRAY_SIZE(kept_regs); i++)
++			kept[i] = readl(kept_regs[i]);
++		if (!panel_asleep) {
++			clock_set(MMSS_MISC_AHB_CBCR, true);
++			writel(readl(MMSS_DSI_CLAMP) | DSI_CLAMPS, MMSS_DSI_CLAMP);
++			writel(readl(MMSS_DSI_CLAMP) | DSI_CLAMPS | DSI_CLAMP_EN, MMSS_DSI_CLAMP);
++			writel(1, MMSS_DSI_PHY_RESET);
++			clock_set(MMSS_MISC_AHB_CBCR, false);
++		}
+ 	}
+ 	for (unsigned i = 0; i < ARRAY_SIZE(dsi_clocks); i++)
+ 		clock_set(dsi_clocks[i], false);
+ 	for (unsigned i = 0; i < ARRAY_SIZE(mdp_clocks); i++)
+ 		clock_set(mdp_clocks[i], false);
+-	writel(0, DSI_PLL_GLB_CFG);
+-	dsb();
+-	clock_set(MDSS_AHB_CBCR, false);
+-	writel(readl(MDP_GDSCR) | GDSC_SW_COLLAPSE, MDP_GDSCR);
+-	for (int i = 0; i < 1000 && (readl(MDP_GDSCR) & GDSC_PWR_ON); i++)
+-		delay_us(1);
++	pll_off = display_rest_level >= 1;
++	phy_off = pll_off && panel_asleep;
++	if (phy_off) {
++		writel(0, DSI_PHY_CTRL_0);
++		writel(0, DSI_PHY_REGULATOR_CTRL_6);
++	}
++	if (pll_off) {
++		writel(0, DSI_PLL_GLB_CFG);
++		dsb();
++		clock_set(MDSS_AHB_CBCR, false);
++	}
++	if (collapsed) {
++		writel(readl(MDP_GDSCR) | GDSC_SW_COLLAPSE, MDP_GDSCR);
++		for (int i = 0; i < 1000 && (readl(MDP_GDSCR) & GDSC_PWR_ON); i++)
++			delay_us(1);
++	}
+ 	resting = true;
+ 	return true;
+ }
+@@ -333,34 +366,51 @@ void display_active(void)
+ {
+ 	if (!resting)
+ 		return;
+-	writel(readl(MDP_GDSCR) & ~GDSC_SW_COLLAPSE, MDP_GDSCR);
+-	for (int i = 0; !(readl(MDP_GDSCR) & GDSC_PWR_ON); i++) {
+-		if (i == 1000) {
+-			log_printf("display: power domain stays off, %08lx\n", readl(MDP_GDSCR));
+-			break;
++	if (collapsed) {
++		writel(readl(MDP_GDSCR) & ~GDSC_SW_COLLAPSE, MDP_GDSCR);
++		for (int i = 0; !(readl(MDP_GDSCR) & GDSC_PWR_ON); i++) {
++			if (i == 1000) {
++				log_printf("display: power domain stays off, %08lx\n", readl(MDP_GDSCR));
++				break;
++			}
++			delay_us(1);
+ 		}
+ 		delay_us(1);
+ 	}
+-	delay_us(1);
+-	clock_set(MDSS_AHB_CBCR, true);
++	if (pll_off)
++		clock_set(MDSS_AHB_CBCR, true);
+ 	for (unsigned i = 0; i < ARRAY_SIZE(mdp_clocks); i++)
+ 		clock_set(mdp_clocks[i], true);
+-	int r = scm_restore_sec_cfg(1);
+-	if (r)
+-		log_printf("display: secure config not restored (%d)\n", r);
+-	for (unsigned i = 0; i < ARRAY_SIZE(kept_regs); i++)
+-		writel(kept[i], kept_regs[i]);
+-	if (!panel_asleep) {
+-		clock_set(MDSS_ESC0_CBCR, true);
+-		writel(ULPS_LANES, DSI_LANE_CTRL);
++	if (collapsed) {
++		int r = scm_restore_sec_cfg(1);
++		if (r)
++			log_printf("display: secure config not restored (%d)\n", r);
++		for (unsigned i = 0; i < ARRAY_SIZE(kept_regs); i++)
++			writel(kept[i], kept_regs[i]);
++		if (!panel_asleep) {
++			clock_set(MDSS_ESC0_CBCR, true);
++			writel(ULPS_LANES, DSI_LANE_CTRL);
++			delay_us(100);
++			clock_set(MDSS_ESC0_CBCR, false);
++			clock_set(MMSS_MISC_AHB_CBCR, true);
++			writel(0, MMSS_DSI_PHY_RESET);
++			writel(readl(MMSS_DSI_CLAMP) & ~(DSI_CLAMPS | DSI_CLAMP_EN), MMSS_DSI_CLAMP);
++			clock_set(MMSS_MISC_AHB_CBCR, false);
++		}
++		collapsed = false;
++		phy_off = false;
++	}
++	if (phy_off) {
++		writel(phy_regulator, DSI_PHY_REGULATOR_CTRL_6);
++		writel(phy_ctrl, DSI_PHY_CTRL_0);
+ 		delay_us(100);
+-		clock_set(MDSS_ESC0_CBCR, false);
+-		clock_set(MMSS_MISC_AHB_CBCR, true);
+-		writel(0, MMSS_DSI_PHY_RESET);
+-		writel(readl(MMSS_DSI_CLAMP) & ~(DSI_CLAMPS | DSI_CLAMP_EN), MMSS_DSI_CLAMP);
+-		clock_set(MMSS_MISC_AHB_CBCR, false);
++		phy_off = false;
+ 	}
+-	pll_power_up();
++	if (pll_off)
++		pll_power_up();
++	else if (!pll_locked())
++		log_printf("display: DSI PLL not locked, status %08lx\n", readl(DSI_PLL_STATUS));
++	pll_off = false;
+ 	for (unsigned i = 0; i < ARRAY_SIZE(dsi_clocks); i++)
+ 		clock_set(dsi_clocks[i], true);
+ 	uint32_t err = readl(DSI_DLN0_PHY_ERR);
+diff --git a/src/soc/pmic.c b/src/soc/pmic.c
+index fd2aeb1..c5ec92a 100644
+--- a/src/soc/pmic.c
++++ b/src/soc/pmic.c
+@@ -357,6 +357,13 @@ static void usb_changed(bool present)
+ 	}
+ }
+ 
++/* For a test: the BATFET's low power mode while on battery. */
++void pmic_batfet_lpm(bool on)
++{
++	if (!usb_present)
++		smbb_update(BAT_IF_BATFET_CTRL4, 0xc0, on ? 0x40 : 0);
++}
++
+ static bool charging_now(uint8_t chg, uint8_t bat)
+ {
+ 	if (!(bat & BAT_IF_RT_TEMP_OK))
+@@ -656,6 +663,15 @@ void pmic_iadc_trim(void)
+ 	pmic_write(IADC_OFFSET_LSB, off & 0xff);
+ }
+ 
++/* For a test: the raw gain and offset conversions and the stored trim. */
++void pmic_iadc_raws(int *gain, int *off, int *ext, unsigned *trim)
++{
++	*gain = iadc_raw(IADC_CH_GAIN);
++	*off = iadc_raw(IADC_CH_EXT_OFFSET);
++	*ext = iadc_raw(IADC_CH_EXT_RSENSE);
++	*trim = pmic_read(IADC + 0xf2) << 8 | pmic_read(IADC + 0xf3);
++}
++
+ /* Gain conversion minus offset conversion, or 0. */
+ int pmic_iadc_gain(void)
+ {
+diff --git a/tests/stubs.c b/tests/stubs.c
+index d17bf84..d40d34a 100644
+--- a/tests/stubs.c
++++ b/tests/stubs.c
+@@ -40,10 +40,20 @@ int bt_start(const uint8_t *bdaddr, struct bt_info *info)
+ 	return -1;
+ }
+ void bt_stop(void) {}
++void bt_host_slow(bool slow) {}
++bool bt_host_is_slow(void) { return false; }
+ bool bt_running(void) { return false; }
+ bool bt_host_wake(void) { return false; }
+ int bt_host_start(void) { return -1; }
+ void bt_host_stop(void) {}
++bool bt_host_running(void) { return false; }
++bool usb_connected(void) { return true; }
++bool pmic_usb_present(void) { return true; }
++void pmic_batfet_lpm(bool on) {}
++int display_rest_level = 2;
++void display_set_rest_level(int level) { display_rest_level = level; }
++void pmic_iadc_trim(void) {}
++void pmic_iadc_raws(int *gain, int *off, int *ext, unsigned *trim) { *gain = *off = *ext = 0; *trim = 0; }
+ int bt_store_clear(void) { return -1; }
+ __attribute__((weak)) void haptics_play(const uint16_t *on_off_ms, unsigned n) {}
+ __attribute__((weak)) bool haptics_busy(void) { return false; }
