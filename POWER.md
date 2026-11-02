@@ -819,3 +819,7 @@ idle power collapse does (`K:mdss_mdp.c:2960` footswitch with
 - So the 10-27 "DSI PLL/PHY -2 mA, GDSC -1 mA" do not hold for the
   asleep state with a trustworthy counter. The asleep total with AOD and
   BT off is ~8.7-8.9 mA; the screen-off case on sturgeon is not measured.
+
+Sparrow's counter (2026-11-02): Darrel sees the same wrong readings on
+AsteroidOS, so it is not a firmware regression; power work continues on
+sturgeon only.
