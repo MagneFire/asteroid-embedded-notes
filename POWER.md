@@ -823,3 +823,26 @@ idle power collapse does (`K:mdss_mdp.c:2960` footswitch with
 Sparrow's counter (2026-11-02): Darrel sees the same wrong readings on
 AsteroidOS, so it is not a firmware regression; power work continues on
 sturgeon only.
+
+## 16. Screen off: the floor is drawn in VDD-min (2026-11-02, aod-display-rest ac097aa + harness)
+
+`powertest 15 25 dsi` with AOD off and BT off, one complete mirrored round
+(arms 0-5; arm 6 cut short by the plug-in), with the rest level now
+applied while resting (`display_set_rest_level`).
+
+| rest | arms | CC mA (BMS cc, between OCV resets) |
+|---|---|---|
+| collapse | 0, 5 | 6.54, 7.46 |
+| pll off | 1, 4 | 6.38, 6.31 |
+| old | 2, 3 | 6.42, 7.50 |
+
+- Paired in the round: collapse - old +0.04 mA, pll - old -0.62 mA. One
+  round resolves ~0.6-0.8 mA, so neither is a detected effect.
+- **RPM VDD-min residency 99.97% in every arm**, ~4 VDD-min entries a minute
+  (new per-minute `power: vmin` line). The ~7 mA screen-off current is
+  therefore almost all drawn while the SoC sits in VDD-min: wake overhead
+  is negligible, and the remaining load is outside the APSS (peripherals,
+  regulators, their sleep votes). That is what ASTRA-POWER.md's U/R/H/E/T
+  experiments target.
+- AOD costs ~1.9 mA (8.8 mA with AOD in §15 vs ~6.9 mA here, BT off both).
+- Log: logs-screen-off-2026-11-02-sturgeon.txt.
