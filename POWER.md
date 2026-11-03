@@ -909,3 +909,15 @@ kept arms 14-44 (one and a half cycles). B = the five sleep measures of
   the chip with no record; M covers L4/L6 only. The TFA9895 is already
   powered down at idle (reg 0x09 = 0x0265, bit 0 set), so A was dropped.
 - Log: logs-floor-2026-11-03-sturgeon.txt.
+
+**Correction to §18 (ASTRA-POWER-4.md, checked):** `usb_next_ms()` in the
+run's build returned 1 when no USB deadline was pending
+(`(int32_t)UINT32_MAX < 0`), so the watch woke every second all day: 60
+VDD-min entries a minute instead of ~5, residency 99.0% instead of 99.9%.
+That inflates every arm alike (Astra estimates ~0.2-1 mA), so B ~4.3 mA is
+not a sleep floor yet. With time-weighted trim correction the contrasts
+shrink further: V +0.17, Q +0.02, M +0.07, all three ABBA +0.00 mA; only
+the USB rails keep a small positive sign. The vendor IADC driver also
+calibrates from one unaveraged conversion every 300 s (and, per its DT,
+from channel 6, not 5), so there is no vendor filter to copy; the
+measured slope within arms (0.551 mA/code) is close to the nominal 0.559.
