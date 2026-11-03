@@ -972,7 +972,7 @@ index 4f2991b..0ce262d 100644
  	return first || !ms ? 0 : (int32_t)(uas * 1000 / ms);
  }
 diff --git a/src/soc/rpm.c b/src/soc/rpm.c
-index 90536f9..2767ba9 100644
+index 90536f9..6e6b1b8 100644
 --- a/src/soc/rpm.c
 +++ b/src/soc/rpm.c
 @@ -202,8 +202,8 @@ int rpm_regulator_voltage(uint32_t type, uint32_t id, uint32_t uv)
@@ -986,7 +986,7 @@ index 90536f9..2767ba9 100644
  int rpm_regulator_sleep_enable(uint32_t type, uint32_t id, bool on)
  {
  	uint32_t kvp[3] = { 0x6e657773, 4, on };
-@@ -242,3 +242,74 @@ void rpm_sleep_votes(void)
+@@ -242,3 +242,76 @@ void rpm_sleep_votes(void)
  	uint32_t kvp[3] = { RPM_KEY_ENABLE, 4, 0 };
  	request(RPM_SET_SLEEP, RPM_CLK0, 0, kvp, 1);
  }
@@ -1044,8 +1044,10 @@ index 90536f9..2767ba9 100644
 +		/* Mode and load only: whether the rail is on in sleep is left to
 +		 * the measures that switch it (the RPM keeps each key's last value
 +		 * per set). */
++		/* Off: the active mode again and no load request (0 mA), so
++		 * the low load left by "on" does not linger. */
 +		uint32_t kvp[6] = { RPM_KEY_LSMD, 4, on ? 0 : lpm_active_hpm[i] > 0, RPM_KEY_MA, 4, on ? 1 : 0 };
-+		if (request(RPM_SET_SLEEP, RPM_LDOA, lpm_ldos[i], kvp, on ? 2 : 1))
++		if (request(RPM_SET_SLEEP, RPM_LDOA, lpm_ldos[i], kvp, 2))
 +			ok = false;
 +	}
 +	if (ok)
@@ -1143,7 +1145,7 @@ index 15ccbfe..46741c5 100644
  }
  
 diff --git a/src/usb/usb.c b/src/usb/usb.c
-index 692b418..1b243a0 100644
+index 692b418..ebcc6b0 100644
 --- a/src/usb/usb.c
 +++ b/src/usb/usb.c
 @@ -32,6 +32,7 @@ enum { ITF_ACM_COMM = 0, ITF_ACM_DATA, ITF_ADB, ITF_COUNT };
@@ -1154,7 +1156,7 @@ index 692b418..1b243a0 100644
  
  static int ulpi_write(uint8_t reg, uint8_t val)
  {
-@@ -316,6 +317,44 @@ bool usb_connected(void)
+@@ -316,6 +317,55 @@ bool usb_connected(void)
  	return (readl(USB_PORTSC) & (PORTSC_CCS | PORTSC_SUSP)) == PORTSC_CCS;
  }
  
@@ -1165,16 +1167,27 @@ index 692b418..1b243a0 100644
 +/* Harness: the PHY's supplies, L10 (1.8 V) and L20 (3.075 V), switched
 + * off through the RPM while USB rests, as the vendor's unplugged
 + * collapse does; on before anything touches the PHY again. */
-+static bool usb_rails_off, usb_rails_wanted;
++static bool usb_rails_off, usb_rails_wanted, rail_off[2];
 +static bool usb_rails(bool on)
 +{
-+	if (on != usb_rails_off)
++	static const uint8_t ids[2] = { 10, 20 };
++	bool ok = true, changed = false;
++	for (unsigned i = 0; i < 2; i++) {
++		if (rail_off[i] == !on)
++			continue;
++		changed = true;
++		if (rpm_regulator_both(RPM_LDOA, ids[i], on))
++			ok = false;
++		else
++			rail_off[i] = !on;
++	}
++	if (!changed)
 +		return true;
-+	bool ok = !rpm_regulator_both(RPM_LDOA, 10, on) && !rpm_regulator_both(RPM_LDOA, 20, on);
 +	if (on)
 +		delay_ms(1);
-+	usb_rails_off = !on && ok;
-+	log_printf("usb: phy supplies %s%s\n", on ? "on" : "off", ok ? "" : " (not acknowledged)");
++	usb_rails_off = rail_off[0] && rail_off[1];
++	log_printf("usb: phy supplies %s%s (l10 %s, l20 %s)\n", on ? "on" : "off", ok ? "" : " NOT all acknowledged",
++		   rail_off[0] ? "off" : "on", rail_off[1] ? "off" : "on");
 +	return ok;
 +}
 +bool usb_rails_policy(bool off)
@@ -1199,7 +1212,7 @@ index 692b418..1b243a0 100644
  /* Unplugged, the USB block rests as the vendor's suspend leaves it with
   * VBUS sensed by the PMIC: the stack stopped, the PHY in low power mode
   * (PHCD, then STP) and the controller's clocks off. Coming out of that the
-@@ -383,6 +422,8 @@ static void usb_collapse(const char *why)
+@@ -383,6 +433,8 @@ static void usb_collapse(const char *why)
  	}
  	usb_down = true;
  	usb_clocks_off = phcd;
@@ -1208,15 +1221,18 @@ index 692b418..1b243a0 100644
  	log_printf("usb: %s, %s\n", why, phcd ? "phy in low power mode" : "phy did not enter low power mode, clocks left on");
  }
  
-@@ -392,6 +433,7 @@ static bool usb_restore(void)
+@@ -392,6 +444,10 @@ static bool usb_restore(void)
  {
  	uint32_t t0 = time_ms();
  	const char *fail = NULL;
-+	usb_rails(true);
++	if (!usb_rails(true)) {
++		fail = "phy supplies";
++		goto out;
++	}
  	if (!clock_on(GCC_USB_HS_AHB_CBCR) || !clock_on(GCC_USB_HS_SYSTEM_CBCR)) {
  		fail = "clocks";
  		goto out;
-@@ -458,7 +500,7 @@ void usb_cable(bool present, bool edge)
+@@ -458,7 +514,7 @@ void usb_cable(bool present, bool edge)
  	uint32_t now = time_ms();
  	if (!present) {
  		retry_t = 0;
@@ -1225,7 +1241,7 @@ index 692b418..1b243a0 100644
  			gone_t = 0;
  			return;
  		}
-@@ -491,7 +533,7 @@ uint32_t usb_next_ms(void)
+@@ -491,7 +547,7 @@ uint32_t usb_next_ms(void)
  	uint32_t now = time_ms(), next = UINT32_MAX;
  	if (gone_t)
  		next = left(gone_t, 2000, now);
