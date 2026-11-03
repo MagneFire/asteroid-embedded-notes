@@ -878,3 +878,34 @@ without it minus the mean of the two all-on arms, per cycle):
   harness reboots on plug-in. A real feature needs the vendor resume path
   (ASTRA-POWER-2.md §2).
 - Log: logs-sleep-loo-2026-11-03-sturgeon.txt.
+
+## 18. Rails on top of the sleep measures, and the trim noise (2026-11-03 day run)
+
+`powertest 15 13 floor`, AOD off, BT off, 11.5 h unplugged; the log ring
+kept arms 14-44 (one and a half cycles). B = the five sleep measures of
+§17 (USB now rests through the real unplugged collapse in usb.c).
+
+- **The counter follows the IADC trim: +0.52 mA per trim LSB, r = 0.94**
+  over 160 baseline minutes. The firmware rewrites the trim every 5 min
+  from one offset conversion, which wanders over ~bbce-bbdc (about ±5
+  LSB), so the reading steps by up to ±2.5 mA at each rewrite. Raw
+  baseline arms spread 2.4-7.6 mA; corrected to one trim (bbd3, the mean)
+  their sd drops from 1.9 to 0.34 mA. This also explains the steps
+  within arms noted in ASTRA-POWER-3.md. A fix belongs in the firmware
+  (average several offset conversions, or filter the trim).
+- Trim-corrected, each measure against its neighbouring B arms:
+
+| measure | saving | per pair |
+|---|---|---|
+| V USB rails L10/L20 off | +0.24 mA | +0.34, +0.28, +0.10 |
+| Q touch rail L19 off | +0.11 mA | +0.10, +0.07, +0.17 |
+| M L4/L6 low-power sleep votes | -0.05 mA | -0.18, +0.07 |
+| all three (ABBA) | -0.01 mA | -0.05, +0.03, 0.00 |
+
+- So the rails add little: at most a few tenths of a mA, and the ABBA
+  shows none. Baseline B is ~4.3 mA at trim bbd3; the absolute value
+  moves 0.5 mA per LSB with whichever trim is right.
+- Sleep-set low-power votes for L8 (also the CPU PLL supply) or L19 reset
+  the chip with no record; M covers L4/L6 only. The TFA9895 is already
+  powered down at idle (reg 0x09 = 0x0265, bit 0 set), so A was dropped.
+- Log: logs-floor-2026-11-03-sturgeon.txt.
