@@ -846,3 +846,35 @@ applied while resting (`display_set_rest_level`).
   experiments target.
 - AOD costs ~1.9 mA (8.8 mA with AOD in §15 vs ~6.9 mA here, BT off both).
 - Log: logs-screen-off-2026-11-02-sturgeon.txt.
+
+## 17. Sleep measures, leave-one-out (2026-11-03 overnight, harness a909d0c)
+
+`powertest 15 13 sleep`, AOD off, BT off, 13 min arms, 2 complete 14-arm
+cycles plus 6 arms (7.6 h unplugged). Every arm applied what its label
+says (want = have), VDD-min residency 99.9% in every arm. Shadow-counter
+current, gap-free, 11 retained minutes per arm (tools/powerlog.py).
+
+Saving of each measure with the other four on (mean of the two arms
+without it minus the mean of the two all-on arms, per cycle):
+
+| measure | saving | per cycle |
+|---|---|---|
+| U USB PHY low power (PHCD + STP) | **+4.2 mA** | +4.5, +3.9 |
+| T touch sensor sleep (RMI4 F01) | +0.8 mA | +0.7, +0.8 |
+| E eMMC sleep + SDCC1 clocks off | +0.7 mA | +1.0, +0.4 |
+| R bus clock sleep votes (GCC vote already 0) | +0.5 mA | +0.5, +0.5 |
+| H hub held in reset | -0.2 mA | +1.0, -1.3 |
+| bundle: none - all | +3.7 mA | +3.5, +3.8 |
+
+- All on: ~3-4 mA; none: ~7-9 mA (matching §16's ~7 mA screen-off floor).
+- Two cycles only: the 2 SE from two values is not a real uncertainty. U is
+  clearly large; T, E and R are probably real but small; H is unresolved.
+- U alone exceeds the bundle, so the parts are not additive (the measures
+  interact, or arm-to-arm noise of ~0.5-1 mA).
+- RPM stats records (read 2026-11-03): 0xfc19dba0 is `xosd` (XO shutdown),
+  0xfc19dbd0 `vmin`. The RPM counts the deepest mode entered, so `xosd`
+  stays 0 while every sleep reaches `vmin`: not evidence of XO staying on.
+- USB LPM still has no clean exit (the host does not re-enumerate); the
+  harness reboots on plug-in. A real feature needs the vendor resume path
+  (ASTRA-POWER-2.md §2).
+- Log: logs-sleep-loo-2026-11-03-sturgeon.txt.

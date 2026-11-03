@@ -35,7 +35,9 @@ def parse(path):
         if not m:
             continue
         t, text = float(m.group(1)), m.group(2)
-        if (a := ARM.search(text)):
+        if ARMEND.search(text):
+            cur = None
+        elif (a := ARM.search(text)):
             label = re.sub(r" have [0-9a-f]+$", "", a.group(2).strip())
             cur = {"n": int(a.group(1)), "label": label, "t0": t, "bms": [], "avg": [], "ocv": [], "reset": [],
                    "shadow": [], "mismatch": []}
