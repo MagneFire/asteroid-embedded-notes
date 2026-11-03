@@ -80,7 +80,7 @@ def arm_stats(arm, trim_s):
         mt, mv = st.mean(ts), st.mean(vs)
         den = sum((t - mt) ** 2 for t in ts)
         slope = sum((t - mt) * (v - mv) for t, v in zip(ts, vs)) / den * 3600 if den else None
-    sh = [x for x in arm["shadow"] if x[0] >= start]
+    sh = [x for x in arm["shadow"] if x[0] - x[2] / 1000 >= start]
     sh_ms = sum(x[2] for x in sh)
     shadow_ma = sum(x[1] * x[2] for x in sh) / sh_ms / 1000 if sh_ms else None
     slept = sum(x[7] for x in sh)
@@ -121,6 +121,7 @@ def main():
         se = st.stdev(v) / len(v) ** 0.5 if len(v) > 1 else float("nan")
         print(f"{label:<16} n={len(v):<3} cc {st.mean(v):7.2f} mA  se {se:5.2f}")
     leave_one_out(stats, args.min_shadow)
+    floor_contrasts(stats, args.min_shadow)
     if len(by_label) == 2:
         (la, va), (lb, vb) = by_label.items()
         d = st.mean(va) - st.mean(vb)
@@ -159,6 +160,46 @@ def leave_one_out(stats, trim_ok):
         se = st.stdev(d) / len(d) ** 0.5 if len(d) > 1 else float("nan")
         print(f"  {k:<24} {st.mean(d):+6.2f} mA  2 SE {2 * se:5.2f}  cycles {len(d)}  per cycle "
               + " ".join(f"{x:+.2f}" for x in d))
+
+
+FLOOR_NAMES = {0x20: "V usb rails off", 0x40: "Q touch rail off", 0x80: "M L4/L6 sleep low power",
+               0x100: "A amp power-down", None: "F all new measures"}
+
+
+def floor_contrasts(stats, trim_ok):
+    """`powertest ... floor`: each arm with one new measure on top of the
+    baseline B (mask 01f) saves the mean of its two neighbouring B arms
+    minus its own current; the ABBA blocks of B and F (all) give the
+    combined saving."""
+    arms = {}
+    for n, (label, s) in stats.items():
+        m = re.search(r"floor=([0-9a-f]+)", label)
+        if m and s["shadow_ma"] is not None and s["shadow_min"] >= trim_ok and not s["mismatch"]:
+            arms[n] = (int(m.group(1), 16), s["shadow_ma"])
+    if not arms:
+        return
+    B = 0x1F
+    rows = {}
+    for n, (mask, cur) in sorted(arms.items()):
+        if mask == B:
+            continue
+        prev, nxt = arms.get(n - 1), arms.get(n + 1)
+        if prev and nxt and prev[0] == B and nxt[0] == B:
+            extra = mask & ~B
+            key = extra if extra in FLOOR_NAMES else None
+            rows.setdefault(key, []).append((prev[1] + nxt[1]) / 2 - cur)
+    # ABBA of B and F: B F F B
+    ns = sorted(arms)
+    for i in range(len(ns) - 3):
+        a, b, c, d = (arms.get(ns[i] + k) for k in range(4))
+        if all((a, b, c, d)) and a[0] == B and d[0] == B and b[0] == c[0] and b[0] & ~B and bin(b[0] & ~B).count("1") > 1:
+            rows.setdefault("ABBA", []).append((a[1] + d[1]) / 2 - (b[1] + c[1]) / 2)
+    base = [c for m, c in arms.values() if m == B]
+    print(f"\nfloor: baseline B mean {st.mean(base):.2f} mA over {len(base)} arms; savings (positive = saves):")
+    for k, d in rows.items():
+        name = "F all, ABBA (B F F B)" if k == "ABBA" else FLOOR_NAMES.get(k, hex(k))
+        se = st.stdev(d) / len(d) ** 0.5 if len(d) > 1 else float("nan")
+        print(f"  {name:<26} {st.mean(d):+6.2f} mA  2 SE {2 * se:5.2f}  n {len(d)}  " + " ".join(f"{x:+.2f}" for x in d))
 
 
 if __name__ == "__main__":
