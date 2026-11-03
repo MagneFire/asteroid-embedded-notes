@@ -1,5 +1,5 @@
 diff --git a/src/asteroid.h b/src/asteroid.h
-index 2f54c0e..917c371 100644
+index b29b562..917c371 100644
 --- a/src/asteroid.h
 +++ b/src/asteroid.h
 @@ -168,7 +168,28 @@ enum { BAT_DISCHARGING, BAT_CHARGING, BAT_FULL };
@@ -31,15 +31,6 @@ index 2f54c0e..917c371 100644
  void pmic_charger_configure(void);
  void pmic_charger_poll(void);
  void bms_init(void);
-@@ -211,6 +232,8 @@ void fbcon_printf(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
- 
- /* usb */
- void usb_init(const char *serialno);
-+void usb_cable(bool present, bool edge);
-+uint32_t usb_next_ms(void);
- void usb_poll(void);
- bool usb_connected(void);
- bool usb_busy(void);
 diff --git a/src/audio/speaker.c b/src/audio/speaker.c
 index d2abd68..76f9c6b 100644
 --- a/src/audio/speaker.c
@@ -114,43 +105,6 @@ index f68ff10..e160142 100644
 +int speaker_read(uint8_t reg, uint16_t *val);
 +bool speaker_powerdown(bool on);
  #endif
-diff --git a/src/board/board.h b/src/board/board.h
-index f904bca..b747264 100644
---- a/src/board/board.h
-+++ b/src/board/board.h
-@@ -104,6 +104,8 @@ struct board {
- 	} chg;
- 	/* The battery current sense resistor. */
- 	uint32_t rsense_uohm;
-+	/* USB PHY override registers 0x80-0x83, written after a PHY reset. */
-+	uint8_t usb_phy_init[4];
- 	const struct board_battery *battery;
- 
- 	const struct touch_driver *touch;
-diff --git a/src/board/sparrow.c b/src/board/sparrow.c
-index 730adc2..116d20f 100644
---- a/src/board/sparrow.c
-+++ b/src/board/sparrow.c
-@@ -105,6 +105,7 @@ const struct board board_sparrow = {
- 	.chg = { .vdd_max_mv = 4350, .vdd_safe_mv = 4380, .vin_min_mv = 4350,
- 		 .ibat_max_ma = 300, .ibat_safe_ma = 600, .iterm_ma = 20 },
- 	.rsense_uohm = 10000,
-+	.usb_phy_init = { 0x44, 0x68, 0x34, 0x13 },
- 	.battery = &battery,
- 	/* ITE IT7260 on BLSP1 QUP5, interrupt on gpio 17 (MPM pin 8), reset on
- 	 * gpio 16. */
-diff --git a/src/board/sturgeon.c b/src/board/sturgeon.c
-index 4df6439..1be7ecd 100644
---- a/src/board/sturgeon.c
-+++ b/src/board/sturgeon.c
-@@ -102,6 +102,7 @@ const struct board board_sturgeon = {
- 	.chg = { .vdd_max_mv = 4350, .vdd_safe_mv = 4430, .vin_min_mv = 4350,
- 		 .ibat_max_ma = 300, .ibat_safe_ma = 600, .iterm_ma = 20 },
- 	.rsense_uohm = 9700,
-+	.usb_phy_init = { 0x44, 0x68, 0x3c, 0xf3 },
- 	.battery = &battery,
- 	/* Synaptics RMI4 on BLSP1 QUP5. */
- 	.touch = &touch_rmi4,
 diff --git a/src/bt/bt.h b/src/bt/bt.h
 index eec3d1c..1d37244 100644
 --- a/src/bt/bt.h
@@ -841,7 +795,7 @@ index 00ef135..2dfcf0c 100644
  	.init = rmi4_init,
  	.poll = rmi4_poll,
 diff --git a/src/main.c b/src/main.c
-index 33a7394..a760e28 100644
+index 4e83ed9..a760e28 100644
 --- a/src/main.c
 +++ b/src/main.c
 @@ -345,6 +345,18 @@ static void show_weather(void)
@@ -863,22 +817,7 @@ index 33a7394..a760e28 100644
  void main(uint32_t machtype, const void *fdt)
  {
  	cpu_clock_init();
-@@ -541,9 +553,14 @@ void main(uint32_t machtype, const void *fdt)
- 			dot_y = t.y;
- 		}
- 		pmic_power_key_irq();
-+		static uint32_t usb_check_t;
- 		if (pmic_usb_irq() && pmic_usb_present()) {
- 			log_printf("usb: cable plugged in\n");
-+			usb_cable(true, true);
- 			power_charger_plugged(now);
-+		} else if (now - usb_check_t >= 1000) {
-+			usb_check_t = now;
-+			usb_cable(pmic_usb_present(), false);
- 		}
- 		bool key = pmic_power_key();
- 		if (key != key_was) {
-@@ -800,11 +817,32 @@ void main(uint32_t machtype, const void *fdt)
+@@ -805,11 +817,32 @@ void main(uint32_t machtype, const void *fdt)
  			last = now;
  			uint32_t pc, pcc, pcb;
  			spm_stats(&pc, &pcc, &pcb);
@@ -912,13 +851,10 @@ index 33a7394..a760e28 100644
  			uint32_t rx, tx, att, terr;
  			usb_stats(&rx, &tx);
  			touch_stats(&att, &terr);
-@@ -854,6 +892,12 @@ void main(uint32_t machtype, const void *fdt)
- 			uint32_t tp = have_touch ? touch_next_ms() : UINT32_MAX;
- 			if (tp < app_next)
- 				app_next = tp;
-+			uint32_t un = usb_next_ms();
-+			if (un < app_next)
-+				app_next = un;
+@@ -862,6 +895,9 @@ void main(uint32_t machtype, const void *fdt)
+ 			uint32_t un = usb_next_ms();
+ 			if (un < app_next)
+ 				app_next = un;
 +			uint32_t pt = powertest_next_ms();
 +			if (pt < app_next)
 +				app_next = pt;
@@ -962,20 +898,8 @@ index 444a4cc..989f3aa 100644
  	return state != S_READY || (!tlmm_get(GPIO_MCU_WAKE) && time_ms() - wake_t >= WAKE_HOLD_MS);
  }
  
-diff --git a/src/soc/msm8226.h b/src/soc/msm8226.h
-index c1f355a..f936f1b 100644
---- a/src/soc/msm8226.h
-+++ b/src/soc/msm8226.h
-@@ -111,6 +111,7 @@
- #define USB_USBCMD		(USB_HS_BASE + 0x140)
- #define USB_ULPI_VIEWPORT	(USB_HS_BASE + 0x170)
- #define USB_PORTSC		(USB_HS_BASE + 0x184)
-+#define USB_PHY_CTRL		(USB_HS_BASE + 0x240)
- #define USB_USBMODE		(USB_HS_BASE + 0x1a8)
- #define GCC_USB_HS_BCR		0xfc400480u
- #define GCC_USB_HS_SYSTEM_CBCR	0xfc400484u
 diff --git a/src/soc/pmic.c b/src/soc/pmic.c
-index fd2aeb1..5ec3806 100644
+index 4f2991b..0ce262d 100644
 --- a/src/soc/pmic.c
 +++ b/src/soc/pmic.c
 @@ -357,6 +357,13 @@ static void usb_changed(bool present)
@@ -992,17 +916,33 @@ index fd2aeb1..5ec3806 100644
  static bool charging_now(uint8_t chg, uint8_t bat)
  {
  	if (!(bat & BAT_IF_RT_TEMP_OK))
-@@ -654,6 +661,20 @@ void pmic_iadc_trim(void)
- 	pmic_write(IADC_OFFSET_MSB, off >> 8);
+@@ -650,15 +657,21 @@ static int iadc_raw(uint8_t chan)
+ 
+ void pmic_iadc_trim(void)
+ {
+-	int32_t sum = 0;
++	int32_t sum = 0, lo = 0x7fffffff, hi = -1;
+ 	for (int i = 0; i < TRIM_SAMPLES; i++) {
+ 		int v = iadc_raw(IADC_CH_EXT_OFFSET);
+ 		if (v < 0)
+ 			return;
+ 		sum += v;
++		if (v < lo)
++			lo = v;
++		if (v > hi)
++			hi = v;
+ 	}
+ 	int off = (int)((sum + TRIM_SAMPLES / 2) / TRIM_SAMPLES);
+ 	int stored = pmic_read(IADC_OFFSET_MSB) << 8 | pmic_read(IADC_OFFSET_LSB);
++	/* Harness: every calibration, to line up with steps in the counter. */
++	log_printf("iadc: trim %04x, conversions %04lx-%04lx, stored %04x\n", off & 0xffff, lo & 0xffff, hi & 0xffff, stored);
+ 	if (off == stored)
+ 		return;
  	pmic_write(IADC_SEC_ACCESS, 0xa5);
- 	pmic_write(IADC_OFFSET_LSB, off & 0xff);
-+	/* Harness: every trim written, to line up with steps in the counter. */
-+	static int last = -1;
-+	if (off != last)
-+		log_printf("iadc: trim %04x (was %04x)\n", off & 0xffff, last & 0xffff);
-+	last = off;
-+}
-+
+@@ -670,6 +683,15 @@ void pmic_iadc_trim(void)
+ 		log_printf("pmic: iadc trim %04x did not stick, reads %04x\n", off & 0xffff, stored);
+ }
+ 
 +/* For a test: the raw gain and offset conversions and the stored trim. */
 +void pmic_iadc_raws(int *gain, int *off, int *ext, unsigned *trim)
 +{
@@ -1010,10 +950,12 @@ index fd2aeb1..5ec3806 100644
 +	*off = iadc_raw(IADC_CH_EXT_OFFSET);
 +	*ext = iadc_raw(IADC_CH_EXT_RSENSE);
 +	*trim = pmic_read(IADC + 0xf2) << 8 | pmic_read(IADC + 0xf3);
- }
- 
++}
++
  /* Gain conversion minus offset conversion, or 0. */
-@@ -694,6 +715,8 @@ static int64_t cc_raw(void)
+ int pmic_iadc_gain(void)
+ {
+@@ -708,6 +730,8 @@ static int64_t cc_raw(void)
  	return (int64_t)(v << 28) >> 28;
  }
  
@@ -1022,7 +964,7 @@ index fd2aeb1..5ec3806 100644
  /* Average since the previous call, positive while the battery discharges. */
  int32_t pmic_battery_avg_ua(void)
  {
-@@ -705,5 +728,6 @@ int32_t pmic_battery_avg_ua(void)
+@@ -719,5 +743,6 @@ int32_t pmic_battery_avg_ua(void)
  	bool first = !last_ms;
  	last = cc;
  	last_ms = now;
@@ -1200,141 +1142,19 @@ index 15ccbfe..46741c5 100644
  	return 0;
  }
  
-diff --git a/src/usb/dcd_ci_hs_msm.c b/src/usb/dcd_ci_hs_msm.c
-index 5fab9c6..51ac663 100644
---- a/src/usb/dcd_ci_hs_msm.c
-+++ b/src/usb/dcd_ci_hs_msm.c
-@@ -184,9 +184,9 @@ static void bus_reset(uint8_t rhport) {
-   dcd_reg->ENDPTSETUPSTAT = dcd_reg->ENDPTSETUPSTAT;
-   dcd_reg->ENDPTCOMPLETE  = dcd_reg->ENDPTCOMPLETE;
- 
--  while (dcd_reg->ENDPTPRIME) {}
-+  for (uint32_t i = 0; i < 1000000 && dcd_reg->ENDPTPRIME; i++) {}
-   dcd_reg->ENDPTFLUSH = 0xFFFFFFFF;
--  while (dcd_reg->ENDPTFLUSH) {}
-+  for (uint32_t i = 0; i < 1000000 && dcd_reg->ENDPTFLUSH; i++) {}
- 
-   // read reset bit in portsc
- 
-@@ -217,7 +217,7 @@ bool dcd_init(uint8_t rhport, const tusb_rhport_init_t *rh_init) {
- 
-   // Reset controller
-   dcd_reg->USBCMD |= USBCMD_RESET;
--  while (dcd_reg->USBCMD & USBCMD_RESET) {}
-+  for (uint32_t i = 0; i < 1000000 && (dcd_reg->USBCMD & USBCMD_RESET); i++) {}
- 
-   // Set mode to device, must be set immediately after reset
-   uint32_t usbmode = dcd_reg->USBMODE & ~USBMOD_CM_MASK;
-@@ -263,9 +263,9 @@ bool dcd_deinit(uint8_t rhport) {
-   dcd_reg->USBCMD &= ~USBCMD_RUN_STOP;
- 
-   // flush all endpoints
--  while (dcd_reg->ENDPTPRIME) {}
-+  for (uint32_t i = 0; i < 1000000 && dcd_reg->ENDPTPRIME; i++) {}
-   dcd_reg->ENDPTFLUSH = 0xFFFFFFFF;
--  while (dcd_reg->ENDPTFLUSH) {}
-+  for (uint32_t i = 0; i < 1000000 && dcd_reg->ENDPTFLUSH; i++) {}
- 
-   return true;
- }
-@@ -452,7 +452,7 @@ bool dcd_edpt_iso_activate(uint8_t rhport, const tusb_desc_endpoint_t *desc_ep)
-   // Flush EP
-   const uint32_t flush_mask = TU_BIT(epnum + (dir ? 16 : 0));
-   dcd_reg->ENDPTFLUSH       = flush_mask;
--  while (dcd_reg->ENDPTFLUSH & flush_mask) {}
-+  for (uint32_t i = 0; i < 1000000 && (dcd_reg->ENDPTFLUSH & flush_mask); i++) {}
- 
-   // disable to change max packet size
-   ep_ctrl_clear(endptctrl, dir, ENDPTCTRL_ENABLE);
-@@ -492,7 +492,7 @@ static void qhd_start_xfer(uint8_t rhport, uint8_t epnum, uint8_t dir) {
-   if (epnum == 0) {
-     // follows UM 24.10.8.1.1 Setup packet handling using setup lockout mechanism
-     // wait until ENDPTSETUPSTAT before priming data/status in response TODO add time out
--    while (dcd_reg->ENDPTSETUPSTAT & TU_BIT(0)) {}
-+    for (uint32_t i = 0; i < 1000000 && (dcd_reg->ENDPTSETUPSTAT & TU_BIT(0)); i++) {}
-   }
- 
-   // start transfer
 diff --git a/src/usb/usb.c b/src/usb/usb.c
-index 3f6365c..43c591b 100644
+index 692b418..1b243a0 100644
 --- a/src/usb/usb.c
 +++ b/src/usb/usb.c
-@@ -29,37 +29,50 @@
- #define EP_ACM_OUT	0x04
- #define EP_ACM_IN	0x84
- enum { ITF_ACM_COMM = 0, ITF_ACM_DATA, ITF_ADB, ITF_COUNT };
-+static bool cdc_attached;
-+#define PORTSC_PHCD		BIT(23)
-+static bool usb_down, usb_clocks_off;
+@@ -32,6 +32,7 @@ enum { ITF_ACM_COMM = 0, ITF_ACM_DATA, ITF_ADB, ITF_COUNT };
+ static bool cdc_attached;
+ #define PORTSC_PHCD		BIT(23)
+ static bool usb_down, usb_clocks_off;
 +bool usb_hold_up;
  
--static void ulpi_write(uint8_t reg, uint8_t val)
-+static int ulpi_write(uint8_t reg, uint8_t val)
+ static int ulpi_write(uint8_t reg, uint8_t val)
  {
- 	writel(ULPI_RUN | ULPI_WRITE | (uint32_t)reg << 16 | val, USB_ULPI_VIEWPORT);
-+	uint32_t t0 = time_us();
- 	while (readl(USB_ULPI_VIEWPORT) & ULPI_RUN)
--		;
-+		if (time_us() - t0 > 10000) {
-+			log_printf("usb: ulpi write %02x timed out\n", reg);
-+			return -1;
-+		}
-+	return 0;
- }
- 
- /* The PHY selection and the external session-valid wiring survive
-  * neither a controller reset nor the stack's own reset, so they are
-  * applied before and after the stack initialises. */
--static void phy_select(void)
-+static int phy_select(void)
- {
- 	writel(PORTSC_PTS_ULPI, USB_PORTSC);
--	ulpi_write(ULPI_MISC_A_SET, ULPI_MISC_A_VBUSVLDEXTSEL | ULPI_MISC_A_VBUSVLDEXT);
-+	int r = ulpi_write(ULPI_MISC_A_SET, ULPI_MISC_A_VBUSVLDEXTSEL | ULPI_MISC_A_VBUSVLDEXT);
- 	writel(readl(USB_GENCONFIG_2) | GEN2_SESS_VLD_CTRL_EN, USB_GENCONFIG_2);
- 	writel(readl(USB_USBCMD) | USBCMD_SESS_VLD_CTRL, USB_USBCMD);
-+	return r;
- }
- 
--static void controller_init(void)
-+static bool controller_init(void)
- {
- 	writel(readl(GCC_USB_HS_AHB_CBCR) | 1, GCC_USB_HS_AHB_CBCR);
- 	writel(readl(GCC_USB_HS_SYSTEM_CBCR) | 1, GCC_USB_HS_SYSTEM_CBCR);
- 	delay_ms(1);
- 	writel(0x00080002, USB_USBCMD);
- 	delay_ms(2);
--	while (readl(USB_USBCMD) & 2)
--		;
--	phy_select();
-+	for (int i = 0; i < 100000 && (readl(USB_USBCMD) & 2); i++)
-+		delay_us(1);
-+	bool ok = !(readl(USB_USBCMD) & 2);
-+	if (phy_select())
-+		ok = false;
- 	writel(0, USB_SBUSCFG);
- 	writel(0x08, USB_AHB_MODE);
-+	return ok;
- }
- 
- /* TinyUSB port hooks */
-@@ -278,8 +291,9 @@ void tud_cdc_line_state_cb(uint8_t itf, bool dtr, bool rts)
- 	cdc_in_cb = true;
- 	if (dtr)
- 		console_attach(cdc_out, cdc_room, NULL, true);
--	else
-+	else if (cdc_attached)
- 		console_detach();
-+	cdc_attached = dtr;
- 	cdc_in_cb = false;
- 	log_printf("usb: console %s\n", dtr ? "opened" : "closed");
- }
-@@ -295,9 +309,240 @@ void tud_umount_cb(void) { log_printf("usb: unconfigured\n"); }
-  * a newly attached host resets the port out of suspend. */
- bool usb_connected(void)
- {
-+	if (usb_down)
-+		return false;
+@@ -316,6 +317,44 @@ bool usb_connected(void)
  	return (readl(USB_PORTSC) & (PORTSC_CCS | PORTSC_SUSP)) == PORTSC_CCS;
  }
  
@@ -1376,209 +1196,44 @@ index 3f6365c..43c591b 100644
 +}
 +bool usb_phy_in_lpm(void) { return usb_down && usb_clocks_off; }
 +
-+/* Unplugged, the USB block rests as the vendor's suspend leaves it with
-+ * VBUS sensed by the PMIC: the stack stopped, the PHY in low power mode
-+ * (PHCD, then STP) and the controller's clocks off. Coming out of that the
-+ * host does not enumerate the device again, so a cable plugged in brings
-+ * it up from scratch, as the vendor's reset does: block reset, controller
-+ * reset, PHY power-on reset around the board's PHY overrides, then the
-+ * stack. */
-+#define USBCMD_STP		BIT(30)
-+#define PHY_POR			BIT(0)
-+
-+static bool clock_on(uint32_t cbcr)
-+{
-+	writel(readl(cbcr) | 1, cbcr);
-+	for (int i = 0; i < 1000; i++) {
-+		if (!(readl(cbcr) & BIT(31)))
-+			return true;
-+		delay_us(1);
-+	}
-+	return false;
-+}
-+
-+static bool bits_wait(uint32_t addr, uint32_t mask, uint32_t want)
-+{
-+	for (int i = 0; i < 500000; i++) {
-+		if ((readl(addr) & mask) == want)
-+			return true;
-+		delay_us(1);
-+	}
-+	return false;
-+}
-+
-+static void phy_reset(void)
-+{
-+	writel(readl(USB_PHY_CTRL) | PHY_POR, USB_PHY_CTRL);
-+	delay_us(15);
-+	writel(readl(USB_PHY_CTRL) & ~PHY_POR, USB_PHY_CTRL);
-+	dsb();
-+}
-+
-+#define AHB2AHB_BYPASS		BIT(31)
-+
-+/* Unplugged, or a charger that never configures the device: the stack
-+ * stops, then the PHY goes to low power mode and the clocks off. The
-+ * clocks stay on if the PHY did not get there. */
-+static void usb_collapse(const char *why)
-+{
-+	if (cdc_attached) {
-+		console_detach();
-+		cdc_attached = false;
-+	}
-+	tud_deinit(0);
-+	adb_open = adb_tx_busy = adb_rx_queued = false;
-+	adb_reset();
-+	gic_mask(IRQ_USB_HS);
-+	bool phcd = !ulpi_write(0x98, ULPI_MISC_A_VBUSVLDEXTSEL | ULPI_MISC_A_VBUSVLDEXT);
-+	if (phcd) {
-+		writel(readl(USB_PORTSC) | PORTSC_PHCD, USB_PORTSC);
-+		phcd = bits_wait(USB_PORTSC, PORTSC_PHCD, PORTSC_PHCD);
-+	}
-+	if (phcd) {
-+		writel(readl(USB_USBCMD) | USBCMD_STP, USB_USBCMD);
-+		dsb();
-+		writel(readl(GCC_USB_HS_SYSTEM_CBCR) & ~1u, GCC_USB_HS_SYSTEM_CBCR);
-+		writel(readl(GCC_USB_HS_AHB_CBCR) & ~1u, GCC_USB_HS_AHB_CBCR);
-+	}
-+	usb_down = true;
-+	usb_clocks_off = phcd;
+ /* Unplugged, the USB block rests as the vendor's suspend leaves it with
+  * VBUS sensed by the PMIC: the stack stopped, the PHY in low power mode
+  * (PHCD, then STP) and the controller's clocks off. Coming out of that the
+@@ -383,6 +422,8 @@ static void usb_collapse(const char *why)
+ 	}
+ 	usb_down = true;
+ 	usb_clocks_off = phcd;
 +	if (phcd && usb_rails_wanted)
 +		usb_rails(false);
-+	log_printf("usb: %s, %s\n", why, phcd ? "phy in low power mode" : "phy did not enter low power mode, clocks left on");
-+}
-+
-+/* Brings USB up from scratch. On any failure the stack is stopped
-+ * again and USB stays down; usb_cable tries again later. */
-+static bool usb_restore(void)
-+{
-+	uint32_t t0 = time_ms();
-+	const char *fail = NULL;
-+	usb_rails(true);
-+	if (!clock_on(GCC_USB_HS_AHB_CBCR) || !clock_on(GCC_USB_HS_SYSTEM_CBCR)) {
-+		fail = "clocks";
-+		goto out;
-+	}
-+	usb_clocks_off = false;
-+	writel(readl(USB_USBCMD) & ~(USBCMD_STP | BIT(29)), USB_USBCMD);
-+	writel(readl(USB_PORTSC) & ~PORTSC_PHCD, USB_PORTSC);
-+	bits_wait(USB_PORTSC, PORTSC_PHCD, 0);
-+	/* The vendor turns AHB2AHB bypass off before the asynchronous block
-+	 * reset. */
-+	writel(readl(USB_AHB_MODE) & ~AHB2AHB_BYPASS, USB_AHB_MODE);
-+	writel(readl(GCC_USB_HS_SYSTEM_CBCR) & ~1u, GCC_USB_HS_SYSTEM_CBCR);
-+	writel(readl(GCC_USB_HS_AHB_CBCR) & ~1u, GCC_USB_HS_AHB_CBCR);
-+	writel(1, GCC_USB_HS_BCR);
-+	delay_ms(1);
-+	writel(0, GCC_USB_HS_BCR);
-+	delay_us(1);
-+	if (!controller_init()) {
-+		fail = "controller reset";
-+		goto out;
-+	}
-+	delay_ms(100);
-+	phy_reset();
-+	for (unsigned i = 0; i < 4; i++)
-+		if (ulpi_write((uint8_t)(0x80 + i), board->usb_phy_init[i])) {
-+			fail = "phy overrides";
-+			goto out;
-+		}
-+	phy_reset();
-+	adb_open = adb_tx_busy = adb_rx_queued = false;
-+	adb_reset();
-+	tusb_rhport_init_t rh = { .role = TUSB_ROLE_DEVICE, .speed = TUSB_SPEED_HIGH };
-+	if (!tusb_init(0, &rh)) {
-+		fail = "stack";
-+		goto out;
-+	}
-+	/* The stack starts the controller as it initialises; the session
-+	 * wiring has to follow its reset, then the device attaches. */
-+	tud_disconnect();
-+	if (phy_select()) {
-+		fail = "phy select";
-+		goto out;
-+	}
-+	dsb();
-+	tud_connect();
-+	usb_down = false;
-+	log_printf("usb: up again in %lu ms\n", time_ms() - t0);
-+	return true;
-+out:
-+	tud_deinit(0);
-+	gic_mask(IRQ_USB_HS);
-+	usb_down = true;
-+	log_printf("usb: bringing up failed at %s after %lu ms\n", fail, time_ms() - t0);
-+	return false;
-+}
-+
-+/* The cable state from the PMIC. A cable plugged in (the rising edge)
-+ * brings USB up, and so does a present cable while USB rests, unless
-+ * it was put to rest as a charger; absent for 2 s puts it to rest, and
-+ * so does a cable that has not configured the device in 10 s (a wall
-+ * charger). A failed bring-up is tried again after 5 s. */
-+static uint32_t gone_t, plugged_t, retry_t;
-+static bool charger_rest;
-+
-+void usb_cable(bool present, bool edge)
-+{
-+	uint32_t now = time_ms();
-+	if (!present) {
-+		plugged_t = 0;
-+		charger_rest = false;
-+		if (usb_down || usb_hold_up)
-+			return;
-+		if (!gone_t)
-+			gone_t = now | 1;
-+		else if (now - gone_t >= 2000)
-+			usb_collapse("unplugged");
-+		return;
-+	}
-+	gone_t = 0;
-+	if (edge) {
-+		charger_rest = false;
-+		retry_t = 0;
-+	}
-+	if (usb_down && !charger_rest && (!retry_t || now - retry_t >= 5000)) {
-+		plugged_t = now | 1;
-+		retry_t = usb_restore() ? 0 : now | 1;
-+		return;
-+	}
-+	if (!usb_down && !usb_hold_up) {
-+		if (!plugged_t)
-+			plugged_t = now | 1;
-+		else if (!tud_mounted() && now - plugged_t >= 10000) {
-+			charger_rest = true;
-+			usb_collapse("no host after 10 s, a charger");
-+		}
-+	}
-+}
-+
-+/* When usb_cable wants to be called again: the end of the debounce, the
-+ * charger timeout or the retry. */
-+uint32_t usb_next_ms(void)
-+{
-+	uint32_t now = time_ms(), next = UINT32_MAX;
-+	if (gone_t)
-+		next = gone_t + 2000 - now;
-+	if (plugged_t && !usb_down && !tud_mounted() && plugged_t + 10000 - now < next)
-+		next = plugged_t + 10000 - now;
-+	if (retry_t && usb_down && !charger_rest && retry_t + 5000 - now < next)
-+		next = retry_t + 5000 - now;
-+	return (int32_t)next < 0 ? 1 : next;
-+}
-+
- static const struct adb_transport transport = { .send = adb_send, .pump = usb_poll };
+ 	log_printf("usb: %s, %s\n", why, phcd ? "phy in low power mode" : "phy did not enter low power mode, clocks left on");
+ }
  
- void usb_init(const char *serialno)
-@@ -327,6 +572,8 @@ void usb_init(const char *serialno)
- 
- void usb_poll(void)
+@@ -392,6 +433,7 @@ static bool usb_restore(void)
  {
-+	if (usb_down)
-+		return;
- 	tud_task();
- 	adb_poll();
- 	if (tud_cdc_connected())
+ 	uint32_t t0 = time_ms();
+ 	const char *fail = NULL;
++	usb_rails(true);
+ 	if (!clock_on(GCC_USB_HS_AHB_CBCR) || !clock_on(GCC_USB_HS_SYSTEM_CBCR)) {
+ 		fail = "clocks";
+ 		goto out;
+@@ -458,7 +500,7 @@ void usb_cable(bool present, bool edge)
+ 	uint32_t now = time_ms();
+ 	if (!present) {
+ 		retry_t = 0;
+-		if (usb_down) {
++		if (usb_down || usb_hold_up) {
+ 			gone_t = 0;
+ 			return;
+ 		}
+@@ -491,7 +533,7 @@ uint32_t usb_next_ms(void)
+ 	uint32_t now = time_ms(), next = UINT32_MAX;
+ 	if (gone_t)
+ 		next = left(gone_t, 2000, now);
+-	else if (!usb_down)
++	else if (!usb_down && !usb_hold_up)
+ 		next = 2000;
+ 	if (retry_t && usb_down) {
+ 		uint32_t r = left(retry_t, 5000, now);
 diff --git a/tests/stubs.c b/tests/stubs.c
 index d17bf84..1193f2c 100644
 --- a/tests/stubs.c
