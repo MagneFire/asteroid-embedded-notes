@@ -979,3 +979,12 @@ mode; BT off.
   overnight while the measured current stayed flat: the trim follows a
   real temperature-dependent offset.
 - Log: logs-aos-screenoff-2026-11-04-sturgeon.txt.
+
+**Correction to §20 (ASTRA-POWER-6.md):** the last 35.8 min of the AsteroidOS
+run (after it had cooled) read **4.55 mA**, close to the firmware's 4.70; the
+2.1 mA endpoint average is dragged down by the cooling stretch, so the
+"likely 2-3 mA gap" is not supported. Linux's shadow property is still the
+right value (accumulated plus raw, with gain/temperature compensation), but
+offset error while cooling distorts short stretches. The RTC driver does
+implement wake alarms (it only lacks the sysfs file), so a systemd timer
+with WakeSystem=true should give periodic samples; to be rehearsed.
