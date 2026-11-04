@@ -1,14 +1,16 @@
 diff --git a/src/asteroid.h b/src/asteroid.h
-index b29b562..917c371 100644
+index b29b562..c954a46 100644
 --- a/src/asteroid.h
 +++ b/src/asteroid.h
-@@ -168,7 +168,28 @@ enum { BAT_DISCHARGING, BAT_CHARGING, BAT_FULL };
+@@ -168,7 +168,32 @@ enum { BAT_DISCHARGING, BAT_CHARGING, BAT_FULL };
  int pmic_battery_status(void);
  int32_t pmic_battery_ua(void);
  int32_t pmic_battery_avg_ua(void);
 +void pmic_batfet_lpm(bool on);
 +extern int display_rest_level;
 +void display_set_rest_level(int level);
++void display_set_deep(bool on);
++bool display_is_deep(void);
 +bool usb_phy_lpm(bool on);
 +bool usb_phy_in_lpm(void);
 +int emmc_sleep(bool on);
@@ -17,6 +19,8 @@ index b29b562..917c371 100644
 +bool touch_rmi4_sleep(bool on);
 +bool hub_hold(bool on);
 +bool hub_ready(void);
++bool hub_services(bool off);
++bool hub_services_are_off(void);
 +bool rpm_sleep_bus(bool on);
 +bool rpm_ldo_sleep_lpm(bool on);
 +int rpm_regulator_both(uint32_t type, uint32_t id, bool on);
@@ -184,7 +188,7 @@ index 536e27c..f095a27 100644
  	bt_lpm_poll();
  	bool boost = cpu_clock_is_slow() && bt_idle_ms() == 0;
 diff --git a/src/console/console.c b/src/console/console.c
-index 5c3b5a4..caca507 100644
+index 5c3b5a4..34c6660 100644
 --- a/src/console/console.c
 +++ b/src/console/console.c
 @@ -394,6 +394,13 @@ static void cmd_bt(const char *args)
@@ -231,13 +235,14 @@ index 5c3b5a4..caca507 100644
  }
  
  static void cmd_buzz(const char *args)
-@@ -923,6 +944,40 @@ static void cmd_uibench(const char *args)
+@@ -923,6 +944,41 @@ static void cmd_uibench(const char *args)
  	say("panel %lu: %lu us per repaint\n", p, (time_us() - t0) / n);
  }
  
 +static void cmd_powertest(const char *args);
 +enum { PT_USB = 1, PT_RPM = 2, PT_HUB = 4, PT_EMMC = 8, PT_TOUCH = 16, PT_ALL = 31,
-+       PT_USBRAIL = 0x20, PT_TOUCHRAIL = 0x40, PT_LDO = 0x80, PT_AMP = 0x100, PT_EVERY = 0x1ff };
++       PT_USBRAIL = 0x20, PT_TOUCHRAIL = 0x40, PT_LDO = 0x80, PT_AMP = 0x100, PT_PANEL = 0x200, PT_HUBSVC = 0x400,
++       PT_EVERY = 0x7ff };
 +static void powertest_measures(unsigned m);
 +static unsigned pt_applied, pt_want;
 +static uint32_t pt_usb_undo;
@@ -272,7 +277,7 @@ index 5c3b5a4..caca507 100644
  static void cmd_echo(const char *args)
  {
  	say("%s\n", args);
-@@ -955,6 +1010,7 @@ static const struct command commands[] = {
+@@ -955,6 +1011,7 @@ static const struct command commands[] = {
  	{ "kv", "[set <key> <text> | del <key>]", cmd_kv },
  	{ "btinfo", "", cmd_btinfo },
  	{ "amp", "", cmd_amp },
@@ -280,17 +285,17 @@ index 5c3b5a4..caca507 100644
  	{ "buzz", "[ms]", cmd_buzz },
  	{ "hub", "[send <hex bytes>]", cmd_hub },
  	{ "touch", "tap <x> <y> | swipe <x0> <y0> <x1> <y1> [ms]", cmd_touch },
-@@ -963,6 +1019,9 @@ static const struct command commands[] = {
+@@ -963,6 +1020,9 @@ static const struct command commands[] = {
  	{ "media", "<volume> <playing> <title>|<artist>", cmd_media },
  	{ "uibench", "<panel> <gpu> [times]", cmd_uibench },
  	{ "echo", "<text>", cmd_echo },
 +	{ "rest", "[0|1|2]", cmd_rest },
 +	{ "measures", "<hex mask>", cmd_measures },
-+	{ "powertest", "<settle_min> <arm_min> [lpm|dsi|sleep|floor]", cmd_powertest },
++	{ "powertest", "<settle_min> <arm_min> [lpm|dsi|sleep|floor|night]", cmd_powertest },
  };
  
  static void cmd_help(const char *args)
-@@ -1132,8 +1191,221 @@ static void finish(void)
+@@ -1132,8 +1192,247 @@ static void finish(void)
  		done(ctx);
  }
  
@@ -299,18 +304,19 @@ index 5c3b5a4..caca507 100644
 + * round until the cable is back, each logged. */
 +static uint32_t pt_t0, pt_settle_ms, pt_arm_ms;
 +static int pt_arm = -1;
-+static bool pt_waiting, pt_lpm, pt_dsi, pt_sleep, pt_floor;
++static bool pt_waiting, pt_lpm, pt_dsi, pt_sleep, pt_floor, pt_night;
 +
 +static void cmd_powertest(const char *args)
 +{
 +	uint32_t settle, arm;
 +	if (!parse_num(&args, 10, &settle) || !parse_num(&args, 10, &arm) || !arm || arm > 600 || settle > 600) {
-+		say("usage: powertest <settle_min> <arm_min 1-600> [lpm|dsi|sleep|floor]\n");
++		say("usage: powertest <settle_min> <arm_min 1-600> [lpm|dsi|sleep|floor|night]\n");
 +		return;
 +	}
 +	while (*args == ' ')
 +		args++;
-+	if (*args && strcmp(args, "lpm") && strcmp(args, "dsi") && strcmp(args, "sleep") && strcmp(args, "floor")) {
++	if (*args && strcmp(args, "lpm") && strcmp(args, "dsi") && strcmp(args, "sleep") && strcmp(args, "floor") &&
++	    strcmp(args, "night")) {
 +		say("powertest: unknown mode %s\n", args);
 +		return;
 +	}
@@ -319,6 +325,9 @@ index 5c3b5a4..caca507 100644
 +	pt_dsi = !strcmp(args, "dsi");
 +	pt_sleep = !strcmp(args, "sleep") || !strcmp(args, "floor");
 +	pt_floor = !strcmp(args, "floor");
++	pt_night = !strcmp(args, "night");
++	if (pt_night)
++		pt_sleep = true;
 +	pt_settle_ms = settle * 60000;
 +	pt_arm_ms = arm * 60000;
 +	pt_waiting = true;
@@ -375,6 +384,12 @@ index 5c3b5a4..caca507 100644
 +		have |= PT_LDO;
 +	if (speaker_powerdown(m & PT_AMP) && (m & PT_AMP))
 +		have |= PT_AMP;
++	display_set_deep(m & PT_PANEL);
++	if ((m & PT_PANEL) && display_is_deep())
++		have |= PT_PANEL;
++	/* S needs the hub running: it comes up after a release from reset. */
++	if (hub_services((m & PT_HUBSVC) && !(m & PT_HUB)) && (m & PT_HUBSVC) && hub_services_are_off())
++		have |= PT_HUBSVC;
 +	have = (have & ~PT_USB) | (usb_phy_in_lpm() ? PT_USB : 0);
 +	/* U only rests USB once unplugged; V needs that too. */
 +	if (pmic_usb_present())
@@ -441,6 +456,22 @@ index 5c3b5a4..caca507 100644
 +		bool lpm = pt_arm % 2 == 0;
 +		pmic_batfet_lpm(lpm);
 +		log_printf("powertest: arm %d batfet lpm %s, ctrl4 %02x\n", pt_arm, lpm ? "on" : "off", pmic_read(0x001293));
++		pt_arm++;
++		return;
++	}
++	if (pt_night) {
++		/* B = the five sleep measures; P = B plus the panel in deep
++		 * standby; S = B with the hub running, its services off. */
++		enum { B = PT_ALL, P = PT_ALL | PT_PANEL, S = (PT_ALL & ~PT_HUB) | PT_HUBSVC };
++		static const uint16_t order[] = { B, P, P, B, B, S, S, B };
++		if (pt_arm == 0)
++			powertest_bt(false);
++		else
++			log_printf("powertest: arm %d end, have %03x\n", pt_arm - 1, pt_applied);
++		unsigned m = order[pt_arm % ARRAY_SIZE(order)];
++		powertest_measures(m);
++		log_printf("powertest: arm %d night=%03x aod=%s bt=off have %03x\n", pt_arm, m, setting_get(SETTING_AOD) ? "on" : "off",
++			   pt_applied);
 +		pt_arm++;
 +		return;
 +	}
@@ -513,7 +544,7 @@ index 5c3b5a4..caca507 100644
  		if (more && more())
  			return;
 diff --git a/src/display/display.c b/src/display/display.c
-index 100eefa..7b3a4e7 100644
+index 100eefa..b9dfa9d 100644
 --- a/src/display/display.c
 +++ b/src/display/display.c
 @@ -16,6 +16,9 @@
@@ -718,6 +749,107 @@ index 100eefa..7b3a4e7 100644
  	for (unsigned i = 0; i < ARRAY_SIZE(dsi_clocks); i++)
  		clock_set(dsi_clocks[i], true);
  	uint32_t err = readl(DSI_DLN0_PHY_ERR);
+@@ -389,13 +439,65 @@ void display_wait_idle(void) { pp_wait(); }
+ uint32_t display_frames(void) { return frames; }
+ uint32_t display_waits(void) { return waits; }
+ 
++static uint8_t brightness = 0xff;
++
+ void display_set_brightness(uint8_t level)
+ {
+ 	display_active();
+ 	pp_wait();
+ 	dsi_dcs_write(0x51, &level, 1);
++	brightness = level;
+ }
+ 
++/* Harness (P): with the screen off, the panel in deep standby as the
++ * vendor's RM69080 off sequence leaves it (after sleep-in: 120 ms, 00 00,
++ * 255 ms, 4F 01). Leaving deep standby takes the reset pulse on gpio 25
++ * (low 5 ms, high 10 ms), which puts it back in plain sleep, and on wake
++ * the vendor's on sequence. Sturgeon only. */
++#define PANEL_RESET_GPIO	25
++bool display_deep_wanted;
++static bool deep, needs_init;
++
++static bool deep_ok(void) { return board->panel.lines == 434; }
++
++static void enter_deep(void)
++{
++	static const uint8_t z = 0, one = 1;
++	dsi_dcs_write(0x00, &z, 1);
++	delay_ms(255);
++	dsi_dcs_write(0x4f, &one, 1);
++	deep = true;
++	log_printf("display: panel in deep standby\n");
++}
++
++static void leave_deep(void)
++{
++	tlmm_config(PANEL_RESET_GPIO, 0, TLMM_OUTPUT, TLMM_PULL_NONE, 2);
++	tlmm_set(PANEL_RESET_GPIO, 0);
++	delay_ms(5);
++	tlmm_set(PANEL_RESET_GPIO, 1);
++	delay_ms(10);
++	deep = false;
++	needs_init = true;
++	log_printf("display: panel reset out of deep standby\n");
++}
++
++/* Applied at once while the screen is off; otherwise at the next sleep. */
++void display_set_deep(bool on)
++{
++	display_deep_wanted = on && deep_ok();
++	if (!panel_asleep)
++		return;
++	if (display_deep_wanted && !deep) {
++		display_active();
++		pp_wait();
++		enter_deep();
++	} else if (!display_deep_wanted && deep) {
++		leave_deep();
++	}
++}
++bool display_is_deep(void) { return deep; }
++
+ void display_sleep(void)
+ {
+ 	display_active();
+@@ -403,12 +505,34 @@ void display_sleep(void)
+ 	dsi_dcs_write(0x28, NULL, 0);
+ 	dsi_dcs_write(0x10, NULL, 0);
+ 	panel_asleep = true;
++	if (display_deep_wanted && deep_ok()) {
++		delay_ms(120);
++		enter_deep();
++	}
+ }
+ 
+ void display_wake(void)
+ {
+ 	display_active();
+ 	panel_asleep = false;
++	if (deep)
++		leave_deep();
++	if (needs_init) {
++		static const struct { uint8_t cmd, val; } seq[] = {
++			{ 0xfe, 0x01 }, { 0x18, 0x66 }, { 0xfe, 0x07 }, { 0x07, 0x6d }, { 0xfe, 0x00 }, { 0x35, 0x00 },
++		};
++		for (unsigned i = 0; i < ARRAY_SIZE(seq); i++)
++			dsi_dcs_write(seq[i].cmd, &seq[i].val, 1);
++		dsi_dcs_write(0x11, NULL, 0);
++		static const uint8_t madctl = 0x40;
++		dsi_dcs_write(0x36, &madctl, 1);
++		delay_ms(120);
++		dsi_dcs_write(0x51, &brightness, 1);
++		dsi_dcs_write(0x29, NULL, 0);
++		needs_init = false;
++		log_printf("display: panel initialised after reset\n");
++		return;
++	}
+ 	dsi_dcs_write(0x11, NULL, 0);
+ 	delay_ms(120);
+ 	dsi_dcs_write(0x29, NULL, 0);
 diff --git a/src/input/touch.c b/src/input/touch.c
 index 00ef135..2dfcf0c 100644
 --- a/src/input/touch.c
@@ -862,10 +994,30 @@ index 4e83ed9..a760e28 100644
  		power_idle(app_next);
  	}
 diff --git a/src/sensors/hub.c b/src/sensors/hub.c
-index 444a4cc..989f3aa 100644
+index 444a4cc..6db000d 100644
 --- a/src/sensors/hub.c
 +++ b/src/sensors/hub.c
-@@ -456,8 +456,32 @@ static bool stm32_tilted(void)
+@@ -83,6 +83,9 @@ static uint32_t steps = HUB_NONE, heart_rate = HUB_NONE;
+ static uint8_t heart_status;
+ static unsigned heart_readings;
+ static bool heart_on;
++/* Harness (S) */
++static bool services_off;
++static unsigned svc_acks;
+ static bool accel_on, accel_new;
+ static int16_t accel[3];
+ 
+@@ -283,6 +286,9 @@ static void frame(const uint8_t *p, unsigned n)
+ 		enter(S_READY);
+ 		return;
+ 	}
++	if (state == S_READY && n >= 4 && p[0] == CH_SERVICE && p[1] == T_RESPONSE &&
++	    (p[2] == TAG_WRIST_TILT || p[2] == TAG_STEPS) && (p[3] == CMD_ACTIVATE || p[3] == CMD_DEACTIVATE))
++		svc_acks++;
+ 	if (n >= 8 && p[0] == CH_SERVICE && p[1] == T_EVENT && p[2] == TAG_STEPS && p[3] == CMD_EVENT) {
+ 		memcpy(&steps, p + n - 4 - (n - 4) % 4, 4);
+ 		return;
+@@ -456,8 +462,58 @@ static bool stm32_tilted(void)
  	return t;
  }
  
@@ -884,12 +1036,38 @@ index 444a4cc..989f3aa 100644
 +	}
 +	rx_len = 0;
 +	rx_esc = false;
++	services_off = false;
 +	held = on;
 +	bool ok = on || stm32_init();
 +	log_printf("hub: %s%s\n", on ? "held in reset" : "released", ok ? "" : ", init failed");
 +	return ok;
 +}
 +bool hub_ready(void) { return state == S_READY; }
++
++/* Harness (S): the hub's services off (wrist tilt and the step counter
++ * deactivated) with the MCU running and sleeping as usual, against
++ * holding it in reset. Only once it is ready; acknowledgements counted. */
++bool hub_services(bool off)
++{
++	if (board->hub != &hub_stm32)
++		return false;
++	if (off == services_off)
++		return true;
++	if (state != S_READY)
++		return false;
++	static const uint8_t tilt_off[] = { CH_SERVICE, T_REQUEST, TAG_WRIST_TILT, CMD_DEACTIVATE };
++	static const uint8_t steps_off[] = { CH_SERVICE, T_REQUEST, TAG_STEPS, CMD_DEACTIVATE };
++	static const uint8_t tilt_on[] = { CH_SERVICE, T_REQUEST, TAG_WRIST_TILT, CMD_ACTIVATE };
++	static const uint8_t steps_on[] = { CH_SERVICE, T_REQUEST, TAG_STEPS, CMD_ACTIVATE };
++	int r = off ? send(tilt_off, sizeof tilt_off) | send(steps_off, sizeof steps_off)
++		    : send(tilt_on, sizeof tilt_on) | send(steps_on, sizeof steps_on);
++	if (r)
++		return false;
++	services_off = off;
++	log_printf("hub: services %s (%u acknowledgements so far)\n", off ? "off" : "on", svc_acks);
++	return true;
++}
++bool hub_services_are_off(void) { return services_off; }
 +
  static bool stm32_can_sleep(void)
  {
@@ -898,6 +1076,15 @@ index 444a4cc..989f3aa 100644
  	return state != S_READY || (!tlmm_get(GPIO_MCU_WAKE) && time_ms() - wake_t >= WAKE_HOLD_MS);
  }
  
+@@ -469,7 +525,7 @@ static void stm32_sleep(bool asleep)
+ 		wake_t = time_ms();
+ 		mcu_wakes++;
+ 	}
+-	if (!asleep && state == S_READY) {
++	if (!asleep && state == S_READY && !services_off) {
+ 		static const uint8_t flush[] = { CH_SERVICE, T_REQUEST, TAG_STEPS, CMD_FLUSH };
+ 		send(flush, sizeof flush);
+ 	}
 diff --git a/src/soc/pmic.c b/src/soc/pmic.c
 index 4f2991b..0ce262d 100644
 --- a/src/soc/pmic.c
@@ -1251,10 +1438,10 @@ index 692b418..ebcc6b0 100644
  	if (retry_t && usb_down) {
  		uint32_t r = left(retry_t, 5000, now);
 diff --git a/tests/stubs.c b/tests/stubs.c
-index d17bf84..1193f2c 100644
+index d17bf84..74f9a62 100644
 --- a/tests/stubs.c
 +++ b/tests/stubs.c
-@@ -40,10 +40,38 @@ int bt_start(const uint8_t *bdaddr, struct bt_info *info)
+@@ -40,10 +40,42 @@ int bt_start(const uint8_t *bdaddr, struct bt_info *info)
  	return -1;
  }
  void bt_stop(void) {}
@@ -1270,6 +1457,8 @@ index d17bf84..1193f2c 100644
 +void pmic_batfet_lpm(bool on) {}
 +int display_rest_level = 2;
 +void display_set_rest_level(int level) { display_rest_level = level; }
++void display_set_deep(bool on) {}
++bool display_is_deep(void) { return false; }
 +bool usb_phy_lpm(bool on) { return true; }
 +bool usb_phy_in_lpm(void) { return false; }
 +int emmc_sleep(bool on) { return 0; }
@@ -1278,6 +1467,8 @@ index d17bf84..1193f2c 100644
 +bool touch_rmi4_sleep(bool on) { return true; }
 +bool hub_hold(bool on) { return true; }
 +bool hub_ready(void) { return true; }
++bool hub_services(bool off) { return true; }
++bool hub_services_are_off(void) { return false; }
 +bool rpm_sleep_bus(bool on) { return true; }
 +uint32_t pmic_avg_ms;
 +bool rpm_ldo_sleep_lpm(bool on) { return true; }
