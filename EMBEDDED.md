@@ -1094,3 +1094,10 @@ Five things Darrel noticed on the watch that behaved differently from AsteroidOS
   turns the mesh and opens it; back swipe -> launcher with it still selected, top close ->
   watchface; editing the only alarm shows no "+". `shot` encodes asynchronously: wait ~1.5 s
   before `adb pull screen.jpg` or the previous picture comes back.
+- **Review round** (Codex gpt-6-astra + Sonnet 5.5, fixups 6f3fde1, 9ee7261 on 90e1cd3): touch
+  time is now set when the driver queues the report (`struct touch.ms`, `ui_set_touch_ms`),
+  since main.c drains reports queued during a repaint back to back and the dispatch time put
+  them ~1 ms apart. Qt adds 0.25 item to the flick distance ("encourage moving at least one item
+  in the flick direction"; from memory again). The pressed app's colours only at rest; a press
+  that stops a turning wheel only stops it (PathView steals that click); a press between discs
+  does nothing. Left as Qt does: a weak flick takes up to ~1.2 s to settle.
