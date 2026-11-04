@@ -1110,3 +1110,12 @@ Five things Darrel noticed on the watch that behaved differently from AsteroidOS
   report, fading to 0 at 100 ms. Also (Sonnet): the move that crossed the 4 degree threshold was
   dropped, so a fling of 3 or fewer reports had < 2 samples and v = 0; sampling now starts at the
   press. Sturgeon's RMI4 lift delay is unmeasured.
+- **Other layouts and corners** (e9a8c11, e886bb8): Pager got the speed dial's sampling (3
+  samples timed by touch-ms, from the press, 50-100 ms lift allowance) and lost its 600 ms cap on
+  the flick animation. The cap made Vertical (one page per app, up to 9 screens a flick) move up
+  to ~5x faster than the finger while Two columns (5 rows) never hit it; Darrel noticed. Corners:
+  the mesh (max vertex radius 0.455 x 1.45 x launcher 1.1 = 0.725 vs 0.707 to a corner) leaves
+  sparrow's corners uncovered at some animation steps even unshifted (checked over the 6400-step
+  loop); nothing cleared them, so the three by three title left coloured corners. Square panels
+  now get a frame-filling quad (CPU: span fill) in the outer colour first, not turned with the
+  nightstand rotation.
