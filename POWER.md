@@ -929,7 +929,8 @@ measured slope within arms (0.551 mA/code) is close to the nominal 0.559.
 1-minute rehearsal passed every transition. USB rests through the
 committed unplugged collapse; no 1-second wakes (5-6 VDD-min entries a
 minute, residency 99.8-99.9% in every arm); the trim now comes from 64
-conversions and held bbd2-bbd4 asleep.
+conversions and ranged bbd2-bbda asleep (time-weighted ~bbd7), rising as the
+watch cooled.
 
 - **Baseline B (the five sleep measures): 4.70 mA** over 23 arms, every
   arm 4.2-5.0 mA without any trim correction.
@@ -988,3 +989,15 @@ right value (accumulated plus raw, with gain/temperature compensation), but
 offset error while cooling distorts short stretches. The RTC driver does
 implement wake alarms (it only lacks the sysfs file), so a systemd timer
 with WakeSystem=true should give periodic samples; to be rehearsed.
+
+**AsteroidOS day run (2026-11-04, ASTRA-POWER-7.md):** 11.0 h unplugged, screen and
+AOD off, BT off, tilt-to-wake off, systemd WakeSystem timer sampling every ~302 s
+(works). Settled: 3.07 mA mean over 125 intervals (3.09 endpoint-integrated),
+~4 VDD-min entries/min, 22.4 -> 18.5 C. Per Linux trim: bbd6 1.45, bbd9 2.80,
+bbdc 4.33 mA (0.48 mA/code). Both write the same trim register, so at the
+firmware's time-weighted trim (~bbd7.3) AsteroidOS reads ~2.0 mA against the
+firmware's 4.70: an apparent gap of ~2.7 mA. Equal trim cancels the programmed
+offset but not any state/temperature difference in the analogue zero, so this is
+strong evidence, not proof. Snapshot (plugged in): panel rails L4, L8, L15
+disabled with the screen off; touch doze_cycle 8, wake_gesture 1, L19 on.
+Logs: logs-aos-2026-11-04/.
