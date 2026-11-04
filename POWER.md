@@ -921,3 +921,32 @@ the USB rails keep a small positive sign. The vendor IADC driver also
 calibrates from one unaveraged conversion every 300 s (and, per its DT,
 from channel 6, not 5), so there is no vendor filter to copy; the
 measured slope within arms (0.551 mA/code) is close to the nominal 0.559.
+
+## 19. Floor with the fixes in (2026-11-04 overnight, 2751917 + 1f29a3e + harness 62832a5)
+
+`powertest 15 13 floor`, AOD off, BT off, 10 h unplugged, whole log kept
+(settle + arms 0-44, 2.25 cycles). Gate first (ASTRA-POWER-4.md): a
+1-minute rehearsal passed every transition. USB rests through the
+committed unplugged collapse; no 1-second wakes (5-6 VDD-min entries a
+minute, residency 99.8-99.9% in every arm); the trim now comes from 64
+conversions and held bbd2-bbd4 asleep.
+
+- **Baseline B (the five sleep measures): 4.70 mA** over 23 arms, every
+  arm 4.2-5.0 mA without any trim correction.
+- Each added measure against its neighbouring B arms:
+
+| measure | saving | 2 SE | per pair |
+|---|---|---|---|
+| V USB rails L10/L20 off | +0.09 mA | 0.18 | +0.21 +0.37 -0.06 -0.12 +0.06 |
+| Q touch rail L19 off | -0.07 mA | 0.26 | +0.06 -0.02 +0.08 -0.57 +0.12 |
+| M L4/L6 low-power sleep votes | -0.09 mA | 0.24 | -0.11 +0.01 -0.42 +0.14 |
+| all three (ABBA) | +0.25 mA | 0.16 | +0.33 +0.04 +0.23 +0.41 |
+
+- So none of the rail measures is worth implementing on its own; the
+  remaining ~4.7 mA is elsewhere (ASTRA-POWER-4.md §4: the panel's full
+  off sequence, the hub's sensors, CX/MX sleep votes, DDR).
+- The absolute value rests on the asleep trim (bbd3); plugged in the trim
+  reads ~bbc2-bbc5 (13-18 codes lower), so it is state dependent.
+- Harness note: with no measures applied the harness keeps USB up, so
+  during the settle USB was up; it rested when arm 0 applied U.
+- Log: logs-floor2-2026-11-04-sturgeon.txt.
