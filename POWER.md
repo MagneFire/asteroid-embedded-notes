@@ -950,3 +950,32 @@ conversions and held bbd2-bbd4 asleep.
 - Harness note: with no measures applied the harness keeps USB up, so
   during the settle USB was up; it rested when arm 0 applied U.
 - Log: logs-floor2-2026-11-04-sturgeon.txt.
+
+## 20. AsteroidOS on sturgeon, screen off, by the same counter (2026-11-04)
+
+AsteroidOS booted with `fastboot boot backup/sturgeon/boot-asteroidos.img`;
+`tools/aos-powerlog.sh` as a systemd unit, logging the BMS
+`charge_counter_shadow` property (uAh, Linux's accumulated value) on every
+USB change and every 600 s awake. This kernel's RTC has no wakealarm, so
+the unplug and the replug are the samples. AOD off needs both dconf keys
+(`/org/asteroidos/settings/always-on-display`,
+`/desktop/asteroid/nightstand/always-on-display`) besides mce's low power
+mode; BT off.
+
+- Unplugged 3944 s at ~94-100%, 24 -> 17 C: shadow +2285 uAh, **2.1 mA**
+  by the endpoints. VDD-min entries rose 32 -> 296.
+- The samples in between do not add up: -29 uAh (14 min), -399 uAh
+  (16 min, i.e. charging while unplugged), +2275 uAh (30 min, 4.5 mA),
+  +438 uAh (6 min, 4.6 mA). Linux's trim moved bbce -> bbdb as the watch
+  cooled; its accumulated counter is not a clean integral across that.
+  So 2.1 mA is indicative, roughly +-1-2 mA.
+- An earlier 8 min rehearsal with AOD on gave ~2.4 mA (first minutes after
+  unplug).
+- Compared with the firmware's 4.7 mA (§19, 18-20 C, trim bbd2-bbda): the
+  gap is likely real, ~2-3 mA, but needs a longer AsteroidOS run to pin
+  down. AsteroidOS does not wake every minute (the firmware's stats line,
+  BMS calc every 20 s), worth ~0.1-0.2 mA of the gap.
+- The firmware run shows the trim rising ~8 codes as the watch cooled
+  overnight while the measured current stayed flat: the trim follows a
+  real temperature-dependent offset.
+- Log: logs-aos-screenoff-2026-11-04-sturgeon.txt.

@@ -1,0 +1,12 @@
+start 1793775797 interval 600
+t 1793775797 uptime 146.59 shadow -80644 cc -8306 cur -172268 volt 4014699 cap 78 temp 290 usb 1 trim [036F0 -- -- BB C9] rpm xosd 0 vmin 0 vmin_last_ms 0
+t 1793776322 uptime 671.41 shadow -99872 cc -27549 cur 13535 volt 4244725 cap 86 temp 282 usb 0 trim [036F0 -- -- BB C8] rpm xosd 0 vmin 0 vmin_last_ms 0
+t 1793776797 uptime 1146.25 shadow -99557 cc -27234 cur 0 volt 4200000 cap 86 temp 235 usb 1 trim [036F0 -- -- BB D5] rpm xosd 0 vmin 32 vmin_last_ms 10000
+t 1793777397 uptime 1746.98 shadow -110892 cc -38585 cur -57422 volt 4227129 cap 99 temp 246 usb 1 trim [036F0 -- -- BB CC] rpm xosd 0 vmin 32 vmin_last_ms 10000
+t 1793777997 uptime 2346.64 shadow -118970 cc -46667 cur -41443 volt 4261711 cap 99 temp 245 usb 1 trim [036F0 -- -- BB CA] rpm xosd 0 vmin 32 vmin_last_ms 10000
+t 1793778597 uptime 2946.35 shadow -124671 cc -52369 cur -29175 volt 4291832 cap 100 temp 243 usb 1 trim [036F0 -- -- BB CE] rpm xosd 0 vmin 32 vmin_last_ms 10000
+t 1793778692 uptime 3041.50 shadow -125419 cc -53116 cur 70747 volt 4266683 cap 100 temp 243 usb 0 trim [036F0 -- -- BB CE] rpm xosd 0 vmin 32 vmin_last_ms 10000
+t 1793779525 uptime 3874.23 shadow -125448 cc -6 cur -2164 volt 4217680 cap 94 temp 200 usb 0 trim [036F0 -- -- BB CE] rpm xosd 0 vmin 88 vmin_last_ms 1000
+t 1793780491 uptime 4840.53 shadow -125847 cc -21 cur -2164 volt 4253714 cap 94 temp 183 usb 0 trim [036F0 -- -- BB DB] rpm xosd 0 vmin 153 vmin_last_ms 3000
+t 1793782293 uptime 6642.36 shadow -123572 cc 150 cur 4451 volt 4236923 cap 94 temp 171 usb 0 trim [036F0 -- -- BB DB] rpm xosd 0 vmin 273 vmin_last_ms 11000
+t 1793782636 uptime 6985.72 shadow -123134 cc 76 cur 0 volt 4253142 cap 94 temp 170 usb 1 trim [036F0 -- -- BB DB] rpm xosd 0 vmin 296 vmin_last_ms 7000
