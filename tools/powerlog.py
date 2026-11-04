@@ -122,6 +122,7 @@ def main():
         print(f"{label:<16} n={len(v):<3} cc {st.mean(v):7.2f} mA  se {se:5.2f}")
     leave_one_out(stats, args.min_shadow)
     floor_contrasts(stats, args.min_shadow)
+    night_contrasts(stats, args.min_shadow)
     if len(by_label) == 2:
         (la, va), (lb, vb) = by_label.items()
         d = st.mean(va) - st.mean(vb)
@@ -200,6 +201,34 @@ def floor_contrasts(stats, trim_ok):
         name = "F all, ABBA (B F F B)" if k == "ABBA" else FLOOR_NAMES.get(k, hex(k))
         se = st.stdev(d) / len(d) ** 0.5 if len(d) > 1 else float("nan")
         print(f"  {name:<26} {st.mean(d):+6.2f} mA  2 SE {2 * se:5.2f}  n {len(d)}  " + " ".join(f"{x:+.2f}" for x in d))
+
+
+def night_contrasts(stats, trim_ok):
+    """`powertest ... night`: blocks of B X X B (X = P, the panel in deep
+    standby, or S, the hub running with its services off instead of held
+    in reset); the saving of X is the mean of the two B arms minus the mean
+    of the two X arms."""
+    arms = {}
+    for n, (label, s) in stats.items():
+        m = re.search(r"night=([0-9a-f]+)", label)
+        if m and s["shadow_ma"] is not None and s["shadow_min"] >= trim_ok and not s["mismatch"]:
+            arms[n] = (int(m.group(1), 16), s["shadow_ma"])
+    if not arms:
+        return
+    B, P, S = 0x1F, 0x21F, 0x41B
+    rows = {"P panel deep standby": [], "S hub services off, MCU running": []}
+    for n in sorted(arms):
+        blk = [arms.get(n + k) for k in range(4)]
+        if all(blk) and blk[0][0] == B and blk[3][0] == B and blk[1][0] == blk[2][0] and blk[1][0] in (P, S):
+            key = "P panel deep standby" if blk[1][0] == P else "S hub services off, MCU running"
+            rows[key].append((blk[0][1] + blk[3][1]) / 2 - (blk[1][1] + blk[2][1]) / 2)
+    base = [c for m, c in arms.values() if m == B]
+    print(f"\nnight: baseline B mean {st.mean(base):.2f} mA over {len(base)} arms; savings (positive = saves):")
+    for k, d in rows.items():
+        if not d:
+            continue
+        se = st.stdev(d) / len(d) ** 0.5 if len(d) > 1 else float("nan")
+        print(f"  {k:<34} {st.mean(d):+6.2f} mA  2 SE {2 * se:5.2f}  n {len(d)}  " + " ".join(f"{x:+.2f}" for x in d))
 
 
 if __name__ == "__main__":
