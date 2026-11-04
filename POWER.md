@@ -1006,3 +1006,15 @@ the start), the firmware §19 run 88 -> 80% (4.19 -> 4.03 V). Both logs carry
 the percentage and voltage per sample; a higher battery voltage means slightly
 less current through the regulators for the same load (a few percent, ~0.1 mA),
 which favours AsteroidOS a little.
+
+**Register diff, firmware vs AsteroidOS (2026-11-04, logs-aos-2026-11-04/fw-regs.txt
+vs snap/aos-snap-1793824759.txt).** Firmware read plugged in, screen off, B
+measures; AsteroidOS read after a timer resume, unplugged. All MMSS GDSCs are
+collapsed on the firmware too, and the hub UART, LPASS AXI and USB PHY sleep
+clocks are off, so the "bootloader-left domains" candidate is dead. LDOs on
+under the firmware but off under Linux: L4 and L15 (panel, HPM), L20 (USB;
+plugged here), and **L18 and L21 in HPM: the SDC2 (microSD) vdd and vdd-io
+rails, whose controller sturgeon's DT disables** (apq8026-sturgeon-common.dtsi:80).
+Something before the firmware (aboot or lk2nd) turns them on and nothing
+turns them off. Linux has L11 on in LPM where the firmware has it off; L17 is
+in LPM on the firmware (eMMC asleep) and HPM in the awake Linux read.
