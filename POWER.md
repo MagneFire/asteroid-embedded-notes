@@ -1001,3 +1001,8 @@ offset but not any state/temperature difference in the analogue zero, so this is
 strong evidence, not proof. Snapshot (plugged in): panel rails L4, L8, L15
 disabled with the screen off; touch doze_cycle 8, wake_gesture 1, L19 on.
 Logs: logs-aos-2026-11-04/.
+Battery state differs: the AsteroidOS day run went 96 -> 87% (4.25-4.30 V at
+the start), the firmware §19 run 88 -> 80% (4.19 -> 4.03 V). Both logs carry
+the percentage and voltage per sample; a higher battery voltage means slightly
+less current through the regulators for the same load (a few percent, ~0.1 mA),
+which favours AsteroidOS a little.

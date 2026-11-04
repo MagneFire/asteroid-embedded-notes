@@ -26,6 +26,18 @@ rpm() {
 	awk '/RPM Mode/ {m=$2} /count:/ {split($1, a, ":"); c[m]=a[2]} /time in last mode/ {split($0, a, ":"); t[m]=a[2]} END {printf "xosd %s vmin %s vmin_last_ms %s", c["Mode:xosd"], c["Mode:vmin"], t["Mode:vmin"]}' /sys/kernel/debug/rpm_stats
 }
 
+line() {
+	echo "t $(date +%s) uptime $(cut -d' ' -f1 /proc/uptime) shadow $(cat $BMS/charge_counter_shadow) cc $(cat $BMS/charge_counter) cur $(cat $BMS/current_now) volt $(cat $BMS/voltage_now) cap $(cat $BMS/capacity) temp $(cat /sys/class/power_supply/battery/temp) usb $(cat /sys/class/power_supply/usb/present) trim [$(spmi16 0x36f2)] rpm $(rpm) $1" >> $LOG
+}
+
+# "once": one sample, for a systemd timer with WakeSystem=true, holding a
+# 5 s wakelock so autosleep does not cut it short.
+if [ "$1" = once ]; then
+	echo "aoslog 5000000000" > /sys/power/wake_lock
+	line timer
+	exit 0
+fi
+
 echo "start $(date +%s) interval $INTERVAL" >> $LOG
 prev=x
 last=0
@@ -33,7 +45,7 @@ while true; do
 	usb=$(cat /sys/class/power_supply/usb/present)
 	now=$(date +%s)
 	if [ "$usb" != "$prev" ] || [ $((now - last)) -ge "$INTERVAL" ]; then
-		echo "t $now uptime $(cut -d' ' -f1 /proc/uptime) shadow $(cat $BMS/charge_counter_shadow) cc $(cat $BMS/charge_counter) cur $(cat $BMS/current_now) volt $(cat $BMS/voltage_now) cap $(cat $BMS/capacity) temp $(cat /sys/class/power_supply/battery/temp) usb $usb trim [$(spmi16 0x36f2)] rpm $(rpm)" >> $LOG
+		line loop
 		prev=$usb
 		last=$now
 	fi

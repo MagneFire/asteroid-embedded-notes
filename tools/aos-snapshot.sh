@@ -19,7 +19,8 @@ spmi() {
 }
 
 {
-	echo "== time $(date +%s) uptime $(cut -d' ' -f1 /proc/uptime) usb $(cat /sys/class/power_supply/usb/present)"
+	B=/sys/class/power_supply/bms
+	echo "== time $(date +%s) uptime $(cut -d' ' -f1 /proc/uptime) usb $(cat /sys/class/power_supply/usb/present) cap $(cat $B/capacity) volt $(cat $B/voltage_now) cur $(cat $B/current_now) temp $(cat /sys/class/power_supply/battery/temp)"
 	echo "== regulators (name state users opmode uV)"
 	for r in /sys/class/regulator/regulator.*; do
 		echo "$(cat $r/name 2>/dev/null) $(cat $r/state 2>/dev/null) $(cat $r/num_users 2>/dev/null) $(cat $r/opmode 2>/dev/null) $(cat $r/microvolts 2>/dev/null)"
