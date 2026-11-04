@@ -1,0 +1,2068 @@
+[ 3800.545289] 
+[ 3800.545300] Restarting tasks ... done.
+[ 3800.547133] PM: suspend exit 2026-11-04 15:49:12.493484347 UTC
+[ 3805.366803] PM: suspend entry 2026-11-04 15:49:17.313117783 UTC
+[ 3805.366906] PM: Syncing filesystems ... done.
+[ 3805.493967] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3805.495365] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3805.496663] Suspending console(s) (use no_console_suspend to debug)
+[ 3805.498125] bcmsdh_sdmmc_suspend Enter
+[ 3805.498127] bcmsdh_sdmmc_suspend Enter
+[ 3805.498676] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3805.498686] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3805.572200] PM: suspend of devices complete after 75.157 msecs
+[ 3805.572573] PM: late suspend of devices complete after 0.365 msecs
+[ 3805.573251] PM: noirq suspend of devices complete after 0.670 msecs
+[ 3805.573256] Disabling non-boot CPUs ...
+[ 3805.573394] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3805.573394] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3805.573394] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3805.573394] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3805.573394] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3805.573394] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3805.573394] Suspended for 0.000 seconds
+[ 3805.574797] PM: noirq resume of devices complete after 0.734 msecs
+[ 3805.576309] PM: early resume of devices complete after 0.446 msecs
+[ 3805.576594] bcmsdh_sdmmc_resume Enter
+[ 3805.576597] bcmsdh_sdmmc_resume Enter
+[ 3805.583385] PM: resume of devices complete after 7.065 msecs
+[ 3805.584010] Restarting tasks ... done.
+[ 3805.606864] PM: suspend exit 2026-11-04 15:54:14.181552564 UTC
+[ 3805.606917] PM: suspend entry 2026-11-04 15:54:14.181608189 UTC
+[ 3805.612599] mmc0: Starting deferred resume
+[ 3805.707687] mmc0: Deferred resume completed
+[ 3805.606936] PM: Syncing filesystems ... done.
+[ 3805.936391] Freezing user space processes ... 
+[ 3805.936727] active wakeup source: aoslog
+[ 3805.936772] 
+[ 3805.936790] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3805.936818] 
+[ 3805.936830] Restarting tasks ... done.
+[ 3805.937467] PM: suspend exit 2026-11-04 15:54:14.512154335 UTC
+[ 3810.676798] PM: suspend entry 2026-11-04 15:54:19.251481885 UTC
+[ 3810.676831] PM: Syncing filesystems ... done.
+[ 3810.828241] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3810.830036] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3810.831519] Suspending console(s) (use no_console_suspend to debug)
+[ 3810.836991] bcmsdh_sdmmc_suspend Enter
+[ 3810.836997] bcmsdh_sdmmc_suspend Enter
+[ 3810.838265] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3810.838281] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3810.913875] PM: suspend of devices complete after 81.609 msecs
+[ 3810.914607] PM: late suspend of devices complete after 0.717 msecs
+[ 3810.916054] PM: noirq suspend of devices complete after 1.429 msecs
+[ 3810.916065] Disabling non-boot CPUs ...
+[ 3810.916266] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3810.916266] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3810.916266] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3810.916266] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3810.916266] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3810.916266] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3810.916266] Suspended for 0.000 seconds
+[ 3810.917919] PM: noirq resume of devices complete after 0.854 msecs
+[ 3810.919839] PM: early resume of devices complete after 0.664 msecs
+[ 3810.920255] bcmsdh_sdmmc_resume Enter
+[ 3810.920260] bcmsdh_sdmmc_resume Enter
+[ 3810.929465] PM: resume of devices complete after 9.607 msecs
+[ 3810.930703] Restarting tasks ... done.
+[ 3810.958494] PM: suspend exit 2026-11-04 15:59:16.191575313 UTC
+[ 3810.958599] PM: suspend entry 2026-11-04 15:59:16.191688334 UTC
+[ 3810.969734] mmc0: Starting deferred resume
+[ 3811.060742] mmc0: Deferred resume completed
+[ 3810.958639] PM: Syncing filesystems ... done.
+[ 3811.282702] Freezing user space processes ... 
+[ 3811.283008] active wakeup source: aoslog
+[ 3811.283048] 
+[ 3811.283064] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3811.283087] 
+[ 3811.283097] Restarting tasks ... done.
+[ 3811.283657] PM: suspend exit 2026-11-04 15:59:16.516750678 UTC
+[ 3816.047363] PM: suspend entry 2026-11-04 15:59:21.280420103 UTC
+[ 3816.047465] PM: Syncing filesystems ... done.
+[ 3816.171524] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3816.173843] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3816.175980] Suspending console(s) (use no_console_suspend to debug)
+[ 3816.186023] bcmsdh_sdmmc_suspend Enter
+[ 3816.186034] bcmsdh_sdmmc_suspend Enter
+[ 3816.187941] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3816.188277] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3816.265871] PM: suspend of devices complete after 88.715 msecs
+[ 3816.267222] PM: late suspend of devices complete after 1.324 msecs
+[ 3816.269523] PM: noirq suspend of devices complete after 2.273 msecs
+[ 3816.269541] Disabling non-boot CPUs ...
+[ 3816.269870] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3816.269870] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3816.269870] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3816.269870] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3816.269870] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3816.269870] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3816.269870] Suspended for 0.000 seconds
+[ 3816.272068] PM: noirq resume of devices complete after 1.144 msecs
+[ 3816.275017] PM: early resume of devices complete after 1.051 msecs
+[ 3816.276128] bcmsdh_sdmmc_resume Enter
+[ 3816.276137] bcmsdh_sdmmc_resume Enter
+[ 3816.289533] PM: resume of devices complete after 14.485 msecs
+[ 3816.291926] Restarting tasks ... done.
+[ 3816.324609] PM: suspend exit 2026-11-04 16:04:18.206165250 UTC
+[ 3816.325900] PM: suspend entry 2026-11-04 16:04:18.207462229 UTC
+[ 3816.332252] mmc0: Starting deferred resume
+[ 3816.422926] mmc0: Deferred resume completed
+[ 3816.325985] PM: Syncing filesystems ... done.
+[ 3816.656561] Freezing user space processes ... 
+[ 3816.656868] active wakeup source: aoslog
+[ 3816.656908] 
+[ 3816.656924] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3816.656947] 
+[ 3816.656958] Restarting tasks ... done.
+[ 3816.657516] PM: suspend exit 2026-11-04 16:04:18.539100614 UTC
+[ 3821.417600] PM: suspend entry 2026-11-04 16:04:23.299179362 UTC
+[ 3821.417636] PM: Syncing filesystems ... done.
+[ 3821.538330] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3821.540659] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3821.542645] Suspending console(s) (use no_console_suspend to debug)
+[ 3821.552704] bcmsdh_sdmmc_suspend Enter
+[ 3821.552714] bcmsdh_sdmmc_suspend Enter
+[ 3821.554621] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3821.554956] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3821.635638] PM: suspend of devices complete after 91.819 msecs
+[ 3821.636997] PM: late suspend of devices complete after 1.333 msecs
+[ 3821.639300] PM: noirq suspend of devices complete after 2.275 msecs
+[ 3821.639316] Disabling non-boot CPUs ...
+[ 3821.639647] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3821.639647] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3821.639647] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3821.639647] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3821.639647] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3821.639647] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3821.639647] Suspended for 0.000 seconds
+[ 3821.641843] PM: noirq resume of devices complete after 1.145 msecs
+[ 3821.644806] PM: early resume of devices complete after 1.050 msecs
+[ 3821.645931] bcmsdh_sdmmc_resume Enter
+[ 3821.645941] bcmsdh_sdmmc_resume Enter
+[ 3821.659391] PM: resume of devices complete after 14.552 msecs
+[ 3821.661791] Restarting tasks ... done.
+[ 3821.694521] PM: suspend exit 2026-11-04 16:09:20.208255290 UTC
+[ 3821.695833] PM: suspend entry 2026-11-04 16:09:20.209572269 UTC
+[ 3821.702074] mmc0: Starting deferred resume
+[ 3821.793644] mmc0: Deferred resume completed
+[ 3821.695918] PM: Syncing filesystems ... done.
+[ 3822.557908] Freezing user space processes ... 
+[ 3822.558399] active wakeup source: aoslog
+[ 3822.558468] 
+[ 3822.558492] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3822.558528] 
+[ 3822.558544] Restarting tasks ... done.
+[ 3822.559446] PM: suspend exit 2026-11-04 16:09:21.073201436 UTC
+[ 3826.787286] PM: suspend entry 2026-11-04 16:09:25.301010184 UTC
+[ 3826.787389] PM: Syncing filesystems ... done.
+[ 3826.907107] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3826.909425] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3826.911416] Suspending console(s) (use no_console_suspend to debug)
+[ 3826.921472] bcmsdh_sdmmc_suspend Enter
+[ 3826.921483] bcmsdh_sdmmc_suspend Enter
+[ 3826.923388] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3826.923741] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3826.995666] PM: suspend of devices complete after 83.060 msecs
+[ 3826.997023] PM: late suspend of devices complete after 1.331 msecs
+[ 3826.999329] PM: noirq suspend of devices complete after 2.278 msecs
+[ 3826.999347] Disabling non-boot CPUs ...
+[ 3826.999676] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3826.999676] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3826.999676] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3826.999676] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3826.999676] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3826.999676] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3826.999676] Suspended for 0.000 seconds
+[ 3827.001874] PM: noirq resume of devices complete after 1.145 msecs
+[ 3827.004819] PM: early resume of devices complete after 1.051 msecs
+[ 3827.005927] bcmsdh_sdmmc_resume Enter
+[ 3827.005937] bcmsdh_sdmmc_resume Enter
+[ 3827.019321] PM: resume of devices complete after 14.470 msecs
+[ 3827.021721] Restarting tasks ... done.
+[ 3827.054379] PM: suspend exit 2026-11-04 16:14:22.209841528 UTC
+[ 3827.056175] PM: suspend entry 2026-11-04 16:14:22.211641633 UTC
+[ 3827.061934] mmc0: Starting deferred resume
+[ 3827.152030] mmc0: Deferred resume completed
+[ 3827.056262] PM: Syncing filesystems ... done.
+[ 3827.361072] Freezing user space processes ... 
+[ 3827.361387] active wakeup source: aoslog
+[ 3827.361427] 
+[ 3827.361442] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3827.361465] 
+[ 3827.361475] Restarting tasks ... done.
+[ 3827.362034] PM: suspend exit 2026-11-04 16:14:22.517527101 UTC
+[ 3832.157488] PM: suspend entry 2026-11-04 16:14:27.312943922 UTC
+[ 3832.157592] PM: Syncing filesystems ... done.
+[ 3832.280167] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3832.282501] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3832.284477] Suspending console(s) (use no_console_suspend to debug)
+[ 3832.294532] bcmsdh_sdmmc_suspend Enter
+[ 3832.294542] bcmsdh_sdmmc_suspend Enter
+[ 3832.297008] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3832.297033] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3832.375704] PM: suspend of devices complete after 89.789 msecs
+[ 3832.377057] PM: late suspend of devices complete after 1.327 msecs
+[ 3832.379358] PM: noirq suspend of devices complete after 2.273 msecs
+[ 3832.379375] Disabling non-boot CPUs ...
+[ 3832.379705] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3832.379705] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3832.379705] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3832.379705] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3832.379705] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3832.379705] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3832.379705] Suspended for 0.000 seconds
+[ 3832.381928] PM: noirq resume of devices complete after 1.145 msecs
+[ 3832.384962] PM: early resume of devices complete after 1.139 msecs
+[ 3832.386083] bcmsdh_sdmmc_resume Enter
+[ 3832.386094] bcmsdh_sdmmc_resume Enter
+[ 3832.399714] PM: resume of devices complete after 14.718 msecs
+[ 3832.402112] Restarting tasks ... done.
+[ 3832.438397] PM: suspend exit 2026-11-04 16:19:24.215583236 UTC
+[ 3832.439003] PM: suspend entry 2026-11-04 16:19:24.216219955 UTC
+[ 3832.443123] mmc0: Starting deferred resume
+[ 3832.534470] mmc0: Deferred resume completed
+[ 3832.439027] PM: Syncing filesystems ... done.
+[ 3832.762965] Freezing user space processes ... 
+[ 3832.763282] active wakeup source: aoslog
+[ 3832.763324] 
+[ 3832.763341] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3832.763366] 
+[ 3832.763377] Restarting tasks ... done.
+[ 3832.763967] PM: suspend exit 2026-11-04 16:19:24.541180788 UTC
+[ 3837.535501] PM: suspend entry 2026-11-04 16:19:29.312711151 UTC
+[ 3837.535535] PM: Syncing filesystems ... done.
+[ 3837.664356] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3837.665750] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3837.666996] Suspending console(s) (use no_console_suspend to debug)
+[ 3837.668960] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3837.668969] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3837.669039] bcmsdh_sdmmc_suspend Enter
+[ 3837.669042] bcmsdh_sdmmc_suspend Enter
+[ 3837.741697] PM: suspend of devices complete after 74.319 msecs
+[ 3837.742069] PM: late suspend of devices complete after 0.364 msecs
+[ 3837.742748] PM: noirq suspend of devices complete after 0.671 msecs
+[ 3837.742753] Disabling non-boot CPUs ...
+[ 3837.742894] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3837.742894] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3837.742894] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3837.742894] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3837.742894] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3837.742894] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3837.742894] Suspended for 0.000 seconds
+[ 3837.744299] PM: noirq resume of devices complete after 0.734 msecs
+[ 3837.745803] PM: early resume of devices complete after 0.445 msecs
+[ 3837.746088] bcmsdh_sdmmc_resume Enter
+[ 3837.746091] bcmsdh_sdmmc_resume Enter
+[ 3837.752907] PM: resume of devices complete after 7.094 msecs
+[ 3837.753559] Restarting tasks ... done.
+[ 3837.775850] PM: suspend exit 2026-11-04 16:24:26.191774475 UTC
+[ 3837.775902] PM: suspend entry 2026-11-04 16:24:26.191830308 UTC
+[ 3837.781436] mmc0: Starting deferred resume
+[ 3837.874011] mmc0: Deferred resume completed
+[ 3837.775921] PM: Syncing filesystems ... done.
+[ 3838.120406] Freezing user space processes ... 
+[ 3838.121376] active wakeup source: aoslog
+[ 3838.121502] 
+[ 3838.121562] Freezing of tasks aborted after 0.001 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3838.121653] 
+[ 3838.121694] Restarting tasks ... done.
+[ 3838.123599] PM: suspend exit 2026-11-04 16:24:26.539497079 UTC
+[ 3842.845582] PM: suspend entry 2026-11-04 16:24:31.261502858 UTC
+[ 3842.845613] PM: Syncing filesystems ... done.
+[ 3842.940707] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3842.942367] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3842.943811] Suspending console(s) (use no_console_suspend to debug)
+[ 3842.947040] bcmsdh_sdmmc_suspend Enter
+[ 3842.947045] bcmsdh_sdmmc_suspend Enter
+[ 3842.947940] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3842.947954] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3843.023353] PM: suspend of devices complete after 78.889 msecs
+[ 3843.023943] PM: late suspend of devices complete after 0.577 msecs
+[ 3843.025147] PM: noirq suspend of devices complete after 1.190 msecs
+[ 3843.025157] Disabling non-boot CPUs ...
+[ 3843.025328] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3843.025328] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3843.025328] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3843.025328] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3843.025328] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3843.025328] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3843.025328] Suspended for 0.000 seconds
+[ 3843.026857] PM: noirq resume of devices complete after 0.798 msecs
+[ 3843.028520] PM: early resume of devices complete after 0.555 msecs
+[ 3843.028878] bcmsdh_sdmmc_resume Enter
+[ 3843.028882] bcmsdh_sdmmc_resume Enter
+[ 3843.036821] PM: resume of devices complete after 8.285 msecs
+[ 3843.037787] Restarting tasks ... done.
+[ 3843.072313] PM: suspend exit 2026-11-04 16:29:28.207082797 UTC
+[ 3843.072396] PM: suspend entry 2026-11-04 16:29:28.207169776 UTC
+[ 3843.081575] mmc0: Starting deferred resume
+[ 3843.174737] mmc0: Deferred resume completed
+[ 3843.072427] PM: Syncing filesystems ... done.
+[ 3843.437959] Freezing user space processes ... 
+[ 3843.438795] active wakeup source: aoslog
+[ 3843.438903] 
+[ 3843.438949] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3843.439020] 
+[ 3843.439052] Restarting tasks ... done.
+[ 3843.440602] PM: suspend exit 2026-11-04 16:29:28.575356495 UTC
+[ 3848.147187] PM: suspend entry 2026-11-04 16:29:33.281925034 UTC
+[ 3848.147291] PM: Syncing filesystems ... done.
+[ 3848.237455] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3848.239525] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3848.241317] Suspending console(s) (use no_console_suspend to debug)
+[ 3848.249319] bcmsdh_sdmmc_suspend Enter
+[ 3848.249327] bcmsdh_sdmmc_suspend Enter
+[ 3848.250877] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3848.250899] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3848.324799] PM: suspend of devices complete after 82.494 msecs
+[ 3848.326038] PM: late suspend of devices complete after 1.214 msecs
+[ 3848.327902] PM: noirq suspend of devices complete after 1.843 msecs
+[ 3848.327917] Disabling non-boot CPUs ...
+[ 3848.328190] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3848.328190] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3848.328190] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3848.328190] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3848.328190] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3848.328190] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3848.328190] Suspended for 0.000 seconds
+[ 3848.330153] PM: noirq resume of devices complete after 1.017 msecs
+[ 3848.332647] PM: early resume of devices complete after 0.865 msecs
+[ 3848.333419] bcmsdh_sdmmc_resume Enter
+[ 3848.333427] bcmsdh_sdmmc_resume Enter
+[ 3848.344797] PM: resume of devices complete after 12.123 msecs
+[ 3848.346812] Restarting tasks ... done.
+[ 3848.379754] PM: suspend exit 2026-11-04 16:34:30.213897785 UTC
+[ 3848.379906] PM: suspend entry 2026-11-04 16:34:30.214057993 UTC
+[ 3848.389143] mmc0: Starting deferred resume
+[ 3848.480618] mmc0: Deferred resume completed
+[ 3848.379966] PM: Syncing filesystems ... done.
+[ 3848.698538] Freezing user space processes ... 
+[ 3848.699493] active wakeup source: aoslog
+[ 3848.699621] 
+[ 3848.699680] Freezing of tasks aborted after 0.001 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3848.699771] 
+[ 3848.699812] Restarting tasks ... done.
+[ 3848.701709] PM: suspend exit 2026-11-04 16:34:30.535847681 UTC
+[ 3853.467323] PM: suspend entry 2026-11-04 16:34:35.301473877 UTC
+[ 3853.467377] PM: Syncing filesystems ... done.
+[ 3853.596669] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3853.598999] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3853.600985] Suspending console(s) (use no_console_suspend to debug)
+[ 3853.611001] bcmsdh_sdmmc_suspend Enter
+[ 3853.611012] bcmsdh_sdmmc_suspend Enter
+[ 3853.612924] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3853.613278] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3853.685486] PM: suspend of devices complete after 83.316 msecs
+[ 3853.686843] PM: late suspend of devices complete after 1.331 msecs
+[ 3853.689145] PM: noirq suspend of devices complete after 2.274 msecs
+[ 3853.689163] Disabling non-boot CPUs ...
+[ 3853.689491] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3853.689491] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3853.689491] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3853.689491] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3853.689491] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3853.689491] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3853.689491] Suspended for 0.000 seconds
+[ 3853.691685] PM: noirq resume of devices complete after 1.147 msecs
+[ 3853.694629] PM: early resume of devices complete after 1.050 msecs
+[ 3853.695754] bcmsdh_sdmmc_resume Enter
+[ 3853.695764] bcmsdh_sdmmc_resume Enter
+[ 3853.709248] PM: resume of devices complete after 14.585 msecs
+[ 3853.711646] Restarting tasks ... done.
+[ 3853.745475] PM: suspend exit 2026-11-04 16:39:32.220116680 UTC
+[ 3853.746911] PM: suspend entry 2026-11-04 16:39:32.221553503 UTC
+[ 3853.752066] mmc0: Starting deferred resume
+[ 3853.840679] mmc0: Deferred resume completed
+[ 3853.746996] PM: Syncing filesystems ... done.
+[ 3854.067690] Freezing user space processes ... 
+[ 3854.068187] active wakeup source: aoslog
+[ 3854.068258] 
+[ 3854.068282] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3854.068317] 
+[ 3854.068333] Restarting tasks ... done.
+[ 3854.069228] PM: suspend exit 2026-11-04 16:39:32.543887461 UTC
+[ 3858.836099] PM: suspend entry 2026-11-04 16:39:37.310759022 UTC
+[ 3858.836135] PM: Syncing filesystems ... done.
+[ 3858.969719] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3858.972046] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3858.974032] Suspending console(s) (use no_console_suspend to debug)
+[ 3858.984039] bcmsdh_sdmmc_suspend Enter
+[ 3858.984050] bcmsdh_sdmmc_suspend Enter
+[ 3858.986551] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3858.986575] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3859.065350] PM: suspend of devices complete after 89.858 msecs
+[ 3859.066698] PM: late suspend of devices complete after 1.323 msecs
+[ 3859.069003] PM: noirq suspend of devices complete after 2.278 msecs
+[ 3859.069020] Disabling non-boot CPUs ...
+[ 3859.069351] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3859.069351] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3859.069351] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3859.069351] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3859.069351] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3859.069351] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3859.069351] Suspended for 0.000 seconds
+[ 3859.071542] PM: noirq resume of devices complete after 1.145 msecs
+[ 3859.074486] PM: early resume of devices complete after 1.049 msecs
+[ 3859.075603] bcmsdh_sdmmc_resume Enter
+[ 3859.075613] bcmsdh_sdmmc_resume Enter
+[ 3859.089975] PM: resume of devices complete after 15.456 msecs
+[ 3859.092598] Restarting tasks ... done.
+[ 3859.128108] PM: suspend exit 2026-11-04 16:44:34.224627762 UTC
+[ 3859.175735] PM: suspend entry 2026-11-04 16:44:34.272276460 UTC
+[ 3859.176132] mmc0: Starting deferred resume
+[ 3859.271208] mmc0: Deferred resume completed
+[ 3859.175768] PM: Syncing filesystems ... done.
+[ 3859.455562] Freezing user space processes ... 
+[ 3859.455917] active wakeup source: aoslog
+[ 3859.455958] 
+[ 3859.455973] Freezing of tasks aborted after 0.000 seconds (12 tasks refusing to freeze, wq_busy=0):
+[ 3859.455996] 
+[ 3859.456007] Restarting tasks ... done.
+[ 3859.456565] PM: suspend exit 2026-11-04 16:44:34.553113699 UTC
+[ 3864.225264] PM: suspend entry 2026-11-04 16:44:39.321775624 UTC
+[ 3864.225367] PM: Syncing filesystems ... done.
+[ 3864.360366] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3864.362143] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3864.363627] Suspending console(s) (use no_console_suspend to debug)
+[ 3864.369088] bcmsdh_sdmmc_suspend Enter
+[ 3864.369094] bcmsdh_sdmmc_suspend Enter
+[ 3864.370180] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3864.370196] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3864.443209] PM: suspend of devices complete after 78.835 msecs
+[ 3864.443936] PM: late suspend of devices complete after 0.713 msecs
+[ 3864.445387] PM: noirq suspend of devices complete after 1.433 msecs
+[ 3864.445397] Disabling non-boot CPUs ...
+[ 3864.445599] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3864.445599] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3864.445599] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3864.445599] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3864.445599] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3864.445599] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3864.445599] Suspended for 0.000 seconds
+[ 3864.447261] PM: noirq resume of devices complete after 0.857 msecs
+[ 3864.449181] PM: early resume of devices complete after 0.664 msecs
+[ 3864.449593] bcmsdh_sdmmc_resume Enter
+[ 3864.449598] bcmsdh_sdmmc_resume Enter
+[ 3864.458813] PM: resume of devices complete after 9.613 msecs
+[ 3864.460046] Restarting tasks ... done.
+[ 3864.488267] PM: suspend exit 2026-11-04 16:49:36.209982334 UTC
+[ 3864.488369] PM: suspend entry 2026-11-04 16:49:36.210090042 UTC
+[ 3864.499150] mmc0: Starting deferred resume
+[ 3864.589212] mmc0: Deferred resume completed
+[ 3864.488408] PM: Syncing filesystems ... done.
+[ 3864.832176] Freezing user space processes ... 
+[ 3864.832510] active wakeup source: aoslog
+[ 3864.832553] 
+[ 3864.832571] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3864.832599] 
+[ 3864.832611] Restarting tasks ... done.
+[ 3864.833246] PM: suspend exit 2026-11-04 16:49:36.554969104 UTC
+[ 3869.576829] PM: suspend entry 2026-11-04 16:49:41.298549415 UTC
+[ 3869.576862] PM: Syncing filesystems ... done.
+[ 3869.698074] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3869.699476] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3869.700724] Suspending console(s) (use no_console_suspend to debug)
+[ 3869.702684] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3869.702694] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3869.702763] bcmsdh_sdmmc_suspend Enter
+[ 3869.702766] bcmsdh_sdmmc_suspend Enter
+[ 3869.771286] PM: suspend of devices complete after 70.179 msecs
+[ 3869.771662] PM: late suspend of devices complete after 0.369 msecs
+[ 3869.772342] PM: noirq suspend of devices complete after 0.672 msecs
+[ 3869.772348] Disabling non-boot CPUs ...
+[ 3869.772483] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3869.772483] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3869.772483] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3869.772483] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3869.772483] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3869.772483] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3869.772483] Suspended for 0.000 seconds
+[ 3869.773883] PM: noirq resume of devices complete after 0.731 msecs
+[ 3869.775397] PM: early resume of devices complete after 0.448 msecs
+[ 3869.775687] bcmsdh_sdmmc_resume Enter
+[ 3869.775690] bcmsdh_sdmmc_resume Enter
+[ 3869.782480] PM: resume of devices complete after 7.071 msecs
+[ 3869.783111] Restarting tasks ... done.
+[ 3869.807763] PM: suspend exit 2026-11-04 16:54:38.204829145 UTC
+[ 3869.807814] PM: suspend entry 2026-11-04 16:54:38.204883728 UTC
+[ 3869.813907] mmc0: Starting deferred resume
+[ 3869.903167] mmc0: Deferred resume completed
+[ 3869.807834] PM: Syncing filesystems ... done.
+[ 3870.167316] Freezing user space processes ... 
+[ 3870.167814] active wakeup source: aoslog
+[ 3870.167880] 
+[ 3870.167903] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3870.167939] 
+[ 3870.167956] Restarting tasks ... done.
+[ 3870.168848] PM: suspend exit 2026-11-04 16:54:38.565909041 UTC
+[ 3874.895904] PM: suspend entry 2026-11-04 16:54:43.292965705 UTC
+[ 3874.895940] PM: Syncing filesystems ... done.
+[ 3875.067302] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3875.069636] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3875.071617] Suspending console(s) (use no_console_suspend to debug)
+[ 3875.081676] bcmsdh_sdmmc_suspend Enter
+[ 3875.081686] bcmsdh_sdmmc_suspend Enter
+[ 3875.084011] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3875.084036] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3875.155161] PM: suspend of devices complete after 82.365 msecs
+[ 3875.156511] PM: late suspend of devices complete after 1.325 msecs
+[ 3875.158815] PM: noirq suspend of devices complete after 2.277 msecs
+[ 3875.158832] Disabling non-boot CPUs ...
+[ 3875.159164] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3875.159164] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3875.159164] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3875.159164] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3875.159164] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3875.159164] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3875.159164] Suspended for 0.000 seconds
+[ 3875.161358] PM: noirq resume of devices complete after 1.145 msecs
+[ 3875.164302] PM: early resume of devices complete after 1.050 msecs
+[ 3875.165408] bcmsdh_sdmmc_resume Enter
+[ 3875.165418] bcmsdh_sdmmc_resume Enter
+[ 3875.178804] PM: resume of devices complete after 14.468 msecs
+[ 3875.181202] Restarting tasks ... done.
+[ 3875.229740] PM: suspend exit 2026-11-04 16:59:40.241923196 UTC
+[ 3875.229925] PM: suspend entry 2026-11-04 16:59:40.242116738 UTC
+[ 3875.245112] mmc0: Starting deferred resume
+[ 3875.333179] mmc0: Deferred resume completed
+[ 3875.230001] PM: Syncing filesystems ... done.
+[ 3875.533241] Freezing user space processes ... 
+[ 3875.533596] active wakeup source: aoslog
+[ 3875.533642] 
+[ 3875.533659] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3875.533687] 
+[ 3875.533699] Restarting tasks ... done.
+[ 3875.534334] PM: suspend exit 2026-11-04 16:59:40.546542571 UTC
+[ 3880.396917] PM: suspend entry 2026-11-04 16:59:45.409090903 UTC
+[ 3880.397020] PM: Syncing filesystems ... done.
+[ 3880.540084] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3880.542408] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3880.544392] Suspending console(s) (use no_console_suspend to debug)
+[ 3880.554495] bcmsdh_sdmmc_suspend Enter
+[ 3880.554506] bcmsdh_sdmmc_suspend Enter
+[ 3880.556960] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3880.556985] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3880.635094] PM: suspend of devices complete after 89.268 msecs
+[ 3880.636446] PM: late suspend of devices complete after 1.326 msecs
+[ 3880.638753] PM: noirq suspend of devices complete after 2.278 msecs
+[ 3880.638769] Disabling non-boot CPUs ...
+[ 3880.639098] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3880.639098] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3880.639098] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3880.639098] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3880.639098] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3880.639098] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3880.639098] Suspended for 0.000 seconds
+[ 3880.641319] PM: noirq resume of devices complete after 1.148 msecs
+[ 3880.644262] PM: early resume of devices complete after 1.049 msecs
+[ 3880.645368] bcmsdh_sdmmc_resume Enter
+[ 3880.645378] bcmsdh_sdmmc_resume Enter
+[ 3880.658776] PM: resume of devices complete after 14.481 msecs
+[ 3880.661175] Restarting tasks ... done.
+[ 3880.693798] PM: suspend exit 2026-11-04 17:04:42.227802664 UTC
+[ 3880.695185] PM: suspend entry 2026-11-04 17:04:42.229197091 UTC
+[ 3880.701407] mmc0: Starting deferred resume
+[ 3880.790418] mmc0: Deferred resume completed
+[ 3880.695271] PM: Syncing filesystems ... done.
+[ 3880.988695] Freezing user space processes ... 
+[ 3880.989654] active wakeup source: aoslog
+[ 3880.989781] 
+[ 3880.989838] Freezing of tasks aborted after 0.001 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3880.989929] 
+[ 3880.989971] Restarting tasks ... done.
+[ 3880.991860] PM: suspend exit 2026-11-04 17:04:42.525865060 UTC
+[ 3885.786622] PM: suspend entry 2026-11-04 17:04:47.320618860 UTC
+[ 3885.786725] PM: Syncing filesystems ... done.
+[ 3885.946912] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3885.948562] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3885.949959] Suspending console(s) (use no_console_suspend to debug)
+[ 3885.954225] bcmsdh_sdmmc_suspend Enter
+[ 3885.954230] bcmsdh_sdmmc_suspend Enter
+[ 3885.955245] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3885.955260] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3886.032854] PM: suspend of devices complete after 82.248 msecs
+[ 3886.033439] PM: late suspend of devices complete after 0.573 msecs
+[ 3886.034525] PM: noirq suspend of devices complete after 1.075 msecs
+[ 3886.034535] Disabling non-boot CPUs ...
+[ 3886.034705] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3886.034705] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3886.034705] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3886.034705] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3886.034705] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3886.034705] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3886.034705] Suspended for 0.000 seconds
+[ 3886.036340] PM: noirq resume of devices complete after 0.798 msecs
+[ 3886.038004] PM: early resume of devices complete after 0.557 msecs
+[ 3886.038350] bcmsdh_sdmmc_resume Enter
+[ 3886.038355] bcmsdh_sdmmc_resume Enter
+[ 3886.046227] PM: resume of devices complete after 8.208 msecs
+[ 3886.047187] Restarting tasks ... done.
+[ 3886.085089] PM: suspend exit 2026-11-04 17:09:44.224938902 UTC
+[ 3886.085170] PM: suspend entry 2026-11-04 17:09:44.225024371 UTC
+[ 3886.095403] mmc0: Starting deferred resume
+[ 3886.187731] mmc0: Deferred resume completed
+[ 3886.085201] PM: Syncing filesystems ... done.
+[ 3886.968407] Freezing user space processes ... 
+[ 3886.968741] active wakeup source: aoslog
+[ 3886.968786] 
+[ 3886.968804] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3886.968832] 
+[ 3886.968844] Restarting tasks ... done.
+[ 3886.969482] PM: suspend exit 2026-11-04 17:09:45.109336610 UTC
+[ 3891.166690] PM: suspend entry 2026-11-04 17:09:49.306541244 UTC
+[ 3891.166723] PM: Syncing filesystems ... done.
+[ 3891.271288] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3891.272742] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3891.274065] Suspending console(s) (use no_console_suspend to debug)
+[ 3891.277307] bcmsdh_sdmmc_suspend Enter
+[ 3891.277311] bcmsdh_sdmmc_suspend Enter
+[ 3891.277993] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3891.278004] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3891.351546] PM: suspend of devices complete after 77.059 msecs
+[ 3891.351974] PM: late suspend of devices complete after 0.419 msecs
+[ 3891.352751] PM: noirq suspend of devices complete after 0.767 msecs
+[ 3891.352757] Disabling non-boot CPUs ...
+[ 3891.352898] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3891.352898] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3891.352898] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3891.352898] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3891.352898] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3891.352898] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3891.352898] Suspended for 0.000 seconds
+[ 3891.354330] PM: noirq resume of devices complete after 0.751 msecs
+[ 3891.355961] PM: early resume of devices complete after 0.487 msecs
+[ 3891.356268] bcmsdh_sdmmc_resume Enter
+[ 3891.356271] bcmsdh_sdmmc_resume Enter
+[ 3891.363643] PM: resume of devices complete after 7.670 msecs
+[ 3891.364380] Restarting tasks ... done.
+[ 3891.395634] PM: suspend exit 2026-11-04 17:14:46.219552797 UTC
+[ 3891.395694] PM: suspend entry 2026-11-04 17:14:46.219617015 UTC
+[ 3891.404113] mmc0: Starting deferred resume
+[ 3891.498289] mmc0: Deferred resume completed
+[ 3891.395717] PM: Syncing filesystems ... done.
+[ 3891.757823] Freezing user space processes ... 
+[ 3891.758162] active wakeup source: aoslog
+[ 3891.758206] 
+[ 3891.758224] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3891.758252] 
+[ 3891.758264] Restarting tasks ... done.
+[ 3891.758912] PM: suspend exit 2026-11-04 17:14:46.582831703 UTC
+[ 3896.465733] PM: suspend entry 2026-11-04 17:14:51.289617378 UTC
+[ 3896.465836] PM: Syncing filesystems ... done.
+[ 3896.545062] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3896.546472] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3896.547752] Suspending console(s) (use no_console_suspend to debug)
+[ 3896.549748] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3896.549758] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3896.549824] bcmsdh_sdmmc_suspend Enter
+[ 3896.549827] bcmsdh_sdmmc_suspend Enter
+[ 3896.621081] PM: suspend of devices complete after 72.942 msecs
+[ 3896.621454] PM: late suspend of devices complete after 0.365 msecs
+[ 3896.622131] PM: noirq suspend of devices complete after 0.669 msecs
+[ 3896.622136] Disabling non-boot CPUs ...
+[ 3896.622275] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3896.622275] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3896.622275] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3896.622275] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3896.622275] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3896.622275] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3896.622275] Suspended for 0.000 seconds
+[ 3896.623687] PM: noirq resume of devices complete after 0.734 msecs
+[ 3896.625189] PM: early resume of devices complete after 0.446 msecs
+[ 3896.625476] bcmsdh_sdmmc_resume Enter
+[ 3896.625479] bcmsdh_sdmmc_resume Enter
+[ 3896.632101] PM: resume of devices complete after 6.902 msecs
+[ 3896.632753] Restarting tasks ... done.
+[ 3896.654678] PM: suspend exit 2026-11-04 17:19:48.210937265 UTC
+[ 3896.654731] PM: suspend entry 2026-11-04 17:19:48.210993515 UTC
+[ 3896.660644] mmc0: Starting deferred resume
+[ 3896.752774] mmc0: Deferred resume completed
+[ 3896.654750] PM: Syncing filesystems ... done.
+[ 3897.001120] Freezing user space processes ... 
+[ 3897.001429] active wakeup source: aoslog
+[ 3897.001469] 
+[ 3897.001484] Freezing of tasks aborted after 0.000 seconds (11 tasks refusing to freeze, wq_busy=0):
+[ 3897.001507] 
+[ 3897.001518] Restarting tasks ... done.
+[ 3897.002064] PM: suspend exit 2026-11-04 17:19:48.558323098 UTC
+[ 3901.726735] PM: suspend entry 2026-11-04 17:19:53.282979554 UTC
+[ 3901.726789] PM: Syncing filesystems ... done.
+[ 3901.853911] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3901.855318] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3901.856596] Suspending console(s) (use no_console_suspend to debug)
+[ 3901.858925] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3901.858935] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3901.859002] bcmsdh_sdmmc_suspend Enter
+[ 3901.859004] bcmsdh_sdmmc_suspend Enter
+[ 3901.931054] PM: suspend of devices complete after 74.073 msecs
+[ 3901.931435] PM: late suspend of devices complete after 0.373 msecs
+[ 3901.932110] PM: noirq suspend of devices complete after 0.668 msecs
+[ 3901.932116] Disabling non-boot CPUs ...
+[ 3901.932257] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3901.932257] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3901.932257] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3901.932257] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3901.932257] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3901.932257] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3901.932257] Suspended for 0.000 seconds
+[ 3901.933672] PM: noirq resume of devices complete after 0.733 msecs
+[ 3901.935174] PM: early resume of devices complete after 0.447 msecs
+[ 3901.935456] bcmsdh_sdmmc_resume Enter
+[ 3901.935459] bcmsdh_sdmmc_resume Enter
+[ 3901.942260] PM: resume of devices complete after 7.076 msecs
+[ 3901.942915] Restarting tasks ... done.
+[ 3901.965756] PM: suspend exit 2026-11-04 17:24:50.213987461 UTC
+[ 3901.965808] PM: suspend entry 2026-11-04 17:24:50.214042409 UTC
+[ 3901.971923] mmc0: Starting deferred resume
+[ 3902.062787] mmc0: Deferred resume completed
+[ 3901.965828] PM: Syncing filesystems ... done.
+[ 3902.312760] Freezing user space processes ... 
+[ 3902.313098] active wakeup source: aoslog
+[ 3902.313143] 
+[ 3902.313161] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3902.313188] 
+[ 3902.313201] Restarting tasks ... done.
+[ 3902.313832] PM: suspend exit 2026-11-04 17:24:50.562061524 UTC
+[ 3907.045762] PM: suspend entry 2026-11-04 17:24:55.293988084 UTC
+[ 3907.045798] PM: Syncing filesystems ... done.
+[ 3907.149527] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3907.151847] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3907.153833] Suspending console(s) (use no_console_suspend to debug)
+[ 3907.163821] bcmsdh_sdmmc_suspend Enter
+[ 3907.163831] bcmsdh_sdmmc_suspend Enter
+[ 3907.166333] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3907.166358] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3907.244844] PM: suspend of devices complete after 89.574 msecs
+[ 3907.246194] PM: late suspend of devices complete after 1.325 msecs
+[ 3907.248488] PM: noirq suspend of devices complete after 2.266 msecs
+[ 3907.248505] Disabling non-boot CPUs ...
+[ 3907.248836] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3907.248836] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3907.248836] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3907.248836] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3907.248836] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3907.248836] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3907.248836] Suspended for 0.000 seconds
+[ 3907.251029] PM: noirq resume of devices complete after 1.145 msecs
+[ 3907.253972] PM: early resume of devices complete after 1.048 msecs
+[ 3907.255068] bcmsdh_sdmmc_resume Enter
+[ 3907.255078] bcmsdh_sdmmc_resume Enter
+[ 3907.268512] PM: resume of devices complete after 14.508 msecs
+[ 3907.270914] Restarting tasks ... done.
+[ 3907.303594] PM: suspend exit 2026-11-04 17:29:52.236849116 UTC
+[ 3907.304945] PM: suspend entry 2026-11-04 17:29:52.238206981 UTC
+[ 3907.311126] mmc0: Starting deferred resume
+[ 3907.400843] mmc0: Deferred resume completed
+[ 3907.305031] PM: Syncing filesystems ... done.
+[ 3907.628237] Freezing user space processes ... 
+[ 3907.629205] active wakeup source: aoslog
+[ 3907.629332] 
+[ 3907.629391] Freezing of tasks aborted after 0.001 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3907.629482] 
+[ 3907.629523] Restarting tasks ... done.
+[ 3907.631423] PM: suspend exit 2026-11-04 17:29:52.564679324 UTC
+[ 3912.405114] PM: suspend entry 2026-11-04 17:29:57.338360729 UTC
+[ 3912.405217] PM: Syncing filesystems ... done.
+[ 3912.554208] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3912.556803] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3912.558792] Suspending console(s) (use no_console_suspend to debug)
+[ 3912.568759] bcmsdh_sdmmc_suspend Enter
+[ 3912.568769] bcmsdh_sdmmc_suspend Enter
+[ 3912.570677] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3912.571010] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3912.644854] PM: suspend of devices complete after 84.884 msecs
+[ 3912.646212] PM: late suspend of devices complete after 1.331 msecs
+[ 3912.648514] PM: noirq suspend of devices complete after 2.274 msecs
+[ 3912.648530] Disabling non-boot CPUs ...
+[ 3912.648858] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3912.648858] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3912.648858] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3912.648858] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3912.648858] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3912.648858] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3912.648858] Suspended for 0.000 seconds
+[ 3912.651074] PM: noirq resume of devices complete after 1.146 msecs
+[ 3912.654020] PM: early resume of devices complete after 1.050 msecs
+[ 3912.655162] bcmsdh_sdmmc_resume Enter
+[ 3912.655172] bcmsdh_sdmmc_resume Enter
+[ 3912.668828] PM: resume of devices complete after 14.777 msecs
+[ 3912.671230] Restarting tasks ... done.
+[ 3912.704877] PM: suspend exit 2026-11-04 17:34:54.239849053 UTC
+[ 3912.705066] PM: suspend entry 2026-11-04 17:34:54.240040876 UTC
+[ 3912.711552] mmc0: Starting deferred resume
+[ 3912.802493] mmc0: Deferred resume completed
+[ 3912.705142] PM: Syncing filesystems ... done.
+[ 3913.016815] Freezing user space processes ... 
+[ 3913.017150] active wakeup source: aoslog
+[ 3913.017195] 
+[ 3913.017213] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3913.017240] 
+[ 3913.017253] Restarting tasks ... done.
+[ 3913.017889] PM: suspend exit 2026-11-04 17:34:54.552882959 UTC
+[ 3917.796425] PM: suspend entry 2026-11-04 17:34:59.331414572 UTC
+[ 3917.796461] PM: Syncing filesystems ... done.
+[ 3917.937200] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3917.938984] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3917.940467] Suspending console(s) (use no_console_suspend to debug)
+[ 3917.945920] bcmsdh_sdmmc_suspend Enter
+[ 3917.945925] bcmsdh_sdmmc_suspend Enter
+[ 3917.947015] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3917.947031] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3918.022696] PM: suspend of devices complete after 81.481 msecs
+[ 3918.023424] PM: late suspend of devices complete after 0.713 msecs
+[ 3918.024875] PM: noirq suspend of devices complete after 1.434 msecs
+[ 3918.024885] Disabling non-boot CPUs ...
+[ 3918.025088] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3918.025088] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3918.025088] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3918.025088] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3918.025088] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3918.025088] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3918.025088] Suspended for 0.000 seconds
+[ 3918.026728] PM: noirq resume of devices complete after 0.855 msecs
+[ 3918.028648] PM: early resume of devices complete after 0.663 msecs
+[ 3918.029062] bcmsdh_sdmmc_resume Enter
+[ 3918.029067] bcmsdh_sdmmc_resume Enter
+[ 3918.038527] PM: resume of devices complete after 9.860 msecs
+[ 3918.039767] Restarting tasks ... done.
+[ 3918.067753] PM: suspend exit 2026-11-04 17:39:56.227948208 UTC
+[ 3918.067853] PM: suspend entry 2026-11-04 17:39:56.228055343 UTC
+[ 3918.078905] mmc0: Starting deferred resume
+[ 3918.170444] mmc0: Deferred resume completed
+[ 3918.067893] PM: Syncing filesystems ... done.
+[ 3918.424817] Freezing user space processes ... 
+[ 3918.425125] active wakeup source: aoslog
+[ 3918.425164] 
+[ 3918.425179] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3918.425202] 
+[ 3918.425213] Restarting tasks ... done.
+[ 3918.425765] PM: suspend exit 2026-11-04 17:39:56.585972530 UTC
+[ 3923.156655] PM: suspend entry 2026-11-04 17:40:01.316825133 UTC
+[ 3923.156758] PM: Syncing filesystems ... done.
+[ 3923.306098] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3923.308425] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3923.310412] Suspending console(s) (use no_console_suspend to debug)
+[ 3923.320387] bcmsdh_sdmmc_suspend Enter
+[ 3923.320397] bcmsdh_sdmmc_suspend Enter
+[ 3923.322306] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3923.322641] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3923.394727] PM: suspend of devices complete after 83.127 msecs
+[ 3923.396083] PM: late suspend of devices complete after 1.330 msecs
+[ 3923.398383] PM: noirq suspend of devices complete after 2.272 msecs
+[ 3923.398399] Disabling non-boot CPUs ...
+[ 3923.398729] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3923.398729] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3923.398729] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3923.398729] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3923.398729] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3923.398729] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3923.398729] Suspended for 0.000 seconds
+[ 3923.400923] PM: noirq resume of devices complete after 1.146 msecs
+[ 3923.403864] PM: early resume of devices complete after 1.050 msecs
+[ 3923.404999] bcmsdh_sdmmc_resume Enter
+[ 3923.405009] bcmsdh_sdmmc_resume Enter
+[ 3923.418414] PM: resume of devices complete after 14.519 msecs
+[ 3923.420817] Restarting tasks ... done.
+[ 3923.453426] PM: suspend exit 2026-11-04 17:44:58.242033821 UTC
+[ 3923.454758] PM: suspend entry 2026-11-04 17:44:58.243371946 UTC
+[ 3923.461205] mmc0: Starting deferred resume
+[ 3923.550364] mmc0: Deferred resume completed
+[ 3923.454843] PM: Syncing filesystems ... done.
+[ 3923.770473] Freezing user space processes ... 
+[ 3923.770778] active wakeup source: aoslog
+[ 3923.770818] 
+[ 3923.770834] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3923.770857] 
+[ 3923.770868] Restarting tasks ... done.
+[ 3923.771420] PM: suspend exit 2026-11-04 17:44:58.560055852 UTC
+[ 3928.544788] PM: suspend entry 2026-11-04 17:45:03.333386996 UTC
+[ 3928.544892] PM: Syncing filesystems ... done.
+[ 3928.679178] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3928.681295] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3928.683090] Suspending console(s) (use no_console_suspend to debug)
+[ 3928.691097] bcmsdh_sdmmc_suspend Enter
+[ 3928.691105] bcmsdh_sdmmc_suspend Enter
+[ 3928.692657] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3928.692678] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3928.763946] PM: suspend of devices complete after 79.869 msecs
+[ 3928.765197] PM: late suspend of devices complete after 1.224 msecs
+[ 3928.767060] PM: noirq suspend of devices complete after 1.841 msecs
+[ 3928.767074] Disabling non-boot CPUs ...
+[ 3928.767346] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3928.767346] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3928.767346] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3928.767346] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3928.767346] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3928.767346] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3928.767346] Suspended for 0.000 seconds
+[ 3928.769316] PM: noirq resume of devices complete after 1.017 msecs
+[ 3928.771809] PM: early resume of devices complete after 0.867 msecs
+[ 3928.772585] bcmsdh_sdmmc_resume Enter
+[ 3928.772593] bcmsdh_sdmmc_resume Enter
+[ 3928.783952] PM: resume of devices complete after 12.118 msecs
+[ 3928.785964] Restarting tasks ... done.
+[ 3928.818892] PM: suspend exit 2026-11-04 17:50:00.240828081 UTC
+[ 3928.819041] PM: suspend entry 2026-11-04 17:50:00.240984591 UTC
+[ 3928.828213] mmc0: Starting deferred resume
+[ 3928.919670] mmc0: Deferred resume completed
+[ 3928.819103] PM: Syncing filesystems ... done.
+[ 3929.143100] Freezing user space processes ... 
+[ 3929.143409] active wakeup source: aoslog
+[ 3929.143449] 
+[ 3929.143464] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3929.143487] 
+[ 3929.143497] Restarting tasks ... done.
+[ 3929.144052] PM: suspend exit 2026-11-04 17:50:00.566008706 UTC
+[ 3933.906135] PM: suspend entry 2026-11-04 17:50:05.328086725 UTC
+[ 3933.906171] PM: Syncing filesystems ... done.
+[ 3934.052919] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3934.055244] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3934.057227] Suspending console(s) (use no_console_suspend to debug)
+[ 3934.067224] bcmsdh_sdmmc_suspend Enter
+[ 3934.067236] bcmsdh_sdmmc_suspend Enter
+[ 3934.069141] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3934.069496] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3934.144430] PM: suspend of devices complete after 86.028 msecs
+[ 3934.145783] PM: late suspend of devices complete after 1.327 msecs
+[ 3934.148089] PM: noirq suspend of devices complete after 2.277 msecs
+[ 3934.148106] Disabling non-boot CPUs ...
+[ 3934.148439] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3934.148439] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3934.148439] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3934.148439] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3934.148439] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3934.148439] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3934.148439] Suspended for 0.000 seconds
+[ 3934.150636] PM: noirq resume of devices complete after 1.146 msecs
+[ 3934.153581] PM: early resume of devices complete after 1.051 msecs
+[ 3934.154689] bcmsdh_sdmmc_resume Enter
+[ 3934.154699] bcmsdh_sdmmc_resume Enter
+[ 3934.168088] PM: resume of devices complete after 14.475 msecs
+[ 3934.170483] Restarting tasks ... done.
+[ 3934.214539] PM: suspend exit 2026-11-04 17:55:02.257176350 UTC
+[ 3934.214730] PM: suspend entry 2026-11-04 17:55:02.257372860 UTC
+[ 3934.220582] mmc0: Starting deferred resume
+[ 3934.315057] mmc0: Deferred resume completed
+[ 3934.214806] PM: Syncing filesystems ... done.
+[ 3934.521085] Freezing user space processes ... 
+[ 3934.521393] active wakeup source: aoslog
+[ 3934.521433] 
+[ 3934.521449] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3934.521472] 
+[ 3934.521482] Restarting tasks ... done.
+[ 3934.522045] PM: suspend exit 2026-11-04 17:55:02.564706767 UTC
+[ 3939.325716] PM: suspend entry 2026-11-04 17:55:07.368349056 UTC
+[ 3939.325801] PM: Syncing filesystems ... done.
+[ 3939.473097] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3939.475676] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3939.477671] Suspending console(s) (use no_console_suspend to debug)
+[ 3939.487698] bcmsdh_sdmmc_suspend Enter
+[ 3939.487709] bcmsdh_sdmmc_suspend Enter
+[ 3939.489617] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3939.489953] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3939.563935] PM: suspend of devices complete after 85.089 msecs
+[ 3939.565498] PM: late suspend of devices complete after 1.530 msecs
+[ 3939.567811] PM: noirq suspend of devices complete after 2.285 msecs
+[ 3939.567828] Disabling non-boot CPUs ...
+[ 3939.568160] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3939.568160] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3939.568160] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3939.568160] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3939.568160] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3939.568160] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3939.568160] Suspended for 0.000 seconds
+[ 3939.570357] PM: noirq resume of devices complete after 1.145 msecs
+[ 3939.573301] PM: early resume of devices complete after 1.052 msecs
+[ 3939.574419] bcmsdh_sdmmc_resume Enter
+[ 3939.574430] bcmsdh_sdmmc_resume Enter
+[ 3939.588021] PM: resume of devices complete after 14.687 msecs
+[ 3939.590412] Restarting tasks ... done.
+[ 3939.634902] PM: suspend exit 2026-11-04 18:00:04.259554724 UTC
+[ 3939.635087] PM: suspend entry 2026-11-04 18:00:04.259747744 UTC
+[ 3939.649534] mmc0: Starting deferred resume
+[ 3939.741829] mmc0: Deferred resume completed
+[ 3939.635161] PM: Syncing filesystems ... done.
+[ 3939.971950] Freezing user space processes ... 
+[ 3939.972294] active wakeup source: aoslog
+[ 3939.972339] 
+[ 3939.972357] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3939.972384] 
+[ 3939.972397] Restarting tasks ... done.
+[ 3939.973023] PM: suspend exit 2026-11-04 18:00:04.597701130 UTC
+[ 3944.736305] PM: suspend entry 2026-11-04 18:00:09.360948107 UTC
+[ 3944.736409] PM: Syncing filesystems ... done.
+[ 3944.867561] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3944.868995] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3944.870262] Suspending console(s) (use no_console_suspend to debug)
+[ 3944.871823] bcmsdh_sdmmc_suspend Enter
+[ 3944.871826] bcmsdh_sdmmc_suspend Enter
+[ 3944.872562] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3944.872572] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3944.940644] PM: suspend of devices complete after 69.978 msecs
+[ 3944.941044] PM: late suspend of devices complete after 0.392 msecs
+[ 3944.941767] PM: noirq suspend of devices complete after 0.714 msecs
+[ 3944.941772] Disabling non-boot CPUs ...
+[ 3944.941907] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3944.941907] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3944.941907] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3944.941907] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3944.941907] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3944.941907] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3944.941907] Suspended for 0.000 seconds
+[ 3944.943343] PM: noirq resume of devices complete after 0.746 msecs
+[ 3944.944908] PM: early resume of devices complete after 0.463 msecs
+[ 3944.945208] bcmsdh_sdmmc_resume Enter
+[ 3944.945211] bcmsdh_sdmmc_resume Enter
+[ 3944.952217] PM: resume of devices complete after 7.298 msecs
+[ 3944.952893] Restarting tasks ... done.
+[ 3944.976242] PM: suspend exit 2026-11-04 18:05:06.229091535 UTC
+[ 3944.976297] PM: suspend entry 2026-11-04 18:05:06.229150337 UTC
+[ 3944.982591] mmc0: Starting deferred resume
+[ 3945.078846] mmc0: Deferred resume completed
+[ 3944.976318] PM: Syncing filesystems ... done.
+[ 3946.358315] Freezing user space processes ... 
+[ 3946.358823] active wakeup source: aoslog
+[ 3946.358889] 
+[ 3946.358913] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3946.358949] 
+[ 3946.358965] Restarting tasks ... done.
+[ 3946.359859] PM: suspend exit 2026-11-04 18:05:07.612703201 UTC
+[ 3950.055327] PM: suspend entry 2026-11-04 18:05:11.308163408 UTC
+[ 3950.055380] PM: Syncing filesystems ... done.
+[ 3950.116382] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3950.118517] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3950.120314] Suspending console(s) (use no_console_suspend to debug)
+[ 3950.128335] bcmsdh_sdmmc_suspend Enter
+[ 3950.128343] bcmsdh_sdmmc_suspend Enter
+[ 3950.129897] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3950.129918] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3950.203712] PM: suspend of devices complete after 82.414 msecs
+[ 3950.204958] PM: late suspend of devices complete after 1.220 msecs
+[ 3950.206825] PM: noirq suspend of devices complete after 1.845 msecs
+[ 3950.206838] Disabling non-boot CPUs ...
+[ 3950.207110] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3950.207110] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3950.207110] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3950.207110] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3950.207110] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3950.207110] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3950.207110] Suspended for 0.000 seconds
+[ 3950.209058] PM: noirq resume of devices complete after 1.018 msecs
+[ 3950.211554] PM: early resume of devices complete after 0.867 msecs
+[ 3950.212332] bcmsdh_sdmmc_resume Enter
+[ 3950.212340] bcmsdh_sdmmc_resume Enter
+[ 3950.224016] PM: resume of devices complete after 12.435 msecs
+[ 3950.225907] Restarting tasks ... done.
+[ 3950.257494] PM: suspend exit 2026-11-04 18:10:08.246673763 UTC
+[ 3950.257641] PM: suspend entry 2026-11-04 18:10:08.246828659 UTC
+[ 3950.267735] mmc0: Starting deferred resume
+[ 3950.360302] mmc0: Deferred resume completed
+[ 3950.257700] PM: Syncing filesystems ... done.
+[ 3950.584814] Freezing user space processes ... 
+[ 3950.585309] active wakeup source: aoslog
+[ 3950.585379] 
+[ 3950.585402] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3950.585438] 
+[ 3950.585455] Restarting tasks ... done.
+[ 3950.586343] PM: suspend exit 2026-11-04 18:10:08.575535429 UTC
+[ 3955.346094] PM: suspend entry 2026-11-04 18:10:13.335289282 UTC
+[ 3955.346127] PM: Syncing filesystems ... done.
+[ 3955.491373] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3955.493704] Freezing remaining freezable tasks ... (elapsed 0.002 seconds) done.
+[ 3955.495948] Suspending console(s) (use no_console_suspend to debug)
+[ 3955.505960] bcmsdh_sdmmc_suspend Enter
+[ 3955.505971] bcmsdh_sdmmc_suspend Enter
+[ 3955.507880] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3955.508214] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3955.584384] PM: suspend of devices complete after 87.261 msecs
+[ 3955.585735] PM: late suspend of devices complete after 1.325 msecs
+[ 3955.588036] PM: noirq suspend of devices complete after 2.275 msecs
+[ 3955.588053] Disabling non-boot CPUs ...
+[ 3955.588383] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3955.588383] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3955.588383] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3955.588383] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3955.588383] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3955.588383] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3955.588383] Suspended for 0.000 seconds
+[ 3955.590583] PM: noirq resume of devices complete after 1.146 msecs
+[ 3955.593528] PM: early resume of devices complete after 1.049 msecs
+[ 3955.594652] bcmsdh_sdmmc_resume Enter
+[ 3955.594662] bcmsdh_sdmmc_resume Enter
+[ 3955.608103] PM: resume of devices complete after 14.543 msecs
+[ 3955.610504] Restarting tasks ... done.
+[ 3955.643114] PM: suspend exit 2026-11-04 18:15:10.253026460 UTC
+[ 3955.644384] PM: suspend entry 2026-11-04 18:15:10.254301199 UTC
+[ 3955.650767] mmc0: Starting deferred resume
+[ 3955.740007] mmc0: Deferred resume completed
+[ 3955.644468] PM: Syncing filesystems ... done.
+[ 3955.985708] Freezing user space processes ... 
+[ 3955.986205] active wakeup source: aoslog
+[ 3955.986269] 
+[ 3955.986293] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3955.986328] 
+[ 3955.986345] Restarting tasks ... done.
+[ 3955.987224] PM: suspend exit 2026-11-04 18:15:10.597157397 UTC
+[ 3960.736036] PM: suspend entry 2026-11-04 18:15:15.345969426 UTC
+[ 3960.736072] PM: Syncing filesystems ... done.
+[ 3960.893912] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3960.896383] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3960.898373] Suspending console(s) (use no_console_suspend to debug)
+[ 3960.908319] bcmsdh_sdmmc_suspend Enter
+[ 3960.908330] bcmsdh_sdmmc_suspend Enter
+[ 3960.910228] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3960.910253] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3960.984236] PM: suspend of devices complete after 84.686 msecs
+[ 3960.985590] PM: late suspend of devices complete after 1.328 msecs
+[ 3960.987892] PM: noirq suspend of devices complete after 2.273 msecs
+[ 3960.987910] Disabling non-boot CPUs ...
+[ 3960.988240] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3960.988240] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3960.988240] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3960.988240] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3960.988240] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3960.988240] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3960.988240] Suspended for 0.000 seconds
+[ 3960.990454] PM: noirq resume of devices complete after 1.144 msecs
+[ 3960.993399] PM: early resume of devices complete after 1.050 msecs
+[ 3960.994513] bcmsdh_sdmmc_resume Enter
+[ 3960.994523] bcmsdh_sdmmc_resume Enter
+[ 3961.007937] PM: resume of devices complete after 14.506 msecs
+[ 3961.010340] Restarting tasks ... done.
+[ 3961.043060] PM: suspend exit 2026-11-04 18:20:12.254856604 UTC
+[ 3961.044315] PM: suspend entry 2026-11-04 18:20:12.256119157 UTC
+[ 3961.051069] mmc0: Starting deferred resume
+[ 3961.141006] mmc0: Deferred resume completed
+[ 3961.044400] PM: Syncing filesystems ... done.
+[ 3961.394990] Freezing user space processes ... 
+[ 3961.395569] active wakeup source: aoslog
+[ 3961.395646] 
+[ 3961.395675] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3961.395721] 
+[ 3961.395742] Restarting tasks ... done.
+[ 3961.396822] PM: suspend exit 2026-11-04 18:20:12.608637125 UTC
+[ 3966.136058] PM: suspend entry 2026-11-04 18:20:17.347879155 UTC
+[ 3966.136092] PM: Syncing filesystems ... done.
+[ 3966.311541] Freezing user space processes ... (elapsed 0.008 seconds) done.
+[ 3966.320618] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3966.322317] Suspending console(s) (use no_console_suspend to debug)
+[ 3966.330365] bcmsdh_sdmmc_suspend Enter
+[ 3966.330373] bcmsdh_sdmmc_suspend Enter
+[ 3966.331931] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3966.331952] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3966.403106] PM: suspend of devices complete after 79.779 msecs
+[ 3966.404361] PM: late suspend of devices complete after 1.229 msecs
+[ 3966.406229] PM: noirq suspend of devices complete after 1.845 msecs
+[ 3966.406243] Disabling non-boot CPUs ...
+[ 3966.406517] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3966.406517] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3966.406517] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3966.406517] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3966.406517] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3966.406517] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3966.406517] Suspended for 0.000 seconds
+[ 3966.408465] PM: noirq resume of devices complete after 1.020 msecs
+[ 3966.410957] PM: early resume of devices complete after 0.866 msecs
+[ 3966.411734] bcmsdh_sdmmc_resume Enter
+[ 3966.411741] bcmsdh_sdmmc_resume Enter
+[ 3966.422714] PM: resume of devices complete after 11.730 msecs
+[ 3966.424747] Restarting tasks ... done.
+[ 3966.468335] PM: suspend exit 2026-11-04 18:25:14.263589510 UTC
+[ 3966.468493] PM: suspend entry 2026-11-04 18:25:14.263754093 UTC
+[ 3966.478355] mmc0: Starting deferred resume
+[ 3966.569736] mmc0: Deferred resume completed
+[ 3966.468553] PM: Syncing filesystems ... done.
+[ 3966.662014] Freezing user space processes ... 
+[ 3966.662363] active wakeup source: aoslog
+[ 3966.662403] 
+[ 3966.662418] Freezing of tasks aborted after 0.000 seconds (14 tasks refusing to freeze, wq_busy=0):
+[ 3966.662442] 
+[ 3966.662452] Restarting tasks ... done.
+[ 3966.663191] PM: suspend exit 2026-11-04 18:25:14.458466749 UTC
+[ 3971.635575] PM: suspend entry 2026-11-04 18:25:19.430813310 UTC
+[ 3971.635678] PM: Syncing filesystems ... done.
+[ 3971.705326] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3971.707100] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3971.708645] Suspending console(s) (use no_console_suspend to debug)
+[ 3971.714085] bcmsdh_sdmmc_suspend Enter
+[ 3971.714091] bcmsdh_sdmmc_suspend Enter
+[ 3971.715356] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3971.715432] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3971.792137] PM: suspend of devices complete after 82.751 msecs
+[ 3971.792868] PM: late suspend of devices complete after 0.717 msecs
+[ 3971.794310] PM: noirq suspend of devices complete after 1.423 msecs
+[ 3971.794321] Disabling non-boot CPUs ...
+[ 3971.794521] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3971.794521] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3971.794521] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3971.794521] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3971.794521] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3971.794521] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3971.794521] Suspended for 0.000 seconds
+[ 3971.796171] PM: noirq resume of devices complete after 0.857 msecs
+[ 3971.798091] PM: early resume of devices complete after 0.664 msecs
+[ 3971.798510] bcmsdh_sdmmc_resume Enter
+[ 3971.798515] bcmsdh_sdmmc_resume Enter
+[ 3971.807992] PM: resume of devices complete after 9.884 msecs
+[ 3971.809230] Restarting tasks ... done.
+[ 3971.836656] PM: suspend exit 2026-11-04 18:30:16.245381373 UTC
+[ 3971.836755] PM: suspend entry 2026-11-04 18:30:16.245487050 UTC
+[ 3971.842134] mmc0: Starting deferred resume
+[ 3971.934420] mmc0: Deferred resume completed
+[ 3971.836794] PM: Syncing filesystems ... done.
+[ 3972.069957] Freezing user space processes ... 
+[ 3972.070283] active wakeup source: aoslog
+[ 3972.070323] 
+[ 3972.070339] Freezing of tasks aborted after 0.000 seconds (11 tasks refusing to freeze, wq_busy=0):
+[ 3972.070362] 
+[ 3972.070372] Restarting tasks ... done.
+[ 3972.070937] PM: suspend exit 2026-11-04 18:30:16.479671946 UTC
+[ 3976.925691] PM: suspend entry 2026-11-04 18:30:21.334390121 UTC
+[ 3976.925795] PM: Syncing filesystems ... done.
+[ 3976.988192] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3976.990523] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3976.992506] Suspending console(s) (use no_console_suspend to debug)
+[ 3977.002543] bcmsdh_sdmmc_suspend Enter
+[ 3977.002553] bcmsdh_sdmmc_suspend Enter
+[ 3977.005006] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3977.005030] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3977.084045] PM: suspend of devices complete after 89.983 msecs
+[ 3977.085393] PM: late suspend of devices complete after 1.323 msecs
+[ 3977.087697] PM: noirq suspend of devices complete after 2.276 msecs
+[ 3977.087715] Disabling non-boot CPUs ...
+[ 3977.088047] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3977.088047] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3977.088047] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3977.088047] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3977.088047] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3977.088047] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3977.088047] Suspended for 0.000 seconds
+[ 3977.090249] PM: noirq resume of devices complete after 1.145 msecs
+[ 3977.093188] PM: early resume of devices complete after 1.048 msecs
+[ 3977.094328] bcmsdh_sdmmc_resume Enter
+[ 3977.094338] bcmsdh_sdmmc_resume Enter
+[ 3977.107758] PM: resume of devices complete after 14.538 msecs
+[ 3977.110155] Restarting tasks ... done.
+[ 3977.154746] PM: suspend exit 2026-11-04 18:35:18.272003861 UTC
+[ 3977.154941] PM: suspend entry 2026-11-04 18:35:18.272207559 UTC
+[ 3977.159156] mmc0: Starting deferred resume
+[ 3977.252476] mmc0: Deferred resume completed
+[ 3977.155644] PM: Syncing filesystems ... done.
+[ 3977.329935] Freezing user space processes ... 
+[ 3977.330258] active wakeup source: aoslog
+[ 3977.330298] 
+[ 3977.330314] Freezing of tasks aborted after 0.000 seconds (13 tasks refusing to freeze, wq_busy=0):
+[ 3977.330337] 
+[ 3977.330348] Restarting tasks ... done.
+[ 3977.330919] PM: suspend exit 2026-11-04 18:35:18.448206101 UTC
+[ 3982.254924] PM: suspend entry 2026-11-04 18:35:23.372173547 UTC
+[ 3982.255026] PM: Syncing filesystems ... done.
+[ 3982.356167] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 3982.358491] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3982.360477] Suspending console(s) (use no_console_suspend to debug)
+[ 3982.370459] bcmsdh_sdmmc_suspend Enter
+[ 3982.370470] bcmsdh_sdmmc_suspend Enter
+[ 3982.372376] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3982.372710] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3982.443897] PM: suspend of devices complete after 82.248 msecs
+[ 3982.445248] PM: late suspend of devices complete after 1.326 msecs
+[ 3982.447550] PM: noirq suspend of devices complete after 2.274 msecs
+[ 3982.447567] Disabling non-boot CPUs ...
+[ 3982.447895] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3982.447895] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3982.447895] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3982.447895] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3982.447895] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3982.447895] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3982.447895] Suspended for 0.000 seconds
+[ 3982.450107] PM: noirq resume of devices complete after 1.144 msecs
+[ 3982.453047] PM: early resume of devices complete after 1.049 msecs
+[ 3982.454147] bcmsdh_sdmmc_resume Enter
+[ 3982.454157] bcmsdh_sdmmc_resume Enter
+[ 3982.467576] PM: resume of devices complete after 14.496 msecs
+[ 3982.469970] Restarting tasks ... done.
+[ 3982.514682] PM: suspend exit 2026-11-04 18:40:20.274053329 UTC
+[ 3982.514877] PM: suspend entry 2026-11-04 18:40:20.274256506 UTC
+[ 3982.519416] mmc0: Starting deferred resume
+[ 3982.610592] mmc0: Deferred resume completed
+[ 3982.515600] PM: Syncing filesystems ... done.
+[ 3982.688964] Freezing user space processes ... 
+[ 3982.689322] active wakeup source: aoslog
+[ 3982.689367] 
+[ 3982.689384] Freezing of tasks aborted after 0.000 seconds (12 tasks refusing to freeze, wq_busy=0):
+[ 3982.689412] 
+[ 3982.689425] Restarting tasks ... done.
+[ 3982.690078] PM: suspend exit 2026-11-04 18:40:20.449475673 UTC
+[ 3987.605514] PM: suspend entry 2026-11-04 18:40:25.364876192 UTC
+[ 3987.605617] PM: Syncing filesystems ... done.
+[ 3987.689611] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3987.691059] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3987.692345] Suspending console(s) (use no_console_suspend to debug)
+[ 3987.695557] bcmsdh_sdmmc_suspend Enter
+[ 3987.695560] bcmsdh_sdmmc_suspend Enter
+[ 3987.696238] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3987.696248] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3987.770721] PM: suspend of devices complete after 77.954 msecs
+[ 3987.771148] PM: late suspend of devices complete after 0.418 msecs
+[ 3987.771923] PM: noirq suspend of devices complete after 0.765 msecs
+[ 3987.771928] Disabling non-boot CPUs ...
+[ 3987.772070] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3987.772070] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3987.772070] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3987.772070] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3987.772070] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3987.772070] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3987.772070] Suspended for 0.000 seconds
+[ 3987.773647] PM: noirq resume of devices complete after 0.878 msecs
+[ 3987.775153] PM: early resume of devices complete after 0.486 msecs
+[ 3987.775459] bcmsdh_sdmmc_resume Enter
+[ 3987.775462] bcmsdh_sdmmc_resume Enter
+[ 3987.782838] PM: resume of devices complete after 7.673 msecs
+[ 3987.783653] Restarting tasks ... done.
+[ 3987.805896] PM: suspend exit 2026-11-04 18:45:22.243060818 UTC
+[ 3987.805955] PM: suspend entry 2026-11-04 18:45:22.243122536 UTC
+[ 3987.810368] mmc0: Starting deferred resume
+[ 3987.906655] mmc0: Deferred resume completed
+[ 3987.805978] PM: Syncing filesystems ... done.
+[ 3988.033675] Freezing user space processes ... 
+[ 3988.033991] active wakeup source: aoslog
+[ 3988.034031] 
+[ 3988.034046] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3988.034069] 
+[ 3988.034079] Restarting tasks ... done.
+[ 3988.035663] PM: suspend exit 2026-11-04 18:45:22.472829984 UTC
+[ 3992.873656] PM: suspend entry 2026-11-04 18:45:27.310788732 UTC
+[ 3992.873758] PM: Syncing filesystems ... done.
+[ 3992.940906] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3992.942359] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3992.943572] Suspending console(s) (use no_console_suspend to debug)
+[ 3992.946668] bcmsdh_sdmmc_suspend Enter
+[ 3992.946672] bcmsdh_sdmmc_suspend Enter
+[ 3992.947355] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3992.947366] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3993.020697] PM: suspend of devices complete after 76.697 msecs
+[ 3993.021132] PM: late suspend of devices complete after 0.426 msecs
+[ 3993.021906] PM: noirq suspend of devices complete after 0.765 msecs
+[ 3993.021912] Disabling non-boot CPUs ...
+[ 3993.022053] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3993.022053] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3993.022053] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3993.022053] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3993.022053] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3993.022053] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3993.022053] Suspended for 0.000 seconds
+[ 3993.023636] PM: noirq resume of devices complete after 0.876 msecs
+[ 3993.025146] PM: early resume of devices complete after 0.489 msecs
+[ 3993.025456] bcmsdh_sdmmc_resume Enter
+[ 3993.025459] bcmsdh_sdmmc_resume Enter
+[ 3993.032858] PM: resume of devices complete after 7.700 msecs
+[ 3993.033698] Restarting tasks ... done.
+[ 3993.055848] PM: suspend exit 2026-11-04 18:50:24.244769296 UTC
+[ 3993.055906] PM: suspend entry 2026-11-04 18:50:24.244831119 UTC
+[ 3993.060205] mmc0: Starting deferred resume
+[ 3993.157968] mmc0: Deferred resume completed
+[ 3993.055929] PM: Syncing filesystems ... done.
+[ 3993.287178] Freezing user space processes ... 
+[ 3993.287785] active wakeup source: aoslog
+[ 3993.287864] 
+[ 3993.287893] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3993.287940] 
+[ 3993.287961] Restarting tasks ... done.
+[ 3993.289057] PM: suspend exit 2026-11-04 18:50:24.477969556 UTC
+[ 3998.125005] PM: suspend entry 2026-11-04 18:50:29.313891273 UTC
+[ 3998.125108] PM: Syncing filesystems ... done.
+[ 3998.201921] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 3998.203330] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 3998.204687] Suspending console(s) (use no_console_suspend to debug)
+[ 3998.206640] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 3998.206650] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 3998.206716] bcmsdh_sdmmc_suspend Enter
+[ 3998.206719] bcmsdh_sdmmc_suspend Enter
+[ 3998.279964] PM: suspend of devices complete after 74.896 msecs
+[ 3998.280338] PM: late suspend of devices complete after 0.366 msecs
+[ 3998.281016] PM: noirq suspend of devices complete after 0.670 msecs
+[ 3998.281021] Disabling non-boot CPUs ...
+[ 3998.281162] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 3998.281162] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 3998.281162] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 3998.281162] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 3998.281162] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 3998.281162] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 3998.281162] Suspended for 0.000 seconds
+[ 3998.282574] PM: noirq resume of devices complete after 0.732 msecs
+[ 3998.284077] PM: early resume of devices complete after 0.450 msecs
+[ 3998.284377] bcmsdh_sdmmc_resume Enter
+[ 3998.284380] bcmsdh_sdmmc_resume Enter
+[ 3998.291158] PM: resume of devices complete after 7.070 msecs
+[ 3998.291813] Restarting tasks ... done.
+[ 3998.314331] PM: suspend exit 2026-11-04 18:55:26.245874649 UTC
+[ 3998.314383] PM: suspend entry 2026-11-04 18:55:26.245930587 UTC
+[ 3998.318221] mmc0: Starting deferred resume
+[ 3998.413049] mmc0: Deferred resume completed
+[ 3998.314403] PM: Syncing filesystems ... done.
+[ 3998.542942] Freezing user space processes ... 
+[ 3998.543286] active wakeup source: aoslog
+[ 3998.543448] 
+[ 3998.543469] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 3998.543497] 
+[ 3998.543510] Restarting tasks ... done.
+[ 3998.545323] PM: suspend exit 2026-11-04 18:55:26.476865639 UTC
+[ 4003.384604] PM: suspend entry 2026-11-04 18:55:31.316111731 UTC
+[ 4003.384706] PM: Syncing filesystems ... done.
+[ 4003.451899] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 4003.453388] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4003.454670] Suspending console(s) (use no_console_suspend to debug)
+[ 4003.456636] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4003.456646] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4003.456711] bcmsdh_sdmmc_suspend Enter
+[ 4003.456713] bcmsdh_sdmmc_suspend Enter
+[ 4003.529928] PM: suspend of devices complete after 74.876 msecs
+[ 4003.530300] PM: late suspend of devices complete after 0.363 msecs
+[ 4003.530975] PM: noirq suspend of devices complete after 0.667 msecs
+[ 4003.530980] Disabling non-boot CPUs ...
+[ 4003.531114] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4003.531114] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 4003.531114] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 4003.531114] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4003.531114] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4003.531114] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4003.531114] Suspended for 0.000 seconds
+[ 4003.532521] PM: noirq resume of devices complete after 0.731 msecs
+[ 4003.534020] PM: early resume of devices complete after 0.447 msecs
+[ 4003.534304] bcmsdh_sdmmc_resume Enter
+[ 4003.534307] bcmsdh_sdmmc_resume Enter
+[ 4003.541082] PM: resume of devices complete after 7.051 msecs
+[ 4003.541732] Restarting tasks ... done.
+[ 4003.562740] PM: suspend exit 2026-11-04 19:00:28.246068128 UTC
+[ 4003.562793] PM: suspend entry 2026-11-04 19:00:28.246124378 UTC
+[ 4003.566514] mmc0: Starting deferred resume
+[ 4003.660116] mmc0: Deferred resume completed
+[ 4003.562812] PM: Syncing filesystems ... done.
+[ 4003.795175] Freezing user space processes ... 
+[ 4003.795683] active wakeup source: aoslog
+[ 4003.795750] 
+[ 4003.795773] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 4003.795809] 
+[ 4003.795825] Restarting tasks ... done.
+[ 4003.796713] PM: suspend exit 2026-11-04 19:00:28.480034534 UTC
+[ 4008.635453] PM: suspend entry 2026-11-04 19:00:33.318745365 UTC
+[ 4008.635556] PM: Syncing filesystems ... done.
+[ 4008.710179] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 4008.712509] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4008.714502] Suspending console(s) (use no_console_suspend to debug)
+[ 4008.724488] bcmsdh_sdmmc_suspend Enter
+[ 4008.724499] bcmsdh_sdmmc_suspend Enter
+[ 4008.726399] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4008.726741] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4008.803718] PM: suspend of devices complete after 88.045 msecs
+[ 4008.805071] PM: late suspend of devices complete after 1.328 msecs
+[ 4008.807377] PM: noirq suspend of devices complete after 2.279 msecs
+[ 4008.807394] Disabling non-boot CPUs ...
+[ 4008.807726] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4008.807726] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 4008.807726] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 4008.807726] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4008.807726] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4008.807726] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4008.807726] Suspended for 0.000 seconds
+[ 4008.809928] PM: noirq resume of devices complete after 1.143 msecs
+[ 4008.812872] PM: early resume of devices complete after 1.049 msecs
+[ 4008.813979] bcmsdh_sdmmc_resume Enter
+[ 4008.813989] bcmsdh_sdmmc_resume Enter
+[ 4008.827283] PM: resume of devices complete after 14.378 msecs
+[ 4008.829680] Restarting tasks ... done.
+[ 4008.862343] PM: suspend exit 2026-11-04 19:05:30.270867596 UTC
+[ 4008.863838] PM: suspend entry 2026-11-04 19:05:30.272369367 UTC
+[ 4008.869266] mmc0: Starting deferred resume
+[ 4008.961694] mmc0: Deferred resume completed
+[ 4008.863923] PM: Syncing filesystems ... done.
+[ 4009.103795] Freezing user space processes ... 
+[ 4009.104117] active wakeup source: aoslog
+[ 4009.104159] 
+[ 4009.104176] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 4009.104201] 
+[ 4009.104213] Restarting tasks ... done.
+[ 4009.104797] PM: suspend exit 2026-11-04 19:05:30.513349314 UTC
+[ 4013.945593] PM: suspend entry 2026-11-04 19:05:35.354108896 UTC
+[ 4013.945696] PM: Syncing filesystems ... done.
+[ 4014.021834] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 4014.023512] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4014.024999] Suspending console(s) (use no_console_suspend to debug)
+[ 4014.030307] bcmsdh_sdmmc_suspend Enter
+[ 4014.030313] bcmsdh_sdmmc_suspend Enter
+[ 4014.031589] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4014.031666] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4014.101643] PM: suspend of devices complete after 75.896 msecs
+[ 4014.102368] PM: late suspend of devices complete after 0.711 msecs
+[ 4014.103814] PM: noirq suspend of devices complete after 1.430 msecs
+[ 4014.103825] Disabling non-boot CPUs ...
+[ 4014.104025] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4014.104025] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 4014.104025] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 4014.104025] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4014.104025] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4014.104025] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4014.104025] Suspended for 0.000 seconds
+[ 4014.105681] PM: noirq resume of devices complete after 0.855 msecs
+[ 4014.107605] PM: early resume of devices complete after 0.666 msecs
+[ 4014.108017] bcmsdh_sdmmc_resume Enter
+[ 4014.108023] bcmsdh_sdmmc_resume Enter
+[ 4014.117417] PM: resume of devices complete after 9.795 msecs
+[ 4014.118657] Restarting tasks ... done.
+[ 4014.146306] PM: suspend exit 2026-11-04 19:10:32.259968991 UTC
+[ 4014.146408] PM: suspend entry 2026-11-04 19:10:32.260078105 UTC
+[ 4014.154016] mmc0: Starting deferred resume
+[ 4014.252138] mmc0: Deferred resume completed
+[ 4014.146446] PM: Syncing filesystems ... done.
+[ 4014.385547] Freezing user space processes ... 
+[ 4014.386145] active wakeup source: aoslog
+[ 4014.386222] 
+[ 4014.386253] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 4014.386299] 
+[ 4014.386319] Restarting tasks ... done.
+[ 4014.387521] PM: suspend exit 2026-11-04 19:10:32.501185657 UTC
+[ 4019.235290] PM: suspend entry 2026-11-04 19:10:37.348959458 UTC
+[ 4019.235326] PM: Syncing filesystems ... done.
+[ 4019.304741] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 4019.306148] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4019.307428] Suspending console(s) (use no_console_suspend to debug)
+[ 4019.309401] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4019.309411] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4019.309477] bcmsdh_sdmmc_suspend Enter
+[ 4019.309479] bcmsdh_sdmmc_suspend Enter
+[ 4019.379776] PM: suspend of devices complete after 71.965 msecs
+[ 4019.380149] PM: late suspend of devices complete after 0.365 msecs
+[ 4019.380831] PM: noirq suspend of devices complete after 0.674 msecs
+[ 4019.380836] Disabling non-boot CPUs ...
+[ 4019.380975] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4019.380975] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 4019.380975] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 4019.380975] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4019.380975] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4019.380975] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4019.380975] Suspended for 0.000 seconds
+[ 4019.382388] PM: noirq resume of devices complete after 0.733 msecs
+[ 4019.383888] PM: early resume of devices complete after 0.447 msecs
+[ 4019.384175] bcmsdh_sdmmc_resume Enter
+[ 4019.384178] bcmsdh_sdmmc_resume Enter
+[ 4019.390969] PM: resume of devices complete after 7.071 msecs
+[ 4019.391596] Restarting tasks ... done.
+[ 4019.414385] PM: suspend exit 2026-11-04 19:15:34.253345021 UTC
+[ 4019.414437] PM: suspend entry 2026-11-04 19:15:34.253399708 UTC
+[ 4019.418849] mmc0: Starting deferred resume
+[ 4019.512572] mmc0: Deferred resume completed
+[ 4019.414456] PM: Syncing filesystems ... done.
+[ 4019.666025] Freezing user space processes ... 
+[ 4019.666330] active wakeup source: aoslog
+[ 4019.666371] 
+[ 4019.666386] Freezing of tasks aborted after 0.000 seconds (11 tasks refusing to freeze, wq_busy=0):
+[ 4019.666409] 
+[ 4019.666420] Restarting tasks ... done.
+[ 4019.666973] PM: suspend exit 2026-11-04 19:15:34.505932989 UTC
+[ 4025.255052] PM: suspend entry 2026-11-04 19:15:40.093975539 UTC
+[ 4025.255155] PM: Syncing filesystems ... done.
+[ 4025.353890] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 4025.355349] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4025.356670] Suspending console(s) (use no_console_suspend to debug)
+[ 4025.359829] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4025.359839] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4025.360121] bcmsdh_sdmmc_suspend Enter
+[ 4025.360124] bcmsdh_sdmmc_suspend Enter
+[ 4025.430359] PM: suspend of devices complete after 73.265 msecs
+[ 4025.430791] PM: late suspend of devices complete after 0.423 msecs
+[ 4025.431568] PM: noirq suspend of devices complete after 0.766 msecs
+[ 4025.431574] Disabling non-boot CPUs ...
+[ 4025.431713] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4025.431713] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 4025.431713] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 4025.431713] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4025.431713] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4025.431713] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4025.431713] Suspended for 0.000 seconds
+[ 4025.433286] PM: noirq resume of devices complete after 0.876 msecs
+[ 4025.434790] PM: early resume of devices complete after 0.485 msecs
+[ 4025.435100] bcmsdh_sdmmc_resume Enter
+[ 4025.435103] bcmsdh_sdmmc_resume Enter
+[ 4025.442465] PM: resume of devices complete after 7.663 msecs
+[ 4025.443280] Restarting tasks ... done.
+[ 4025.465563] PM: suspend exit 2026-11-04 19:20:35.255584853 UTC
+[ 4025.465624] PM: suspend entry 2026-11-04 19:20:35.255649541 UTC
+[ 4025.470222] mmc0: Starting deferred resume
+[ 4025.567852] mmc0: Deferred resume completed
+[ 4025.465647] PM: Syncing filesystems ... done.
+[ 4025.720417] Freezing user space processes ... 
+[ 4025.720920] active wakeup source: aoslog
+[ 4025.720986] 
+[ 4025.721009] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 4025.721045] 
+[ 4025.721062] Restarting tasks ... done.
+[ 4025.721942] PM: suspend exit 2026-11-04 19:20:35.511958915 UTC
+[ 4030.544474] PM: suspend entry 2026-11-04 19:20:40.334492976 UTC
+[ 4030.544506] PM: Syncing filesystems ... done.
+[ 4030.637900] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 4030.640013] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4030.641810] Suspending console(s) (use no_console_suspend to debug)
+[ 4030.649882] bcmsdh_sdmmc_suspend Enter
+[ 4030.649891] bcmsdh_sdmmc_suspend Enter
+[ 4030.651448] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4030.651469] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4030.722908] PM: suspend of devices complete after 80.113 msecs
+[ 4030.724157] PM: late suspend of devices complete after 1.224 msecs
+[ 4030.726027] PM: noirq suspend of devices complete after 1.847 msecs
+[ 4030.726041] Disabling non-boot CPUs ...
+[ 4030.726314] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4030.726314] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 4030.726314] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 4030.726314] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4030.726314] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4030.726314] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4030.726314] Suspended for 0.000 seconds
+[ 4030.728286] PM: noirq resume of devices complete after 1.015 msecs
+[ 4030.730780] PM: early resume of devices complete after 0.868 msecs
+[ 4030.731562] bcmsdh_sdmmc_resume Enter
+[ 4030.731569] bcmsdh_sdmmc_resume Enter
+[ 4030.742885] PM: resume of devices complete after 12.078 msecs
+[ 4030.744903] Restarting tasks ... done.
+[ 4030.778161] PM: suspend exit 2026-11-04 19:25:37.275097081 UTC
+[ 4030.778314] PM: suspend entry 2026-11-04 19:25:37.275258695 UTC
+[ 4030.786634] mmc0: Starting deferred resume
+[ 4030.877967] mmc0: Deferred resume completed
+[ 4030.778374] PM: Syncing filesystems ... done.
+[ 4030.976434] Freezing user space processes ... 
+[ 4030.976768] active wakeup source: aoslog
+[ 4030.976807] 
+[ 4030.976823] Freezing of tasks aborted after 0.000 seconds (14 tasks refusing to freeze, wq_busy=0):
+[ 4030.976846] 
+[ 4030.976857] Restarting tasks ... done.
+[ 4030.977436] PM: suspend exit 2026-11-04 19:25:37.474394945 UTC
+[ 4035.865120] PM: suspend entry 2026-11-04 19:25:42.362073693 UTC
+[ 4035.865154] PM: Syncing filesystems ... done.
+[ 4035.986692] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 4035.988143] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4035.989427] Suspending console(s) (use no_console_suspend to debug)
+[ 4035.992114] bcmsdh_sdmmc_suspend Enter
+[ 4035.992117] bcmsdh_sdmmc_suspend Enter
+[ 4035.992795] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4035.992806] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4036.070258] PM: suspend of devices complete after 80.411 msecs
+[ 4036.070693] PM: late suspend of devices complete after 0.426 msecs
+[ 4036.071468] PM: noirq suspend of devices complete after 0.766 msecs
+[ 4036.071474] Disabling non-boot CPUs ...
+[ 4036.071616] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4036.071616] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 4036.071616] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 4036.071616] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4036.071616] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4036.071616] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4036.071616] Suspended for 0.000 seconds
+[ 4036.073192] PM: noirq resume of devices complete after 0.875 msecs
+[ 4036.074700] PM: early resume of devices complete after 0.488 msecs
+[ 4036.075006] bcmsdh_sdmmc_resume Enter
+[ 4036.075010] bcmsdh_sdmmc_resume Enter
+[ 4036.082352] PM: resume of devices complete after 7.640 msecs
+[ 4036.083168] Restarting tasks ... done.
+[ 4036.105455] PM: suspend exit 2026-11-04 19:30:39.259293892 UTC
+[ 4036.105516] PM: suspend entry 2026-11-04 19:30:39.259358215 UTC
+[ 4036.110978] mmc0: Starting deferred resume
+[ 4036.207432] mmc0: Deferred resume completed
+[ 4036.105539] PM: Syncing filesystems ... done.
+[ 4036.361868] Freezing user space processes ... 
+[ 4036.362206] active wakeup source: aoslog
+[ 4036.362251] 
+[ 4036.362269] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 4036.362296] 
+[ 4036.362308] Restarting tasks ... done.
+[ 4036.362941] PM: suspend exit 2026-11-04 19:30:39.516779934 UTC
+[ 4041.184267] PM: suspend entry 2026-11-04 19:30:44.338102328 UTC
+[ 4041.184300] PM: Syncing filesystems ... done.
+[ 4041.795666] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 4041.797969] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4041.799840] Suspending console(s) (use no_console_suspend to debug)
+[ 4041.809910] bcmsdh_sdmmc_suspend Enter
+[ 4041.809920] bcmsdh_sdmmc_suspend Enter
+[ 4041.811823] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4041.812156] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4041.883497] PM: suspend of devices complete after 82.483 msecs
+[ 4041.884847] PM: late suspend of devices complete after 1.324 msecs
+[ 4041.887147] PM: noirq suspend of devices complete after 2.273 msecs
+[ 4041.887164] Disabling non-boot CPUs ...
+[ 4041.887494] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4041.887494] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 4041.887494] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 4041.887494] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4041.887494] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4041.887494] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4041.887494] Suspended for 0.000 seconds
+[ 4041.889698] PM: noirq resume of devices complete after 1.144 msecs
+[ 4041.892642] PM: early resume of devices complete after 1.049 msecs
+[ 4041.893752] bcmsdh_sdmmc_resume Enter
+[ 4041.893762] bcmsdh_sdmmc_resume Enter
+[ 4041.907113] PM: resume of devices complete after 14.438 msecs
+[ 4041.909507] Restarting tasks ... done.
+[ 4041.942083] PM: suspend exit 2026-11-04 19:35:41.281601224 UTC
+[ 4041.943535] PM: suspend entry 2026-11-04 19:35:41.283059141 UTC
+[ 4041.949211] mmc0: Starting deferred resume
+[ 4042.041297] mmc0: Deferred resume completed
+[ 4041.943621] PM: Syncing filesystems ... done.
+[ 4042.183873] Freezing user space processes ... 
+[ 4042.184177] active wakeup source: aoslog
+[ 4042.184218] 
+[ 4042.184233] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 4042.184257] 
+[ 4042.184267] Restarting tasks ... done.
+[ 4042.184827] PM: suspend exit 2026-11-04 19:35:41.524372891 UTC
+[ 4047.024575] PM: suspend entry 2026-11-04 19:35:46.364084607 UTC
+[ 4047.024680] PM: Syncing filesystems ... done.
+[ 4047.119228] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 4047.121586] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4047.123460] Suspending console(s) (use no_console_suspend to debug)
+[ 4047.133543] bcmsdh_sdmmc_suspend Enter
+[ 4047.133553] bcmsdh_sdmmc_suspend Enter
+[ 4047.135461] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4047.135796] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4047.213382] PM: suspend of devices complete after 88.746 msecs
+[ 4047.214739] PM: late suspend of devices complete after 1.332 msecs
+[ 4047.217045] PM: noirq suspend of devices complete after 2.278 msecs
+[ 4047.217062] Disabling non-boot CPUs ...
+[ 4047.217394] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4047.217394] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 4047.217394] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 4047.217394] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4047.217394] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4047.217394] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4047.217394] Suspended for 0.000 seconds
+[ 4047.219618] PM: noirq resume of devices complete after 1.145 msecs
+[ 4047.222561] PM: early resume of devices complete after 1.051 msecs
+[ 4047.223687] bcmsdh_sdmmc_resume Enter
+[ 4047.223697] bcmsdh_sdmmc_resume Enter
+[ 4047.237057] PM: resume of devices complete after 14.464 msecs
+[ 4047.239455] Restarting tasks ... done.
+[ 4047.272339] PM: suspend exit 2026-11-04 19:40:43.283697254 UTC
+[ 4047.273466] PM: suspend entry 2026-11-04 19:40:43.284831212 UTC
+[ 4047.278869] mmc0: Starting deferred resume
+[ 4047.369061] mmc0: Deferred resume completed
+[ 4047.273550] PM: Syncing filesystems ... done.
+[ 4047.524021] Freezing user space processes ... 
+[ 4047.524602] active wakeup source: aoslog
+[ 4047.524680] 
+[ 4047.524711] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 4047.524757] 
+[ 4047.524777] Restarting tasks ... done.
+[ 4047.534669] PM: suspend exit 2026-11-04 19:40:43.546030275 UTC
+[ 4052.364902] PM: suspend entry 2026-11-04 19:40:48.376251419 UTC
+[ 4052.365004] PM: Syncing filesystems ... done.
+[ 4052.506254] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 4052.508580] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4052.510562] Suspending console(s) (use no_console_suspend to debug)
+[ 4052.520674] bcmsdh_sdmmc_suspend Enter
+[ 4052.520685] bcmsdh_sdmmc_suspend Enter
+[ 4052.522585] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4052.523171] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4052.603258] PM: suspend of devices complete after 91.528 msecs
+[ 4052.604605] PM: late suspend of devices complete after 1.322 msecs
+[ 4052.606908] PM: noirq suspend of devices complete after 2.275 msecs
+[ 4052.606925] Disabling non-boot CPUs ...
+[ 4052.607257] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4052.607257] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 4052.607257] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 4052.607257] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4052.607257] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4052.607257] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4052.607257] Suspended for 0.000 seconds
+[ 4052.609448] PM: noirq resume of devices complete after 1.144 msecs
+[ 4052.612394] PM: early resume of devices complete after 1.048 msecs
+[ 4052.613494] bcmsdh_sdmmc_resume Enter
+[ 4052.613504] bcmsdh_sdmmc_resume Enter
+[ 4052.626825] PM: resume of devices complete after 14.399 msecs
+[ 4052.629224] Restarting tasks ... done.
+[ 4052.661982] PM: suspend exit 2026-11-04 19:45:45.285229794 UTC
+[ 4052.663398] PM: suspend entry 2026-11-04 19:45:45.286652346 UTC
+[ 4052.668634] mmc0: Starting deferred resume
+[ 4052.760040] mmc0: Deferred resume completed
+[ 4052.663483] PM: Syncing filesystems ... done.
+[ 4052.911794] Freezing user space processes ... 
+[ 4052.912105] active wakeup source: aoslog
+[ 4052.912146] 
+[ 4052.912161] Freezing of tasks aborted after 0.000 seconds (11 tasks refusing to freeze, wq_busy=0):
+[ 4052.912184] 
+[ 4052.912195] Restarting tasks ... done.
+[ 4052.912744] PM: suspend exit 2026-11-04 19:45:45.536020471 UTC
+[ 4057.763242] PM: suspend entry 2026-11-04 19:45:50.386513594 UTC
+[ 4057.763278] PM: Syncing filesystems ... done.
+[ 4057.865716] Freezing user space processes ... (elapsed 0.001 seconds) done.
+[ 4057.867493] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4057.868980] Suspending console(s) (use no_console_suspend to debug)
+[ 4057.874463] bcmsdh_sdmmc_suspend Enter
+[ 4057.874469] bcmsdh_sdmmc_suspend Enter
+[ 4057.875553] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4057.875569] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4057.951195] PM: suspend of devices complete after 81.471 msecs
+[ 4057.951921] PM: late suspend of devices complete after 0.712 msecs
+[ 4057.953372] PM: noirq suspend of devices complete after 1.433 msecs
+[ 4057.953383] Disabling non-boot CPUs ...
+[ 4057.953585] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4057.953585] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 4057.953585] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 4057.953585] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4057.953585] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4057.953585] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4057.953585] Suspended for 0.000 seconds
+[ 4057.955224] PM: noirq resume of devices complete after 0.856 msecs
+[ 4057.957150] PM: early resume of devices complete after 0.668 msecs
+[ 4057.957564] bcmsdh_sdmmc_resume Enter
+[ 4057.957569] bcmsdh_sdmmc_resume Enter
+[ 4057.966733] PM: resume of devices complete after 9.565 msecs
+[ 4057.967973] Restarting tasks ... done.
+[ 4057.997181] PM: suspend exit 2026-11-04 19:50:47.275545668 UTC
+[ 4057.997284] PM: suspend entry 2026-11-04 19:50:47.275654366 UTC
+[ 4058.007179] mmc0: Starting deferred resume
+[ 4058.097213] mmc0: Deferred resume completed
+[ 4057.997323] PM: Syncing filesystems ... done.
+[ 4058.262630] Freezing user space processes ... 
+[ 4058.263402] active wakeup source: aoslog
+[ 4058.263481] 
+[ 4058.263512] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 4058.263559] 
+[ 4058.263580] Restarting tasks ... done.
+[ 4058.266738] PM: suspend exit 2026-11-04 19:50:47.545103272 UTC
+[ 4063.094854] PM: suspend entry 2026-11-04 19:50:52.373192697 UTC
+[ 4063.094958] PM: Syncing filesystems ... done.
+[ 4063.218240] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 4063.220593] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4063.222575] Suspending console(s) (use no_console_suspend to debug)
+[ 4063.232637] bcmsdh_sdmmc_suspend Enter
+[ 4063.232648] bcmsdh_sdmmc_suspend Enter
+[ 4063.234794] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4063.235132] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4063.312961] PM: suspend of devices complete after 88.955 msecs
+[ 4063.314317] PM: late suspend of devices complete after 1.329 msecs
+[ 4063.316622] PM: noirq suspend of devices complete after 2.278 msecs
+[ 4063.316640] Disabling non-boot CPUs ...
+[ 4063.316971] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4063.316971] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 4063.316971] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 4063.316971] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4063.316971] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4063.316971] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4063.316971] Suspended for 0.000 seconds
+[ 4063.319179] PM: noirq resume of devices complete after 1.145 msecs
+[ 4063.322124] PM: early resume of devices complete after 1.051 msecs
+[ 4063.323228] bcmsdh_sdmmc_resume Enter
+[ 4063.323238] bcmsdh_sdmmc_resume Enter
+[ 4063.336768] PM: resume of devices complete after 14.611 msecs
+[ 4063.339165] Restarting tasks ... done.
+[ 4063.371801] PM: suspend exit 2026-11-04 19:55:49.289060969 UTC
+[ 4063.373280] PM: suspend entry 2026-11-04 19:55:49.290545708 UTC
+[ 4063.378985] mmc0: Starting deferred resume
+[ 4063.468973] mmc0: Deferred resume completed
+[ 4063.373365] PM: Syncing filesystems ... done.
+[ 4063.629292] Freezing user space processes ... 
+[ 4063.629602] active wakeup source: aoslog
+[ 4063.629643] 
+[ 4063.629657] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 4063.629680] 
+[ 4063.629691] Restarting tasks ... done.
+[ 4063.630244] PM: suspend exit 2026-11-04 19:55:49.547531489 UTC
+[ 4068.454302] PM: suspend entry 2026-11-04 19:55:54.371585081 UTC
+[ 4068.454336] PM: Syncing filesystems ... done.
+[ 4068.545272] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 4068.547593] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4068.549586] Suspending console(s) (use no_console_suspend to debug)
+[ 4068.559655] bcmsdh_sdmmc_suspend Enter
+[ 4068.559666] bcmsdh_sdmmc_suspend Enter
+[ 4068.561573] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4068.561927] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4068.633110] PM: suspend of devices complete after 82.348 msecs
+[ 4068.634463] PM: late suspend of devices complete after 1.328 msecs
+[ 4068.636765] PM: noirq suspend of devices complete after 2.274 msecs
+[ 4068.636784] Disabling non-boot CPUs ...
+[ 4068.637116] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4068.637116] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 4068.637116] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 4068.637116] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4068.637116] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4068.637116] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4068.637116] Suspended for 0.000 seconds
+[ 4068.639315] PM: noirq resume of devices complete after 1.145 msecs
+[ 4068.642258] PM: early resume of devices complete after 1.049 msecs
+[ 4068.643362] bcmsdh_sdmmc_resume Enter
+[ 4068.643372] bcmsdh_sdmmc_resume Enter
+[ 4068.656719] PM: resume of devices complete after 14.428 msecs
+[ 4068.659117] Restarting tasks ... done.
+[ 4068.692025] PM: suspend exit 2026-11-04 20:00:51.290880280 UTC
+[ 4068.693217] PM: suspend entry 2026-11-04 20:00:51.292079343 UTC
+[ 4068.699031] mmc0: Starting deferred resume
+[ 4068.793316] mmc0: Deferred resume completed
+[ 4068.693302] PM: Syncing filesystems ... done.
+[ 4068.949250] Freezing user space processes ... 
+[ 4068.949556] active wakeup source: aoslog
+[ 4068.949597] 
+[ 4068.949613] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 4068.949636] 
+[ 4068.949647] Restarting tasks ... done.
+[ 4068.950200] PM: suspend exit 2026-11-04 20:00:51.549084499 UTC
+[ 4073.782847] PM: suspend entry 2026-11-04 20:00:56.381695018 UTC
+[ 4073.782950] PM: Syncing filesystems ... done.
+[ 4073.897658] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 4073.899986] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4073.901961] Suspending console(s) (use no_console_suspend to debug)
+[ 4073.912039] bcmsdh_sdmmc_suspend Enter
+[ 4073.912050] bcmsdh_sdmmc_suspend Enter
+[ 4073.914531] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4073.914556] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4073.993065] PM: suspend of devices complete after 89.661 msecs
+[ 4073.994415] PM: late suspend of devices complete after 1.324 msecs
+[ 4073.996723] PM: noirq suspend of devices complete after 2.280 msecs
+[ 4073.996741] Disabling non-boot CPUs ...
+[ 4073.997072] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4073.997072] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 4073.997072] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 4073.997072] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4073.997072] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4073.997072] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4073.997072] Suspended for 0.000 seconds
+[ 4073.999266] PM: noirq resume of devices complete after 1.144 msecs
+[ 4074.002209] PM: early resume of devices complete after 1.051 msecs
+[ 4074.003315] bcmsdh_sdmmc_resume Enter
+[ 4074.003325] bcmsdh_sdmmc_resume Enter
+[ 4074.016683] PM: resume of devices complete after 14.441 msecs
+[ 4074.019078] Restarting tasks ... done.
+[ 4074.052264] PM: suspend exit 2026-11-04 20:05:53.292918654 UTC
+[ 4074.053129] PM: suspend entry 2026-11-04 20:05:53.293791206 UTC
+[ 4074.063454] mmc0: Starting deferred resume
+[ 4074.155987] mmc0: Deferred resume completed
+[ 4074.053211] PM: Syncing filesystems ... done.
+[ 4074.314063] Freezing user space processes ... 
+[ 4074.314375] active wakeup source: aoslog
+[ 4074.314416] 
+[ 4074.314431] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 4074.314454] 
+[ 4074.314464] Restarting tasks ... done.
+[ 4074.315017] PM: suspend exit 2026-11-04 20:05:53.555700269 UTC
+[ 4079.134581] PM: suspend entry 2026-11-04 20:05:58.375258965 UTC
+[ 4079.134614] PM: Syncing filesystems ... done.
+[ 4079.244226] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 4079.246590] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4079.248573] Suspending console(s) (use no_console_suspend to debug)
+[ 4079.258625] bcmsdh_sdmmc_suspend Enter
+[ 4079.258636] bcmsdh_sdmmc_suspend Enter
+[ 4079.260542] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4079.260909] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4079.332767] PM: suspend of devices complete after 83.021 msecs
+[ 4079.334117] PM: late suspend of devices complete after 1.324 msecs
+[ 4079.336422] PM: noirq suspend of devices complete after 2.276 msecs
+[ 4079.336441] Disabling non-boot CPUs ...
+[ 4079.336769] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4079.336769] Resume caused by IRQ 335, qpnp_rtc_alarm
+[ 4079.336769] __qpnpint_handle_irq: 335 triggered [0x0, 0x61,0x1] qpnp_rtc_alarm
+[ 4079.336769] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4079.336769] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4079.336769] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4079.336769] Suspended for 0.000 seconds
+[ 4079.338990] PM: noirq resume of devices complete after 1.145 msecs
+[ 4079.341938] PM: early resume of devices complete after 1.051 msecs
+[ 4079.343044] bcmsdh_sdmmc_resume Enter
+[ 4079.343055] bcmsdh_sdmmc_resume Enter
+[ 4079.356566] PM: resume of devices complete after 14.598 msecs
+[ 4079.359041] Restarting tasks ... done.
+[ 4079.391737] PM: suspend exit 2026-11-04 20:10:55.294447706 UTC
+[ 4079.393074] PM: suspend entry 2026-11-04 20:10:55.295791716 UTC
+[ 4079.398674] mmc0: Starting deferred resume
+[ 4079.488737] mmc0: Deferred resume completed
+[ 4079.393159] PM: Syncing filesystems ... done.
+[ 4079.664567] Freezing user space processes ... 
+[ 4079.665060] active wakeup source: aoslog
+[ 4079.665124] 
+[ 4079.665148] Freezing of tasks aborted after 0.000 seconds (10 tasks refusing to freeze, wq_busy=0):
+[ 4079.665183] 
+[ 4079.665200] Restarting tasks ... done.
+[ 4079.666092] PM: suspend exit 2026-11-04 20:10:55.568825935 UTC
+[ 4084.472508] PM: suspend entry 2026-11-04 20:11:00.375244058 UTC
+[ 4084.472555] PM: Syncing filesystems ... done.
+[ 4084.604026] Freezing user space processes ... (elapsed 0.002 seconds) done.
+[ 4084.606349] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.
+[ 4084.608335] Suspending console(s) (use no_console_suspend to debug)
+[ 4084.618413] bcmsdh_sdmmc_suspend Enter
+[ 4084.618424] bcmsdh_sdmmc_suspend Enter
+[ 4084.620339] Mcusleep: mcusleep_suspend: mcusleep_suspend allow mcu sleep
+[ 4084.620697] Mcusleep: mcusleep_sleep_allow: mcusleep allowed ap_status_gpio low
+[ 4084.692934] PM: suspend of devices complete after 83.425 msecs
+[ 4084.694283] PM: late suspend of devices complete after 1.323 msecs
+[ 4084.696587] PM: noirq suspend of devices complete after 2.276 msecs
+[ 4084.696605] Disabling non-boot CPUs ...
+[ 4084.696936] CPU0:msm_cpu_pm_enter_sleep mode:3 during suspend
+[ 4084.696936] Resume caused by IRQ 318, usbin-valid
+[ 4084.696936] __qpnpint_handle_irq: 318 triggered [0x0, 0x13,0x1] usbin-valid
+[ 4084.696936] gic_show_resume_irq: 200 triggered qcom,smd-rpm
+[ 4084.696936] gic_show_resume_irq: 203 triggered fc4281d0.qcom,mpm
+[ 4084.696936] gic_show_resume_irq: 222 triggered fc4cf000.qcom,spmi
+[ 4084.696936] Suspended for 0.000 seconds
+[ 4084.699091] PM: noirq resume of devices complete after 1.144 msecs
+[ 4084.703132] PM: early resume of devices complete after 1.379 msecs
+[ 4084.704031] bcmsdh_sdmmc_resume Enter
+[ 4084.704041] bcmsdh_sdmmc_resume Enter
+[ 4084.715973] msm_otg f9a55000.usb: USB exited from low power mode
+[ 4084.727827] PM: resume of devices complete after 24.664 msecs
+[ 4084.730679] Restarting tasks ... done.
+[ 4084.774209] PM: suspend exit 2026-11-04 20:14:40.233573661 UTC
+[ 4084.792209] get_running_test_result: get_running_test_result info: usb=1 batt_pres=1 batt_volt=4174816 batt_temp=189 result=0x0
+[ 4084.866208] Mcusleep: mcusleep_sleep_deny: awake mcu ap_status_gpio high
+[ 4084.866249] Mcusleep: mcusleep_sleep_deny: ext_wake_mcu high
+[ 4084.952711] msm_otg f9a55000.usb: Avail curr from USB = 1500
+[ 4084.956074] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESET_EVENT received
+[ 4084.970786] Mcusleep: mcusleep_sleep_deny: ext_wake_mcu low
+[ 4085.011734] get_running_test_result: get_running_test_result info: usb=1 batt_pres=1 batt_volt=4176586 batt_temp=189 result=0x0
+[ 4085.089459] synaptics_dsx_i2c 5-0020: fwu_read_f34_flash_status: Flash status = 7
+[ 4085.102470] synaptics_rmi4_sensor_report: spontaneous reset detected
+[ 4085.138739] get_running_test_result: get_running_test_result info: usb=1 batt_pres=1 batt_volt=4177468 batt_temp=189 result=0x0
+[ 4085.206930] get_running_test_result: get_running_test_result info: usb=1 batt_pres=1 batt_volt=4178059 batt_temp=189 result=0x0
+[ 4085.327790] mmc0: Starting deferred resume
+[ 4085.421906] mmc0: Deferred resume completed
+[ 4086.148201] read descriptors
+[ 4086.148234] read descriptors
+[ 4086.148253] read strings
+[ 4086.148316] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_CONNECT_EVENT received
+[ 4086.252216] android_work: android_work: did not send uevent (0 0   (null))
+[ 4086.317485] android_work: android_work: sent uevent USB_STATE=CONNECTED
+[ 4086.322762] android_usb gadget: high-speed config #1: fe8050c8.android_usb
+[ 4086.382614] android_work: android_work: sent uevent USB_STATE=CONFIGURED
+[ 4101.202944] msm_otg f9a55000.usb: Avail curr from USB = 0
+[ 4101.203030] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_DISCONNECT_EVENT received
+[ 4101.204919] android_work: android_work: sent uevent USB_STATE=DISCONNECTED
+[ 4101.207824] msm_otg f9a55000.usb: phy_reset: success
+[ 4101.312660] get_bam_type_from_core_name: invalid BAM name()
+[ 4101.312693] usb_bam_get_connection_idx: Invalid bam, type=-22, name=
+[ 4101.312712] msm_bam_device_lpm_ok: Going to LPM now
+[ 4101.316477] msm_otg f9a55000.usb: USB in low power mode
+[ 4101.480514] ffs_data_put(): freeing
+[ 4102.306877] msm_otg f9a55000.usb: USB exited from low power mode
+[ 4102.386144] msm_otg f9a55000.usb: phy_reset: success
+[ 4102.492812] get_bam_type_from_core_name: invalid BAM name()
+[ 4102.492856] usb_bam_get_connection_idx: Invalid bam, type=-22, name=
+[ 4102.492885] msm_bam_device_lpm_ok: Going to LPM now
+[ 4102.595474] get_running_test_result: get_running_test_result info: usb=1 batt_pres=1 batt_volt=3939742 batt_temp=195 result=0x0
+[ 4102.716641] get_running_test_result: get_running_test_result info: usb=1 batt_pres=1 batt_volt=3860206 batt_temp=196 result=0x0
+[ 4103.125344] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_RESET_EVENT received
+[ 4103.756549] read descriptors
+[ 4103.756582] read descriptors
+[ 4103.756602] read strings
+[ 4103.756667] msm_hsusb msm_hsusb: CI13XXX_CONTROLLER_CONNECT_EVENT received
+[ 4103.860474] msm_otg f9a55000.usb: Avail curr from USB = 150
+[ 4103.861201] android_work: android_work: did not send uevent (0 0   (null))
+[ 4103.925325] android_work: android_work: sent uevent USB_STATE=CONNECTED
+[ 4103.927123] get_running_test_result: get_running_test_result info: usb=1 batt_pres=1 batt_volt=3906454 batt_temp=196 result=0x0
+[ 4103.931898] android_usb gadget: high-speed config #1: fe8050c8.android_usb
+[ 4103.931973] msm_otg f9a55000.usb: Avail curr from USB = 500
+[ 4103.992524] android_work: android_work: sent uevent USB_STATE=CONFIGURED
+[ 4104.160627] get_running_test_result: get_running_test_result info: usb=1 batt_pres=1 batt_volt=3904393 batt_temp=196 result=0x0
+[ 4104.372764] qpnp_chg_usb_low_power_work: usb present is 1 , usb_ma is 200 ,vusb_uv is5188050 ,vchg_uv is 5172853 
+[ 4104.372855] qpnp_chg_usb_low_power_work: vchg_loop is true,usb_ma is 200,
+[ 4104.619158] get_prop_batt_status: adjust charging status from charging to discharging
+[ 4166.004654] mmc0: Starting deferred resume
+[ 4166.108385] mmc0: Deferred resume completed
+[ 4226.544514] mmc0: Starting deferred resume
+[ 4226.648301] mmc0: Deferred resume completed
+[ 4256.004435] mmc0: Starting deferred resume
+[ 4256.105811] mmc0: Deferred resume completed
+[ 4288.003966] mmc0: Starting deferred resume
+[ 4288.105030] mmc0: Deferred resume completed

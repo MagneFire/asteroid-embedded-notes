@@ -1,0 +1,428 @@
+--------- beginning of main
+__bionic_open_tzdata_path: ANDROID_DATA not set!
+__bionic_open_tzdata_path: ANDROID_ROOT not set!
+__bionic_open_tzdata_path: ANDROID_DATA not set!
+__bionic_open_tzdata_path: ANDROID_ROOT not set!
+__bionic_open_tzdata_path: ANDROID_DATA not set!
+__bionic_open_tzdata_path: ANDROID_ROOT not set!
+11-04 07:01:05.947     0   427 D shd     : Failed to get shdctl from environment: No such file or directory
+11-04 07:01:05.954     0   427 D shd     : Failed to get shddata from environment: No such file or directory
+11-04 07:01:05.968     0   427 D update_mcu: get mcu current version:11.900.12.01.00, length:15.
+11-04 07:01:05.972     0   427 E update_mcu: mcu version same(11.900.12.01.00), do not need update!
+11-04 07:01:08.051   427   427 D shd     : Start sensorhub daemon, control server create ok
+11-04 07:01:08.051   427   427 D shd     : Send Handshake to sensorhub
+11-04 07:01:08.093   427   469 D shd     : OnEvent Receive Mcu Control response
+11-04 07:01:08.093   427   427 D shd     : Handshake OK
+11-04 07:01:08.093   427   427 D shd     : Set parameter
+11-04 07:01:08.138   427   427 D shd     : Set parameter OK, start loop
+11-04 07:01:08.829   483   483 D SensorHal: Loaded library from /system/lib/libsensorhub.so
+11-04 07:01:08.956   394   394 D SensorHal: Loaded library from /system/lib/libsensorhub.so
+11-04 07:01:08.956   394   394 D SensorHal: sensors_poll_context_t get in !
+11-04 07:01:08.957   394   394 D SensorHal: sensorsocket_init_timeout ok.
+11-04 07:01:08.966   427   427 E shd     : Sensor GetInfo :LSM6DS3,STMicroelectronic
+11-04 07:01:08.966   394   394 D SensorHal: use sensorlist_STM.
+11-04 07:01:09.042   427   427 E shd     : Sensor DeActive :64 failure ret:1
+11-04 07:01:09.043   427   427 D shd     : ProcessVirtualSensor type:18 cmd:10
+11-04 07:01:09.043   427   427 D shd     : ProcessVirtualSensor type:18 cmd:1
+11-04 07:01:09.075   427   427 D shd     : ProcessVirtualSensor type:17 cmd:10
+11-04 07:01:09.075   427   427 D shd     : ProcessVirtualSensor type:17 cmd:1
+11-04 07:01:12.033   517   517 D audio_hw_primary: adev_open: enter
+11-04 07:01:12.033   517   517 D platform_info: platform_info_init: Failed to open /system/etc/audio_platform_info.xml, using defaults.
+11-04 07:01:12.042   517   517 D msm8974_platform: platform_init: snd_card_name: msm8226-tapan-snd-card
+11-04 07:01:12.158   517   517 E audio_route: Control 'LINEOUT1 Volume' doesn't exist - skipping
+11-04 07:01:12.158   517   517 E audio_route: Control 'LINEOUT2 Volume' doesn't exist - skipping
+11-04 07:01:12.158   517   517 E audio_route: Control 'HPHL Volume' doesn't exist - skipping
+11-04 07:01:12.158   517   517 E audio_route: Control 'HPHR Volume' doesn't exist - skipping
+11-04 07:01:12.158   517   517 E audio_route: Control 'RX1 Digital Volume' doesn't exist - skipping
+11-04 07:01:12.158   517   517 E audio_route: Control 'RX2 Digital Volume' doesn't exist - skipping
+11-04 07:01:12.158   517   517 E audio_route: Control 'RX3 Digital Volume' doesn't exist - skipping
+11-04 07:01:12.158   517   517 E audio_route: Control 'RX4 Digital Volume' doesn't exist - skipping
+11-04 07:01:12.158   517   517 E audio_route: Control 'ADC1 Volume' doesn't exist - skipping
+11-04 07:01:12.158   517   517 E audio_route: Control 'ADC2 Volume' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'ADC3 Volume' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'ADC4 Volume' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'ADC5 Volume' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'DEC1 Volume' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'DEC2 Volume' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'DEC3 Volume' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'DEC4 Volume' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'IIR1 INP1 Volume' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'IIR1 INP2 Volume' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'IIR1 INP3 Volume' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'IIR1 INP4 Volume' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'COMP0 Switch' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'COMP1 Switch' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'COMP2 Switch' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'SLIMBUS_0_RX Port Mixer INT_BT_SCO_TX' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'Internal BTSCO SampleRate' doesn't exist - skipping
+11-04 07:01:12.159   517   517 E audio_route: Control 'INTERNAL_BT_SCO_RX Audio Mixer Multimedia6' doesn't exist - skipping
+11-04 07:01:12.161   517   517 E audio_route: Control 'MultiMedia5 Mixer QUAT_MI2S_TX' doesn't exist - skipping
+11-04 07:01:12.161   517   517 E audio_route: Control 'MultiMedia4 Mixer QUAT_MI2S_TX' doesn't exist - skipping
+11-04 07:01:12.161   517   517 E audio_route: Control 'IIR1 INP1 MUX' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'SLIM TX5 MUX' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'SLIM TX4 MUX' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'SLIM TX3 MUX' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'SLIM TX2 MUX' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'SLIM TX1 MUX' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'DEC4 MUX' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'DEC3 MUX' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'DEC2 MUX' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'DEC1 MUX' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'RX2 MIX2 INP2' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'RX2 MIX2 INP1' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'RX1 MIX2 INP2' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'RX1 MIX2 INP1' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'RX4 MIX1 INP2' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'RX4 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'RX3 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'RX2 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'RX1 MIX1 INP3' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'RX1 MIX1 INP2' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'RX1 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.162   517   517 E audio_route: Control 'HPHL DAC Switch' doesn't exist - skipping
+11-04 07:01:12.170   517   517 E audio_route: Control 'DAC1 Switch' doesn't exist - skipping
+11-04 07:01:12.170   517   517 E audio_route: Control 'SPK DAC Switch' doesn't exist - skipping
+11-04 07:01:12.170   517   517 E audio_route: Control 'SLIM_0_RX Channels' doesn't exist - skipping
+11-04 07:01:12.170   517   517 E audio_route: Control 'SLIM_0_TX Channels' doesn't exist - skipping
+11-04 07:01:12.170   517   517 E audio_route: Control 'SLIM RX1 MUX' doesn't exist - skipping
+11-04 07:01:12.170   517   517 E audio_route: Control 'EAR PA Gain' doesn't exist - skipping
+11-04 07:01:12.170   517   517 E audio_route: Control 'SLIM RX2 MUX' doesn't exist - skipping
+11-04 07:01:12.170   517   517 E audio_route: Control 'SPK DRV Volume' doesn't exist - skipping
+11-04 07:01:12.170   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX1' doesn't exist - skipping
+11-04 07:01:12.170   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX2' doesn't exist - skipping
+11-04 07:01:12.170   517   517 E audio_route: Control 'CLASS_H_DSM MUX' doesn't exist - skipping
+11-04 07:01:12.171   517   517 E audio_route: Control 'IIR1 Band1' doesn't exist - skipping
+11-04 07:01:12.171   517   517 E audio_route: Control 'IIR1 Band1' doesn't exist - skipping
+11-04 07:01:12.171   517   517 E audio_route: Control 'IIR1 Band1' doesn't exist - skipping
+11-04 07:01:12.171   517   517 E audio_route: Control 'IIR1 Band1' doesn't exist - skipping
+11-04 07:01:12.172   517   517 E audio_route: Control 'IIR1 Band1' doesn't exist - skipping
+11-04 07:01:12.172   517   517 E audio_route: Control 'IIR1 Band2' doesn't exist - skipping
+11-04 07:01:12.172   517   517 E audio_route: Control 'IIR1 Band2' doesn't exist - skipping
+11-04 07:01:12.172   517   517 E audio_route: Control 'IIR1 Band2' doesn't exist - skipping
+11-04 07:01:12.172   517   517 E audio_route: Control 'IIR1 Band2' doesn't exist - skipping
+11-04 07:01:12.172   517   517 E audio_route: Control 'IIR1 Band2' doesn't exist - skipping
+11-04 07:01:12.177   517   517 E audio_route: Control 'IIR1 Band3' doesn't exist - skipping
+11-04 07:01:12.177   517   517 E audio_route: Control 'IIR1 Band3' doesn't exist - skipping
+11-04 07:01:12.177   517   517 E audio_route: Control 'IIR1 Band3' doesn't exist - skipping
+11-04 07:01:12.177   517   517 E audio_route: Control 'IIR1 Band3' doesn't exist - skipping
+11-04 07:01:12.177   517   517 E audio_route: Control 'IIR1 Band3' doesn't exist - skipping
+11-04 07:01:12.177   517   517 E audio_route: Control 'IIR1 Band4' doesn't exist - skipping
+11-04 07:01:12.177   517   517 E audio_route: Control 'IIR1 Band4' doesn't exist - skipping
+11-04 07:01:12.177   517   517 E audio_route: Control 'IIR1 Band4' doesn't exist - skipping
+11-04 07:01:12.177   517   517 E audio_route: Control 'IIR1 Band4' doesn't exist - skipping
+11-04 07:01:12.177   517   517 E audio_route: Control 'IIR1 Band4' doesn't exist - skipping
+11-04 07:01:12.177   517   517 E audio_route: Control 'IIR1 Band5' doesn't exist - skipping
+11-04 07:01:12.177   517   517 E audio_route: Control 'IIR1 Band5' doesn't exist - skipping
+11-04 07:01:12.177   517   517 E audio_route: Control 'IIR1 Band5' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'IIR1 Band5' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'IIR1 Band5' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'IIR1 Enable Band1' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'IIR1 Enable Band2' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'IIR1 Enable Band3' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'IIR1 Enable Band4' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'IIR1 Enable Band5' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'IIR1 INP1 Volume' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'ANC Slot' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'ANC1 FB MUX' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'ANC1 MUX' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'ANC2 MUX' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'ANC Function' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'SLIM_0_RX AANC MUX' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX3' doesn't exist - skipping
+11-04 07:01:12.178   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX4' doesn't exist - skipping
+11-04 07:01:12.179   517   517 E audio_route: Control 'Internal BTSCO SampleRate' doesn't exist - skipping
+11-04 07:01:12.179   517   517 E audio_route: Control 'MultiMedia5 Mixer QUAT_MI2S_TX' doesn't exist - skipping
+11-04 07:01:12.179   517   517 E audio_route: Control 'Internal BTSCO SampleRate' doesn't exist - skipping
+11-04 07:01:12.179   517   517 E audio_route: Control 'Internal BTSCO SampleRate' doesn't exist - skipping
+11-04 07:01:12.179   517   517 E audio_route: Control 'Internal BTSCO SampleRate' doesn't exist - skipping
+11-04 07:01:12.180   517   517 E audio_route: Control 'Internal BTSCO SampleRate' doesn't exist - skipping
+11-04 07:01:12.180   517   517 E audio_route: Control 'Internal BTSCO SampleRate' doesn't exist - skipping
+11-04 07:01:12.180   517   517 E audio_route: Control 'Internal BTSCO SampleRate' doesn't exist - skipping
+11-04 07:01:12.180   517   517 E audio_route: Control 'Internal BTSCO SampleRate' doesn't exist - skipping
+11-04 07:01:12.193   517   517 E audio_route: Control 'Internal BTSCO SampleRate' doesn't exist - skipping
+11-04 07:01:12.193   517   517 E audio_route: Control 'Internal BTSCO SampleRate' doesn't exist - skipping
+11-04 07:01:12.198   517   517 E audio_route: Control 'Internal BTSCO SampleRate' doesn't exist - skipping
+11-04 07:01:12.199   517   517 E audio_route: Control 'Internal BTSCO SampleRate' doesn't exist - skipping
+11-04 07:01:12.200   517   517 E audio_route: Control 'Internal BTSCO SampleRate' doesn't exist - skipping
+11-04 07:01:12.200   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX1' doesn't exist - skipping
+11-04 07:01:12.200   517   517 E audio_route: Control 'SLIM_0_TX Channels' doesn't exist - skipping
+11-04 07:01:12.200   517   517 E audio_route: Control 'SLIM TX1 MUX' doesn't exist - skipping
+11-04 07:01:12.200   517   517 E audio_route: Control 'DEC1 MUX' doesn't exist - skipping
+11-04 07:01:12.200   517   517 E audio_route: Control 'IIR1 INP1 MUX' doesn't exist - skipping
+11-04 07:01:12.200   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX1' doesn't exist - skipping
+11-04 07:01:12.201   517   517 E audio_route: Control 'SLIM_0_TX Channels' doesn't exist - skipping
+11-04 07:01:12.201   517   517 E audio_route: Control 'SLIM TX1 MUX' doesn't exist - skipping
+11-04 07:01:12.201   517   517 E audio_route: Control 'DEC1 MUX' doesn't exist - skipping
+11-04 07:01:12.201   517   517 E audio_route: Control 'IIR1 INP1 MUX' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX1' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'SLIM_0_TX Channels' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'SLIM TX1 MUX' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'DEC1 MUX' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'IIR1 INP1 MUX' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'SLIM RX1 MUX' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'SLIM RX2 MUX' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'SLIM_0_RX Channels' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'RX3 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'RX4 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'RDAC4 MUX' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'RDAC5 MUX' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'COMP2 Switch' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'LINEOUT1 Volume' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'LINEOUT2 Volume' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'SLIM RX1 MUX' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'SLIM RX2 MUX' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'SLIM_0_RX Channels' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'RX2 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'RX3 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'RDAC5 MUX' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'RDAC4 MUX' doesn't exist - skipping
+11-04 07:01:12.202   517   517 E audio_route: Control 'RDAC3 MUX' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'LINEOUT1 Volume' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'LINEOUT2 Volume' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'IIR1 Enable Band1' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'IIR1 Enable Band2' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'IIR1 Enable Band3' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'IIR1 Enable Band4' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'IIR1 Enable Band5' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'IIR1 INP1 Volume' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'RX1 MIX2 INP1' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'RX2 MIX2 INP1' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'IIR1 INP1 Volume' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'RX1 MIX2 INP1' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'SLIM RX1 MUX' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'SLIM_0_RX Channels' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'RX1 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'CLASS_H_DSM MUX' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'RDAC3 MUX' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'DAC1 Switch' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'ANC Function' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'SLIM RX1 MUX' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'SLIM_0_RX Channels' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'RX1 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.203   517   517 E audio_route: Control 'CLASS_H_DSM MUX' doesn't exist - skipping
+11-04 07:01:12.204   517   517 E audio_route: Control 'RDAC3 MUX' doesn't exist - skipping
+11-04 07:01:12.204   517   517 E audio_route: Control 'DAC1 Switch' doesn't exist - skipping
+11-04 07:01:12.204   517   517 E audio_route: Control 'RX1 Digital Volume' doesn't exist - skipping
+11-04 07:01:12.205   517   517 E audio_route: Control 'ANC Slot' doesn't exist - skipping
+11-04 07:01:12.205   517   517 E audio_route: Control 'ANC1 MUX' doesn't exist - skipping
+11-04 07:01:12.205   517   517 E audio_route: Control 'ADC3 Volume' doesn't exist - skipping
+11-04 07:01:12.205   517   517 E audio_route: Control 'ANC1 FB MUX' doesn't exist - skipping
+11-04 07:01:12.205   517   517 E audio_route: Control 'SLIM RX1 MUX' doesn't exist - skipping
+11-04 07:01:12.205   517   517 E audio_route: Control 'SLIM RX2 MUX' doesn't exist - skipping
+11-04 07:01:12.205   517   517 E audio_route: Control 'SLIM_0_RX Channels' doesn't exist - skipping
+11-04 07:01:12.205   517   517 E audio_route: Control 'RX1 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.205   517   517 E audio_route: Control 'RX2 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'CLASS_H_DSM MUX' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'RDAC3 MUX' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'HPHL DAC Switch' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'COMP1 Switch' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'RX4 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'RX4 MIX1 INP2' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'SPK DAC Switch' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'COMP0 Switch' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'RX3 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'SPK DAC Switch' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'RX3 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'RX4 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'RDAC4 MUX' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'RDAC5 MUX' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'COMP2 Switch' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'LINEOUT1 Volume' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'LINEOUT2 Volume' doesn't exist - skipping
+11-04 07:01:12.206   517   517 E audio_route: Control 'RX3 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'RDAC5 MUX' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'RDAC4 MUX' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'LINEOUT1 Volume' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'LINEOUT2 Volume' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'ANC Function' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'ANC Slot' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'ANC1 FB MUX' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'ANC1 MUX' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'ANC2 MUX' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'ADC5 Volume' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'ADC4 Volume' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'COMP1 Switch' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'HPHL Volume' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'HPHR Volume' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'RX4 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'RX4 MIX1 INP2' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'SPK DAC Switch' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'COMP0 Switch' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'RX3 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'RX4 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'RDAC5 MUX' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'COMP2 Switch' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'LINEOUT1 Volume' doesn't exist - skipping
+11-04 07:01:12.207   517   517 E audio_route: Control 'LINEOUT2 Volume' doesn't exist - skipping
+11-04 07:01:12.208   517   517 E audio_route: Control 'ANC Slot' doesn't exist - skipping
+11-04 07:01:12.208   517   517 E audio_route: Control 'RX4 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.208   517   517 E audio_route: Control 'RX4 MIX1 INP2' doesn't exist - skipping
+11-04 07:01:12.208   517   517 E audio_route: Control 'SPK DAC Switch' doesn't exist - skipping
+11-04 07:01:12.208   517   517 E audio_route: Control 'COMP0 Switch' doesn't exist - skipping
+11-04 07:01:12.208   517   517 E audio_route: Control 'RX3 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.208   517   517 E audio_route: Control 'RX4 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.210   517   517 E audio_route: Control 'RDAC4 MUX' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'RDAC5 MUX' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'COMP2 Switch' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'LINEOUT1 Volume' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'LINEOUT2 Volume' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX1' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX2' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX3' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'SLIM_0_TX Channels' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'SLIM_0_RX AANC MUX' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'SLIM TX1 MUX' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'DEC1 MUX' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'ADC1 Volume' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'SLIM TX2 MUX' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'DEC2 MUX' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'ADC3 Volume' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'SLIM TX3 MUX' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'DEC3 MUX' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'ADC4 Volume' doesn't exist - skipping
+11-04 07:01:12.211   517   517 E audio_route: Control 'IIR1 INP1 MUX' doesn't exist - skipping
+11-04 07:01:12.212   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX1' doesn't exist - skipping
+11-04 07:01:12.212   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX2' doesn't exist - skipping
+11-04 07:01:12.212   517   517 E audio_route: Control 'SLIM TX1 MUX' doesn't exist - skipping
+11-04 07:01:12.212   517   517 E audio_route: Control 'DEC1 MUX' doesn't exist - skipping
+11-04 07:01:12.212   517   517 E audio_route: Control 'SLIM TX2 MUX' doesn't exist - skipping
+11-04 07:01:12.212   517   517 E audio_route: Control 'DEC2 MUX' doesn't exist - skipping
+11-04 07:01:12.212   517   517 E audio_route: Control 'SLIM_0_TX Channels' doesn't exist - skipping
+11-04 07:01:12.212   517   517 E audio_route: Control 'IIR1 INP1 MUX' doesn't exist - skipping
+11-04 07:01:12.212   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX1' doesn't exist - skipping
+11-04 07:01:12.212   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX2' doesn't exist - skipping
+11-04 07:01:12.212   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX3' doesn't exist - skipping
+11-04 07:01:12.212   517   517 E audio_route: Control 'AIF1_CAP Mixer SLIM TX4' doesn't exist - skipping
+11-04 07:01:12.212   517   517 E audio_route: Control 'SLIM_0_TX Channels' doesn't exist - skipping
+11-04 07:01:12.212   517   517 E audio_route: Control 'SLIM TX1 MUX' doesn't exist - skipping
+11-04 07:01:12.213   517   517 E audio_route: Control 'DEC1 MUX' doesn't exist - skipping
+11-04 07:01:12.213   517   517 E audio_route: Control 'SLIM TX2 MUX' doesn't exist - skipping
+11-04 07:01:12.213   517   517 E audio_route: Control 'DEC2 MUX' doesn't exist - skipping
+11-04 07:01:12.213   517   517 E audio_route: Control 'SLIM TX3 MUX' doesn't exist - skipping
+11-04 07:01:12.213   517   517 E audio_route: Control 'DEC3 MUX' doesn't exist - skipping
+11-04 07:01:12.213   517   517 E audio_route: Control 'SLIM TX4 MUX' doesn't exist - skipping
+11-04 07:01:12.213   517   517 E audio_route: Control 'DEC4 MUX' doesn't exist - skipping
+11-04 07:01:12.213   517   517 E audio_route: Control 'SLIM RX1 MUX' doesn't exist - skipping
+11-04 07:01:12.213   517   517 E audio_route: Control 'SLIM_0_RX Channels' doesn't exist - skipping
+11-04 07:01:12.213   517   517 E audio_route: Control 'RX1 MIX1 INP1' doesn't exist - skipping
+11-04 07:01:12.213   517   517 E audio_route: Control 'CLASS_H_DSM MUX' doesn't exist - skipping
+11-04 07:01:12.213   517   517 E audio_route: Control 'RDAC3 MUX' doesn't exist - skipping
+11-04 07:01:12.214   517   517 E audio_route: Control 'HPHL DAC Switch' doesn't exist - skipping
+11-04 07:01:12.214   517   517 E audio_route: Control 'COMP1 Switch' doesn't exist - skipping
+11-04 07:01:12.214   517   517 E audio_route: Control 'EAR PA Gain' doesn't exist - skipping
+11-04 07:01:12.214   517   517 D msm8974_platform: platform_init: Opened sound card:0
+11-04 07:01:12.337   517   517 E ACDB-LOADER: ACDB -> No .acdb files found in /etc!
+11-04 07:01:12.337   517   517 E ACDB-LOADER: ACDB -> Error: Could not open any directory! Failed for /etc
+11-04 07:01:12.337   517   517 E ACDB-LOADER: ACDB -> Could not load .acdb files!
+11-04 07:01:12.353   517   517 E ext_speaker: open_speaker_bundle: DLOPEN failed for /system/lib/soundfx/libspeakerbundle.so
+11-04 07:01:12.391   517   517 D tfa98xx : [NXP] exTfa98xx_calibration ENTER
+11-04 07:01:12.411   517   517 D tfa98xx : Loaded container file calibration Tfa98xx.cnt.
+11-04 07:01:12.499   517   517 D         : tfa98xxCalibrationEx: status: 0x885f, err : 0, line: 499
+11-04 07:01:12.503   517   517 D         : tfa98xxCalibrationEx: status: 0x885f, err : 0, line: 515, re25: 8.00
+11-04 07:01:12.503   517   517 D         : DSP has calibrated before, 8.00 ohm
+11-04 07:01:12.573   517   517 D         : tfa98xxCalibrationEx: re25 = 8.00, line = 596
+11-04 07:01:12.574   517   517 D tfa98xx : handles 0
+11-04 07:01:12.574   517   517 D tfa98xx : [NXP] exTfa98xx status reg is 0xd05f
+11-04 07:01:12.574   517   517 D tfa98xx : status checking ok
+11-04 07:01:12.607   517   517 D         : FUNC: tfaRunMuteAmplifier, LINE: 633 status = 0xc05f
+11-04 07:01:12.608   517   517 D tfa98xx : [NXP] exTfa98xx_calibration END Calibration is done!
+11-04 07:01:12.615   517   517 D audio_hw_primary: out_set_parameters: enter: usecase(0: deep-buffer-playback) kvpairs: routing=2;
+11-04 07:01:12.649   517   544 D audio_hw_primary: select_devices: out_snd_device(2: speaker) in_snd_device(0: none)
+11-04 07:01:12.649   517   544 D msm8974_platform: platform_send_audio_calibration: sending audio calibration for snd_device(2) acdb_id(15)
+11-04 07:01:12.649   517   544 E ACDB-LOADER: ACDB -> Not correctly initialized!
+11-04 07:01:12.649   517   544 D audio_hw_primary: enable_snd_device: snd_device(2: speaker)
+11-04 07:01:12.649   517   544 D audio_hw_primary: enable_audio_route: apply and update mixer path: deep-buffer-playback
+11-04 07:01:12.682   517   544 D tfa98xx : exTfa98xx_speakeron: mode 0, setmode 0
+11-04 07:01:12.682   517   544 D tfa98xx : Loaded container file speaker_on Tfa98xx.cnt.
+11-04 07:01:12.682   517   544 D tfa98xx : tfa start with volume 0.
+11-04 07:01:12.686   517   544 D tfa98xx : start use case success
+11-04 07:01:12.737   525   525 D libEGL  : loaded /vendor/lib/egl/libEGL_adreno.so
+11-04 07:01:12.746   525   525 D libEGL  : loaded /vendor/lib/egl/libGLESv1_CM_adreno.so
+11-04 07:01:12.891   525   525 D libEGL  : loaded /vendor/lib/egl/libGLESv2_adreno.so
+11-04 07:01:12.903   517   544 D tfa98xx : handles 0
+11-04 07:01:12.903   517   544 D tfa98xx : [NXP] exTfa98xx status reg is 0xd05f
+11-04 07:01:12.903   517   544 D tfa98xx : status checking ok
+11-04 07:01:12.903   517   544 D tfa98xx : exTfa98xx start use case successfully
+11-04 07:01:12.941   525   525 I PowerHAL: power_init
+11-04 07:01:13.566   525   525 I qdutils : PartialUpdate status: Disabled
+11-04 07:01:13.566   525   525 I qdutils : Left Align: 0
+11-04 07:01:13.566   525   525 I qdutils : Width Align: 0
+11-04 07:01:13.566   525   525 I qdutils : Top Align: 0
+11-04 07:01:13.566   525   525 I qdutils : Height Align: 0
+11-04 07:01:13.566   525   525 I qdutils : Min ROI Width: 0
+11-04 07:01:13.566   525   525 I qdutils : Min ROI Height: 0
+11-04 07:01:13.566   525   525 I qdutils : Needs ROI Merge: 0
+11-04 07:01:13.588   525   525 W Adreno-GSL: <gsl_ldd_control:466>: ioctl fd 6 code 0xc0100940 (IOCTL_KGSL_SYNCSOURCE_CREATE) failed: errno 25 Unknown ioctl code
+11-04 07:01:13.594   525   525 I qdhwcomposer: Initializing Qualcomm Hardware Composer
+11-04 07:01:13.594   525   525 I qdhwcomposer: MDP version: 500
+11-04 07:01:13.596   525   525 I qdhwcomposer: hwc_registerProcs
+11-04 07:01:13.596   525   525 I qdhwcomposer: Initializing UEVENT Thread
+11-04 07:01:13.596   525   525 I qdhwcomposer: Initializing VSYNC Thread
+11-04 07:01:13.596   525   525 I PowerHAL: power_set_interactive ON
+11-04 07:01:13.597   525   525 E cutils-trace: Error opening trace file: Permission denied (13)
+11-04 07:01:13.597   525   525 E qdhwcomposer: Unknown display attribute 0
+11-04 07:01:13.597   525   525 E qdhwcomposer: Unknown display attribute 0
+11-04 07:01:13.597   525   525 E qdhwcomposer: Unknown display attribute 0
+11-04 07:01:13.597   525   525 D qdhwcomposer: hwc_getDisplayAttributes disp = 0, width = 400
+11-04 07:01:13.597   525   525 E qdhwcomposer: Unknown display attribute 0
+11-04 07:01:13.597   525   525 D qdhwcomposer: hwc_getDisplayAttributes disp = 0, height = 400
+11-04 07:01:13.597   525   525 E qdhwcomposer: Unknown display attribute 0
+11-04 07:01:13.601   525   547 I qdhwcomposer: vsync_loop: Reading event 0 for dpy 0 from /sys/class/graphics/fb0/vsync_event
+11-04 07:01:13.601   525   547 I qdhwcomposer: vsync_loop: Reading event 1 for dpy 0 from /sys/class/graphics/fb0/show_blank_event
+11-04 07:01:13.601   525   547 I qdhwcomposer: vsync_loop: Reading event 0 for dpy 1 from /sys/class/graphics/fb-1/vsync_event
+11-04 07:01:13.601   525   547 I qdhwcomposer: vsync_loop: Reading event 1 for dpy 1 from /sys/class/graphics/fb-1/show_blank_event
+11-04 07:01:13.608   525   525 I Adreno-EGL: <qeglDrvAPI_eglInitialize:379>: QUALCOMM Build: 09/28/15, cb423fe, Ib3272dc427
+11-04 07:01:14.877   525   525 E libEGL  : validate_display:255 error 3008 (EGL_BAD_DISPLAY)
+11-04 07:01:15.841   525   525 W Adreno-EGL: <qeglDrvAPI_eglSwapInterval:4070>: EGL_BAD_SURFACE
+11-04 07:01:15.841   525   525 W Adreno-EGL: <qeglDrvAPI_eglSwapInterval:4070>: EGL_BAD_SURFACE
+11-04 07:01:17.887   517   544 D audio_hw_primary: disable_audio_route: reset and update mixer path: deep-buffer-playback
+11-04 07:01:17.888   517   544 D audio_hw_primary: disable_snd_device: snd_device(2: speaker)
+11-04 07:01:18.104   525   579 D qdutils : DEBUG_CALC_FPS: 0
+11-04 07:01:18.104   525   579 D qdutils : period: 10
+11-04 07:01:18.104   525   579 D qdutils : ignorethresh_us: 10
+11-04 07:01:18.135   517   544 D         : FUNC: tfaRunMuteAmplifier, LINE: 633 status = 0xc05f
+11-04 07:01:18.136   517   544 D tfa98xx : device goes to stop success
+11-04 07:01:18.697   582   582 D libEGL  : loaded /vendor/lib/egl/libEGL_adreno.so
+11-04 07:01:18.698   582   582 D libEGL  : loaded /vendor/lib/egl/libGLESv1_CM_adreno.so
+11-04 07:01:18.739   582   582 D libEGL  : loaded /vendor/lib/egl/libGLESv2_adreno.so
+11-04 07:01:18.891   584   584 W Adreno-GSL: <gsl_ldd_control:466>: ioctl fd 6 code 0xc0100940 (IOCTL_KGSL_SYNCSOURCE_CREATE) failed: errno 25 Unknown ioctl code
+11-04 07:01:18.891   584   584 I Adreno-EGL: <qeglDrvAPI_eglInitialize:379>: QUALCOMM Build: 09/28/15, cb423fe, Ib3272dc427
+11-04 07:01:35.862   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 2
+11-04 07:01:35.864   525   525 I PowerHAL: power_set_interactive OFF
+11-04 07:01:35.866   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 2
+11-04 07:16:45.093   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 2
+11-04 07:19:56.350   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 2
+11-04 07:19:56.445   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 1
+11-04 07:19:56.563   525   525 I PowerHAL: power_set_interactive ON
+11-04 07:19:56.563   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 1
+11-04 07:20:04.311   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 0
+11-04 07:20:04.315   525   525 I PowerHAL: power_set_interactive OFF
+11-04 07:20:04.322   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 0
+11-04 08:57:16.858   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 1
+11-04 08:57:17.057   525   525 I PowerHAL: power_set_interactive ON
+11-04 08:57:17.065   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 1
+11-04 08:57:24.363   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 0
+11-04 08:57:24.365   525   525 I PowerHAL: power_set_interactive OFF
+11-04 08:57:24.367   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 0
+11-04 09:09:06.284   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 1
+11-04 09:09:06.319   525   525 I PowerHAL: power_set_interactive ON
+11-04 09:09:06.322   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 1
+11-04 09:09:11.734   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 0
+11-04 09:09:11.738   525   525 I PowerHAL: power_set_interactive OFF
+11-04 09:09:11.746   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 0
+11-04 09:09:13.311   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 1
+11-04 09:09:13.348   525   525 I PowerHAL: power_set_interactive ON
+11-04 09:09:13.351   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 1
+11-04 09:09:32.431   584 10624 E cutils-trace: Error opening trace file: Permission denied (13)
+11-04 09:09:32.664 10619 10619 W Adreno-GSL: <gsl_ldd_control:466>: ioctl fd 6 code 0xc0100940 (IOCTL_KGSL_SYNCSOURCE_CREATE) failed: errno 25 Unknown ioctl code
+11-04 09:09:32.664 10619 10619 I Adreno-EGL: <qeglDrvAPI_eglInitialize:379>: QUALCOMM Build: 09/28/15, cb423fe, Ib3272dc427
+11-04 09:09:36.903   584 10624 W Adreno-EGL: <qeglDrvAPI_eglSwapInterval:4070>: EGL_BAD_SURFACE
+11-04 09:09:47.408   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 0
+11-04 09:09:47.412   525   525 I PowerHAL: power_set_interactive OFF
+11-04 09:09:47.415   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 0
+11-04 20:14:40.546   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 1
+11-04 20:14:40.791   525   525 I PowerHAL: power_set_interactive ON
+11-04 20:14:40.791   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 1
+11-04 20:15:15.782   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 0
+11-04 20:15:15.786   525   525 I PowerHAL: power_set_interactive OFF
+11-04 20:15:15.794   525   547 I qdhwcomposer: handle_blank_event: dpy:0 panel power state: 0
