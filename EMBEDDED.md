@@ -1062,3 +1062,35 @@ conversions included: compile-time scaling scaled those too, and keeping them ph
 `Icons.get` for a fixed size (the Diamonds tile does), or every frame draws a new image.
 Untested on the watch: heart rate and Diamonds screens; `make preview` shows no icons
 (the viewer has no `Icons.get`) and lays out at Theme's 400 px default only.
+
+## AsteroidOS parity: alarm, back gesture, speed dial (2026-11-04, `parity` branch bcd7429..f6b1d3a, worktree `../asteroid-embedded-parity`)
+
+Five things Darrel noticed on the watch that behaved differently from AsteroidOS.
+
+- **Alarm "+" behind the editor:** the alarm list slides one screen left when a time or days
+  page opens, and `Page` has no background. Unclipped, the page right of the edited alarm showed
+  through (the add page on the last alarm). asteroid-alarmclock's ListView has `clip: true`.
+- **Back gesture:** in asteroid-launcher `compositor.qml` a right swipe sets `aboutToMinimize`
+  and `MainScreen.qml` then does `grid.moveTo(0, 1)` (launcher); a down swipe sets
+  `aboutToClose`, `moveTo(0, 0)` (watchface). stack.c now picks the screen from `app_top`.
+- **Speed dial label:** 005-speed-dial.qml: left margin 5 %, width 66 %, centred, 12 % font,
+  letter spacing 0.2 %, `fontSizeMode: Text.Fit`. Fit is emulated with a hidden Text at the base
+  size; Slint does expose `preferred-width` for reading.
+- **Speed dial flick** (QQuickPathView release, constants from memory of the Qt source; not
+  checked against it, no Qt source on the Mac or pc): velocity samples in items/s per move,
+  buffer of 3 (`QML_FLICK_SAMPLEBUFFER`), averaged without the newest; linear decay to 0 over
+  50 ms since the last move (`QML_FLICK_VELOCITY_DECAY_TIME`); no flick under 75 px/s
+  (`MinimumFlickVelocity`), clamp at 2500 px/s (`maximumFlickVelocity`), item length = path
+  length / pathItemCount; distance `min(count - 1, v^2 / (2 * deceleration / 10))`, deceleration
+  100, rounded to an item; constant deceleration, so a quadratic ease-out over `2 * dist / v`.
+  The old code used the newest sample (EMA 0.6) timed by `animation-tick()` (per frame), kept
+  full speed for 100 ms and had no floor or cap (up to ~22 items). Touch times come from
+  `Face.touch-ms`, set in `ui_touch`. A press stops the wheel (PathView does).
+- **Press selects:** delegate `onPressed` sets `selectedLauncherItem` and the mesh colours; it
+  holds until `onCurrentItemChanged`. Only a disc or the label launches; the rest of the view
+  does nothing. Mesh blend now wraps last -> first (`upperStop = 0` upstream).
+- **Tested on sparrow** (sturgeon was busy): label centred, a 45 degree drag over 800 ms moves
+  one app, a 100 px / 80 ms flick moved three and stopped, tap on 12 o'clock fills it, names it,
+  turns the mesh and opens it; back swipe -> launcher with it still selected, top close ->
+  watchface; editing the only alarm shows no "+". `shot` encodes asynchronously: wait ~1.5 s
+  before `adb pull screen.jpg` or the previous picture comes back.
