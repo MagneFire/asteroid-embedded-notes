@@ -1,8 +1,8 @@
 diff --git a/src/asteroid.h b/src/asteroid.h
-index b29b562..c954a46 100644
+index 142601d..30edeba 100644
 --- a/src/asteroid.h
 +++ b/src/asteroid.h
-@@ -168,7 +168,32 @@ enum { BAT_DISCHARGING, BAT_CHARGING, BAT_FULL };
+@@ -169,7 +169,33 @@ enum { BAT_DISCHARGING, BAT_CHARGING, BAT_FULL };
  int pmic_battery_status(void);
  int32_t pmic_battery_ua(void);
  int32_t pmic_battery_avg_ua(void);
@@ -24,6 +24,7 @@ index b29b562..c954a46 100644
 +bool rpm_sleep_bus(bool on);
 +bool rpm_ldo_sleep_lpm(bool on);
 +int rpm_regulator_both(uint32_t type, uint32_t id, bool on);
++bool rpm_sd_rails(bool off);
 +bool usb_rails_policy(bool off);
 +bool usb_rails_are_off(void);
 +bool touch_rmi4_rail(bool off);
@@ -188,7 +189,7 @@ index 536e27c..f095a27 100644
  	bt_lpm_poll();
  	bool boost = cpu_clock_is_slow() && bt_idle_ms() == 0;
 diff --git a/src/console/console.c b/src/console/console.c
-index 5c3b5a4..34c6660 100644
+index 5c3b5a4..66acc97 100644
 --- a/src/console/console.c
 +++ b/src/console/console.c
 @@ -394,6 +394,13 @@ static void cmd_bt(const char *args)
@@ -242,7 +243,7 @@ index 5c3b5a4..34c6660 100644
 +static void cmd_powertest(const char *args);
 +enum { PT_USB = 1, PT_RPM = 2, PT_HUB = 4, PT_EMMC = 8, PT_TOUCH = 16, PT_ALL = 31,
 +       PT_USBRAIL = 0x20, PT_TOUCHRAIL = 0x40, PT_LDO = 0x80, PT_AMP = 0x100, PT_PANEL = 0x200, PT_HUBSVC = 0x400,
-+       PT_EVERY = 0x7ff };
++       PT_SDRAIL = 0x800, PT_EVERY = 0xfff };
 +static void powertest_measures(unsigned m);
 +static unsigned pt_applied, pt_want;
 +static uint32_t pt_usb_undo;
@@ -251,7 +252,7 @@ index 5c3b5a4..34c6660 100644
 +{
 +	uint32_t m;
 +	if (!parse_num(&args, 16, &m) || m > PT_EVERY) {
-+		say("usage: measures <hex mask: 1 usb, 2 rpm, 4 hub, 8 emmc, 10 touch, 20 usb rails, 40 touch rail, 80 ldo sleep, 100 amp>\n");
++		say("usage: measures <hex mask: 1 usb, 2 rpm, 4 hub, 8 emmc, 10 touch, 20 usb rails, 40 touch rail, 80 ldo sleep, 100 amp, 200 panel deep, 400 hub services, 800 sd rails>\n");
 +		return;
 +	}
 +	powertest_measures(m);
@@ -295,7 +296,7 @@ index 5c3b5a4..34c6660 100644
  };
  
  static void cmd_help(const char *args)
-@@ -1132,8 +1192,247 @@ static void finish(void)
+@@ -1132,8 +1192,250 @@ static void finish(void)
  		done(ctx);
  }
  
@@ -384,6 +385,8 @@ index 5c3b5a4..34c6660 100644
 +		have |= PT_LDO;
 +	if (speaker_powerdown(m & PT_AMP) && (m & PT_AMP))
 +		have |= PT_AMP;
++	if (rpm_sd_rails(m & PT_SDRAIL) && (m & PT_SDRAIL))
++		have |= PT_SDRAIL;
 +	display_set_deep(m & PT_PANEL);
 +	if ((m & PT_PANEL) && display_is_deep())
 +		have |= PT_PANEL;
@@ -460,10 +463,11 @@ index 5c3b5a4..34c6660 100644
 +		return;
 +	}
 +	if (pt_night) {
-+		/* B = the five sleep measures; P = B plus the panel in deep
-+		 * standby; S = B with the hub running, its services off. */
-+		enum { B = PT_ALL, P = PT_ALL | PT_PANEL, S = (PT_ALL & ~PT_HUB) | PT_HUBSVC };
-+		static const uint16_t order[] = { B, P, P, B, B, S, S, B };
++		/* B = the five sleep measures; D = B plus the unused SD-card
++		 * supplies off; P = B plus the panel in deep standby; S = B
++		 * with the hub running, its services off. */
++		enum { B = PT_ALL, D = PT_ALL | PT_SDRAIL, P = PT_ALL | PT_PANEL, S = (PT_ALL & ~PT_HUB) | PT_HUBSVC };
++		static const uint16_t order[] = { B, D, D, B, B, P, P, B, B, S, S, B };
 +		if (pt_arm == 0)
 +			powertest_bt(false);
 +		else
@@ -544,7 +548,7 @@ index 5c3b5a4..34c6660 100644
  		if (more && more())
  			return;
 diff --git a/src/display/display.c b/src/display/display.c
-index 100eefa..b9dfa9d 100644
+index 8cacf20..3a01f59 100644
 --- a/src/display/display.c
 +++ b/src/display/display.c
 @@ -16,6 +16,9 @@
@@ -557,7 +561,7 @@ index 100eefa..b9dfa9d 100644
  static void (*idle_hook)(void);
  void display_set_idle_hook(void (*fn)(void)) { idle_hook = fn; }
  uint32_t display_timeouts(void) { return timeouts; }
-@@ -128,26 +131,28 @@ bool display_init(void)
+@@ -134,26 +137,28 @@ bool display_init(void)
  	       PIPE + PIPE_SRC_OP_MODE);
  	writel((uint32_t)(uintptr_t)fb.buf[1], PIPE + PIPE_SRC0_ADDR);
  	writel(MDP_INTR_PP0_DONE, MDP_INTR_CLEAR);
@@ -599,7 +603,7 @@ index 100eefa..b9dfa9d 100644
   * display_rest says whether the cluster may power down: not while a
   * frame is still on its way to the panel; if only the lanes refuse
   * ULPS, the display stays clocked and the cluster may still go. */
-@@ -163,7 +168,22 @@ uint32_t *display_backbuffer(void) { return fb.buf[fb.back]; }
+@@ -169,7 +174,22 @@ uint32_t *display_backbuffer(void) { return fb.buf[fb.back]; }
  
  static const uint32_t mdp_clocks[] = { MDSS_AXI_CBCR, MDSS_MDP_CBCR, MDSS_MDP_LUT_CBCR, MDSS_VSYNC_CBCR };
  static const uint32_t dsi_clocks[] = { MDSS_ESC0_CBCR, MDSS_BYTE0_CBCR, MDSS_PCLK0_CBCR };
@@ -623,7 +627,7 @@ index 100eefa..b9dfa9d 100644
  
  /* The registers the MDSS power domain loses when it collapses, in the
   * order they are written back: VBIF, MDP top (interface select, the
-@@ -306,25 +326,38 @@ bool display_rest(void)
+@@ -312,25 +332,38 @@ bool display_rest(void)
  		writel(0, DSI_LANE_CTRL);
  		return true;
  	}
@@ -676,7 +680,7 @@ index 100eefa..b9dfa9d 100644
  	resting = true;
  	return true;
  }
-@@ -333,34 +366,51 @@ void display_active(void)
+@@ -339,34 +372,51 @@ void display_active(void)
  {
  	if (!resting)
  		return;
@@ -749,7 +753,7 @@ index 100eefa..b9dfa9d 100644
  	for (unsigned i = 0; i < ARRAY_SIZE(dsi_clocks); i++)
  		clock_set(dsi_clocks[i], true);
  	uint32_t err = readl(DSI_DLN0_PHY_ERR);
-@@ -389,13 +439,65 @@ void display_wait_idle(void) { pp_wait(); }
+@@ -395,13 +445,65 @@ void display_wait_idle(void) { pp_wait(); }
  uint32_t display_frames(void) { return frames; }
  uint32_t display_waits(void) { return waits; }
  
@@ -815,7 +819,7 @@ index 100eefa..b9dfa9d 100644
  void display_sleep(void)
  {
  	display_active();
-@@ -403,12 +505,34 @@ void display_sleep(void)
+@@ -409,12 +511,34 @@ void display_sleep(void)
  	dsi_dcs_write(0x28, NULL, 0);
  	dsi_dcs_write(0x10, NULL, 0);
  	panel_asleep = true;
@@ -927,7 +931,7 @@ index 00ef135..2dfcf0c 100644
  	.init = rmi4_init,
  	.poll = rmi4_poll,
 diff --git a/src/main.c b/src/main.c
-index 4e83ed9..a760e28 100644
+index 0265652..23eaa27 100644
 --- a/src/main.c
 +++ b/src/main.c
 @@ -345,6 +345,18 @@ static void show_weather(void)
@@ -949,7 +953,7 @@ index 4e83ed9..a760e28 100644
  void main(uint32_t machtype, const void *fdt)
  {
  	cpu_clock_init();
-@@ -805,11 +817,32 @@ void main(uint32_t machtype, const void *fdt)
+@@ -806,11 +818,32 @@ void main(uint32_t machtype, const void *fdt)
  			last = now;
  			uint32_t pc, pcc, pcb;
  			spm_stats(&pc, &pcc, &pcb);
@@ -983,7 +987,7 @@ index 4e83ed9..a760e28 100644
  			uint32_t rx, tx, att, terr;
  			usb_stats(&rx, &tx);
  			touch_stats(&att, &terr);
-@@ -862,6 +895,9 @@ void main(uint32_t machtype, const void *fdt)
+@@ -863,6 +896,9 @@ void main(uint32_t machtype, const void *fdt)
  			uint32_t un = usb_next_ms();
  			if (un < app_next)
  				app_next = un;
@@ -1159,7 +1163,7 @@ index 4f2991b..0ce262d 100644
  	return first || !ms ? 0 : (int32_t)(uas * 1000 / ms);
  }
 diff --git a/src/soc/rpm.c b/src/soc/rpm.c
-index 90536f9..6e6b1b8 100644
+index f26cd99..e27528f 100644
 --- a/src/soc/rpm.c
 +++ b/src/soc/rpm.c
 @@ -202,8 +202,8 @@ int rpm_regulator_voltage(uint32_t type, uint32_t id, uint32_t uv)
@@ -1173,7 +1177,7 @@ index 90536f9..6e6b1b8 100644
  int rpm_regulator_sleep_enable(uint32_t type, uint32_t id, bool on)
  {
  	uint32_t kvp[3] = { 0x6e657773, 4, on };
-@@ -242,3 +242,76 @@ void rpm_sleep_votes(void)
+@@ -244,3 +244,106 @@ void rpm_sleep_votes(void)
  	uint32_t kvp[3] = { RPM_KEY_ENABLE, 4, 0 };
  	request(RPM_SET_SLEEP, RPM_CLK0, 0, kvp, 1);
  }
@@ -1249,6 +1253,36 @@ index 90536f9..6e6b1b8 100644
 +{
 +	int r = rpm_regulator_enable(type, id, on);
 +	return r ? r : rpm_regulator_sleep_enable(type, id, on);
++}
++
++/* Harness: the microSD supplies L18 (vdd) and L21 (vdd-io). Sturgeon has
++ * no slot and its kernel disables the controller, but they are on at
++ * boot; Linux leaves them off. Voted off in both sets, back on only if
++ * this turned them off. True once the request holds physically. */
++static bool sd_rail_off[2];
++bool rpm_sd_rails(bool off)
++{
++	static const uint8_t ids[2] = { 18, 21 };
++	bool ok = true, changed = false;
++	for (unsigned i = 0; i < 2; i++) {
++		if (sd_rail_off[i] == off)
++			continue;
++		changed = true;
++		if (rpm_regulator_both(RPM_LDOA, ids[i], !off))
++			ok = false;
++		else
++			sd_rail_off[i] = off;
++		/* Back on, in the high-power mode they had at boot. */
++		uint32_t kvp[3] = { RPM_KEY_LSMD, 4, 1 };
++		if (!off && (request(RPM_SET_ACTIVE, RPM_LDOA, ids[i], kvp, 1) || request(RPM_SET_SLEEP, RPM_LDOA, ids[i], kvp, 1)))
++			ok = false;
++	}
++	uint8_t en18 = pmic_read(0x015146), en21 = pmic_read(0x015446);
++	if (changed)
++		log_printf("rpm: sd supplies %s%s (l18 %02x, l21 %02x)\n", off ? "off" : "on", ok ? "" : " NOT all acknowledged",
++			   en18, en21);
++	bool phys_off = !(en18 & 0x80) && !(en21 & 0x80);
++	return ok && (off ? phys_off : true);
 +}
 diff --git a/src/storage/emmc.c b/src/storage/emmc.c
 index 15ccbfe..46741c5 100644
@@ -1438,10 +1472,10 @@ index 692b418..ebcc6b0 100644
  	if (retry_t && usb_down) {
  		uint32_t r = left(retry_t, 5000, now);
 diff --git a/tests/stubs.c b/tests/stubs.c
-index d17bf84..74f9a62 100644
+index d17bf84..a493f18 100644
 --- a/tests/stubs.c
 +++ b/tests/stubs.c
-@@ -40,10 +40,42 @@ int bt_start(const uint8_t *bdaddr, struct bt_info *info)
+@@ -40,10 +40,43 @@ int bt_start(const uint8_t *bdaddr, struct bt_info *info)
  	return -1;
  }
  void bt_stop(void) {}
@@ -1473,6 +1507,7 @@ index d17bf84..74f9a62 100644
 +uint32_t pmic_avg_ms;
 +bool rpm_ldo_sleep_lpm(bool on) { return true; }
 +int rpm_regulator_both(uint32_t type, uint32_t id, bool on) { return 0; }
++bool rpm_sd_rails(bool off) { return true; }
 +bool usb_rails_policy(bool off) { return true; }
 +bool usb_rails_are_off(void) { return false; }
 +bool touch_rmi4_rail(bool off) { return true; }
