@@ -1101,3 +1101,12 @@ Five things Darrel noticed on the watch that behaved differently from AsteroidOS
   in the flick direction"; from memory again). The pressed app's colours only at rest; a press
   that stops a turning wheel only stops it (PathView steals that click); a press between discs
   does nothing. Left as Qt does: a weak flick takes up to ~1.2 s to settle.
+- **Fling round** (fixup 99d57c6, Darrel: "still bad", then "good now"): a real-finger log on
+  sparrow showed IT7260 reports every ~11 ms while moving, none while the finger is still, and the
+  lift record 36-42 ms after the last move on every fling. The 50 ms decay cut 70-80 % of each
+  fling (25 items/s measured -> 5 released). The vendor driver lifts the same way, so Qt on
+  AsteroidOS either does not decay PathView flicks or decays more leniently; my recollection of
+  `QML_FLICK_VELOCITY_DECAY_TIME` in PathView is suspect. Now: full speed up to 50 ms without a
+  report, fading to 0 at 100 ms. Also (Sonnet): the move that crossed the 4 degree threshold was
+  dropped, so a fling of 3 or fewer reports had < 2 samples and v = 0; sampling now starts at the
+  press. Sturgeon's RMI4 lift delay is unmeasured.
