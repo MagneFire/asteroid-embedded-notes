@@ -1018,3 +1018,14 @@ rails, whose controller sturgeon's DT disables** (apq8026-sturgeon-common.dtsi:8
 Something before the firmware (aboot or lk2nd) turns them on and nothing
 turns them off. Linux has L11 on in LPM where the firmware has it off; L17 is
 in LPM on the firmware (eMMC asleep) and HPM in the awake Linux read.
+
+**Nightstand AOD in the earlier runs (2026-11-04).** The harness runs were armed
+on the charger, and the watch went to sleep there: always-on was then picked
+with nightstand.aod (1), not aod (0), and kept after the unplug (fixed in
+84fbbe3). The floor runs (§19 and before) went to sleep plugged in and were
+unplugged later without a wake, so they most likely ran with the AOD face on;
+the frames are not logged, so this is inferred. The 4.70 mA "screen off" floor
+and the 2.7 mA gap to AsteroidOS are therefore suspect. Rehearsal with AOD
+really off (logs-night-rehearsal-2026-11-04.txt, 1-minute arms): B read 2.1-3.1
+mA at trims bbc9-bbd0; every arm reached want = have, P entered and left deep
+standby, S turned the hub services off. The night run re-measures the floor.

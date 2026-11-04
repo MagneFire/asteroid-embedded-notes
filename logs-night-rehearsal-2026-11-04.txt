@@ -1,0 +1,353 @@
+[2.587] asteroid-embedded da710208d4+ up, timer 19200000 Hz, scm 0
+[2.587] cpu: clock at boot cfg 00000501, a7 pll mode 00000007 l 41 status 00010001; now cfg 00000501 status 00010001
+[2.587] board: sturgeon by device tree (tree 08600000 Huawei Watch, machtype 0, panel 400x400)
+[2.587] smem: item 13 at 03000000 + 00005bf0 size 00000800 (ext 00000000)
+[2.588] smem: item 18 at fc428000 + 00000000 size 00000058 (ext fc428000)
+[2.588] smem: item 342 at fc428000 + 00000200 size 00000800 (ext fc428000)
+[2.588] rpm: channel 4 info 88 fifo 1024, local state 0 remote 1, idx 0/0 0/0
+[2.588] rpm: remote state 1 after 0 ms
+[2.588] rpm: opened, remote state 2 after 0 ms
+[2.588] rpm: msg 1 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000001
+[2.589] rpm: msg 2 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000002
+[2.589] rpm: msg 3 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000003
+[2.589] rpm: msg 4 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000004
+[2.589] rpm: bus votes in 672 us, 0 of 4 not acknowledged
+[2.589] rpm: msg 5 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000005
+[2.589] spmi arbiter 20000002, pmic type 51.04 pon 10 warm 0200 poff 0200 ps_hold 01/80
+[2.589] display: mdp rev 10010001 fb 04200000 400x400 format 0002243f cmd autorefresh 0 op_mode 00000000
+[2.590] display: pp tear 0 sync 00000000 height 0 init 0 thresh 00000000 start 0 rdptr 0, te gpio cfg 00000001
+[2.689] display: te gpio 12 edges in 100 ms
+[2.694] display: framebuffers cleared in 2526 + 2983 us
+[2.694] display: phy ctrl_0 5f regulator_6 01
+[2.697] no fault record from the previous boot
+[2.698] charger: rev 00 boot 80 ctrl 80 vmax 111 vsafe 119 vbatdet 50 imax 6 isafe 12 vinmin 19 usb imax 5 trim 5
+[2.780] iadc: trim bbc9, conversions bbc1-bbd0, stored bbc9
+[2.805] bms: cell SCUD (id 10 kOhm), stored -1000%, raw 93%
+[2.822] bms: 93% (calculated 93%), ocv 4247264 uV, cc 30 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 0 mA, rbatt 466 mOhm, 28.3 C
+[2.824] rpm: msg 6 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000006
+[2.824] rpm: msg 7 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000007
+[2.824] emmc: mci 00000038 caps 642dc8b2, bus power 5, pwrctl 2
+[2.834] emmc: ocr c0ff8080 after 7 ms
+[2.850] emmc: init done in 26 ms: 7634944 sectors, 8-bit, 50000000 Hz
+[2.857] rpm: msg 8 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000008
+[2.857] gpu: powered, hw version 00070010, gdsc a0222000
+[2.858] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[2.859] gpu: selftest passed in 4 us: scratch reg 5eed0001, memory c0ffee42
+[2.868] ui: ready
+[2.869] rpm: msg 9 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000009
+[2.870] rpm: msg 10 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000a
+[3.177] touch: sid1 rev 51, l19 status 80 volt 03.30, lvs1 status 80, reset gpio 1
+[3.177] i2c: qup5 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3.178] touch: F34 query 73 cmd 00 ctrl 34 data 00 irqs 1
+[3.178] touch: F01 query 7c cmd 71 ctrl 38 data 13 irqs 1
+[3.178] touch: F11 query 99 cmd 72 ctrl 3e data 15 irqs 1
+[3.179] touch: F11 5 fingers, 2 status bytes, max 400 x 400
+[3.180] touch: palm detection on, data 28 at +27
+[3.180] touch: product MCRYHW_002, status 81 irq 02, attn 1
+[3.189] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3.191] storage: store 1048576 bytes in 1 runs, writable
+[3.193] kv: slots valid/valid, using 1, seq 456, 1374 bytes
+[3.194] haptics: drv2605 status 60, restored calibration 0, status 00 comp 03 bemf a9 feedback 36
+[3.214] uart1: 115200 baud, sr 0000020c isr 00000001 badr 64
+[3.220] rtc 1793828672, battery 4278 mV, usb valid, battery present, not charging
+[3.282] kv: slots valid/valid, using 1, seq 456, 1374 bytes
+[3.305] tick 0, 1 fps, rtc 1793828672, battery 4281 mV, usb valid, battery present, not charging, usb 0/0, touch 0/0
+[3.307] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -1 mA, 0 mA average
+[3.307] gpu: 1 frames, 1507 us submit to idle, 258 us vertices
+[3.307] ui: 1 of 1 frames repainted, update 58065 us avg, 58064 us per repaint
+[3.403] usb: configured, high speed
+[4.225] tick 1, 12 fps, rtc 1793828673, battery 4287 mV, usb valid, battery present, not charging, usb 0/0, touch 0/0
+[4.227] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, 0 mA average
+[4.227] gpu: 12 frames, 2341 us submit to idle, 206 us vertices
+[4.227] ui: 1 of 872 frames repainted, update 27 us avg, 20499 us per repaint
+[4.254] adb: host connected, max payload 1048576
+[4.431] powertest: settle 1 min, arms 1 min, from each unplug
+[4.722] hub: version 11.900.12.01.00
+[4.726] hub: handshake done
+[4.730] hub: calibration accel -34 15 -9
+[4.772] hub: wrist tilt on (0)
+[4.778] hub: wrist tilt every 10 ms (0)
+[4.784] hub: time set (0)
+[4.788] hub: step counter on (0)
+[4.788] hub: accelerometer on
+[5.220] steps: 0 today, 584 in total
+[5.356] uart4: 115200 baud, sr 0000020c isr 00000041 badr 64
+[5.356] bt: powered, cts 1, host wake 0
+[5.591] bt: 210 patch records, 39973 of 39973 bytes
+[5.854] bt: up in 628 ms (patch 220 ms), lmp subversion 2122, host wake 0, uart 1795/40243/0, hci 219/0
+[5.854] bt: key store "emmc", 1 bonds
+[5.858] tick 2, 15 fps, rtc 1793828674, battery 4284 mV, usb valid, battery present, not charging, usb 578/434, touch 0/0
+[5.860] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -2 mA, 0 mA average
+[5.860] gpu: 15 frames, 2344 us submit to idle, 207 us vertices
+[5.860] ui: 5 of 906 frames repainted, update 44 us avg, 7085 us per repaint
+[5.869] nimble: GAP procedure initiated: stop advertising.
+[5.870] nimble: failed to configure restored IRK
+[5.870] bt: host synced, address 43:43:a0:12:1f:ac (type 0)
+[5.871] nimble: GAP procedure initiated: advertise; disc_mode=2 adv_channel_map=0 own_addr_type=0 adv_filter_policy=0 adv_itvl_min=160 adv_itvl_max=240
+[5.872] bt: advertising as "sturgeon"
+[6.224] tick 3, 5 fps, rtc 1793828675, battery 4284 mV, usb valid, battery present, not charging, usb 578/434, touch 0/0
+[6.226] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -1 mA, 0 mA average
+[6.226] gpu: 5 frames, 2342 us submit to idle, 206 us vertices
+[6.226] ui: 0 of 347 frames repainted, update 4 us avg, 0 us per repaint
+[7.100] bt: resolved private address of a bonded peer
+[7.100] bt: connected to bc:32:b2:3d:2c:0a (type 0)
+[7.100] bt: interval 28 x 1.25 ms, latency 0, timeout 500 x 10 ms
+[7.225] tick 4, 11 fps, rtc 1793828676, battery 4284 mV, usb valid, battery present, not charging, usb 578/434, touch 0/0
+[7.227] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 1 mA, 0 mA average
+[7.227] gpu: 11 frames, 2345 us submit to idle, 205 us vertices
+[7.227] ui: 0 of 995 frames repainted, update 4 us avg, 0 us per repaint
+[7.422] bt: encryption 0: encrypted 1, authenticated 1, bonded 1, key size 16
+[7.422] bt: peer identity bc:32:b2:3d:2c:0a (type 0)
+[7.422] bt: subscribe handle 34, notify 1, indicate 0
+[7.422] bt: subscribe handle 22, notify 1, indicate 0
+[7.422] bt: subscribe handle 56, notify 1, indicate 0
+[7.422] bt: subscribe handle 8, notify 0, indicate 1
+[7.651] sleep
+[7.651] rpm: msg 11 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000b
+[7.774] hub: accelerometer off
+[8.828] bt: time set to 2026-11-04 21:44:37 (rtc 1793828677)
+[9.379] bt: connection update 0, interval 28, latency 0, timeout 500
+[22.813] bms: 93% (calculated 93%), ocv 4247264 uV, cc 30 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 0 mA, rbatt 461 mOhm, 28.5 C
+[23.813] charger: resuming at 93%
+[25.858] bms: 93% (calculated 93%), ocv 4247264 uV, cc 30 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 0 mA, rbatt 461 mOhm, 28.5 C
+[35.394] bms: 93% (calculated 93%), ocv 4247264 uV, cc -43 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg -26 mA, rbatt 456 mOhm, 28.6 C
+[36.383] powertest: unplugged, settling
+[38.386] usb: unconfigured
+[38.386] usb: unplugged, phy in low power mode
+[40.405] power: always-on off
+[67.238] bms: 93% (calculated 93%), ocv 4247264 uV, cc 8 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 5 mA, rbatt 471 mOhm, 27.9 C
+[67.239] power: asleep, 56 wakeups, 36/6/2 collapses, -1 mA average
+[96.388] rpm: msg 12 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000c
+[96.388] rpm: msg 13 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000d
+[96.388] rpm: msg 14 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000e
+[96.388] rpm: msg 15 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000f
+[96.388] rpm: bus sleep votes zero, gcc sleep vote 00000000 (saved 00000000)
+[96.389] hub: held in reset
+[96.391] emmc: asleep
+[96.391] touch: sensor asleep, ctrl 01
+[96.391] rpm: msg 16 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000010
+[96.392] rpm: msg 17 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000011
+[96.392] rpm: ldo sleep votes as active
+[96.392] powertest: measures want 01f have 01f
+[96.392] powertest: arm 0 night=01f aod=off bt=off have 01f
+[96.406] bms: 93% (calculated 93%), ocv 4247264 uV, cc 47 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 4 mA, rbatt 476 mOhm, 27.5 C
+[127.244] bms: 93% (calculated 93%), ocv 4247264 uV, cc 54 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 0 mA, rbatt 481 mOhm, 27.1 C
+[127.245] power: asleep, 2 wakeups, 36/8/2 collapses, 2 mA average
+[127.245] power: cc 2829 uA over 60006 ms, xo 0 x 0 ms, vmin 5 x 59956 ms, slept 59999 ms
+[156.388] powertest: arm 0 end, have 01f
+[156.389] rpm: msg 18 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000012
+[156.389] rpm: msg 19 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000013
+[156.389] rpm: msg 20 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000014
+[156.390] rpm: msg 21 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000015
+[156.390] rpm: sd supplies off (l18 00, l21 00)
+[156.390] powertest: measures want 81f have 81f
+[156.391] powertest: arm 1 night=81f aod=off bt=off have 81f
+[156.405] bms: 93% (calculated 93%), ocv 4247264 uV, cc 59 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 0 mA, rbatt 481 mOhm, 26.8 C
+[187.249] bms: 93% (calculated 93%), ocv 4247264 uV, cc 61 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 0 mA, rbatt 486 mOhm, 26.5 C
+[187.251] power: asleep, 2 wakeups, 36/10/2 collapses, 0 mA average
+[187.251] power: cc 462 uA over 60006 ms, xo 0 x 0 ms, vmin 5 x 59956 ms, slept 59999 ms
+[216.388] powertest: arm 1 end, have 81f
+[216.389] powertest: arm 2 night=81f aod=off bt=off have 81f
+[216.402] bms: 93% (calculated 93%), ocv 4247264 uV, cc 61 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 0 mA, rbatt 486 mOhm, 26.3 C
+[247.254] bms: 93% (calculated 93%), ocv 4247264 uV, cc 61 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 0 mA, rbatt 491 mOhm, 26.2 C
+[247.255] power: asleep, 2 wakeups, 36/12/2 collapses, 0 mA average
+[247.256] power: cc 9 uA over 60004 ms, xo 0 x 0 ms, vmin 5 x 59957 ms, slept 59998 ms
+[276.389] powertest: arm 2 end, have 81f
+[276.389] rpm: msg 22 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000016
+[276.390] rpm: msg 23 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000017
+[276.390] rpm: msg 24 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000018
+[276.390] rpm: msg 25 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000019
+[276.390] rpm: msg 26 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000001a
+[276.391] rpm: msg 27 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000001b
+[276.391] rpm: msg 28 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000001c
+[276.391] rpm: msg 29 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000001d
+[276.392] rpm: sd supplies on (l18 80, l21 80)
+[276.392] powertest: measures want 01f have 01f
+[276.393] powertest: arm 3 night=01f aod=off bt=off have 01f
+[276.406] bms: 93% (calculated 93%), ocv 4247264 uV, cc 61 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 0 mA, rbatt 491 mOhm, 26.0 C
+[307.285] iadc: trim bbce, conversions bbc8-bbd4, stored bbc9
+[307.295] bms: new ocv 4298926 uV
+[307.303] bms: 93% (calculated 97%), ocv 4298926 uV, cc 0 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 0 mA, rbatt 491 mOhm, 25.8 C
+[307.304] power: asleep, 2 wakeups, 36/14/2 collapses, 0 mA average
+[307.304] power: cc -106 uA over 60049 ms, xo 0 x 0 ms, vmin 5 x 59954 ms, slept 60042 ms
+[336.388] powertest: arm 3 end, have 01f
+[336.389] powertest: arm 4 night=01f aod=off bt=off have 01f
+[336.403] bms: 93% (calculated 97%), ocv 4298926 uV, cc 20 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 2 mA, rbatt 491 mOhm, 25.7 C
+[367.264] bms: 93% (calculated 97%), ocv 4298926 uV, cc 40 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 2 mA, rbatt 491 mOhm, 25.5 C
+[367.266] power: asleep, 2 wakeups, 36/16/2 collapses, 2 mA average
+[367.266] power: cc 2471 uA over 59962 ms, xo 0 x 0 ms, vmin 5 x 59914 ms, slept 59955 ms
+[396.388] powertest: arm 4 end, have 01f
+[396.644] display: panel in deep standby
+[396.644] powertest: measures want 21f have 21f
+[396.645] powertest: arm 5 night=21f aod=off bt=off have 21f
+[396.658] bms: 93% (calculated 97%), ocv 4298926 uV, cc 63 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 2 mA, rbatt 496 mOhm, 25.4 C
+[427.269] bms: 93% (calculated 97%), ocv 4298926 uV, cc 99 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 4 mA, rbatt 496 mOhm, 25.2 C
+[427.271] power: asleep, 2 wakeups, 36/18/2 collapses, 3 mA average
+[427.271] power: cc 3570 uA over 60005 ms, xo 0 x 0 ms, vmin 5 x 59701 ms, slept 59998 ms
+[456.388] powertest: arm 5 end, have 21f
+[456.388] powertest: arm 6 night=21f aod=off bt=off have 21f
+[456.399] bms: new ocv 4296469 uV
+[456.407] bms: 93% (calculated 97%), ocv 4296469 uV, cc 11 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg 2 mA, rbatt 496 mOhm, 25.1 C
+[487.275] bms: 93% (calculated 97%), ocv 4296469 uV, cc 30 uAh, fcc 322000 uAh, uuc 0 uAh, iavg 2 mA, rbatt 496 mOhm, 25.0 C
+[487.276] power: asleep, 2 wakeups, 36/20/2 collapses, 2 mA average
+[487.276] power: cc 2227 uA over 60005 ms, xo 0 x 0 ms, vmin 5 x 59953 ms, slept 59998 ms
+[516.388] powertest: arm 6 end, have 21f
+[516.404] display: panel reset out of deep standby
+[516.404] powertest: measures want 01f have 01f
+[516.405] powertest: arm 7 night=01f aod=off bt=off have 01f
+[516.418] bms: 93% (calculated 97%), ocv 4296469 uV, cc 47 uAh, fcc 322000 uAh, uuc 0 uAh, iavg 2 mA, rbatt 496 mOhm, 25.0 C
+[547.281] bms: 93% (calculated 97%), ocv 4296469 uV, cc 65 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 2 mA, rbatt 510 mOhm, 24.8 C
+[547.282] power: asleep, 2 wakeups, 36/22/2 collapses, 2 mA average
+[547.283] power: cc 2134 uA over 60006 ms, xo 0 x 0 ms, vmin 5 x 59943 ms, slept 60000 ms
+[576.389] powertest: arm 7 end, have 01f
+[576.389] powertest: arm 8 night=01f aod=off bt=off have 01f
+[576.400] bms: new ocv 4294693 uV
+[576.410] bms: 93% (calculated 97%), ocv 4294693 uV, cc 2 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 1 mA, rbatt 515 mOhm, 24.7 C
+[607.312] iadc: trim bbd0, conversions bbca-bbd7, stored bbce
+[607.325] bms: 93% (calculated 97%), ocv 4294693 uV, cc 38 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 4 mA, rbatt 520 mOhm, 24.6 C
+[607.327] power: asleep, 2 wakeups, 36/24/2 collapses, 3 mA average
+[607.327] power: cc 3136 uA over 60045 ms, xo 0 x 0 ms, vmin 5 x 59951 ms, slept 60038 ms
+[636.388] powertest: arm 8 end, have 01f
+[636.408] uart1: 115200 baud, sr 0000020c isr 00000001 badr 64
+[636.409] hub: released
+[636.410] powertest: measures want 41b have 01b
+[636.410] powertest: arm 9 night=41b aod=off bt=off have 01b
+[636.424] bms: 93% (calculated 97%), ocv 4294693 uV, cc 63 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 3 mA, rbatt 530 mOhm, 24.5 C
+[638.447] hub: version 11.900.12.01.00
+[639.462] hub: handshake done
+[639.480] emmc: awake
+[639.533] hub: calibration accel -34 15 -9
+[643.525] hub: wrist tilt on (0)
+[644.541] hub: wrist tilt every 10 ms (0)
+[645.557] hub: time set (0)
+[646.573] hub: step counter on (0)
+[667.280] emmc: asleep
+[667.281] hub: services off (0 acknowledgements so far)
+[667.281] powertest: measures want 41b have 41b
+[667.294] bms: 93% (calculated 97%), ocv 4294693 uV, cc 168 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 12 mA, rbatt 530 mOhm, 24.5 C
+[667.296] power: asleep, 13 wakeups, 46/26/3 collapses, 7 mA average
+[667.296] power: cc 7784 uA over 59969 ms, xo 0 x 0 ms, vmin 4 x 49731 ms, slept 59962 ms
+[696.387] powertest: arm 9 end, have 41b
+[696.387] powertest: arm 10 night=41b aod=off bt=off have 41b
+[696.401] bms: 93% (calculated 97%), ocv 4294693 uV, cc 188 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 2 mA, rbatt 530 mOhm, 24.5 C
+[727.292] bms: new ocv 4293214 uV
+[727.300] bms: 93% (calculated 97%), ocv 4293214 uV, cc 13 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 2 mA, rbatt 535 mOhm, 24.4 C
+[727.302] power: asleep, 2 wakeups, 46/28/3 collapses, 2 mA average
+[727.302] power: cc 2451 uA over 60006 ms, xo 0 x 0 ms, vmin 5 x 59956 ms, slept 59999 ms
+[756.387] powertest: arm 10 end, have 41b
+[756.387] hub: held in reset
+[756.387] powertest: measures want 01f have 01f
+[756.388] powertest: arm 11 night=01f aod=off bt=off have 01f
+[756.401] bms: 93% (calculated 97%), ocv 4293214 uV, cc 34 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 2 mA, rbatt 540 mOhm, 24.3 C
+[787.300] bms: 93% (calculated 97%), ocv 4293214 uV, cc 57 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 2 mA, rbatt 545 mOhm, 24.2 C
+[787.302] power: asleep, 2 wakeups, 46/30/3 collapses, 2 mA average
+[787.302] power: cc 2678 uA over 60000 ms, xo 0 x 0 ms, vmin 5 x 59953 ms, slept 59993 ms
+[816.388] powertest: arm 11 end, have 01f
+[816.388] powertest: arm 12 night=01f aod=off bt=off have 01f
+[816.402] bms: 93% (calculated 97%), ocv 4293214 uV, cc 78 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 2 mA, rbatt 550 mOhm, 24.1 C
+[847.302] bms: new ocv 4292326 uV
+[847.312] bms: 93% (calculated 97%), ocv 4292326 uV, cc 4 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 2 mA, rbatt 560 mOhm, 24.0 C
+[847.313] power: asleep, 2 wakeups, 46/32/3 collapses, 2 mA average
+[847.314] power: cc 2644 uA over 60011 ms, xo 0 x 0 ms, vmin 5 x 59958 ms, slept 60005 ms
+[876.389] powertest: arm 12 end, have 01f
+[876.389] rpm: msg 30 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000001e
+[876.390] rpm: msg 31 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000001f
+[876.390] rpm: msg 32 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000020
+[876.390] rpm: msg 33 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000021
+[876.390] rpm: sd supplies off (l18 00, l21 00)
+[876.391] powertest: measures want 81f have 81f
+[876.392] powertest: arm 13 night=81f aod=off bt=off have 81f
+[876.405] bms: 93% (calculated 97%), ocv 4292326 uV, cc 32 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 3 mA, rbatt 560 mOhm, 24.0 C
+[907.337] iadc: trim bbd0, conversions bbcb-bbd5, stored bbd0
+[907.350] bms: 93% (calculated 97%), ocv 4292326 uV, cc 55 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 2 mA, rbatt 565 mOhm, 23.9 C
+[907.351] power: asleep, 2 wakeups, 46/34/3 collapses, 3 mA average
+[907.352] power: cc 3079 uA over 60038 ms, xo 0 x 0 ms, vmin 5 x 59949 ms, slept 60031 ms
+[936.389] powertest: arm 13 end, have 81f
+[936.389] powertest: arm 14 night=81f aod=off bt=off have 81f
+[936.403] bms: 93% (calculated 97%), ocv 4292326 uV, cc 75 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 2 mA, rbatt 570 mOhm, 23.8 C
+[967.316] bms: 93% (calculated 97%), ocv 4292326 uV, cc 98 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 2 mA, rbatt 575 mOhm, 23.7 C
+[967.318] power: asleep, 2 wakeups, 46/36/3 collapses, 2 mA average
+[967.318] power: cc 2662 uA over 59967 ms, xo 0 x 0 ms, vmin 5 x 59919 ms, slept 59960 ms
+[991.541] powertest: plugged in, waiting for the next unplug
+[991.671] uart4: 115200 baud, sr 0000020c isr 00000041 badr 64
+[991.671] bt: powered, cts 1, host wake 0
+[991.906] bt: 210 patch records, 39973 of 39973 bytes
+[992.172] bt: up in 631 ms (patch 222 ms), lmp subversion 2122, host wake 0, uart 1795/40243/0, hci 474/0
+[992.276] usb: up again in 103 ms
+[992.276] rpm: msg 34 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000022
+[992.276] rpm: msg 35 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000023
+[992.277] rpm: msg 36 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000024
+[992.277] rpm: msg 37 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000025
+[992.277] rpm: bus sleep votes active rates, gcc sleep vote 00000000 (saved 00000000)
+[992.298] uart1: 115200 baud, sr 0000020c isr 00000001 badr 64
+[992.299] hub: released
+[992.301] emmc: awake
+[992.302] touch: sensor awake, ctrl 00
+[992.303] rpm: msg 38 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000026
+[992.303] rpm: msg 39 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000027
+[992.304] rpm: msg 40 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000028
+[992.304] rpm: msg 41 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000029
+[992.304] rpm: msg 42 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000002a
+[992.304] rpm: msg 43 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000002b
+[992.305] rpm: msg 44 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000002c
+[992.305] rpm: msg 45 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000002d
+[992.305] rpm: sd supplies on (l18 80, l21 80)
+[992.305] powertest: measures want 000 have 000
+[992.306] bt: subscribe handle 8, notify 0, indicate 0
+[992.307] bt: subscribe handle 22, notify 0, indicate 0
+[992.308] bt: subscribe handle 34, notify 0, indicate 0
+[992.309] bt: subscribe handle 56, notify 0, indicate 0
+[992.310] bt: disconnected, reason 000c
+[992.310] bt: advertising data failed: 22
+[992.311] bt: host reset, reason 12
+[992.324] nimble: GAP procedure initiated: stop advertising.
+[992.325] nimble: failed to configure restored IRK
+[992.325] bt: host synced, address 43:43:a0:12:1f:ac (type 0)
+[992.326] nimble: GAP procedure initiated: advertise; disc_mode=2 adv_channel_map=0 own_addr_type=0 adv_filter_policy=0 adv_itvl_min=160 adv_itvl_max=240
+[992.327] bt: advertising as "sturgeon"
+[992.338] bms: new ocv 4291228 uV
+[992.365] bms: 93% (calculated 97%), ocv 4291228 uV, cc 27 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 0 mA, rbatt 580 mOhm, 23.6 C
+[992.367] usb: cable plugged in
+[992.489] display: panel initialised after reset
+[992.490] wake
+[992.491] rpm: msg 46 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000002e
+[992.491] gpu: powered, hw version 00070010, gdsc a0222000
+[992.492] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[992.493] gpu: resumed in 2075 us
+[992.505] tick 989, 7 fps, rtc 1793829661, battery 4176 mV, usb valid, battery present, not charging, usb 723/1827, touch 0/0
+[992.509] power: awake, asleep 100% of the last second, 1 wakeups, 46/37/3 collapses, battery -5 mA, 4 mA average
+[992.509] gpu: 5 frames, 2637 us submit to idle, 217 us vertices
+[992.509] ui: 2 of 251 frames repainted, update 50 us avg, 5757 us per repaint
+[992.542] usb: configured, high speed
+[993.037] bms: 93% (calculated 97%), ocv 4291228 uV, cc 27 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg 0 mA, rbatt 580 mOhm, 23.6 C
+[993.119] adb: host connected, max payload 1048576
+[993.404] bt: resolved private address of a bonded peer
+[993.404] bt: connected to bc:32:b2:3d:2c:0a (type 0)
+[993.404] bt: interval 28 x 1.25 ms, latency 0, timeout 500 x 10 ms
+[993.497] tick 990, 44 fps, rtc 1793829662, battery 4344 mV, usb valid, battery present, fast charging, usb 1033/1955, touch 0/0
+[993.499] power: awake, asleep 0% of the last second, 0 wakeups, 46/37/3 collapses, battery -39 mA, 0 mA average
+[993.499] gpu: 44 frames, 3881 us submit to idle, 206 us vertices
+[993.499] ui: 1 of 309 frames repainted, update 67 us avg, 19562 us per repaint
+[993.727] bt: encryption 0: encrypted 1, authenticated 1, bonded 1, key size 16
+[993.727] bt: peer identity bc:32:b2:3d:2c:0a (type 0)
+[993.727] bt: subscribe handle 34, notify 1, indicate 0
+[993.727] bt: subscribe handle 22, notify 1, indicate 0
+[993.727] bt: subscribe handle 56, notify 1, indicate 0
+[993.727] bt: subscribe handle 8, notify 0, indicate 1
+[993.814] hub: version 11.900.12.01.00
+[993.818] hub: handshake done
+[993.822] hub: calibration accel -34 15 -9
+[993.864] hub: wrist tilt on (0)
+[993.871] hub: wrist tilt every 10 ms (0)
+[993.877] hub: time set (0)
+[993.882] hub: step counter on (0)
+[993.882] hub: accelerometer on
+[994.495] tick 991, 12 fps, rtc 1793829663, battery 4344 mV, usb valid, battery present, fast charging, usb 1033/1955, touch 0/0
+[994.497] power: awake, asleep 0% of the last second, 0 wakeups, 46/37/3 collapses, battery -35 mA, -32 mA average
+[994.497] gpu: 12 frames, 3790 us submit to idle, 207 us vertices
+[994.497] ui: 1 of 964 frames repainted, update 13 us avg, 8905 us per repaint
+[994.847] bt: time set to 2026-11-04 22:01:04 (rtc 1793829664)
+[995.312] bt: connection update 0, interval 28, latency 0, timeout 500
+[995.667] sleep
+[995.667] rpm: msg 47 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000002f
+[995.787] hub: accelerometer off

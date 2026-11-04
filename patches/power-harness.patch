@@ -931,7 +931,7 @@ index 00ef135..2dfcf0c 100644
  	.init = rmi4_init,
  	.poll = rmi4_poll,
 diff --git a/src/main.c b/src/main.c
-index 0265652..23eaa27 100644
+index a953539..2d2ae7d 100644
 --- a/src/main.c
 +++ b/src/main.c
 @@ -345,6 +345,18 @@ static void show_weather(void)
@@ -987,10 +987,10 @@ index 0265652..23eaa27 100644
  			uint32_t rx, tx, att, terr;
  			usb_stats(&rx, &tx);
  			touch_stats(&att, &terr);
-@@ -863,6 +896,9 @@ void main(uint32_t machtype, const void *fdt)
- 			uint32_t un = usb_next_ms();
- 			if (un < app_next)
- 				app_next = un;
+@@ -866,6 +899,9 @@ void main(uint32_t machtype, const void *fdt)
+ 			uint32_t ns = power_next_ms();
+ 			if (ns < app_next)
+ 				app_next = ns;
 +			uint32_t pt = powertest_next_ms();
 +			if (pt < app_next)
 +				app_next = pt;
