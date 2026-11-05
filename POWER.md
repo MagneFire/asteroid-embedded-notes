@@ -1083,3 +1083,5 @@ earlier null was the off vote that never reached L20. With all three the firmwar
 would read about 2.1 mA without tap to wake, 2.4 with; the hub is still in reset
 here. AsteroidOS: 3.07 mA raw, 1.45 mA in its intervals at trim bbd6, with touch
 doze and the hub running. The gap stays open.
+
+Correction to §22 (ASTRA-POWER-11.md): G wrote F11 report mode 2; the vendor's F11 wake gesture mode is 4 (2 is F12's), so +0.3 mA is not the cost of tap to wake. V's -0.25 mA is one block and L20 only (L10 stays on). L, V and C were never run together; their sum is a prediction.
