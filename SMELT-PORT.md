@@ -10,8 +10,10 @@ Rationale and open questions for the `smelt` branch. Everything below was read f
   (back porch 50 vs 55). Panel: NT35350 large/small, NT35355 sports small.
 - **Stock and AsteroidOS smelt images have no `dt` section**: `CONFIG_BUILD_ARM_APPENDED_DTB_IMAGE`,
   12 trees behind the zImage, `img_info` has no dt. QCDT on Moto aboot is untested by anyone.
-  Hence two images: `build/asteroid.img` (QCDT, all three watches) and `build/asteroid-smelt.img`
-  (no dt section, tree appended, zImage magic and end offset at 0x24/0x2c). Try the second first.
+  One image: `build/asteroid.img` has the QCDT table and also the smelt tree behind the firmware
+  (zImage magic and end offset at 0x24/0x2c). Darrel: it has to stay a single image. Risk: a
+  bootloader that sees a dt section and finds no match there fails instead of trying the appended
+  tree, so if smelt refuses to boot, look at how its aboot matches the table entry first.
   LK reads the appended offset at 0x2c without checking the magic; `start.S` reserves the words.
 - M4 cannot simply be released from reset: every vendor path resets with **boot0 high into the
   STM32 ROM bootloader** and sends GO to 0x08000000 after checking the barker at 0x0807fff8. The
