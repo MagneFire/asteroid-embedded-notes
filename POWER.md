@@ -1049,5 +1049,8 @@ a hub asleep with its services off costs no more than one held in reset.
 Trim rose with cooling (27 -> 17.5 C) at only ~0.05 mA/code within this run, far
 from the 0.5 mA/code seen across plug states, so that slope does not carry over
 to a slow drift. BMS OCV fell 9.2 mV/h (§19: ~14, AsteroidOS: ~7).
-Against AsteroidOS (3.07 mA raw, ~2.0 mA at equal trim) the remaining gap is
-0 to ~0.8 mA, inside the counter's uncertainty.
+Against AsteroidOS (3.07 mA raw) the gap is not established precisely: at this
+run's trim (bbd6.1) the conditional 0.48 mA/code slope gives Linux ~1.4 mA, an
+apparent ~1.3 mA gap (ASTRA-POWER-10.md); raw, the firmware reads lower. 2.7 mA is
+also the BT-off, tap-off, hub-in-reset baseline, not a production floor. Goal:
+the firmware must not use more than AsteroidOS, so this stays open.

@@ -1,0 +1,51 @@
+> status
+uptime 33385.447 s
+build da710208d4+
+board sturgeon (by device tree)
+timer ticks 13912
+display frames 213
+battery 4344 mV
+charger usb valid, battery present, fast charging
+rtc 1793862054
+> hub
+hub: ready, version 11.900.12.01.00, 1 tilts, 1 mcu wakes, 132 frames, 0 bad, uart 406/155/0, mcu status 1 wake 0
+hub: steps -1, heart rate off -1 status 0
+hub: accelerometer off 3 4 2063
+> mem fc19dba0 12
+fc19dba0: 64736f78 00000000 00000000 00000000
+fc19dbb0: 00000000 00000000 00000000 00000000
+fc19dbc0: 00010001 00000000 00000000 00000000
+> mem fc19dbd0 12
+fc19dbd0: 6e696d76 00000878 656618bb 00000092
+fc19dbe0: 683d77ed 00000092 6e6d7d3c 0000008e
+fc19dbf0: 00000000 00000000 00000000 00000000
+> mem fc401488 1
+fc401488: 00000000
+> mem fd511190 2
+fd511190: 00000200 00000003
+> mem fd5114e0 2
+fd5114e0: 00000201 00000003
+> mem fd5116c0 2
+fd5116c0: 00000201 00000003
+> pmic 36f2 2
+036f2: bb ce
+> pmic 14345 2
+14345: 80 80
+> pmic 14545 2
+14545: 80 80
+> pmic 14745 2
+14745: 80 80
+> pmic 14945 2
+14945: 80 80
+> pmic 14e45 2
+14e45: 80 00
+> pmic 15045 2
+15045: 00 80
+> pmic 15145 2
+15145: 80 00
+> pmic 15245 2
+15245: 00 80
+> pmic 15345 2
+15345: 80 80
+> pmic 15445 2
+15445: 80 00
