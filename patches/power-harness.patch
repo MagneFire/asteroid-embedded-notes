@@ -1,8 +1,8 @@
 diff --git a/src/asteroid.h b/src/asteroid.h
-index 142601d..30edeba 100644
+index 142601d..4472d78 100644
 --- a/src/asteroid.h
 +++ b/src/asteroid.h
-@@ -169,7 +169,33 @@ enum { BAT_DISCHARGING, BAT_CHARGING, BAT_FULL };
+@@ -169,7 +169,38 @@ enum { BAT_DISCHARGING, BAT_CHARGING, BAT_FULL };
  int pmic_battery_status(void);
  int32_t pmic_battery_ua(void);
  int32_t pmic_battery_avg_ua(void);
@@ -25,6 +25,11 @@ index 142601d..30edeba 100644
 +bool rpm_ldo_sleep_lpm(bool on);
 +int rpm_regulator_both(uint32_t type, uint32_t id, bool on);
 +bool rpm_sd_rails(bool off);
++int rpm_rail_on_hpm(uint32_t id, uint32_t uv);
++void display_set_rails(bool off);
++bool display_rails_are_off(void);
++bool emmc_rail(bool off);
++bool touch_rmi4_gesture(bool on);
 +bool usb_rails_policy(bool off);
 +bool usb_rails_are_off(void);
 +bool touch_rmi4_rail(bool off);
@@ -189,7 +194,7 @@ index 536e27c..f095a27 100644
  	bt_lpm_poll();
  	bool boost = cpu_clock_is_slow() && bt_idle_ms() == 0;
 diff --git a/src/console/console.c b/src/console/console.c
-index 5c3b5a4..66acc97 100644
+index 5c3b5a4..0291d5b 100644
 --- a/src/console/console.c
 +++ b/src/console/console.c
 @@ -394,6 +394,13 @@ static void cmd_bt(const char *args)
@@ -243,7 +248,7 @@ index 5c3b5a4..66acc97 100644
 +static void cmd_powertest(const char *args);
 +enum { PT_USB = 1, PT_RPM = 2, PT_HUB = 4, PT_EMMC = 8, PT_TOUCH = 16, PT_ALL = 31,
 +       PT_USBRAIL = 0x20, PT_TOUCHRAIL = 0x40, PT_LDO = 0x80, PT_AMP = 0x100, PT_PANEL = 0x200, PT_HUBSVC = 0x400,
-+       PT_SDRAIL = 0x800, PT_EVERY = 0xfff };
++       PT_SDRAIL = 0x800, PT_GESTURE = 0x1000, PT_PANELRAIL = 0x2000, PT_EMMCRAIL = 0x4000, PT_EVERY = 0x7fff };
 +static void powertest_measures(unsigned m);
 +static unsigned pt_applied, pt_want;
 +static uint32_t pt_usb_undo;
@@ -252,7 +257,7 @@ index 5c3b5a4..66acc97 100644
 +{
 +	uint32_t m;
 +	if (!parse_num(&args, 16, &m) || m > PT_EVERY) {
-+		say("usage: measures <hex mask: 1 usb, 2 rpm, 4 hub, 8 emmc, 10 touch, 20 usb rails, 40 touch rail, 80 ldo sleep, 100 amp, 200 panel deep, 400 hub services, 800 sd rails>\n");
++		say("usage: measures <hex mask: 1 usb, 2 rpm, 4 hub, 8 emmc, 10 touch, 20 usb rails, 40 touch rail, 80 ldo sleep, 100 amp, 200 panel deep, 400 hub services, 800 sd rails, 1000 touch gesture, 2000 panel rails, 4000 emmc vcc>\n");
 +		return;
 +	}
 +	powertest_measures(m);
@@ -296,7 +301,7 @@ index 5c3b5a4..66acc97 100644
  };
  
  static void cmd_help(const char *args)
-@@ -1132,8 +1192,250 @@ static void finish(void)
+@@ -1132,8 +1192,261 @@ static void finish(void)
  		done(ctx);
  }
  
@@ -368,8 +373,14 @@ index 5c3b5a4..66acc97 100644
 +		have |= PT_RPM;
 +	if (hub_hold(m & PT_HUB) && (m & PT_HUB))
 +		have |= PT_HUB;
++	if (!(m & PT_EMMCRAIL))
++		emmc_rail(false);
 +	if (!emmc_sleep(m & PT_EMMC) && emmc_is_asleep())
 +		have |= PT_EMMC;
++	if ((m & PT_EMMCRAIL) && emmc_rail(true))
++		have |= PT_EMMCRAIL;
++	if (touch_rmi4_gesture(m & PT_GESTURE) && (m & PT_GESTURE))
++		have |= PT_GESTURE;
 +	/* The touch supply goes off after the sensor sleeps and comes back
 +	 * (with the controller initialised again) before it wakes. */
 +	if (!(m & PT_TOUCHRAIL) && touch_rmi4_rail(false) && !(m & PT_TOUCH))
@@ -387,7 +398,10 @@ index 5c3b5a4..66acc97 100644
 +		have |= PT_AMP;
 +	if (rpm_sd_rails(m & PT_SDRAIL) && (m & PT_SDRAIL))
 +		have |= PT_SDRAIL;
++	display_set_rails(m & PT_PANELRAIL);
 +	display_set_deep(m & PT_PANEL);
++	if ((m & PT_PANELRAIL) && display_rails_are_off())
++		have |= PT_PANELRAIL;
 +	if ((m & PT_PANEL) && display_is_deep())
 +		have |= PT_PANEL;
 +	/* S needs the hub running: it comes up after a release from reset. */
@@ -463,11 +477,13 @@ index 5c3b5a4..66acc97 100644
 +		return;
 +	}
 +	if (pt_night) {
-+		/* B = the five sleep measures; D = B plus the unused SD-card
-+		 * supplies off; P = B plus the panel in deep standby; S = B
-+		 * with the hub running, its services off. */
-+		enum { B = PT_ALL, D = PT_ALL | PT_SDRAIL, P = PT_ALL | PT_PANEL, S = (PT_ALL & ~PT_HUB) | PT_HUBSVC };
-+		static const uint16_t order[] = { B, D, D, B, B, P, P, B, B, S, S, B };
++		/* B = the five sleep measures; G = B with touch in the
++		 * vendor's gesture doze; L = B plus the panel in deep standby
++		 * with its supplies off; C = B plus the card's VCC off; V = B
++		 * plus the USB PHY supplies off. */
++		enum { B = PT_ALL, G = (PT_ALL & ~PT_TOUCH) | PT_GESTURE, L = PT_ALL | PT_PANEL | PT_PANELRAIL, C = PT_ALL | PT_EMMCRAIL,
++		       V = PT_ALL | PT_USBRAIL };
++		static const uint16_t order[] = { B, G, G, B, B, L, L, B, B, C, C, B, B, V, V, B };
 +		if (pt_arm == 0)
 +			powertest_bt(false);
 +		else
@@ -548,7 +564,7 @@ index 5c3b5a4..66acc97 100644
  		if (more && more())
  			return;
 diff --git a/src/display/display.c b/src/display/display.c
-index 8cacf20..3a01f59 100644
+index 8cacf20..ff90562 100644
 --- a/src/display/display.c
 +++ b/src/display/display.c
 @@ -16,6 +16,9 @@
@@ -753,7 +769,7 @@ index 8cacf20..3a01f59 100644
  	for (unsigned i = 0; i < ARRAY_SIZE(dsi_clocks); i++)
  		clock_set(dsi_clocks[i], true);
  	uint32_t err = readl(DSI_DLN0_PHY_ERR);
-@@ -395,13 +445,65 @@ void display_wait_idle(void) { pp_wait(); }
+@@ -395,13 +445,98 @@ void display_wait_idle(void) { pp_wait(); }
  uint32_t display_frames(void) { return frames; }
  uint32_t display_waits(void) { return waits; }
  
@@ -765,8 +781,8 @@ index 8cacf20..3a01f59 100644
  	pp_wait();
  	dsi_dcs_write(0x51, &level, 1);
 +	brightness = level;
- }
- 
++}
++
 +/* Harness (P): with the screen off, the panel in deep standby as the
 + * vendor's RM69080 off sequence leaves it (after sleep-in: 120 ms, 00 00,
 + * 255 ms, 4F 01). Leaving deep standby takes the reset pulse on gpio 25
@@ -778,6 +794,36 @@ index 8cacf20..3a01f59 100644
 +
 +static bool deep_ok(void) { return board->panel.lines == 434; }
 +
++/* Harness (L): in deep standby the panel's L15 and the DSI 1.2 V L4
++ * off as well, as the vendor's panel off; L8 stays. On again in the
++ * vendor's order, L4, 20 ms, L15, before anything touches DSI. */
++static bool rails_wanted, rails_off;
++void display_set_rails(bool off) { rails_wanted = off; }
++bool display_rails_are_off(void) { return rails_off; }
++
++static void panel_rails(bool on)
++{
++	if (on == !rails_off)
++		return;
++	if (on) {
++		int r = rpm_rail_on_hpm(4, 1200000);
++		delay_ms(20);
++		r |= rpm_rail_on_hpm(15, 2800000);
++		rails_off = false;
++		log_printf("display: panel supplies on%s, l4 %02x l15 %02x\n", r ? " NOT acknowledged" : "", pmic_read(0x014346),
++			   pmic_read(0x014e46));
++	} else {
++		/* On first: the bootloader enabled them itself, so the RPM
++		 * believes they are off and an off vote changes nothing. */
++		int r = rpm_rail_on_hpm(4, 1200000) | rpm_rail_on_hpm(15, 2800000);
++		r |= rpm_regulator_both(RPM_LDOA, 15, false);
++		r |= rpm_regulator_both(RPM_LDOA, 4, false);
++		rails_off = true;
++		log_printf("display: panel supplies off%s, l4 %02x l15 %02x\n", r ? " NOT acknowledged" : "", pmic_read(0x014346),
++			   pmic_read(0x014e46));
++	}
+ }
+ 
 +static void enter_deep(void)
 +{
 +	static const uint8_t z = 0, one = 1;
@@ -786,10 +832,13 @@ index 8cacf20..3a01f59 100644
 +	dsi_dcs_write(0x4f, &one, 1);
 +	deep = true;
 +	log_printf("display: panel in deep standby\n");
++	if (rails_wanted)
++		panel_rails(false);
 +}
 +
 +static void leave_deep(void)
 +{
++	panel_rails(true);
 +	tlmm_config(PANEL_RESET_GPIO, 0, TLMM_OUTPUT, TLMM_PULL_NONE, 2);
 +	tlmm_set(PANEL_RESET_GPIO, 0);
 +	delay_ms(5);
@@ -819,7 +868,7 @@ index 8cacf20..3a01f59 100644
  void display_sleep(void)
  {
  	display_active();
-@@ -409,12 +511,34 @@ void display_sleep(void)
+@@ -409,12 +544,35 @@ void display_sleep(void)
  	dsi_dcs_write(0x28, NULL, 0);
  	dsi_dcs_write(0x10, NULL, 0);
  	panel_asleep = true;
@@ -831,6 +880,7 @@ index 8cacf20..3a01f59 100644
  
  void display_wake(void)
  {
++	panel_rails(true);
  	display_active();
  	panel_asleep = false;
 +	if (deep)
@@ -855,10 +905,10 @@ index 8cacf20..3a01f59 100644
  	delay_ms(120);
  	dsi_dcs_write(0x29, NULL, 0);
 diff --git a/src/input/touch.c b/src/input/touch.c
-index 00ef135..2dfcf0c 100644
+index 00ef135..be3bd5b 100644
 --- a/src/input/touch.c
 +++ b/src/input/touch.c
-@@ -330,6 +330,71 @@ static bool rmi4_init(void)
+@@ -330,6 +330,90 @@ static bool rmi4_init(void)
  	return true;
  }
  
@@ -895,6 +945,25 @@ index 00ef135..2dfcf0c 100644
 +		tlmm_irq_enable(GPIO_ATTN, true);
 +	log_printf("touch: sensor %s failed\n", on ? "sleep" : "wake");
 +	return false;
++}
++
++/* Harness (G): the vendor's suspend with tap to wake: F11 in wakeup
++ * gesture report mode, doze check every 80 ms, attention left on. */
++bool touch_rmi4_gesture(bool on)
++{
++	static bool gesture;
++	if (!present || !f11.number)
++		return false;
++	if (on == gesture)
++		return true;
++	uint8_t v = 0;
++	if (rd(f11.ctrl, &v, 1) || wr(f11.ctrl, (uint8_t)((v & ~7) | (on ? 2 : 0))) || wr((uint8_t)(f01.ctrl + 2), on ? 8 : 3)) {
++		log_printf("touch: gesture mode %s failed\n", on ? "on" : "off");
++		return false;
++	}
++	gesture = on;
++	log_printf("touch: gesture mode %s\n", on ? "on" : "off");
++	return true;
 +}
 +
 +/* Harness: the controller's supply L19 off (the vendor's non-gesture
@@ -1163,7 +1232,7 @@ index 4f2991b..0ce262d 100644
  	return first || !ms ? 0 : (int32_t)(uas * 1000 / ms);
  }
 diff --git a/src/soc/rpm.c b/src/soc/rpm.c
-index f26cd99..e27528f 100644
+index f26cd99..5832323 100644
 --- a/src/soc/rpm.c
 +++ b/src/soc/rpm.c
 @@ -202,8 +202,8 @@ int rpm_regulator_voltage(uint32_t type, uint32_t id, uint32_t uv)
@@ -1177,7 +1246,7 @@ index f26cd99..e27528f 100644
  int rpm_regulator_sleep_enable(uint32_t type, uint32_t id, bool on)
  {
  	uint32_t kvp[3] = { 0x6e657773, 4, on };
-@@ -244,3 +244,106 @@ void rpm_sleep_votes(void)
+@@ -244,3 +244,118 @@ void rpm_sleep_votes(void)
  	uint32_t kvp[3] = { RPM_KEY_ENABLE, 4, 0 };
  	request(RPM_SET_SLEEP, RPM_CLK0, 0, kvp, 1);
  }
@@ -1255,6 +1324,18 @@ index f26cd99..e27528f 100644
 +	return r ? r : rpm_regulator_sleep_enable(type, id, on);
 +}
 +
++/* Harness: a rail on in both sets at its voltage, in high-power mode.
++ * Without a voltage the RPM brings it back at its own minimum, below
++ * what the bootloader set (L4 1.15 V, L15 2.75 V). */
++int rpm_rail_on_hpm(uint32_t id, uint32_t uv)
++{
++	uint32_t kvp[6] = { RPM_KEY_LSMD, 4, 1, 0x7675, 4, uv };
++	int r = request(RPM_SET_ACTIVE, RPM_LDOA, id, kvp, 2);
++	if (!r)
++		r = request(RPM_SET_SLEEP, RPM_LDOA, id, kvp, 2);
++	return r ? r : rpm_regulator_both(RPM_LDOA, id, true);
++}
++
 +/* Harness: the microSD supplies L18 (vdd) and L21 (vdd-io). Sturgeon has
 + * no slot and its kernel disables the controller, but they are on at
 + * boot; Linux leaves them off. Voted off in both sets, back on only if
@@ -1285,10 +1366,10 @@ index f26cd99..e27528f 100644
 +	return ok && (off ? phys_off : true);
 +}
 diff --git a/src/storage/emmc.c b/src/storage/emmc.c
-index 15ccbfe..46741c5 100644
+index 15ccbfe..9192038 100644
 --- a/src/storage/emmc.c
 +++ b/src/storage/emmc.c
-@@ -586,10 +586,68 @@ const struct emmc_info *emmc_card(void)
+@@ -586,10 +586,114 @@ const struct emmc_info *emmc_card(void)
  	return &card;
  }
  
@@ -1299,6 +1380,48 @@ index 15ccbfe..46741c5 100644
 +static bool card_asleep;
 +static uint32_t last_io_ms;
 +bool emmc_is_asleep(void) { return card_asleep; }
++
++/* Harness (C): with the card asleep its VCC, L17, off as well, as the
++ * vendor's host power off; L6 stays. Back on takes the full
++ * identification; partitions and the write guard stay as they were. */
++static bool vcc_wanted, vcc_off;
++static void vcc_cut(void)
++{
++	if (rpm_regulator_both(RPM_LDOA, 17, false))
++		log_printf("emmc: vcc off NOT acknowledged\n");
++	else
++		vcc_off = true;
++	log_printf("emmc: vcc off, l17 %02x\n", pmic_read(0x015046));
++}
++
++static int vcc_restore(void)
++{
++	unsigned n = nparts, g = nguard;
++	uint32_t gf = guard_first, gc = guard_count;
++	rpm_regulator_both(RPM_LDOA, 17, true);
++	vcc_off = false;
++	card_asleep = false;
++	delay_ms(1);
++	int r = emmc_init(true);
++	if (!r) {
++		nparts = n;
++		nguard = g;
++		guard_first = gf;
++		guard_count = gc;
++	}
++	log_printf("emmc: vcc on, l17 %02x, card %s\n", pmic_read(0x015046), r ? "lost" : "back");
++	return r;
++}
++
++bool emmc_rail(bool off)
++{
++	vcc_wanted = off;
++	if (off && card_asleep && !vcc_off)
++		vcc_cut();
++	else if (!off && vcc_off)
++		vcc_restore();
++	return vcc_off;
++}
 +uint32_t emmc_idle_ms(void) { return time_ms() - last_io_ms; }
 +
 +static bool branch_on(uint32_t cbcr)
@@ -1327,7 +1450,11 @@ index 15ccbfe..46741c5 100644
 +		writel(readl(GCC_SDCC1_APPS_CBCR) & ~BIT(0), GCC_SDCC1_APPS_CBCR);
 +		writel(readl(GCC_SDCC1_AHB_CBCR) & ~BIT(0), GCC_SDCC1_AHB_CBCR);
 +		card_asleep = true;
++		if (vcc_wanted)
++			vcc_cut();
 +	} else {
++		if (vcc_off)
++			return vcc_restore();
 +		if (!branch_on(GCC_SDCC1_AHB_CBCR) || !branch_on(GCC_SDCC1_APPS_CBCR)) {
 +			r = -10;
 +			card.ready = false;
@@ -1357,7 +1484,7 @@ index 15ccbfe..46741c5 100644
  	if (!n || lba >= card.sectors || n > card.sectors - lba)
  		return -2;
  	uint8_t *p = buf;
-@@ -615,6 +673,7 @@ static int xfer(uint32_t lba, uint32_t n, void *buf, bool read)
+@@ -615,6 +719,7 @@ static int xfer(uint32_t lba, uint32_t n, void *buf, bool read)
  		n -= k;
  		wdt_feed();
  	}
@@ -1366,7 +1493,7 @@ index 15ccbfe..46741c5 100644
  }
  
 diff --git a/src/usb/usb.c b/src/usb/usb.c
-index 692b418..ebcc6b0 100644
+index 692b418..07d3ebe 100644
 --- a/src/usb/usb.c
 +++ b/src/usb/usb.c
 @@ -32,6 +32,7 @@ enum { ITF_ACM_COMM = 0, ITF_ACM_DATA, ITF_ADB, ITF_COUNT };
@@ -1377,7 +1504,7 @@ index 692b418..ebcc6b0 100644
  
  static int ulpi_write(uint8_t reg, uint8_t val)
  {
-@@ -316,6 +317,55 @@ bool usb_connected(void)
+@@ -316,6 +317,58 @@ bool usb_connected(void)
  	return (readl(USB_PORTSC) & (PORTSC_CCS | PORTSC_SUSP)) == PORTSC_CCS;
  }
  
@@ -1392,12 +1519,15 @@ index 692b418..ebcc6b0 100644
 +static bool usb_rails(bool on)
 +{
 +	static const uint8_t ids[2] = { 10, 20 };
++	static const uint32_t uv[2] = { 1800000, 3075000 };
 +	bool ok = true, changed = false;
 +	for (unsigned i = 0; i < 2; i++) {
 +		if (rail_off[i] == !on)
 +			continue;
 +		changed = true;
-+		if (rpm_regulator_both(RPM_LDOA, ids[i], on))
++		/* On first: an off vote alone changes nothing on a rail the
++		 * bootloader enabled itself. */
++		if (rpm_rail_on_hpm(ids[i], uv[i]) || (!on && rpm_regulator_both(RPM_LDOA, ids[i], false)))
 +			ok = false;
 +		else
 +			rail_off[i] = !on;
@@ -1407,8 +1537,8 @@ index 692b418..ebcc6b0 100644
 +	if (on)
 +		delay_ms(1);
 +	usb_rails_off = rail_off[0] && rail_off[1];
-+	log_printf("usb: phy supplies %s%s (l10 %s, l20 %s)\n", on ? "on" : "off", ok ? "" : " NOT all acknowledged",
-+		   rail_off[0] ? "off" : "on", rail_off[1] ? "off" : "on");
++	log_printf("usb: phy supplies %s%s (l10 %02x, l20 %02x)\n", on ? "on" : "off", ok ? "" : " NOT all acknowledged",
++		   pmic_read(0x014946), pmic_read(0x015346));
 +	return ok;
 +}
 +bool usb_rails_policy(bool off)
@@ -1433,7 +1563,7 @@ index 692b418..ebcc6b0 100644
  /* Unplugged, the USB block rests as the vendor's suspend leaves it with
   * VBUS sensed by the PMIC: the stack stopped, the PHY in low power mode
   * (PHCD, then STP) and the controller's clocks off. Coming out of that the
-@@ -383,6 +433,8 @@ static void usb_collapse(const char *why)
+@@ -383,6 +436,8 @@ static void usb_collapse(const char *why)
  	}
  	usb_down = true;
  	usb_clocks_off = phcd;
@@ -1442,7 +1572,7 @@ index 692b418..ebcc6b0 100644
  	log_printf("usb: %s, %s\n", why, phcd ? "phy in low power mode" : "phy did not enter low power mode, clocks left on");
  }
  
-@@ -392,6 +444,10 @@ static bool usb_restore(void)
+@@ -392,6 +447,10 @@ static bool usb_restore(void)
  {
  	uint32_t t0 = time_ms();
  	const char *fail = NULL;
@@ -1453,7 +1583,7 @@ index 692b418..ebcc6b0 100644
  	if (!clock_on(GCC_USB_HS_AHB_CBCR) || !clock_on(GCC_USB_HS_SYSTEM_CBCR)) {
  		fail = "clocks";
  		goto out;
-@@ -458,7 +514,7 @@ void usb_cable(bool present, bool edge)
+@@ -458,7 +517,7 @@ void usb_cable(bool present, bool edge)
  	uint32_t now = time_ms();
  	if (!present) {
  		retry_t = 0;
@@ -1462,7 +1592,7 @@ index 692b418..ebcc6b0 100644
  			gone_t = 0;
  			return;
  		}
-@@ -491,7 +547,7 @@ uint32_t usb_next_ms(void)
+@@ -491,7 +550,7 @@ uint32_t usb_next_ms(void)
  	uint32_t now = time_ms(), next = UINT32_MAX;
  	if (gone_t)
  		next = left(gone_t, 2000, now);
@@ -1472,10 +1602,10 @@ index 692b418..ebcc6b0 100644
  	if (retry_t && usb_down) {
  		uint32_t r = left(retry_t, 5000, now);
 diff --git a/tests/stubs.c b/tests/stubs.c
-index d17bf84..a493f18 100644
+index d17bf84..5e354dc 100644
 --- a/tests/stubs.c
 +++ b/tests/stubs.c
-@@ -40,10 +40,43 @@ int bt_start(const uint8_t *bdaddr, struct bt_info *info)
+@@ -40,10 +40,48 @@ int bt_start(const uint8_t *bdaddr, struct bt_info *info)
  	return -1;
  }
  void bt_stop(void) {}
@@ -1508,6 +1638,11 @@ index d17bf84..a493f18 100644
 +bool rpm_ldo_sleep_lpm(bool on) { return true; }
 +int rpm_regulator_both(uint32_t type, uint32_t id, bool on) { return 0; }
 +bool rpm_sd_rails(bool off) { return true; }
++int rpm_rail_on_hpm(uint32_t id, uint32_t uv) { return 0; }
++void display_set_rails(bool off) {}
++bool display_rails_are_off(void) { return false; }
++bool emmc_rail(bool off) { return false; }
++bool touch_rmi4_gesture(bool on) { return false; }
 +bool usb_rails_policy(bool off) { return true; }
 +bool usb_rails_are_off(void) { return false; }
 +bool touch_rmi4_rail(bool off) { return true; }

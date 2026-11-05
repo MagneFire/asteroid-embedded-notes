@@ -1054,3 +1054,10 @@ run's trim (bbd6.1) the conditional 0.48 mA/code slope gives Linux ~1.4 mA, an
 apparent ~1.3 mA gap (ASTRA-POWER-10.md); raw, the firmware reads lower. 2.7 mA is
 also the BT-off, tap-off, hub-in-reset baseline, not a production floor. Goal:
 the firmware must not use more than AsteroidOS, so this stays open.
+
+**Rails the RPM does not know about (2026-11-05).** An off vote alone leaves
+L4, L15 (and so likely L10, L20) on: the bootloader enabled them itself, so the
+RPM sees no change. It only drops the mode (80 80 -> 00 80). Vote on, then off,
+as Linux does; and give the voltage, or the RPM restores them at its minimum
+(L4 1.15 V, L15 2.75 V instead of 1.2/2.8). So the earlier V results (rails add
+nothing) probably never switched L10/L20 off. L18/L21 did go off with one vote.
