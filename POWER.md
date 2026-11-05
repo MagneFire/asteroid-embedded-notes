@@ -1061,3 +1061,25 @@ RPM sees no change. It only drops the mode (80 80 -> 00 80). Vote on, then off,
 as Linux does; and give the voltage, or the RPM restores them at its minimum
 (L4 1.15 V, L15 2.75 V instead of 1.2/2.8). So the earlier V results (rails add
 nothing) probably never switched L10/L20 off. L18/L21 did go off with one vote.
+
+## 22. New arms G, L, C, V (2026-11-05, day run)
+
+`powertest 15 20 night`, 9.8 h unplugged, 29 arms, 99.92-99.94% VDD-min, no
+resets, every card re-identification worked. First 3 minutes of each arm
+dropped. Log: logs-day-gclv-2026-11-05-sturgeon.txt. Contrast = arm pair against
+the B arms either side, because B drifted 2.4 -> 3.0 mA as the watch cooled.
+
+| Arm | Mean | Vs neighbouring B |
+|---|---|---|
+| B | 2.87 mA (15 arms) | - |
+| L, deep standby, L4/L15 off | 2.53 (4) | -0.42, -0.41 |
+| V, L20 off (L10 stays on, as under Linux) | 2.72 (2) | -0.25 |
+| C, eMMC L17 off | 2.80 (4) | -0.12, -0.20 |
+| G, touch gesture doze | 3.00 (4) | +0.34, +0.32 |
+
+L, V and C together are about -0.8 mA; the vendor's touch doze costs about 0.3 mA
+for tap to wake. P alone saved nothing (§21), so L's saving is the rails. V's
+earlier null was the off vote that never reached L20. With all three the firmware
+would read about 2.1 mA without tap to wake, 2.4 with; the hub is still in reset
+here. AsteroidOS: 3.07 mA raw, 1.45 mA in its intervals at trim bbd6, with touch
+doze and the hub running. The gap stays open.
