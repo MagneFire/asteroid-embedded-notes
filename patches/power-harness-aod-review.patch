@@ -1,0 +1,1689 @@
+diff --git a/src/asteroid.h b/src/asteroid.h
+index c6a5ea7..a003171 100644
+--- a/src/asteroid.h
++++ b/src/asteroid.h
+@@ -176,7 +176,39 @@ enum { BAT_DISCHARGING, BAT_CHARGING, BAT_FULL };
+ int pmic_battery_status(void);
+ int32_t pmic_battery_ua(void);
+ int32_t pmic_battery_avg_ua(void);
++void pmic_batfet_lpm(bool on);
++extern int display_rest_level;
++void display_set_rest_level(int level);
++void display_set_deep(bool on);
++bool display_is_deep(void);
++bool usb_phy_lpm(bool on);
++bool usb_phy_in_lpm(void);
++int emmc_sleep(bool on);
++bool emmc_is_asleep(void);
++uint32_t emmc_idle_ms(void);
++bool touch_rmi4_sleep(bool on);
++bool hub_hold(bool on);
++bool hub_ready(void);
++bool board_has_all_measures(void);
++bool hub_services(bool off);
++bool hub_services_are_off(void);
++bool rpm_sleep_bus(bool on);
++bool rpm_ldo_sleep_lpm(bool on);
++int rpm_regulator_both(uint32_t type, uint32_t id, bool on);
++bool rpm_sd_rails(bool off);
++int rpm_rail_on_hpm(uint32_t id, uint32_t uv);
++void display_set_rails(bool off);
++bool display_rails_are_off(void);
++bool emmc_rail(bool off);
++bool touch_rmi4_gesture(bool on);
++bool usb_rails_policy(bool off);
++bool usb_rails_are_off(void);
++bool touch_rmi4_rail(bool off);
++bool touch_rmi4_rail_is_off(void);
++uint32_t powertest_next_ms(void);
++extern uint32_t pmic_avg_ms;
+ void pmic_iadc_trim(void);
++void pmic_iadc_raws(int *gain, int *off, int *ext, unsigned *trim);
+ void pmic_charger_configure(void);
+ void pmic_charger_poll(void);
+ void bms_init(void);
+diff --git a/src/audio/speaker.c b/src/audio/speaker.c
+index d2abd68..76f9c6b 100644
+--- a/src/audio/speaker.c
++++ b/src/audio/speaker.c
+@@ -29,3 +29,56 @@ int speaker_probe(uint16_t *rev)
+ 	bus = true;
+ 	return read_reg(REG_REV, rev);
+ }
++
++/* Harness: register access, and the amplifier powered down (register 9,
++ * system control, bit 0) with the previous value put back after. */
++int speaker_read(uint8_t reg, uint16_t *val)
++{
++	uint16_t rev;
++	int r = speaker_probe(&rev);
++	return r ? r : read_reg(reg, val);
++}
++
++static int write_reg(uint8_t reg, uint16_t val)
++{
++	uint8_t b[3] = { reg, (uint8_t)(val >> 8), (uint8_t)val };
++	return i2c_qup_xfer(QUP, ADDR, b, 3, NULL, 0);
++}
++
++/* As the vendor's speaker-off (libexTfa98xx tfa98xx_stop): mute (reg 6
++ * bit 5 off, reg 9 amp and boost enables off), wait for the amplifier to
++ * stop switching (reg 0 bit 12), power down (reg 9 bit 0), AEC output off
++ * (reg 4 bit 11). The registers are put back as they were after. */
++static int update_reg(uint8_t reg, uint16_t clear, uint16_t set)
++{
++	uint16_t v;
++	int r = read_reg(reg, &v);
++	return r ? r : write_reg(reg, (uint16_t)((v & ~clear) | set));
++}
++
++bool speaker_powerdown(bool on)
++{
++	static bool down;
++	static uint16_t saved4, saved6, saved9;
++	if (on == down)
++		return true;
++	uint16_t v;
++	if (speaker_read(0x09, &v))
++		return false;
++	if (on) {
++		if (read_reg(0x04, &saved4) || read_reg(0x06, &saved6) || read_reg(0x09, &saved9))
++			return false;
++		if (update_reg(0x06, 0x20, 0) || update_reg(0x09, 0x18, 0))
++			return false;
++		for (int i = 0; i < 40 && !read_reg(0x00, &v) && (v & 0x1000); i++)
++			delay_ms(5);
++		if (update_reg(0x09, 0, 1) || update_reg(0x04, 0x800, 0))
++			return false;
++	} else if (write_reg(0x04, saved4) || write_reg(0x06, saved6) || write_reg(0x09, saved9)) {
++		return false;
++	}
++	read_reg(0x09, &v);
++	down = on;
++	log_printf("amp: %s, sys ctrl %04x\n", on ? "powered down" : "restored", v);
++	return true;
++}
+diff --git a/src/audio/speaker.h b/src/audio/speaker.h
+index f68ff10..e160142 100644
+--- a/src/audio/speaker.h
++++ b/src/audio/speaker.h
+@@ -2,5 +2,8 @@
+ #define SPEAKER_H
+ #include <stdint.h>
+ 
++#include <stdbool.h>
+ int speaker_probe(uint16_t *rev);
++int speaker_read(uint8_t reg, uint16_t *val);
++bool speaker_powerdown(bool on);
+ #endif
+diff --git a/src/board/detect.c b/src/board/detect.c
+index 0b8e6fe..c0faa78 100644
+--- a/src/board/detect.c
++++ b/src/board/detect.c
+@@ -48,3 +48,6 @@ void board_detect(uint32_t machtype, const void *fdt)
+ 	log_printf("board: %s by %s (tree %08lx %s, machtype %lu, panel %lux%lu)\n", board->name, board_detected_by,
+ 		   (uint32_t)(uintptr_t)fdt, model ? model : "none", machtype, w, h);
+ }
++
++/* Harness */
++bool board_has_all_measures(void) { return board == &board_sturgeon; }
+diff --git a/src/bt/bt.h b/src/bt/bt.h
+index eec3d1c..1d37244 100644
+--- a/src/bt/bt.h
++++ b/src/bt/bt.h
+@@ -65,6 +65,10 @@ void bt_host_stop(void);
+ bool bt_host_running(void);
+ void bt_host_status(struct bt_status *s);
+ bool bt_host_connected(void);
++/* Ask the phone for a slow connection (100-125 ms, latency 4) or its
++ * usual one, now and after each connect. */
++void bt_host_slow(bool slow);
++bool bt_host_is_slow(void);
+ void bt_host_disconnect(void);
+ void bt_poll(void);
+ int32_t bt_passkey(void);
+diff --git a/src/bt/host.c b/src/bt/host.c
+index 536e27c..f095a27 100644
+--- a/src/bt/host.c
++++ b/src/bt/host.c
+@@ -23,6 +23,12 @@
+ static bool initialised, host_on;
+ static enum bt_host_state state;
+ static uint16_t conn = BLE_HS_CONN_HANDLE_NONE;
++/* Connection parameters to ask for: the phone's choice (Android's 30-50
++ * ms, latency 0) or a slow link for the radio's sake, requested
++ * PARAMS_DELAY_MS after a connect so the phone's own setup is done. */
++#define PARAMS_DELAY_MS	5000
++static bool slow_params;
++static uint32_t params_due;
+ static uint16_t mtu;
+ static uint8_t own_addr_type;
+ static uint32_t battery_t, start_t, resets;
+@@ -103,6 +109,7 @@ static int gap_event(struct ble_gap_event *ev, void *arg)
+ 		conn = ev->connect.conn_handle;
+ 		mtu = BLE_ATT_MTU_DFLT;
+ 		state = BT_HOST_CONNECTED;
++		params_due = slow_params ? time_ms() + PARAMS_DELAY_MS : 0;
+ 		if (!ble_gap_conn_find(conn, &d)) {
+ 			log_addr("connected to", &d.peer_ota_addr);
+ 			log_printf("bt: interval %u x 1.25 ms, latency %u, timeout %u x 10 ms\n", d.conn_itvl, d.conn_latency,
+@@ -267,10 +274,37 @@ void bt_host_stop(void)
+ 	bt_transport_detach();
+ }
+ 
++static void request_params(void)
++{
++	if (conn == BLE_HS_CONN_HANDLE_NONE)
++		return;
++	struct ble_gap_upd_params p = {
++		.itvl_min = slow_params ? 80 : 24,
++		.itvl_max = slow_params ? 100 : 40,
++		.latency = slow_params ? 4 : 0,
++		.supervision_timeout = slow_params ? 600 : 500,
++	};
++	int r = ble_gap_update_params(conn, &p);
++	log_printf("bt: asking for interval %u-%u x 1.25 ms, latency %u: %d\n", p.itvl_min, p.itvl_max, p.latency, r);
++}
++
++void bt_host_slow(bool slow)
++{
++	slow_params = slow;
++	params_due = 0;
++	request_params();
++}
++
++bool bt_host_is_slow(void) { return slow_params; }
++
+ void bt_poll(void)
+ {
+ 	if (!host_on)
+ 		return;
++	if (params_due && (int32_t)(time_ms() - params_due) >= 0) {
++		params_due = 0;
++		request_params();
++	}
+ 	hci_poll();
+ 	bt_lpm_poll();
+ 	bool boost = cpu_clock_is_slow() && bt_idle_ms() == 0;
+diff --git a/src/console/console.c b/src/console/console.c
+index 5c3b5a4..ca2de9c 100644
+--- a/src/console/console.c
++++ b/src/console/console.c
+@@ -394,6 +394,13 @@ static void cmd_bt(const char *args)
+ 		say(bt_store_clear() ? "bt: could not clear the bonds\n" : "bt: bonds cleared\n");
+ 		return;
+ 	}
++	if (!strncmp(args, "slow", 4)) {
++		const char *v = skip_spaces(args + 4);
++		if (*v)
++			bt_host_slow(!strcmp(v, "on"));
++		say("bt slow %s\n", bt_host_is_slow() ? "on" : "off");
++		return;
++	}
+ 	if (!strcmp(args, "off")) {
+ 		bt_host_stop();
+ 		bt_stop();
+@@ -402,7 +409,7 @@ static void cmd_bt(const char *args)
+ 	}
+ 	if (*args) {
+ 		if (!parse_bdaddr(args, addr)) {
+-			say("usage: bt [off | status | forget | <bd_addr>]\n");
++			say("usage: bt [off | status | forget | slow [on|off] | <bd_addr>]\n");
+ 			return;
+ 		}
+ 		have_addr = true;
+@@ -452,6 +459,8 @@ static uint32_t bits(const uint32_t *r, unsigned start, unsigned len)
+ 
+ static void cmd_emmc(const char *args)
+ {
++	emmc_rail(false);
++	emmc_sleep(false);
+ 	int r = emmc_init(strcmp(args, "safe") != 0);
+ 	const struct emmc_info *c = emmc_card();
+ 	say("host: mci %08lx caps %08lx, %u-bit, %lu Hz%s\n", c->mci_version, c->caps, c->bus_width, c->clock_hz,
+@@ -832,6 +841,20 @@ static void cmd_amp(const char *args)
+ 		say("amp: no answer (%d)\n", r);
+ 	else
+ 		say("amp: revision %04x\n", rev);
++	static const uint8_t regs[] = { 0x00, 0x04, 0x07, 0x08, 0x09 };
++	for (unsigned i = 0; !r && i < ARRAY_SIZE(regs); i++) {
++		uint16_t v;
++		if (!speaker_read(regs[i], &v))
++			say("amp: reg %02x = %04x\n", regs[i], v);
++	}
++}
++
++static void cmd_iadc(const char *args)
++{
++	int gain, off, ext;
++	unsigned trim;
++	pmic_iadc_raws(&gain, &off, &ext, &trim);
++	say("iadc: gain %04x offset %04x ext %04x trim %04x\n", gain & 0xffff, off & 0xffff, ext & 0xffff, trim);
+ }
+ 
+ static void cmd_buzz(const char *args)
+@@ -923,6 +946,37 @@ static void cmd_uibench(const char *args)
+ 	say("panel %lu: %lu us per repaint\n", p, (time_us() - t0) / n);
+ }
+ 
++static void cmd_powertest(const char *args);
++enum { PT_USB = 1, PT_RPM = 2, PT_HUB = 4, PT_EMMC = 8, PT_TOUCH = 16, PT_ALL = 31,
++       PT_USBRAIL = 0x20, PT_TOUCHRAIL = 0x40, PT_LDO = 0x80, PT_AMP = 0x100, PT_PANEL = 0x200, PT_HUBSVC = 0x400,
++       PT_SDRAIL = 0x800, PT_GESTURE = 0x1000, PT_PANELRAIL = 0x2000, PT_EMMCRAIL = 0x4000, PT_EVERY = 0x7fff };
++static void powertest_measures(unsigned m);
++static unsigned pt_applied, pt_want;
++
++static void cmd_measures(const char *args)
++{
++	uint32_t m;
++	if (!parse_num(&args, 16, &m) || m > PT_EVERY) {
++		say("usage: measures <hex mask: 1 usb, 2 rpm, 4 hub, 8 emmc, 10 touch, 20 usb rails, 40 touch rail, 80 ldo sleep, 100 amp, 200 panel deep, 400 hub services, 800 sd rails, 1000 touch gesture, 2000 panel rails, 4000 emmc vcc>\n");
++		return;
++	}
++	powertest_measures(m);
++	say("measures want %03lx have %03x\n", m, pt_applied);
++}
++
++static void cmd_rest(const char *args)
++{
++	uint32_t level;
++	if (*args) {
++		if (!parse_num(&args, 10, &level) || level > 2) {
++			say("usage: rest [0|1|2]\n");
++			return;
++		}
++		display_set_rest_level((int)level);
++	}
++	say("rest %d, gdsc %08lx, ahb %08lx\n", display_rest_level, readl(MDP_GDSCR), readl(MDSS_AHB_CBCR));
++}
++
+ static void cmd_echo(const char *args)
+ {
+ 	say("%s\n", args);
+@@ -955,6 +1009,7 @@ static const struct command commands[] = {
+ 	{ "kv", "[set <key> <text> | del <key>]", cmd_kv },
+ 	{ "btinfo", "", cmd_btinfo },
+ 	{ "amp", "", cmd_amp },
++	{ "iadc", "", cmd_iadc },
+ 	{ "buzz", "[ms]", cmd_buzz },
+ 	{ "hub", "[send <hex bytes>]", cmd_hub },
+ 	{ "touch", "tap <x> <y> | swipe <x0> <y0> <x1> <y1> [ms]", cmd_touch },
+@@ -963,6 +1018,9 @@ static const struct command commands[] = {
+ 	{ "media", "<volume> <playing> <title>|<artist>", cmd_media },
+ 	{ "uibench", "<panel> <gpu> [times]", cmd_uibench },
+ 	{ "echo", "<text>", cmd_echo },
++	{ "rest", "[0|1|2]", cmd_rest },
++	{ "measures", "<hex mask>", cmd_measures },
++	{ "powertest", "<settle_min> <arm_min> [lpm|dsi|sleep|floor|night]", cmd_powertest },
+ };
+ 
+ static void cmd_help(const char *args)
+@@ -1132,8 +1190,265 @@ static void finish(void)
+ 		done(ctx);
+ }
+ 
++/* powertest <settle_min> <arm_min>: from the unplug, a settle, then arms
++ * of fast and slow connection parameters and Bluetooth off, round and
++ * round until the cable is back, each logged. */
++static uint32_t pt_t0, pt_settle_ms, pt_arm_ms;
++static int pt_arm = -1;
++static bool pt_waiting, pt_lpm, pt_dsi, pt_sleep, pt_floor, pt_night;
++
++static void cmd_powertest(const char *args)
++{
++	uint32_t settle, arm;
++	if (!parse_num(&args, 10, &settle) || !parse_num(&args, 10, &arm) || !arm || arm > 600 || settle > 600) {
++		say("usage: powertest <settle_min> <arm_min 1-600> [lpm|dsi|sleep|floor|night]\n");
++		return;
++	}
++	while (*args == ' ')
++		args++;
++	if (*args && strcmp(args, "lpm") && strcmp(args, "dsi") && strcmp(args, "sleep") && strcmp(args, "floor") &&
++	    strcmp(args, "night")) {
++		say("powertest: unknown mode %s\n", args);
++		return;
++	}
++	pt_lpm = !strcmp(args, "lpm");
++	pt_dsi = !strcmp(args, "dsi");
++	pt_sleep = !strcmp(args, "sleep") || !strcmp(args, "floor");
++	pt_floor = !strcmp(args, "floor");
++	pt_night = !strcmp(args, "night");
++	if (pt_night)
++		pt_sleep = true;
++	pt_settle_ms = settle * 60000;
++	pt_arm_ms = arm * 60000;
++	pt_waiting = true;
++	pt_arm = -1;
++	log_printf("powertest: settle %lu min, arms %lu min, from each unplug\n", settle, arm);
++	say("powertest armed, unplug to start\n");
++}
++
++static void powertest_bt(bool on)
++{
++	struct bt_info info;
++	uint8_t addr[6];
++	bt_host_stop();
++	bt_stop();
++	if (!on)
++		return;
++	bool have_addr = !bt_addr_load(addr);
++	if (bt_start(have_addr ? addr : NULL, &info))
++		log_printf("powertest: bt %s failed (%d)\n", info.failed, info.status);
++	else if (bt_host_start())
++		log_printf("powertest: bt host failed\n");
++}
++
++/* The sleep measures of `powertest ... sleep`: USB PHY low power, RPM bus
++ * sleep votes and the GCC sleep vote, hub held in reset, eMMC asleep,
++ * touch sensor asleep. USB goes first on the way back. */
++
++/* Each measure keeps its own state and is a no-op when already there;
++ * pt_applied holds what actually took effect. */
++static void powertest_measures(unsigned m)
++{
++	/* The hub, touch, amp and panel measures are sturgeon's; USB and eMMC
++	 * rails have not been checked on another board. */
++	if (!board_has_all_measures())
++		m &= PT_USB | PT_RPM | PT_EMMC;
++	pt_want = m;
++	unsigned have = 0;
++	if (usb_phy_lpm(m & PT_USB) ? (m & PT_USB) : !(m & PT_USB))
++		have |= PT_USB;
++	if (rpm_sleep_bus(m & PT_RPM) && (m & PT_RPM))
++		have |= PT_RPM;
++	if (hub_hold(m & PT_HUB) && (m & PT_HUB))
++		have |= PT_HUB;
++	if (!(m & PT_EMMCRAIL))
++		emmc_rail(false);
++	if (!emmc_sleep(m & PT_EMMC) && emmc_is_asleep())
++		have |= PT_EMMC;
++	if ((m & PT_EMMCRAIL) && emmc_rail(true))
++		have |= PT_EMMCRAIL;
++	if (touch_rmi4_gesture(m & PT_GESTURE) && (m & PT_GESTURE))
++		have |= PT_GESTURE;
++	/* The touch supply goes off after the sensor sleeps and comes back
++	 * (with the controller initialised again) before it wakes. */
++	if (!(m & PT_TOUCHRAIL) && touch_rmi4_rail(false) && !(m & PT_TOUCH))
++		touch_rmi4_sleep(false);
++	if (touch_rmi4_rail_is_off() || (touch_rmi4_sleep(m & PT_TOUCH) && (m & PT_TOUCH)))
++		have |= m & PT_TOUCH;
++	if ((m & PT_TOUCHRAIL) && touch_rmi4_rail(true))
++		have |= PT_TOUCHRAIL;
++	usb_rails_policy(m & PT_USBRAIL);
++	if ((m & PT_USBRAIL) && usb_rails_are_off())
++		have |= PT_USBRAIL;
++	if (rpm_ldo_sleep_lpm(m & PT_LDO) && (m & PT_LDO))
++		have |= PT_LDO;
++	if (speaker_powerdown(m & PT_AMP) && (m & PT_AMP))
++		have |= PT_AMP;
++	if (rpm_sd_rails(m & PT_SDRAIL) && (m & PT_SDRAIL))
++		have |= PT_SDRAIL;
++	display_set_rails(m & PT_PANELRAIL);
++	display_set_deep(m & PT_PANEL);
++	if ((m & PT_PANELRAIL) && display_rails_are_off())
++		have |= PT_PANELRAIL;
++	if ((m & PT_PANEL) && display_is_deep())
++		have |= PT_PANEL;
++	/* S needs the hub running: it comes up after a release from reset. */
++	if (hub_services((m & PT_HUBSVC) && !(m & PT_HUB)) && (m & PT_HUBSVC) && hub_services_are_off())
++		have |= PT_HUBSVC;
++	have = (have & ~PT_USB) | (usb_phy_in_lpm() ? PT_USB : 0);
++	/* U only rests USB once unplugged; V needs that too. */
++	if (pmic_usb_present())
++		have |= m & (PT_USB | PT_USBRAIL);
++	if (have != pt_applied || have != m)
++		log_printf("powertest: measures want %03x have %03x\n", m, have);
++	pt_applied = have;
++}
++
++static bool hub_ready_or_held(void)
++{
++	return (pt_want & PT_HUB) || hub_ready();
++}
++
++uint32_t powertest_next_ms(void)
++{
++	if (pt_arm < 0)
++		return UINT32_MAX;
++	uint32_t at = pt_settle_ms + (uint32_t)pt_arm * pt_arm_ms, gone = time_ms() - pt_t0;
++	return gone >= at ? 1 : at - gone;
++}
++
++static void powertest_poll(void)
++{
++	static const char *const names[] = { "fast", "slow", "bt off" };
++	static uint32_t checked;
++	if (pt_arm < 0 && !pt_waiting)
++		return;
++	/* The charger state is a PMIC read, once a second is plenty. */
++	if (time_ms() - checked < 1000)
++		return;
++	checked = time_ms();
++	if (pt_waiting) {
++		if (pmic_usb_present())
++			return;
++		pt_waiting = false;
++		pt_t0 = time_ms();
++		pt_arm = 0;
++		log_printf("powertest: unplugged, settling\n");
++	}
++	if (pt_arm < 0)
++		return;
++	if (pmic_usb_present()) {
++		log_printf("powertest: plugged in, waiting for the next unplug\n");
++		pt_arm = -1;
++		pt_waiting = true;
++		if (!bt_host_running())
++			powertest_bt(true);
++		display_set_rest_level(2);
++		/* U stays: without it USB would not rest after the next unplug. */
++		if (pt_sleep)
++			powertest_measures(PT_USB);
++		return;
++	}
++	/* Within an arm, put back what other code undid: a transfer wakes
++	 * the eMMC (the hub reads its calibration after a release), and a
++	 * measure that failed is tried again. */
++	if (pt_sleep && pt_arm > 0 && ((pt_want & ~pt_applied) || ((pt_want & PT_EMMC) && !emmc_is_asleep())) &&
++	    (!(pt_want & PT_EMMC) || emmc_idle_ms() > 3000) && hub_ready_or_held())
++		powertest_measures(pt_want);
++	uint32_t at = pt_settle_ms + (uint32_t)pt_arm * pt_arm_ms;
++	if (time_ms() - pt_t0 < at)
++		return;
++	if (pt_lpm) {
++		bool lpm = pt_arm % 2 == 0;
++		pmic_batfet_lpm(lpm);
++		log_printf("powertest: arm %d batfet lpm %s, ctrl4 %02x\n", pt_arm, lpm ? "on" : "off", pmic_read(0x001293));
++		pt_arm++;
++		return;
++	}
++	if (pt_night) {
++		/* B = the five sleep measures; G = B with touch in the
++		 * vendor's gesture doze; L = B plus the panel in deep standby
++		 * with its supplies off; C = B plus the card's VCC off; V = B
++		 * plus the USB PHY supplies off. */
++		enum { B = PT_ALL, G = (PT_ALL & ~PT_TOUCH) | PT_GESTURE, L = PT_ALL | PT_PANEL | PT_PANELRAIL, C = PT_ALL | PT_EMMCRAIL,
++		       V = PT_ALL | PT_USBRAIL };
++		static const uint16_t order[] = { B, G, G, B, B, L, L, B, B, C, C, B, B, V, V, B };
++		if (pt_arm == 0)
++			powertest_bt(false);
++		else
++			log_printf("powertest: arm %d end, have %03x\n", pt_arm - 1, pt_applied);
++		unsigned m = order[pt_arm % ARRAY_SIZE(order)];
++		powertest_measures(m);
++		log_printf("powertest: arm %d night=%03x aod=%s bt=off have %03x\n", pt_arm, m, setting_get(SETTING_AOD) ? "on" : "off",
++			   pt_applied);
++		pt_arm++;
++		return;
++	}
++	if (pt_floor) {
++		/* Bluetooth off; B = the five sleep measures. Each new measure
++		 * between two B arms, then the same in reverse, then B against
++		 * all of them, ABBA. */
++		enum { B = PT_ALL, F = PT_ALL | PT_USBRAIL | PT_TOUCHRAIL | PT_LDO };
++		static const uint16_t order[] = { B, B | PT_USBRAIL, B, B | PT_TOUCHRAIL, B, B | PT_LDO, B, F,
++						  F, B, B | PT_LDO, B, B | PT_TOUCHRAIL, B, B | PT_USBRAIL, B,
++						  B, F, F, B };
++		if (pt_arm == 0)
++			powertest_bt(false);
++		else
++			log_printf("powertest: arm %d end, have %03x\n", pt_arm - 1, pt_applied);
++		unsigned m = order[pt_arm % ARRAY_SIZE(order)];
++		powertest_measures(m);
++		log_printf("powertest: arm %d floor=%03x aod=%s bt=off have %03x\n", pt_arm, m, setting_get(SETTING_AOD) ? "on" : "off",
++			   pt_applied);
++		pt_arm++;
++		return;
++	}
++	if (pt_sleep) {
++		/* Bluetooth off, leave-one-out mirrored: all measures, each one
++		 * left out in turn, none; then back. */
++		static const uint8_t order[] = { PT_ALL, PT_ALL & ~PT_USB, PT_ALL & ~PT_RPM, PT_ALL & ~PT_HUB, PT_ALL & ~PT_EMMC,
++						 PT_ALL & ~PT_TOUCH, 0, 0, PT_ALL & ~PT_TOUCH, PT_ALL & ~PT_EMMC, PT_ALL & ~PT_HUB,
++						 PT_ALL & ~PT_RPM, PT_ALL & ~PT_USB, PT_ALL };
++		if (pt_arm == 0)
++			powertest_bt(false);
++		else
++			log_printf("powertest: arm %d end, have %02x\n", pt_arm - 1, pt_applied);
++		unsigned m = order[pt_arm % ARRAY_SIZE(order)];
++		powertest_measures(m);
++		log_printf("powertest: arm %d sleep=%s%s%s%s%s aod=%s bt=off have %02x\n", pt_arm, m & PT_USB ? "U" : "-",
++			   m & PT_RPM ? "R" : "-", m & PT_HUB ? "H" : "-", m & PT_EMMC ? "E" : "-", m & PT_TOUCH ? "T" : "-",
++			   setting_get(SETTING_AOD) ? "on" : "off", pt_applied);
++		pt_arm++;
++		return;
++	}
++	if (pt_dsi) {
++		/* Bluetooth off, the three rests mirrored: collapse, PLL off,
++		 * as before, as before, PLL off, collapse. */
++		static const int8_t order[] = { 2, 1, 0, 0, 1, 2 };
++		static const char *const names[] = { "rest=old", "rest=pll", "rest=collapse" };
++		if (pt_arm == 0)
++			powertest_bt(false);
++		display_set_rest_level(order[pt_arm % 6]);
++		log_printf("powertest: arm %d %s aod=%s bt=off\n", pt_arm, names[display_rest_level],
++			   setting_get(SETTING_AOD) ? "on" : "off");
++		pt_arm++;
++		return;
++	}
++	int kind = pt_arm % 3;
++	log_printf("powertest: arm %d %s\n", pt_arm, names[kind]);
++	if (kind == 2)
++		powertest_bt(false);
++	else {
++		if (!bt_host_running())
++			powertest_bt(true);
++		bt_host_slow(kind == 1);
++	}
++	pt_arm++;
++}
++
+ void console_poll(void)
+ {
++	powertest_poll();
+ 	if (running) {
+ 		if (more && more())
+ 			return;
+diff --git a/src/display/display.c b/src/display/display.c
+index 1afa74c..c89ddec 100644
+--- a/src/display/display.c
++++ b/src/display/display.c
+@@ -16,6 +16,9 @@
+ struct fb fb;
+ static bool cmd_mode, kicked, dsi_pending;
+ static uint32_t frames, waits, timeouts;
++static uint32_t phy_ctrl, phy_regulator;
++void display_active(void);
++bool display_rest(void);
+ static void (*idle_hook)(void);
+ void display_set_idle_hook(void (*fn)(void)) { idle_hook = fn; }
+ uint32_t display_timeouts(void) { return timeouts; }
+@@ -135,26 +138,28 @@ bool display_init(void)
+ 	       PIPE + PIPE_SRC_OP_MODE);
+ 	writel((uint32_t)(uintptr_t)fb.buf[1], PIPE + PIPE_SRC0_ADDR);
+ 	writel(MDP_INTR_PP0_DONE, MDP_INTR_CLEAR);
++	phy_ctrl = readl(DSI_PHY_CTRL_0);
++	phy_regulator = readl(DSI_PHY_REGULATOR_CTRL_6);
++	log_printf("display: phy ctrl_0 %02lx regulator_6 %02lx\n", phy_ctrl, phy_regulator);
+ 	return true;
+ }
+ 
+ uint32_t *display_backbuffer(void) { return fb.buf[fb.back]; }
+ 
+ /* While the screen sleeps, between frames, the display rests as the
+- * vendor's idle power collapse leaves it: the last frame done on the
++ * vendor's command-mode idle path leaves it: the last frame done on the
+  * DSI side too, the clock lane and data lane 0 in ultra-low-power state,
+- * the registers the power domain loses saved, the DSI PHY clamped so the
+- * lanes hold their state (not with the panel asleep), the DSI and MDP
+- * clocks gated, the DSI PLL and the register bus clock off and the MDSS
+- * power domain collapsed, so nothing in MDSS reads memory when the
+- * cluster powers down and XO stops.
+- * Waking, the power domain comes back with its clocks, then the secure
+- * world restores its SMMU configuration, without which no MDSS register
+- * answers, and the saved registers are written back. The controller is
+- * put back into ULPS to match the PHY before the clamps are released,
+- * the PLL goes through its power-up sequence until it reports lock, then
+- * escape, byte and pixel follow; leaving ULPS takes 1 ms after clearing
+- * lane 0's PHY errors, then the lanes are forced to the stop state.
++ * the DSI and MDP clocks gated, the DSI PLL behind them powered down and
++ * the register bus clock gated last, so nothing in MDSS reads memory
++ * when the cluster powers down and XO stops. With the panel asleep the
++ * DSI PHY is powered down too; under the always-on face it stays up and
++ * keeps the lanes in ULPS. The power domain stays on and keeps the
++ * registers the bootloader set up, the PLL's dividers among them.
++ * Waking, the register bus, then the bus and MDP clocks come back, the
++ * PHY's regulator and lanes are switched back on and the PLL goes
++ * through its power-up sequence until it reports lock, then escape,
++ * byte and pixel follow; leaving ULPS takes 1 ms after clearing lane
++ * 0's PHY errors, then the lanes are forced to the stop state.
+  * display_rest says whether the cluster may power down: not while a
+  * frame is still on its way to the panel; if only the lanes refuse
+  * ULPS, the display stays clocked and the cluster may still go. */
+@@ -170,7 +175,22 @@ uint32_t *display_backbuffer(void) { return fb.buf[fb.back]; }
+ 
+ static const uint32_t mdp_clocks[] = { MDSS_AXI_CBCR, MDSS_MDP_CBCR, MDSS_MDP_LUT_CBCR, MDSS_VSYNC_CBCR };
+ static const uint32_t dsi_clocks[] = { MDSS_ESC0_CBCR, MDSS_BYTE0_CBCR, MDSS_PCLK0_CBCR };
+-static bool resting, panel_asleep;
++static bool resting, panel_asleep, phy_off, pll_off, collapsed;
++int display_rest_level = 2;
++
++/* Harness: a new rest level takes effect at once, also while resting, by
++ * waking the display hardware (not the panel) and resting it again. */
++void display_set_rest_level(int level)
++{
++	if (level == display_rest_level)
++		return;
++	bool was = resting;
++	if (was)
++		display_active();
++	display_rest_level = level;
++	if (was)
++		display_rest();
++}
+ 
+ /* The registers the MDSS power domain loses when it collapses, in the
+  * order they are written back: VBIF, MDP top (interface select, the
+@@ -341,18 +361,32 @@ bool display_rest(void)
+ 		writel(0, DSI_LANE_CTRL);
+ 		return true;
+ 	}
+-	for (unsigned i = 0; i < ARRAY_SIZE(kept_regs); i++)
+-		kept[i] = readl(kept_regs[i]);
+-	if (!panel_asleep)
+-		dsi_clamp(true);
++	collapsed = display_rest_level >= 2;
++	if (collapsed) {
++		for (unsigned i = 0; i < ARRAY_SIZE(kept_regs); i++)
++			kept[i] = readl(kept_regs[i]);
++		if (!panel_asleep) {
++			/* Harness: shows the clamp path ran before a reset. */
++			log_printf("display: clamped\n");
++			dsi_clamp(true);
++		}
++	}
+ 	for (unsigned i = 0; i < ARRAY_SIZE(dsi_clocks); i++)
+ 		clock_set(dsi_clocks[i], false);
+ 	for (unsigned i = 0; i < ARRAY_SIZE(mdp_clocks); i++)
+ 		clock_set(mdp_clocks[i], false);
+-	writel(0, DSI_PLL_GLB_CFG);
+-	dsb();
+-	clock_set(MDSS_AHB_CBCR, false);
+-	if (!gdsc_set(false))
++	pll_off = display_rest_level >= 1;
++	phy_off = pll_off && panel_asleep;
++	if (phy_off) {
++		writel(0, DSI_PHY_CTRL_0);
++		writel(0, DSI_PHY_REGULATOR_CTRL_6);
++	}
++	if (pll_off) {
++		writel(0, DSI_PLL_GLB_CFG);
++		dsb();
++		clock_set(MDSS_AHB_CBCR, false);
++	}
++	if (collapsed && !gdsc_set(false))
+ 		log_printf("display: power domain stays on, %08lx\n", readl(MDP_GDSCR));
+ 	resting = true;
+ 	return true;
+@@ -362,27 +396,45 @@ void display_active(void)
+ {
+ 	if (!resting)
+ 		return;
+-	if (!gdsc_set(true))
+-		reboot_fatal("display: power domain stays off");
+-	delay_us(1);
+-	clock_set(MDSS_AHB_CBCR, true);
++	if (collapsed) {
++		if (!gdsc_set(true))
++			reboot_fatal("display: power domain stays off");
++		delay_us(1);
++	}
++	if (pll_off)
++		clock_set(MDSS_AHB_CBCR, true);
+ 	for (unsigned i = 0; i < ARRAY_SIZE(mdp_clocks); i++)
+ 		clock_set(mdp_clocks[i], true);
+-	int r = scm_restore_sec_cfg(1);
+-	if (r) {
+-		log_printf("display: secure config not restored (%d)\n", r);
+-		reboot_fatal("display: no secure config");
++	if (collapsed) {
++		int r = scm_restore_sec_cfg(1);
++		if (r) {
++			log_printf("display: secure config not restored (%d)\n", r);
++			reboot_fatal("display: no secure config");
++		}
++		for (unsigned i = 0; i < ARRAY_SIZE(kept_regs); i++)
++			writel(kept[i], kept_regs[i]);
++		if (!panel_asleep) {
++			clock_set(MDSS_ESC0_CBCR, true);
++			writel(ULPS_LANES, DSI_LANE_CTRL);
++			delay_us(100);
++			clock_set(MDSS_ESC0_CBCR, false);
++			dsi_clamp(false);
++			log_printf("display: clamps released\n");
++		}
++		collapsed = false;
++		phy_off = false;
+ 	}
+-	for (unsigned i = 0; i < ARRAY_SIZE(kept_regs); i++)
+-		writel(kept[i], kept_regs[i]);
+-	if (!panel_asleep) {
+-		clock_set(MDSS_ESC0_CBCR, true);
+-		writel(ULPS_LANES, DSI_LANE_CTRL);
++	if (phy_off) {
++		writel(phy_regulator, DSI_PHY_REGULATOR_CTRL_6);
++		writel(phy_ctrl, DSI_PHY_CTRL_0);
+ 		delay_us(100);
+-		clock_set(MDSS_ESC0_CBCR, false);
+-		dsi_clamp(false);
++		phy_off = false;
+ 	}
+-	pll_power_up();
++	if (pll_off)
++		pll_power_up();
++	else if (!pll_locked())
++		log_printf("display: DSI PLL not locked, status %08lx\n", readl(DSI_PLL_STATUS));
++	pll_off = false;
+ 	for (unsigned i = 0; i < ARRAY_SIZE(dsi_clocks); i++)
+ 		clock_set(dsi_clocks[i], true);
+ 	uint32_t err = readl(DSI_DLN0_PHY_ERR);
+@@ -411,13 +463,98 @@ void display_wait_idle(void) { pp_wait(); }
+ uint32_t display_frames(void) { return frames; }
+ uint32_t display_waits(void) { return waits; }
+ 
++static uint8_t brightness = 0xff;
++
+ void display_set_brightness(uint8_t level)
+ {
+ 	display_active();
+ 	pp_wait();
+ 	dsi_dcs_write(0x51, &level, 1);
++	brightness = level;
+ }
+ 
++/* Harness (P): with the screen off, the panel in deep standby as the
++ * vendor's RM69080 off sequence leaves it (after sleep-in: 120 ms, 00 00,
++ * 255 ms, 4F 01). Leaving deep standby takes the reset pulse on gpio 25
++ * (low 5 ms, high 10 ms), which puts it back in plain sleep, and on wake
++ * the vendor's on sequence. Sturgeon only. */
++#define PANEL_RESET_GPIO	25
++bool display_deep_wanted;
++static bool deep, needs_init;
++
++static bool deep_ok(void) { return board->panel.lines == 434; }
++
++/* Harness (L): in deep standby the panel's L15 and the DSI 1.2 V L4
++ * off as well, as the vendor's panel off; L8 stays. On again in the
++ * vendor's order, L4, 20 ms, L15, before anything touches DSI. */
++static bool rails_wanted, rails_off;
++void display_set_rails(bool off) { rails_wanted = off; }
++bool display_rails_are_off(void) { return rails_off; }
++
++static void panel_rails(bool on)
++{
++	if (on == !rails_off)
++		return;
++	if (on) {
++		int r = rpm_rail_on_hpm(4, 1200000);
++		delay_ms(20);
++		r |= rpm_rail_on_hpm(15, 2800000);
++		rails_off = r != 0;
++		log_printf("display: panel supplies on%s, l4 %02x l15 %02x\n", r ? " NOT acknowledged" : "", pmic_read(0x014346),
++			   pmic_read(0x014e46));
++	} else {
++		/* On first: the bootloader enabled them itself, so the RPM
++		 * believes they are off and an off vote changes nothing. */
++		int r = rpm_rail_on_hpm(4, 1200000) | rpm_rail_on_hpm(15, 2800000);
++		r |= rpm_regulator_both(RPM_LDOA, 15, false);
++		r |= rpm_regulator_both(RPM_LDOA, 4, false);
++		rails_off = !r;
++		log_printf("display: panel supplies off%s, l4 %02x l15 %02x\n", r ? " NOT acknowledged" : "", pmic_read(0x014346),
++			   pmic_read(0x014e46));
++	}
++}
++
++static void enter_deep(void)
++{
++	static const uint8_t z = 0, one = 1;
++	dsi_dcs_write(0x00, &z, 1);
++	delay_ms(255);
++	dsi_dcs_write(0x4f, &one, 1);
++	deep = true;
++	log_printf("display: panel in deep standby\n");
++	if (rails_wanted)
++		panel_rails(false);
++}
++
++static void leave_deep(void)
++{
++	panel_rails(true);
++	tlmm_config(PANEL_RESET_GPIO, 0, TLMM_OUTPUT, TLMM_PULL_NONE, 2);
++	tlmm_set(PANEL_RESET_GPIO, 0);
++	delay_ms(5);
++	tlmm_set(PANEL_RESET_GPIO, 1);
++	delay_ms(10);
++	deep = false;
++	needs_init = true;
++	log_printf("display: panel reset out of deep standby\n");
++}
++
++/* Applied at once while the screen is off; otherwise at the next sleep. */
++void display_set_deep(bool on)
++{
++	display_deep_wanted = on && deep_ok();
++	if (!panel_asleep)
++		return;
++	if (display_deep_wanted && !deep) {
++		display_active();
++		pp_wait();
++		enter_deep();
++	} else if (!display_deep_wanted && deep) {
++		leave_deep();
++	}
++}
++bool display_is_deep(void) { return deep; }
++
+ void display_sleep(void)
+ {
+ 	display_active();
+@@ -425,12 +562,35 @@ void display_sleep(void)
+ 	dsi_dcs_write(0x28, NULL, 0);
+ 	dsi_dcs_write(0x10, NULL, 0);
+ 	panel_asleep = true;
++	if (display_deep_wanted && deep_ok()) {
++		delay_ms(120);
++		enter_deep();
++	}
+ }
+ 
+ void display_wake(void)
+ {
++	panel_rails(true);
+ 	display_active();
+ 	panel_asleep = false;
++	if (deep)
++		leave_deep();
++	if (needs_init) {
++		static const struct { uint8_t cmd, val; } seq[] = {
++			{ 0xfe, 0x01 }, { 0x18, 0x66 }, { 0xfe, 0x07 }, { 0x07, 0x6d }, { 0xfe, 0x00 }, { 0x35, 0x00 },
++		};
++		for (unsigned i = 0; i < ARRAY_SIZE(seq); i++)
++			dsi_dcs_write(seq[i].cmd, &seq[i].val, 1);
++		dsi_dcs_write(0x11, NULL, 0);
++		static const uint8_t madctl = 0x40;
++		dsi_dcs_write(0x36, &madctl, 1);
++		delay_ms(120);
++		dsi_dcs_write(0x51, &brightness, 1);
++		dsi_dcs_write(0x29, NULL, 0);
++		needs_init = false;
++		log_printf("display: panel initialised after reset\n");
++		return;
++	}
+ 	dsi_dcs_write(0x11, NULL, 0);
+ 	delay_ms(120);
+ 	dsi_dcs_write(0x29, NULL, 0);
+diff --git a/src/input/touch.c b/src/input/touch.c
+index 00ef135..4013af1 100644
+--- a/src/input/touch.c
++++ b/src/input/touch.c
+@@ -330,6 +330,91 @@ static bool rmi4_init(void)
+ 	return true;
+ }
+ 
++/* Harness: sensor sleep as the vendor does it: attention masked, F01
++ * device control sleep mode 1 with NoSleep cleared; on wake the saved
++ * NoSleep bit returns, pending interrupt status is read and attention is
++ * unmasked. */
++static bool sensor_asleep;
++static uint8_t f01_ctrl_saved;
++bool touch_rmi4_sleep(bool on)
++{
++	if (!present)
++		return false;
++	if (on == sensor_asleep)
++		return true;
++	uint8_t v = 0, st[2];
++	if (on) {
++		tlmm_irq_enable(GPIO_ATTN, false);
++		if (rd(f01.ctrl, &v, 1) || wr(f01.ctrl, (uint8_t)((v & ~7) | 1)))
++			goto fail;
++		f01_ctrl_saved = v;
++	} else {
++		if (rd(f01.ctrl, &v, 1) || wr(f01.ctrl, (uint8_t)((v & ~7) | (f01_ctrl_saved & 4))))
++			goto fail;
++		rd(f01.data, st, 2);
++		tlmm_irq_enable(GPIO_ATTN, true);
++	}
++	sensor_asleep = on;
++	rd(f01.ctrl, &v, 1);
++	log_printf("touch: sensor %s, ctrl %02x\n", on ? "asleep" : "awake", v);
++	return true;
++fail:
++	if (!sensor_asleep)
++		tlmm_irq_enable(GPIO_ATTN, true);
++	log_printf("touch: sensor %s failed\n", on ? "sleep" : "wake");
++	return false;
++}
++
++/* Harness (G): the vendor's suspend with tap to wake: F11 in wakeup
++ * gesture report mode, doze check every 80 ms, attention left on. */
++bool touch_rmi4_gesture(bool on)
++{
++	static bool gesture;
++	if (!present || !f11.number)
++		return false;
++	if (on == gesture)
++		return true;
++	uint8_t v = 0;
++	if (rd(f11.ctrl, &v, 1) || wr(f11.ctrl, (uint8_t)((v & ~7) | (on ? 2 : 0))) || wr((uint8_t)(f01.ctrl + 2), on ? 8 : 3)) {
++		log_printf("touch: gesture mode %s failed\n", on ? "on" : "off");
++		return false;
++	}
++	gesture = on;
++	log_printf("touch: gesture mode %s\n", on ? "on" : "off");
++	return true;
++}
++
++/* Harness: the controller's supply L19 off (the vendor's non-gesture
++ * suspend; LVS1 for the pull-ups stays on), with the sensor asleep and
++ * attention masked first; on again, the controller is initialised from
++ * scratch. */
++static bool rail_off;
++bool touch_rmi4_rail(bool off)
++{
++	if (!present && !rail_off)
++		return false;
++	if (off == rail_off)
++		return true;
++	if (off) {
++		tlmm_irq_enable(GPIO_ATTN, false);
++		if (rpm_regulator_both(RPM_LDOA, 19, false)) {
++			tlmm_irq_enable(GPIO_ATTN, true);
++			return false;
++		}
++		rail_off = true;
++		present = false;
++		sensor_asleep = false;
++	} else {
++		rpm_regulator_sleep_enable(RPM_LDOA, 19, true);
++		if (!rmi4_init())
++			return false;
++		rail_off = false;
++	}
++	log_printf("touch: supply %s\n", off ? "off" : "on, controller initialised");
++	return true;
++}
++bool touch_rmi4_rail_is_off(void) { return rail_off; }
++
+ const struct touch_driver touch_rmi4 = {
+ 	.init = rmi4_init,
+ 	.poll = rmi4_poll,
+diff --git a/src/main.c b/src/main.c
+index b3077f5..c1f3326 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -345,6 +345,18 @@ static void show_weather(void)
+ 	ui_set_weather(w->city, strlen(w->city), n, ids, lo, hi);
+ }
+ 
++/* Harness */
++static bool stats_base;
++static uint64_t rpm_stat64(uint32_t addr)
++{
++	uint32_t hi, lo;
++	do {
++		hi = readl(addr + 4);
++		lo = readl(addr);
++	} while (readl(addr + 4) != hi);
++	return (uint64_t)hi << 32 | lo;
++}
++
+ void main(uint32_t machtype, const void *fdt)
+ {
+ 	cpu_clock_init();
+@@ -807,11 +819,32 @@ void main(uint32_t machtype, const void *fdt)
+ 			last = now;
+ 			uint32_t pc, pcc, pcb;
+ 			spm_stats(&pc, &pcc, &pcb);
++			int32_t cc_ua = pmic_battery_avg_ua();
+ 			log_printf("power: asleep, %lu wakeups, %lu/%lu/%lu collapses, %ld mA average\n", power_wakeups(), pc, pcc,
+-				   pcb, pmic_battery_avg_ua() / 1000);
++				   pcb, cc_ua / 1000);
++			/* Harness: the shadow counter's average over the exact
++			 * interval since the previous reading, and the RPM's
++			 * XO-shutdown and VDD-min records (count +4, 64-bit
++			 * accumulated 19.2 MHz ticks +0x18) against the sleep
++			 * clock, as deltas since the previous asleep line. */
++			static uint64_t xo_acc0, vmin_acc0;
++			static uint32_t xo_n0, vmin_n0, sc0;
++			uint64_t xo_acc = rpm_stat64(0xfc19dba0 + 0x18), vmin_acc = rpm_stat64(0xfc19dbd0 + 0x18);
++			uint32_t xo_n = readl(0xfc19dba0 + 4), vmin_n = readl(0xfc19dbd0 + 4), sc = readl(0xfc4a3000);
++			if (stats_base)
++				log_printf("power: cc %ld uA over %lu ms, xo %lu x %lu ms, vmin %lu x %lu ms, slept %lu ms\n", cc_ua, pmic_avg_ms,
++					   xo_n - xo_n0, (uint32_t)((xo_acc - xo_acc0) / 19200), vmin_n - vmin_n0,
++					   (uint32_t)((vmin_acc - vmin_acc0) / 19200), (uint32_t)((uint64_t)(sc - sc0) * 1000 / 32768));
++			stats_base = true;
++			xo_acc0 = xo_acc;
++			vmin_acc0 = vmin_acc;
++			xo_n0 = xo_n;
++			vmin_n0 = vmin_n;
++			sc0 = sc;
+ 		}
+ 		if (awake && now - last >= 1000) {
+ 			last = now;
++			stats_base = false;
+ 			uint32_t rx, tx, att, terr;
+ 			usb_stats(&rx, &tx);
+ 			touch_stats(&att, &terr);
+@@ -867,6 +900,9 @@ void main(uint32_t machtype, const void *fdt)
+ 			uint32_t ns = power_next_ms();
+ 			if (ns < app_next)
+ 				app_next = ns;
++			uint32_t pt = powertest_next_ms();
++			if (pt < app_next)
++				app_next = pt;
+ 		}
+ 		power_idle(app_next);
+ 	}
+diff --git a/src/sensors/hub.c b/src/sensors/hub.c
+index 444a4cc..dcd881f 100644
+--- a/src/sensors/hub.c
++++ b/src/sensors/hub.c
+@@ -83,6 +83,9 @@ static uint32_t steps = HUB_NONE, heart_rate = HUB_NONE;
+ static uint8_t heart_status;
+ static unsigned heart_readings;
+ static bool heart_on;
++/* Harness (S) */
++static bool services_off;
++static unsigned svc_acks, svc_acks_base;
+ static bool accel_on, accel_new;
+ static int16_t accel[3];
+ 
+@@ -283,6 +286,9 @@ static void frame(const uint8_t *p, unsigned n)
+ 		enter(S_READY);
+ 		return;
+ 	}
++	if (state == S_READY && n >= 4 && p[0] == CH_SERVICE && p[1] == T_RESPONSE &&
++	    (p[2] == TAG_WRIST_TILT || p[2] == TAG_STEPS) && (p[3] == CMD_ACTIVATE || p[3] == CMD_DEACTIVATE))
++		svc_acks++;
+ 	if (n >= 8 && p[0] == CH_SERVICE && p[1] == T_EVENT && p[2] == TAG_STEPS && p[3] == CMD_EVENT) {
+ 		memcpy(&steps, p + n - 4 - (n - 4) % 4, 4);
+ 		return;
+@@ -456,8 +462,59 @@ static bool stm32_tilted(void)
+ 	return t;
+ }
+ 
++/* Harness: the MCU held in reset with its UART stopped and the driver
++ * idle; released, it boots and goes through the handshake again. */
++static bool held;
++bool hub_hold(bool on)
++{
++	if (on == held || board->hub != &hub_stm32)
++		return board->hub == &hub_stm32;
++	if (on) {
++		tlmm_set(GPIO_AP_STATUS, 0);
++		tlmm_set(GPIO_RESET, 0);
++		uart_dm_stop(UART);
++		enter(S_OFF);
++	}
++	rx_len = 0;
++	rx_esc = false;
++	services_off = false;
++	held = on;
++	bool ok = on || stm32_init();
++	log_printf("hub: %s%s\n", on ? "held in reset" : "released", ok ? "" : ", init failed");
++	return ok;
++}
++bool hub_ready(void) { return board->hub != &hub_stm32 || state == S_READY; }
++
++/* Harness (S): the hub's services off (wrist tilt and the step counter
++ * deactivated) with the MCU running and sleeping as usual, against
++ * holding it in reset. Only once it is ready; acknowledgements counted. */
++bool hub_services(bool off)
++{
++	if (board->hub != &hub_stm32)
++		return false;
++	if (off == services_off)
++		return true;
++	if (state != S_READY)
++		return false;
++	static const uint8_t tilt_off[] = { CH_SERVICE, T_REQUEST, TAG_WRIST_TILT, CMD_DEACTIVATE };
++	static const uint8_t steps_off[] = { CH_SERVICE, T_REQUEST, TAG_STEPS, CMD_DEACTIVATE };
++	static const uint8_t tilt_on[] = { CH_SERVICE, T_REQUEST, TAG_WRIST_TILT, CMD_ACTIVATE };
++	static const uint8_t steps_on[] = { CH_SERVICE, T_REQUEST, TAG_STEPS, CMD_ACTIVATE };
++	int r = off ? send(tilt_off, sizeof tilt_off) | send(steps_off, sizeof steps_off)
++		    : send(tilt_on, sizeof tilt_on) | send(steps_on, sizeof steps_on);
++	if (r)
++		return false;
++	services_off = off;
++	svc_acks_base = svc_acks;
++	log_printf("hub: services %s (%u acknowledgements so far)\n", off ? "off" : "on", svc_acks);
++	return true;
++}
++bool hub_services_are_off(void) { return services_off && svc_acks - svc_acks_base >= 2; }
++
+ static bool stm32_can_sleep(void)
+ {
++	if (state > S_OFF && state < S_READY)
++		return false;
+ 	return state != S_READY || (!tlmm_get(GPIO_MCU_WAKE) && time_ms() - wake_t >= WAKE_HOLD_MS);
+ }
+ 
+@@ -469,7 +526,7 @@ static void stm32_sleep(bool asleep)
+ 		wake_t = time_ms();
+ 		mcu_wakes++;
+ 	}
+-	if (!asleep && state == S_READY) {
++	if (!asleep && state == S_READY && !services_off) {
+ 		static const uint8_t flush[] = { CH_SERVICE, T_REQUEST, TAG_STEPS, CMD_FLUSH };
+ 		send(flush, sizeof flush);
+ 	}
+diff --git a/src/soc/exceptions.c b/src/soc/exceptions.c
+index 2d1bdeb..7c3108b 100644
+--- a/src/soc/exceptions.c
++++ b/src/soc/exceptions.c
+@@ -49,6 +49,7 @@ void exception_handler(uint32_t type, uint32_t *frame)
+ 	else if ((spsr & 0x1f) == 0x12)
+ 		__asm__ volatile("cps #0x12\n mov %0, lr\n mov %1, sp\n msr cpsr_c, %2" : "=&r"(lr_x), "=&r"(sp_x) : "r"(cpsr) : "memory");
+ 	fault_record(names[type], pc, lr_x, sp_x, frame);
++	reboot_to_bootloader = true;	/* keep the record: the bootloader does not run the installed system */
+ 	reboot();
+ }
+ 
+@@ -62,5 +63,6 @@ void wdt_bark_handler(void)
+ 	__asm__ volatile("mrs %0, cpsr" : "=r"(cpsr));
+ 	__asm__ volatile("cps #0x13\n mov %0, lr\n mov %1, sp\n msr cpsr_c, %2" : "=&r"(lr_x), "=&r"(sp_x) : "r"(cpsr) : "memory");
+ 	fault_record("watchdog", pc, lr_x, sp_x, NULL);
++	reboot_to_bootloader = true;	/* keep the record: the bootloader does not run the installed system */
+ 	reboot();
+ }
+diff --git a/src/soc/pmic.c b/src/soc/pmic.c
+index 4f2991b..6d9f86c 100644
+--- a/src/soc/pmic.c
++++ b/src/soc/pmic.c
+@@ -357,6 +357,13 @@ static void usb_changed(bool present)
+ 	}
+ }
+ 
++/* For a test: the BATFET's low power mode while on battery. */
++void pmic_batfet_lpm(bool on)
++{
++	if (!usb_present)
++		smbb_update(BAT_IF_BATFET_CTRL4, 0xc0, on ? 0x40 : 0);
++}
++
+ static bool charging_now(uint8_t chg, uint8_t bat)
+ {
+ 	if (!(bat & BAT_IF_RT_TEMP_OK))
+@@ -650,15 +657,23 @@ static int iadc_raw(uint8_t chan)
+ 
+ void pmic_iadc_trim(void)
+ {
+-	int32_t sum = 0;
++	int32_t sum = 0, lo = 0x7fffffff, hi = -1;
++	uint32_t t0 = time_ms();
+ 	for (int i = 0; i < TRIM_SAMPLES; i++) {
+ 		int v = iadc_raw(IADC_CH_EXT_OFFSET);
+ 		if (v < 0)
+ 			return;
+ 		sum += v;
++		if (v < lo)
++			lo = v;
++		if (v > hi)
++			hi = v;
+ 	}
+ 	int off = (int)((sum + TRIM_SAMPLES / 2) / TRIM_SAMPLES);
+ 	int stored = pmic_read(IADC_OFFSET_MSB) << 8 | pmic_read(IADC_OFFSET_LSB);
++	/* Harness: every calibration, to line up with steps in the counter. */
++	log_printf("iadc: trim %04x, conversions %04lx-%04lx, stored %04x, %lu ms\n", off & 0xffff, lo & 0xffff, hi & 0xffff, stored,
++		   time_ms() - t0);
+ 	if (off == stored)
+ 		return;
+ 	pmic_write(IADC_SEC_ACCESS, 0xa5);
+@@ -670,6 +685,15 @@ void pmic_iadc_trim(void)
+ 		log_printf("pmic: iadc trim %04x did not stick, reads %04x\n", off & 0xffff, stored);
+ }
+ 
++/* For a test: the raw gain and offset conversions and the stored trim. */
++void pmic_iadc_raws(int *gain, int *off, int *ext, unsigned *trim)
++{
++	*gain = iadc_raw(IADC_CH_GAIN);
++	*off = iadc_raw(IADC_CH_EXT_OFFSET);
++	*ext = iadc_raw(IADC_CH_EXT_RSENSE);
++	*trim = pmic_read(IADC + 0xf2) << 8 | pmic_read(IADC + 0xf3);
++}
++
+ /* Gain conversion minus offset conversion, or 0. */
+ int pmic_iadc_gain(void)
+ {
+@@ -708,6 +732,8 @@ static int64_t cc_raw(void)
+ 	return (int64_t)(v << 28) >> 28;
+ }
+ 
++uint32_t pmic_avg_ms;
++
+ /* Average since the previous call, positive while the battery discharges. */
+ int32_t pmic_battery_avg_ua(void)
+ {
+@@ -719,5 +745,6 @@ int32_t pmic_battery_avg_ua(void)
+ 	bool first = !last_ms;
+ 	last = cc;
+ 	last_ms = now;
++	pmic_avg_ms = first ? 0 : ms;
+ 	return first || !ms ? 0 : (int32_t)(uas * 1000 / ms);
+ }
+diff --git a/src/soc/reboot.c b/src/soc/reboot.c
+index ce9fbbc..a24b8e1 100644
+--- a/src/soc/reboot.c
++++ b/src/soc/reboot.c
+@@ -48,5 +48,6 @@ void reboot_fatal(const char *what)
+ {
+ 	uint32_t lr = (uint32_t)(uintptr_t)__builtin_return_address(0);
+ 	fault_record(what, lr, lr, (uint32_t)(uintptr_t)__builtin_frame_address(0), NULL);
++	reboot_to_bootloader = true;	/* harness: keep the record */
+ 	reset_now();
+ }
+diff --git a/src/soc/rpm.c b/src/soc/rpm.c
+index f26cd99..5832323 100644
+--- a/src/soc/rpm.c
++++ b/src/soc/rpm.c
+@@ -202,8 +202,8 @@ int rpm_regulator_voltage(uint32_t type, uint32_t id, uint32_t uv)
+ 	return rpm_request(type, id, kvp, 1);
+ }
+ 
+-/* A vote in the sleep set keeps a regulator on while the apps processor
+- * is asleep; without one the RPM applies only the other masters' votes. */
++/* A vote in the sleep set applies while the apps processor is asleep;
++ * without one, its active-set vote stays in force then too. */
+ int rpm_regulator_sleep_enable(uint32_t type, uint32_t id, bool on)
+ {
+ 	uint32_t kvp[3] = { 0x6e657773, 4, on };
+@@ -244,3 +244,118 @@ void rpm_sleep_votes(void)
+ 	uint32_t kvp[3] = { RPM_KEY_ENABLE, 4, 0 };
+ 	request(RPM_SET_SLEEP, RPM_CLK0, 0, kvp, 1);
+ }
++
++/* Harness: the apps processor's bus clock votes zeroed in the sleep set
++ * (KHz only, as the vendor's rate clocks send) and its GCC sleep-enable
++ * vote cleared; off, the sleep set repeats the active rates and the vote
++ * is put back. Returns whether every request was acknowledged. */
++#define APCS_CLOCK_SLEEP_ENA_VOTE	0xfc401488u
++static int bus_sleep = -1;
++bool rpm_sleep_bus(bool on)
++{
++	static uint32_t saved_vote = 0xffffffffu;
++	static const struct { uint32_t type, id, khz; } clk[] = {
++		{ RPM_CLK2, 0, 200000 }, { RPM_CLK1, 1, 100000 }, { RPM_CLK1, 0, 50000 }, { RPM_CLK1, 2, 50000 },
++	};
++	if (bus_sleep == on)
++		return true;
++	bool ok = true;
++	for (unsigned i = 0; i < 4; i++) {
++		uint32_t kvp[3] = { RPM_KEY_KHZ, 4, on ? 0 : clk[i].khz };
++		if (request(RPM_SET_SLEEP, clk[i].type, clk[i].id, kvp, 1))
++			ok = false;
++	}
++	if (saved_vote == 0xffffffffu)
++		saved_vote = readl(APCS_CLOCK_SLEEP_ENA_VOTE);
++	writel(on ? 0 : saved_vote, APCS_CLOCK_SLEEP_ENA_VOTE);
++	if (ok)
++		bus_sleep = on;
++	log_printf("rpm: bus sleep votes %s%s, gcc sleep vote %08lx (saved %08lx)\n", on ? "zero" : "active rates",
++		   ok ? "" : " NOT all acknowledged", readl(APCS_CLOCK_SLEEP_ENA_VOTE), saved_vote);
++	return ok;
++}
++
++/* Harness: the peripheral LDOs left in high-power mode by their active
++ * votes asked for the load-following mode (lsmd 0, IPEAK) with a small
++ * load in the sleep set; off, the sleep set repeats each rail's active
++ * mode as read from the PMIC. MX (L3) and the USB rails are left alone. */
++#define RPM_KEY_LSMD	0x646d736cu
++#define RPM_KEY_MA	0x0000616du
++/* L17 and L19 already run in low power mode. L8 also supplies the CPU
++ * PLL: with it in low power mode for sleep the chip reset shortly after,
++ * with no record. */
++static const uint8_t lpm_ldos[] = { 4, 6 };
++static int8_t lpm_active_hpm[sizeof lpm_ldos];
++static int ldo_sleep = -1;
++bool rpm_ldo_sleep_lpm(bool on)
++{
++	if (ldo_sleep == on)
++		return true;
++	bool ok = true;
++	for (unsigned i = 0; i < sizeof lpm_ldos; i++) {
++		if (!lpm_active_hpm[i])
++			lpm_active_hpm[i] = (pmic_read(0x014000 + 0x100 * (lpm_ldos[i] - 1) + 0x45) & 0x80) ? 1 : -1;
++		/* Mode and load only: whether the rail is on in sleep is left to
++		 * the measures that switch it (the RPM keeps each key's last value
++		 * per set). */
++		/* Off: the active mode again and no load request (0 mA), so
++		 * the low load left by "on" does not linger. */
++		uint32_t kvp[6] = { RPM_KEY_LSMD, 4, on ? 0 : lpm_active_hpm[i] > 0, RPM_KEY_MA, 4, on ? 1 : 0 };
++		if (request(RPM_SET_SLEEP, RPM_LDOA, lpm_ldos[i], kvp, 2))
++			ok = false;
++	}
++	if (ok)
++		ldo_sleep = on;
++	log_printf("rpm: ldo sleep votes %s%s\n", on ? "low power" : "as active", ok ? "" : " NOT all acknowledged");
++	return ok;
++}
++
++/* Harness: a rail switched in both sets, so a sleep-set vote from
++ * another measure cannot turn it back on while asleep. */
++int rpm_regulator_both(uint32_t type, uint32_t id, bool on)
++{
++	int r = rpm_regulator_enable(type, id, on);
++	return r ? r : rpm_regulator_sleep_enable(type, id, on);
++}
++
++/* Harness: a rail on in both sets at its voltage, in high-power mode.
++ * Without a voltage the RPM brings it back at its own minimum, below
++ * what the bootloader set (L4 1.15 V, L15 2.75 V). */
++int rpm_rail_on_hpm(uint32_t id, uint32_t uv)
++{
++	uint32_t kvp[6] = { RPM_KEY_LSMD, 4, 1, 0x7675, 4, uv };
++	int r = request(RPM_SET_ACTIVE, RPM_LDOA, id, kvp, 2);
++	if (!r)
++		r = request(RPM_SET_SLEEP, RPM_LDOA, id, kvp, 2);
++	return r ? r : rpm_regulator_both(RPM_LDOA, id, true);
++}
++
++/* Harness: the microSD supplies L18 (vdd) and L21 (vdd-io). Sturgeon has
++ * no slot and its kernel disables the controller, but they are on at
++ * boot; Linux leaves them off. Voted off in both sets, back on only if
++ * this turned them off. True once the request holds physically. */
++static bool sd_rail_off[2];
++bool rpm_sd_rails(bool off)
++{
++	static const uint8_t ids[2] = { 18, 21 };
++	bool ok = true, changed = false;
++	for (unsigned i = 0; i < 2; i++) {
++		if (sd_rail_off[i] == off)
++			continue;
++		changed = true;
++		if (rpm_regulator_both(RPM_LDOA, ids[i], !off))
++			ok = false;
++		else
++			sd_rail_off[i] = off;
++		/* Back on, in the high-power mode they had at boot. */
++		uint32_t kvp[3] = { RPM_KEY_LSMD, 4, 1 };
++		if (!off && (request(RPM_SET_ACTIVE, RPM_LDOA, ids[i], kvp, 1) || request(RPM_SET_SLEEP, RPM_LDOA, ids[i], kvp, 1)))
++			ok = false;
++	}
++	uint8_t en18 = pmic_read(0x015146), en21 = pmic_read(0x015446);
++	if (changed)
++		log_printf("rpm: sd supplies %s%s (l18 %02x, l21 %02x)\n", off ? "off" : "on", ok ? "" : " NOT all acknowledged",
++			   en18, en21);
++	bool phys_off = !(en18 & 0x80) && !(en21 & 0x80);
++	return ok && (off ? phys_off : true);
++}
+diff --git a/src/storage/emmc.c b/src/storage/emmc.c
+index 15ccbfe..9192038 100644
+--- a/src/storage/emmc.c
++++ b/src/storage/emmc.c
+@@ -586,10 +586,114 @@ const struct emmc_info *emmc_card(void)
+ 	return &card;
+ }
+ 
++/* Harness: the card asleep as the vendor's suspend leaves it: cache
++ * flushed, deselected, CMD5 sleep, SD clock stopped, SDCC1 clocks off.
++ * Waking only re-enables the branch clocks: the rate set_clock chose
++ * stays programmed. Any transfer wakes it; a failed wake stops transfers. */
++static bool card_asleep;
++static uint32_t last_io_ms;
++bool emmc_is_asleep(void) { return card_asleep; }
++
++/* Harness (C): with the card asleep its VCC, L17, off as well, as the
++ * vendor's host power off; L6 stays. Back on takes the full
++ * identification; partitions and the write guard stay as they were. */
++static bool vcc_wanted, vcc_off;
++static void vcc_cut(void)
++{
++	if (rpm_regulator_both(RPM_LDOA, 17, false))
++		log_printf("emmc: vcc off NOT acknowledged\n");
++	else
++		vcc_off = true;
++	log_printf("emmc: vcc off, l17 %02x\n", pmic_read(0x015046));
++}
++
++static int vcc_restore(void)
++{
++	unsigned n = nparts, g = nguard;
++	uint32_t gf = guard_first, gc = guard_count;
++	rpm_regulator_both(RPM_LDOA, 17, true);
++	vcc_off = false;
++	card_asleep = false;
++	delay_ms(1);
++	int r = emmc_init(true);
++	if (!r) {
++		nparts = n;
++		nguard = g;
++		guard_first = gf;
++		guard_count = gc;
++	}
++	log_printf("emmc: vcc on, l17 %02x, card %s\n", pmic_read(0x015046), r ? "lost" : "back");
++	return r;
++}
++
++bool emmc_rail(bool off)
++{
++	vcc_wanted = off;
++	if (off && card_asleep && !vcc_off)
++		vcc_cut();
++	else if (!off && vcc_off)
++		vcc_restore();
++	return vcc_off;
++}
++uint32_t emmc_idle_ms(void) { return time_ms() - last_io_ms; }
++
++static bool branch_on(uint32_t cbcr)
++{
++	writel(readl(cbcr) | BIT(0), cbcr);
++	return wait_clear(cbcr, BIT(31), 1000);
++}
++
++int emmc_sleep(bool on)
++{
++	if (!card.ready || on == card_asleep)
++		return card.ready ? 0 : -1;
++	int r;
++	if (on) {
++		if ((r = wait_tran(1000)))
++			goto fail;
++		if ((card.ext_csd[33] & 1) && (r = ext_csd_switch(SWITCH_WRITE_BYTE, 32, 1)))
++			goto fail;
++		if ((r = cmd(7, 0, R_NONE, NULL)))
++			goto fail;
++		if ((r = cmd(5, RCA << 16 | BIT(15), R1B, NULL))) {
++			cmd(7, RCA << 16, R1B, NULL);
++			goto fail;
++		}
++		hc_ww((uint16_t)(hc_rw(HC_CLK) & ~CLK_SD_EN), HC_CLK);
++		writel(readl(GCC_SDCC1_APPS_CBCR) & ~BIT(0), GCC_SDCC1_APPS_CBCR);
++		writel(readl(GCC_SDCC1_AHB_CBCR) & ~BIT(0), GCC_SDCC1_AHB_CBCR);
++		card_asleep = true;
++		if (vcc_wanted)
++			vcc_cut();
++	} else {
++		if (vcc_off)
++			return vcc_restore();
++		if (!branch_on(GCC_SDCC1_AHB_CBCR) || !branch_on(GCC_SDCC1_APPS_CBCR)) {
++			r = -10;
++			card.ready = false;
++			goto fail;
++		}
++		hc_ww((uint16_t)(hc_rw(HC_CLK) | CLK_SD_EN), HC_CLK);
++		card_asleep = false;
++		if ((r = cmd(5, RCA << 16, R1B, NULL)) || (r = cmd(7, RCA << 16, R1B, NULL)) || (r = wait_tran(1000))) {
++			card.ready = false;
++			goto fail;
++		}
++	}
++	log_printf("emmc: %s\n", on ? "asleep" : "awake");
++	return 0;
++fail:
++	log_printf("emmc: %s failed (%d)%s\n", on ? "sleep" : "wake", r, card.ready ? "" : ", card disabled");
++	return r;
++}
++
+ static int xfer(uint32_t lba, uint32_t n, void *buf, bool read)
+ {
+ 	if (!card.ready)
+ 		return -1;
++	if (card_asleep && emmc_sleep(false))
++		return -1;
++	last_io_ms = time_ms();
+ 	if (!n || lba >= card.sectors || n > card.sectors - lba)
+ 		return -2;
+ 	uint8_t *p = buf;
+@@ -615,6 +719,7 @@ static int xfer(uint32_t lba, uint32_t n, void *buf, bool read)
+ 		n -= k;
+ 		wdt_feed();
+ 	}
++	last_io_ms = time_ms();
+ 	return 0;
+ }
+ 
+diff --git a/src/usb/usb.c b/src/usb/usb.c
+index 7ad58b5..2dee290 100644
+--- a/src/usb/usb.c
++++ b/src/usb/usb.c
+@@ -40,6 +40,7 @@ static bool cdc_attached;
+  * off, so no USB register may be touched. rest_gave_up: unplugged, the PHY
+  * still refused low power mode, so the clocks stay on until the next cable. */
+ static bool usb_down, usb_clocks_off, rest_gave_up;
++bool usb_hold_up;
+ 
+ static int ulpi_write(uint8_t reg, uint8_t val)
+ {
+@@ -343,6 +344,58 @@ bool usb_connected(void)
+ 	return (readl(USB_PORTSC) & (PORTSC_CCS | PORTSC_SUSP)) == PORTSC_CCS;
+ }
+ 
++/* Harness: U on lets USB rest when unplugged (the default), U off keeps
++ * it up (as it was before), bringing it up again if it rests. */
++static bool usb_restore(void);
++
++/* Harness: the PHY's supplies, L10 (1.8 V) and L20 (3.075 V), switched
++ * off through the RPM while USB rests, as the vendor's unplugged
++ * collapse does; on before anything touches the PHY again. */
++static bool usb_rails_off, usb_rails_wanted, rail_off[2];
++static bool usb_rails(bool on)
++{
++	static const uint8_t ids[2] = { 10, 20 };
++	static const uint32_t uv[2] = { 1800000, 3075000 };
++	bool ok = true, changed = false;
++	for (unsigned i = 0; i < 2; i++) {
++		if (rail_off[i] == !on)
++			continue;
++		changed = true;
++		/* On first: an off vote alone changes nothing on a rail the
++		 * bootloader enabled itself. */
++		if (rpm_rail_on_hpm(ids[i], uv[i]) || (!on && rpm_regulator_both(RPM_LDOA, ids[i], false)))
++			ok = false;
++		else
++			rail_off[i] = !on;
++	}
++	if (!changed)
++		return true;
++	if (on)
++		delay_ms(1);
++	usb_rails_off = rail_off[0] && rail_off[1];
++	log_printf("usb: phy supplies %s%s (l10 %02x, l20 %02x)\n", on ? "on" : "off", ok ? "" : " NOT all acknowledged",
++		   pmic_read(0x014946), pmic_read(0x015346));
++	return ok;
++}
++bool usb_rails_policy(bool off)
++{
++	usb_rails_wanted = off;
++	if (off && usb_down && usb_clocks_off)
++		return usb_rails(false);
++	if (!off)
++		return usb_rails(true);
++	return true;
++}
++bool usb_rails_are_off(void) { return usb_rails_off; }
++bool usb_phy_lpm(bool on)
++{
++	usb_hold_up = !on;
++	if (!on && usb_down)
++		return usb_restore();
++	return true;
++}
++bool usb_phy_in_lpm(void) { return usb_down && usb_clocks_off; }
++
+ /* Unplugged, the USB block rests as the vendor's suspend leaves it with
+  * VBUS sensed by the PMIC: the stack stopped, the PHY in low power mode
+  * (PHCD, then STP) and the controller's clocks off. Coming out of that the
+@@ -410,6 +463,8 @@ static void usb_collapse(const char *why)
+ 	gic_mask(IRQ_USB_HS);
+ 	usb_down = true;
+ 	rest_gave_up = !phy_rest();
++	if (!rest_gave_up && usb_rails_wanted)
++		usb_rails(false);
+ 	log_printf("usb: %s, %s\n", why, rest_gave_up ? "phy did not enter low power mode, clocks left on" : "phy in low power mode");
+ }
+ 
+@@ -451,6 +506,10 @@ static bool usb_restore(void)
+ 	uint32_t t0 = time_ms();
+ 	const char *fail = NULL;
+ 	rest_gave_up = false;
++	if (!usb_rails(true)) {
++		fail = "phy supplies";
++		goto out;
++	}
+ 	if (!clock_on(GCC_USB_HS_AHB_CBCR) || !clock_on(GCC_USB_HS_SYSTEM_CBCR)) {
+ 		usb_clocks_gate();
+ 		usb_clocks_off = true;
+@@ -514,7 +573,7 @@ void usb_cable(bool present, bool edge)
+ 		usb_collapse("controller stuck");
+ 	if (!present) {
+ 		retry_t = 0;
+-		if (usb_down && (usb_clocks_off || rest_gave_up)) {
++		if ((usb_down && (usb_clocks_off || rest_gave_up)) || usb_hold_up) {
+ 			gone_t = 0;
+ 			return;
+ 		}
+@@ -541,7 +600,7 @@ uint32_t usb_next_ms(void)
+ 	uint32_t now = time_ms(), next = UINT32_MAX;
+ 	if (gone_t)
+ 		next = ms_left(gone_t, GONE_MS, now);
+-	else if (!usb_down)
++	else if (!usb_down && !usb_hold_up)
+ 		next = GONE_MS;
+ 	if (retry_t && usb_down) {
+ 		uint32_t r = ms_left(retry_t, RETRY_MS, now);
+diff --git a/tests/stubs.c b/tests/stubs.c
+index d17bf84..0a66a3f 100644
+--- a/tests/stubs.c
++++ b/tests/stubs.c
+@@ -40,10 +40,49 @@ int bt_start(const uint8_t *bdaddr, struct bt_info *info)
+ 	return -1;
+ }
+ void bt_stop(void) {}
++void bt_host_slow(bool slow) {}
++bool bt_host_is_slow(void) { return false; }
+ bool bt_running(void) { return false; }
+ bool bt_host_wake(void) { return false; }
+ int bt_host_start(void) { return -1; }
+ void bt_host_stop(void) {}
++bool bt_host_running(void) { return false; }
++bool usb_connected(void) { return true; }
++bool pmic_usb_present(void) { return true; }
++void pmic_batfet_lpm(bool on) {}
++int display_rest_level = 2;
++void display_set_rest_level(int level) { display_rest_level = level; }
++void display_set_deep(bool on) {}
++bool display_is_deep(void) { return false; }
++bool usb_phy_lpm(bool on) { return true; }
++bool usb_phy_in_lpm(void) { return false; }
++int emmc_sleep(bool on) { return 0; }
++bool emmc_is_asleep(void) { return false; }
++uint32_t emmc_idle_ms(void) { return 0; }
++bool touch_rmi4_sleep(bool on) { return true; }
++bool hub_hold(bool on) { return true; }
++bool hub_ready(void) { return true; }
++bool board_has_all_measures(void) { return true; }
++bool hub_services(bool off) { return true; }
++bool hub_services_are_off(void) { return false; }
++bool rpm_sleep_bus(bool on) { return true; }
++uint32_t pmic_avg_ms;
++bool rpm_ldo_sleep_lpm(bool on) { return true; }
++int rpm_regulator_both(uint32_t type, uint32_t id, bool on) { return 0; }
++bool rpm_sd_rails(bool off) { return true; }
++int rpm_rail_on_hpm(uint32_t id, uint32_t uv) { return 0; }
++void display_set_rails(bool off) {}
++bool display_rails_are_off(void) { return false; }
++bool emmc_rail(bool off) { return false; }
++bool touch_rmi4_gesture(bool on) { return false; }
++bool usb_rails_policy(bool off) { return true; }
++bool usb_rails_are_off(void) { return false; }
++bool touch_rmi4_rail(bool off) { return true; }
++bool touch_rmi4_rail_is_off(void) { return false; }
++int speaker_read(uint8_t reg, uint16_t *val) { return -1; }
++bool speaker_powerdown(bool on) { return true; }
++void pmic_iadc_trim(void) {}
++void pmic_iadc_raws(int *gain, int *off, int *ext, unsigned *trim) { *gain = *off = *ext = 0; *trim = 0; }
+ int bt_store_clear(void) { return -1; }
+ __attribute__((weak)) void haptics_play(const uint16_t *on_off_ms, unsigned n) {}
+ __attribute__((weak)) bool haptics_busy(void) { return false; }
