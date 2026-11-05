@@ -1029,3 +1029,25 @@ and the 2.7 mA gap to AsteroidOS are therefore suspect. Rehearsal with AOD
 really off (logs-night-rehearsal-2026-11-04.txt, 1-minute arms): B read 2.1-3.1
 mA at trims bbc9-bbd0; every arm reached want = have, P entered and left deep
 standby, S turned the hub services off. The night run re-measures the floor.
+
+## 21. Night run with AOD really off (2026-11-05)
+
+`powertest 15 30 night`, 8.6 h unplugged, B D D B B P P B B S S B B D D B B
+(the schedule wraps), 99.94% VDD-min, no resets, want = have in every arm.
+Logs: logs-night-2026-11-05-sturgeon.txt. First 3 minutes of each arm dropped.
+
+| Arm | mA (mean of arms) | Trim-adjusted vs B |
+|---|---|---|
+| B, five measures | 2.74 (9 arms, 2.53-2.96) | - |
+| D, SD rails L18/L21 off | 2.88 (4 arms) | +0.12 to +0.25 |
+| P, panel deep standby | 2.72 (2 arms) | -0.20, +0.16 |
+| S, hub running, services off | 2.54 (2 arms) | -0.33, -0.13 |
+
+The floor is about 2.7 mA at trims bbd1-bbd9, not 4.70: §19 had the nightstand
+AOD face on, so AOD costs about 2 mA. D and P save nothing measurable; S shows
+a hub asleep with its services off costs no more than one held in reset.
+Trim rose with cooling (27 -> 17.5 C) at only ~0.05 mA/code within this run, far
+from the 0.5 mA/code seen across plug states, so that slope does not carry over
+to a slow drift. BMS OCV fell 9.2 mV/h (§19: ~14, AsteroidOS: ~7).
+Against AsteroidOS (3.07 mA raw, ~2.0 mA at equal trim) the remaining gap is
+0 to ~0.8 mA, inside the counter's uncertainty.
