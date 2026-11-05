@@ -2,8 +2,9 @@
 
 Sparrow first (G3NZCJ015551123, PR3), then sturgeon, after asking Darrel: it was left on
 AsteroidOS. Build in the worktree named, after `make clean` when switching `TEST=`. Boot with
-`make run`, with `ANDROID_SERIAL` set only for adb calls: it also filters fastboot, which hangs
-with both watches attached. Sum up every log with `adb shell log 20000 | tools/watch-check.py`.
+`make run` only with one watch attached, and with `ANDROID_SERIAL` unset: it also filters fastboot,
+and adb's serial differs from fastboot's (`asteroid-sparrow`, `G3NZCJ015551123`), so `fastboot
+boot` hangs. Use `adb -s` instead. Sum up every log with `adb shell log 20000 | tools/watch-check.py`.
 Afterwards release console holds: `awake off`, `rotate auto`.
 
 ## 0. Baseline: the plugged-in reset on sparrow
@@ -19,7 +20,12 @@ lines from `patches/power-harness-aod-review.patch`.
 | d | USB host | on | 0 | |
 | e | USB host | off | 2 | changes much more than the clamps |
 
-Long enough to reset in run a, then the same length for the others. A reset with `display:
+Results so far, 2026-11-05, worktree `../asteroid-embedded-base` (84fbbe3 plus harness, aid and
+clamp log lines): run a, no reset in 30 min, 31 clamps, nothing flagged, but **0 cluster
+collapses**: with a host attached `usb_connected` keeps the cluster up. So run b, the wall
+charger, is next and the likelier trigger; c to e only mean something once a reset shows up.
+
+Long enough to reset in run b, then the same length for the others. A reset with `display:
 clamped` last in the log implicates the path; no reset clears nothing.
 
 ## 1. aod-review on sparrow, per commit area

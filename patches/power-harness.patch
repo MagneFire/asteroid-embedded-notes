@@ -194,7 +194,7 @@ index 536e27c..f095a27 100644
  	bt_lpm_poll();
  	bool boost = cpu_clock_is_slow() && bt_idle_ms() == 0;
 diff --git a/src/console/console.c b/src/console/console.c
-index 5c3b5a4..0291d5b 100644
+index 5c3b5a4..d6a6742 100644
 --- a/src/console/console.c
 +++ b/src/console/console.c
 @@ -394,6 +394,13 @@ static void cmd_bt(const char *args)
@@ -478,12 +478,12 @@ index 5c3b5a4..0291d5b 100644
 +	}
 +	if (pt_night) {
 +		/* B = the five sleep measures; G = B with touch in the
-+		 * vendor's gesture doze; L = B plus the panel in deep standby
-+		 * with its supplies off; C = B plus the card's VCC off; V = B
-+		 * plus the USB PHY supplies off. */
-+		enum { B = PT_ALL, G = (PT_ALL & ~PT_TOUCH) | PT_GESTURE, L = PT_ALL | PT_PANEL | PT_PANELRAIL, C = PT_ALL | PT_EMMCRAIL,
-+		       V = PT_ALL | PT_USBRAIL };
-+		static const uint16_t order[] = { B, G, G, B, B, L, L, B, B, C, C, B, B, V, V, B };
++		 * vendor's gesture doze; A = B plus all the supplies off
++		 * (panel in deep standby, card VCC, USB PHY); V = B plus the
++		 * USB PHY supplies only. */
++		enum { B = PT_ALL, G = (PT_ALL & ~PT_TOUCH) | PT_GESTURE, V = PT_ALL | PT_USBRAIL,
++		       A = PT_ALL | PT_PANEL | PT_PANELRAIL | PT_EMMCRAIL | PT_USBRAIL };
++		static const uint16_t order[] = { B, G, G, B, B, A, A, B, B, V, V, B };
 +		if (pt_arm == 0)
 +			powertest_bt(false);
 +		else
@@ -905,7 +905,7 @@ index 8cacf20..ff90562 100644
  	delay_ms(120);
  	dsi_dcs_write(0x29, NULL, 0);
 diff --git a/src/input/touch.c b/src/input/touch.c
-index 00ef135..be3bd5b 100644
+index 00ef135..2595659 100644
 --- a/src/input/touch.c
 +++ b/src/input/touch.c
 @@ -330,6 +330,90 @@ static bool rmi4_init(void)
@@ -957,7 +957,7 @@ index 00ef135..be3bd5b 100644
 +	if (on == gesture)
 +		return true;
 +	uint8_t v = 0;
-+	if (rd(f11.ctrl, &v, 1) || wr(f11.ctrl, (uint8_t)((v & ~7) | (on ? 2 : 0))) || wr((uint8_t)(f01.ctrl + 2), on ? 8 : 3)) {
++	if (rd(f11.ctrl, &v, 1) || wr(f11.ctrl, (uint8_t)((v & ~7) | (on ? 4 : 0))) || wr((uint8_t)(f01.ctrl + 2), on ? 8 : 3)) {
 +		log_printf("touch: gesture mode %s failed\n", on ? "on" : "off");
 +		return false;
 +	}
