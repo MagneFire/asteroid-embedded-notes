@@ -1152,3 +1152,18 @@ reset pull-down, so both REG_ON lines are off. DEV_WAKE output low, as the vendo
 teardown. UART, HOST_WAKE, GPIO66, SDC3 and GPIO68-71 all input, pull-down, reading
 low: nothing drives them high against the pull. A weak pull-up in the chip is
 not excluded.
+
+Rehearsal of the vote arms (`powertest 1 2 mx`, logs-rehearsal-mx-2026-11-06.txt,
+about 48 min, no reset, votes acknowledged). The RPM honours the sleep set:
+
+| Sleep set | RPM state | cc |
+|---|---|---|
+| never voted | VDD-min | 2.7-3.5 mA |
+| L3 750 mV, CX corner 0 | VDD-min | 2.0-3.0 mA |
+| L3 1280 mV, CX corner 6 (= active) | XO shutdown only, no VDD-min | 7-8 mA |
+| same, L8 off | XO shutdown only | 7.5-8.7 mA |
+
+So with no vote the RPM is free to reach VDD-min; a sleep vote at active levels
+blocks it and costs about 5 mA. That argues against CX/MX being left high with no
+vote, though 2-minute arms cannot separate never voted from M. L8 off is
+untested in VDD-min, it was only tried in XO shutdown.
