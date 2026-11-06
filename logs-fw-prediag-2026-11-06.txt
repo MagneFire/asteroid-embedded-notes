@@ -1,0 +1,54 @@
+uptime 37614.621 s
+build 84fbbe345f+
+board sturgeon (by device tree)
+timer ticks 16328
+display frames 198
+battery 4344 mV
+charger usb valid, battery present, fast charging
+rtc 1793994431
+[37214.186] bt: subscribe handle 34, notify 1, indicate 0
+[37214.187] bt: subscribe handle 22, notify 1, indicate 0
+[37214.188] bt: subscribe handle 56, notify 1, indicate 0
+[37214.189] bt: subscribe handle 8, notify 0, indicate 1
+[37216.040] bt: time set to 2026-11-06 19:40:32 (rtc 1793994032)
+[37216.571] bt: connection update 0, interval 28, latency 0, timeout 500
+[37225.707] bms: 89% (calculated 89%), ocv 4178530 uV, cc -7592 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg -59 mA, rbatt 585 mOhm, 23.7 C
+[37246.023] bms: 89% (calculated 89%), ocv 4178530 uV, cc -7922 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg -59 mA, rbatt 580 mOhm, 23.8 C
+[37266.339] bms: 89% (calculated 89%), ocv 4178530 uV, cc -8250 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg -56 mA, rbatt 570 mOhm, 24.0 C
+[37270.399] power: asleep, 70 wakeups, 761/646/15 collapses, -58 mA average
+[37270.419] power: cc -58133 uA over 60837 ms, xo 0 x 0 ms, vmin 0 x 0 ms, slept 60835 ms
+[37286.655] bms: 90% (calculated 90%), ocv 4178530 uV, cc -8578 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg -59 mA, rbatt 570 mOhm, 24.0 C
+[37306.971] bms: 90% (calculated 90%), ocv 4178530 uV, cc -8903 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg -58 mA, rbatt 560 mOhm, 24.1 C
+[37326.272] bms: 90% (calculated 90%), ocv 4178530 uV, cc -9210 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg -55 mA, rbatt 550 mOhm, 24.3 C
+[37331.348] power: asleep, 60 wakeups, 821/646/15 collapses, -57 mA average
+[37331.363] power: cc -57175 uA over 60949 ms, xo 0 x 0 ms, vmin 0 x 0 ms, slept 60937 ms
+[37346.589] bms: 90% (calculated 90%), ocv 4178530 uV, cc -9531 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg -57 mA, rbatt 545 mOhm, 24.4 C
+[37366.904] bms: 90% (calculated 90%), ocv 4178530 uV, cc -9851 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg -57 mA, rbatt 540 mOhm, 24.5 C
+[37386.205] bms: 90% (calculated 90%), ocv 4178530 uV, cc -10153 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg -54 mA, rbatt 530 mOhm, 24.6 C
+[37392.297] power: asleep, 60 wakeups, 881/646/15 collapses, -56 mA average
+[37392.316] power: cc -56149 uA over 60949 ms, xo 0 x 0 ms, vmin 0 x 0 ms, slept 60946 ms
+[37406.521] bms: 90% (calculated 90%), ocv 4178530 uV, cc -10467 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg -56 mA, rbatt 525 mOhm, 24.7 C
+[37424.863] iadc: trim bbcd, conversions bbc8-bbd2, stored bbcf
+[37426.838] bms: 90% (calculated 90%), ocv 4178530 uV, cc -10779 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg -56 mA, rbatt 520 mOhm, 24.8 C
+[37446.138] bms: 90% (calculated 90%), ocv 4178530 uV, cc -11079 uAh, fcc 321000 uAh, uuc 3210 uAh, iavg -54 mA, rbatt 515 mOhm, 24.9 C
+[37453.245] power: asleep, 60 wakeups, 941/646/15 collapses, -55 mA average
+[37453.260] power: cc -55380 uA over 60948 ms, xo 0 x 0 ms, vmin 0 x 0 ms, slept 60937 ms
+[37466.454] bms: 91% (calculated 91%), ocv 4178530 uV, cc -11392 uAh, fcc 322000 uAh, uuc 0 uAh, iavg -56 mA, rbatt 505 mOhm, 25.0 C
+[37486.769] bms: 91% (calculated 91%), ocv 4178530 uV, cc -11704 uAh, fcc 322000 uAh, uuc 0 uAh, iavg -56 mA, rbatt 505 mOhm, 25.0 C
+[37506.078] bms: 91% (calculated 91%), ocv 4178530 uV, cc -11997 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg -52 mA, rbatt 505 mOhm, 25.1 C
+[37514.194] power: asleep, 60 wakeups, 1001/646/15 collapses, -54 mA average
+[37514.209] power: cc -54662 uA over 60949 ms, xo 0 x 0 ms, vmin 0 x 0 ms, slept 60942 ms
+[37519.244] nimble: GATT procedure initiated: notify; att_handle=56
+[37526.726] bms: 91% (calculated 91%), ocv 4178530 uV, cc -12308 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg -55 mA, rbatt 505 mOhm, 25.2 C
+[37547.040] bms: 91% (calculated 91%), ocv 4178530 uV, cc -12612 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg -52 mA, rbatt 505 mOhm, 25.3 C
+[37567.359] bms: 91% (calculated 91%), ocv 4178530 uV, cc -12914 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg -54 mA, rbatt 500 mOhm, 25.4 C
+[37574.459] power: asleep, 60 wakeups, 1061/646/15 collapses, -53 mA average
+[37574.478] power: cc -53468 uA over 60265 ms, xo 0 x 0 ms, vmin 0 x 0 ms, slept 60262 ms
+[37587.674] bms: 91% (calculated 91%), ocv 4178530 uV, cc -13215 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg -54 mA, rbatt 496 mOhm, 25.5 C
+[37607.990] bms: 91% (calculated 91%), ocv 4178530 uV, cc -13512 uAh, fcc 322000 uAh, uuc 3220 uAh, iavg -53 mA, rbatt 496 mOhm, 25.7 C
+> pmic 3600 8
+03600: 00 04 03 00 08 03 00 00
+> pmic 36f0 8
+036f0: 05 00 bb cd a6 c9 00 00
+> pmic 4040 4
+04040: 40 00 00 00
