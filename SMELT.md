@@ -36,8 +36,7 @@ leaving the pipeline set up. Next: set it up as mdss_mdp_ctl does. DT has cont-s
 mdp-trigger "none", dma-trigger sw. Taps did nothing visible, touch not checked further.
 
 Heat: gauge 50 -> 56 C in about 3 min on the dock at 100%, back much hotter, thermal shutdown
-suspected. Unproved lead: bq5105x-ctrl only exports chg_term 53, chg_rate 58, chg_n 94 (active
-low); userspace (healthd.smelt, charge-restart-level=98) ends charging, and the firmware
+suspected. Unproved lead: bq5105x-ctrl only exports chg_term 53, chg_rate 58, chg_n 94 (input); userspace (healthd.smelt, charge-restart-level=98) ends charging, and the firmware
 drives none of them. The firmware has no temperature limit here.
 
 AsteroidOS autosleep drops USB: hold a wakelock for adb. usbproxy-bm holds back the tail of a
@@ -55,5 +54,6 @@ current_avg. Values from the boot log, temperatures in 0.1 C:
 - Terminate at 53.0 C (hyst 1.0).
 - Complete after 1800 s, or current_avg at or under 16 mA 5 times; restart at 98 %.
 
-The firmware has none of this: it started at 50 C and ran past 53 C still charging. Polarity of
-the lines still to be read. So AsteroidOS already had the cell near 50 C on this dock.
+The firmware has none of this: it started at 50 C and ran past 53 C still charging. From its code: chg_term 1 stops
+charging, 0 allows it; chg_rate 1 is the reduced rate; it also writes 1 to the dock's smart_debounce.
+So AsteroidOS already had the cell near 50 C on this dock.
