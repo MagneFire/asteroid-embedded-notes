@@ -1103,11 +1103,13 @@ at 2.66-3.01 mA per block.
 
 Tap to wake costs about 0.3 mA, the same as the mode 2 arm. V holds up. A is
 the surprise: the prediction was -0.8 mA, and it is no better than V alone.
-A minus V is about 0.0 +/- 0.1 mA, so panel rails and L17 add nothing measurable
-on top of L20, though L alone read -0.4 in §22. Either the savings overlap or
-§22's L was overstated. Unknown which; not additive either way.
+A minus V is -0.03 mA, roughly -0.22 to +0.17 at 95% from only two cycles
+(ASTRA-POWER-12.md), so panel rails and L17 show no added saving here, though L
+alone read -0.4 in §22. That does not prove they add nothing: V A A V and its
+reverse would measure it directly.
 
-Wakes are not the gap. Time outside VDD-min is 25 ms a minute in every arm; even
-at 100 mA that is 0.04 mA. So a 60 vs 300 s stats wake cannot matter, and the
-rest of the gap, if real, is current drawn inside VDD-min: a rail, voltage or
-peripheral left on.
+Wakes are unlikely to be the gap. Time outside VDD-min is about 30 ms a minute
+in every arm, so 0.05-0.06 mA if it were all at an assumed 100 mA. A wake could
+still leave something on afterwards, so 60 vs 300 s is low priority, not ruled
+out. The rest of the gap, if real, is most likely current drawn inside VDD-min.
+The counter does not show CX/MX voltage or that the state matches Linux.
