@@ -1,0 +1,52 @@
+**READ:** Your three main entries are correct as Linux AP requests: **S1 `corn=0`, L3 `uv=750000`, L8 `swen=0`**. They do **not** establish physical rail voltages or complete firmware/Linux parity. No edits, commits or device access.
+
+References below use **K** = `minnow/sturgeon-kernel`, **F** = `asteroid-embedded-sleep`, **H** = `asteroid-embedded`, **N** = `asteroid-embedded-notes`. **Log line numbers refer to decompressed `parity-kernel.log.gz`.**
+
+1. **Request order and meaning — READ.** L8 first gets sleep `{swen=0,uv=1800000}` at log:150; panel activity changes it to on with `ma=110`, then screen-off sends `ma=10` followed by `swen=0` at :20343/:20346. L3 gets active `{swen=1,uv=1280000,ma=0}`, then sleep **only** `{uv=750000}` at :247/:248. The `_ao` label identifies the caller triggering aggregation; the 750 mV contribution comes from `_so`.
+
+   S1 initially has cached sleep requests matching active. Its first distinct sleep request is `{swen=1,ma=0,corn=3,vfc=0}` at :46430. Before the five completed suspends, `corn=0` appears at **:47715, :48158, :48633, :49480, :50237**; the next changes occur during resume, to 3/3/3/3/4. Thus **zero remains the recorded AP sleep corner throughout the long suspends**. `_corner` contributes to both sets; `_ao` only to active. Corners aggregate by maximum, loads by sum; the printed name is not a separate RPM resource. GCC, USB, display and subsystem proxy consumers share the ordinary handle; the CPU PLL uses `_ao`. The log identifies the aggregate, not which individual consumer released the final constraint. [K aggregation:463](/Users/darrel/Downloads/AsteroidOS/minnow/sturgeon-kernel/drivers/regulator/rpm-smd-regulator.c:463), [DT handles:129](/Users/darrel/Downloads/AsteroidOS/minnow/sturgeon-kernel/arch/arm/boot/dts/qcom/msm8226-regulator.dtsi:129)
+
+   **Correction:** 308 VDD-min entries do not mean 303 Linux idle collapses. Counts increase **68→188→308** across two approximately 30-minute system suspends. **INFER:** RPM can leave/re-enter its own VDD-min while AP remains suspended; attributing each entry requires APSS/cluster tracing. During genuinely awake gaps, sleep `corn` changes among 3/4/6; idle collapse uses that current sleep set, not necessarily zero. [N counter log:237](/Users/darrel/Downloads/AsteroidOS/asteroid-embedded-notes/logs-aos-rpm-2026-11-06/aos-power.log:237)
+
+   Exact target encoding: little-endian words, **active set=0, sleep set=1**, each listed scalar’s **length=4 bytes**:
+
+   | Type / id | Active target | Sleep target |
+   |---|---|---|
+   | `smpa`=`0x61706d73` / 1 | `swen=1,ma=0,corn=3,vfc=0` at last suspend | `swen=1,ma=0,corn=0,vfc=0` |
+   | `ldoa`=`0x616f646c` / 3 | `swen=1,uv=1280000,ma=0` | **`uv=750000` only**; no logged sleep `ma` or `swen` |
+   | `ldoa` / 8 | `swen=1,uv=1800000,ma=10` | `swen=0,uv=1800000,ma=10` |
+
+   Keys: `swen=0x6e657773`, `uv=0x00007675`, `ma=0x0000616d`, `corn=0x6e726f63`, `vfc=0x00636676`. `vfc=0` matters: a retained nonzero floor would defeat the intended corner reduction. `corn=0` means no corner requirement, **not 0 V**. [K keys:113](/Users/darrel/Downloads/AsteroidOS/minnow/sturgeon-kernel/drivers/regulator/rpm-smd-regulator.c:113)
+
+2. **Complete observed inventory — READ, with an explicit capture limit.** The replay ignores `cached` fields and only parses regulators. Cached sleep regulators below inherit active requests; non-regulator sleep payloads are **not printed by this capture** because buffering returns before normal request logging. `sent` in regulator logging can mean accepted into that buffer, not yet transmitted. [N parser:7](/Users/darrel/Downloads/AsteroidOS/asteroid-embedded-notes/tools/aos-rpmstate.py:7), [K buffering:1137](/Users/darrel/Downloads/AsteroidOS/minnow/sturgeon-kernel/drivers/soc/qcom/rpm-smd.c:1137)
+
+   | Resources at last suspend | Linux active / sleep | Firmware comparison |
+   |---|---|---|
+   | S1, L3, L8 | Above | No corresponding sleep policy |
+   | L4/L10/L15/L17/L20 | `swen=0` both; µV=1200000/1800000/2800000/2950000/3075000; `ma=0` | H varies by arm; **F already switches L10/L20 off** |
+   | L6 | Both `{swen=1,uv=1800000,ma=154}` | Active enable/voltage; no matching load |
+   | L19 | Both `{swen=1,uv=2850000,ma=0}` | Active enable |
+   | `vsa/1` | Both `swen=1` | Active enable |
+   | `clk0/0,1,2` | Active `Enab=1`, `STAT=0`, `Enab=1`; sleep unobserved | F sleep `/0 Enab=0`; no `/1,/2` requests |
+   | `clk1/0,1,2,3` | Active KHz=17563/17563/0/40000; sleep unobserved | F active=50000/100000/50000/absent; sleep=100/100/0/absent |
+   | `clk2/0,1,2` | Active KHz=532939/0/0; sleep unobserved | F BIMC active=200000, sleep=100; GPU active managed separately |
+   | `clka/2,11,12` | Active `swen=0`; `/2 pccb=0`; sleep unobserved | No matching requests |
+   | `bmas/21,44`; `bslv/0,24` | Active `bw=0 0` (8-byte value); sleep unobserved | No requests |
+
+   Inventory evidence: log:143–994, :20315–20358, :46413–46421, :50211–50245. **No requests in either set** for L1/L2/L5/L7/L9—or other unlisted LDOs—so their physical off state cannot be described as Linux sending `swen=0`. F additionally explicitly disables L18/L21. The table in §24 mixes H’s harness with F’s newer policy. [F sleep clocks:275](/Users/darrel/Downloads/AsteroidOS/asteroid-embedded-sleep/src/soc/rpm.c:275), [F USB rails:366](/Users/darrel/Downloads/AsteroidOS/asteroid-embedded-sleep/src/usb/usb.c:366)
+
+   **READ:** absent sleep requests preserve existing active regulator requests. `lpm-levels` flushes requests and enters MPM; it does not invent CX/MX voltage votes. The notifier reports sleep KVPs; I found no registered consumer in this tree. This `rpm-smd` driver/DT has no `vdd_dig/vdd_mem` sleep-level policy to copy. **INFER:** explicit votes remove AP constraints; whether RPM already lowers rails when firmware has never established either set remains unknown. VDD-min counts cannot resolve that. [K default semantics:192](/Users/darrel/Downloads/AsteroidOS/minnow/sturgeon-kernel/drivers/regulator/rpm-smd-regulator.c:192), [lpm-levels:480](/Users/darrel/Downloads/AsteroidOS/minnow/sturgeon-kernel/drivers/cpuidle/lpm-levels.c:480), [notifier:506](/Users/darrel/Downloads/AsteroidOS/minnow/sturgeon-kernel/drivers/soc/qcom/rpm-smd.c:506)
+
+3. **Safety — INFER, constrained by READ evidence.** Establish acknowledged active requirements **before** lower sleep requests: L3 1280000 and S1 a corner sufficient for firmware’s actual clocks—not blindly Linux’s last `3`. Keep these identical across experimental/control arms. Wake must restore MX/CX before DDR exits self-refresh and CPU/interconnect access resumes; failure can corrupt retained RAM, hang, or reset. MX retention voltage is not proof of external DDR supply safety. The RPM’s exact sequencing is unavailable here.
+
+   APC is separate: preserve the working SPM sequence and `PMIC_DATA`; S1 is CX, not APC/S2. [H spm.c:253](/Users/darrel/Downloads/AsteroidOS/asteroid-embedded/src/soc/spm.c:253), [N decoding:216](/Users/darrel/Downloads/AsteroidOS/asteroid-embedded-notes/SUSPEND.md:216)
+
+   **READ:** earlier L8/L19 LPM profiles reset; the cause was never established. Low-load/mode changes are not equivalent to Linux’s L8 sleep-off policy. L8 supplies the CPU PLL as well as display circuitry. **INFER:** test sleep-off first with panel deep standby, valid cold recovery, and active L8 1.8 V established. Ordinary panel sleep-in is not demonstrated safe for repeated supply loss; deep standby is a precaution, not a proven sufficient condition. [N reset assessment:269](/Users/darrel/Downloads/AsteroidOS/asteroid-embedded-notes/ASTRA-POWER-4.md:269), [K PLL supplies:1005](/Users/darrel/Downloads/AsteroidOS/minnow/sturgeon-kernel/arch/arm/boot/dts/qcom/msm8226.dtsi:1005)
+
+4. **Tonight — INFER/proposal.** Use common baseline **D=V plus panel deep standby**, then **D M M D E E D**, where M adds L3/CX votes and E adds only L8 sleep-off: **7 arms, 140 minutes**, shared middle baseline; no interaction estimate. Keep optional `V A A V / A V V A` and `V P P V / P V V P` unchanged—P remains the five-pin pull experiment. Total with both: **460 minutes**, plus settling.
+
+   Use `0x8000` for M and a separate explicit L8 selector; `0x10000` would truncate in the current `uint16_t` schedule. Bench first: active-vote setup/control → short L3-only → CX-only → M → deep-standby control → L8-off; repeat timer and charger wakes before long arms. Restore explicit baseline sleep values on exit; merely stopping requests does not undo them. [H masks:948](/Users/darrel/Downloads/AsteroidOS/asteroid-embedded/src/console/console.c:948)
+
+   Log request tuple/payload, unique message ID, **matching reply ID and absence of `err`**, timeout, and applied state only after success. Current firmware accepts any reply beginning `req`, which is insufficient. Also log retained pre-sleep stage, reset reasons, residency, trim, temperature and charge deltas. With watchdog stopped during long sleep, recovery needs the verified PMIC long-press reset and a known-good boot path; capture PON reasons before retrying. [F ACK check:173](/Users/darrel/Downloads/AsteroidOS/asteroid-embedded-sleep/src/soc/rpm.c:173), [H watchdog:282](/Users/darrel/Downloads/AsteroidOS/asteroid-embedded/src/power.c:282)
+
+5. **Before leaving Linux — proposed capture.** Preserve runtime config, available tracing events/kprobes, regulator/clock summaries, full logs, RPM/APSS statistics, and existing SPMI-readable active rail/PON registers; correlate one suspend with wall-clock timestamps. **A full sleep-set dump is not available through the existing debug mask:** `lpm-levels` hardcodes `msm_rpm_enter_sleep(0,…)`. Existing RPM tracepoints provide resource/set/message-ID and ACK correlation, **not KVP values**. Without rebuilding, payload capture is possible **conditionally** through supported kprobes on the serialized send buffer or a compatible diagnostic module; availability is unverified. Increasing `debug_mask` alone will not expose the buffered flush. [K flush:392](/Users/darrel/Downloads/AsteroidOS/minnow/sturgeon-kernel/drivers/soc/qcom/rpm-smd.c:392), [trace fields:42](/Users/darrel/Downloads/AsteroidOS/minnow/sturgeon-kernel/include/trace/events/trace_rpm_smd.h:42)

@@ -1128,11 +1128,18 @@ Sleep-set state at the last suspend:
 | S1 CX corner | **corn 0** | corn 3 | no vote |
 | L3 MX | **750 mV** | 1280 mV | no vote |
 | L8 | **off** (`swen 0`) | on, 10 mA | no sleep vote |
-| L4, L10, L15, L17, L20 | off | off | on except L20 (A arm off) |
-| L6, L19, LVS1 | on | on | on |
+| L4, L10, L15, L17, L20 | off | off | harness: by arm; sleep-parity: L10, L20 off |
+| L6, L19, LVS1 | on | on | on, no L6 load vote |
 
 SUSPEND.md §6 step 6 planned the L3 vote and was never done, and its "l3_so is not
 sent" is wrong: `ldoa 3 s=slp uv=750000` goes out at boot (9.06 s), via 8226_l3_ao.
+L3's sleep vote is `uv=750000` alone, its 750 mV comes from the `_so` handle
+(the printed `_ao` is only who triggered aggregation). Corn 0 means no corner
+requirement, not 0 V, and it holds through the long suspends; VDD-min entries
+rise inside a suspend, so the count is not Linux idle collapses. Clock sleep
+votes are not in this capture, they go through a buffer with no logging
+(ASTRA-POWER-14.md).
+
 So the firmware's "VDD-min" may be VDD-min with CX and MX left at active levels;
 the RPM's counter would not show that. Untested. Whether the RPM lowers them on
 its own without a sleep vote is unknown.
