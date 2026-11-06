@@ -1,0 +1,19 @@
+diff --git a/src/soc/exceptions.c b/src/soc/exceptions.c
+index 2d1bdeb..7c3108b 100644
+--- a/src/soc/exceptions.c
++++ b/src/soc/exceptions.c
+@@ -49,6 +49,7 @@ void exception_handler(uint32_t type, uint32_t *frame)
+ 	else if ((spsr & 0x1f) == 0x12)
+ 		__asm__ volatile("cps #0x12\n mov %0, lr\n mov %1, sp\n msr cpsr_c, %2" : "=&r"(lr_x), "=&r"(sp_x) : "r"(cpsr) : "memory");
+ 	fault_record(names[type], pc, lr_x, sp_x, frame);
++	reboot_to_bootloader = true;	/* keep the record: the bootloader does not run the installed system */
+ 	reboot();
+ }
+ 
+@@ -62,5 +63,6 @@ void wdt_bark_handler(void)
+ 	__asm__ volatile("mrs %0, cpsr" : "=r"(cpsr));
+ 	__asm__ volatile("cps #0x13\n mov %0, lr\n mov %1, sp\n msr cpsr_c, %2" : "=&r"(lr_x), "=&r"(sp_x) : "r"(cpsr) : "memory");
+ 	fault_record("watchdog", pc, lr_x, sp_x, NULL);
++	reboot_to_bootloader = true;	/* keep the record: the bootloader does not run the installed system */
+ 	reboot();
+ }
