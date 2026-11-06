@@ -1,0 +1,18 @@
+uptime 36817.893 s
+build 84fbbe345f+
+board sturgeon (by device tree)
+timer ticks 15530
+display frames 184
+battery 4344 mV
+charger usb valid, battery present, fast charging
+rtc 1793993633
+> mem fc19dba0 12
+fc19dba0: 64736f78 00000144 4d86ac74 00000036
+fc19dbb0: 4e98f7f9 00000036 72069585 00000015
+fc19dbc0: 00010001 00000000 00000000 00000000
+> mem fc19dbd0 12
+fc19dbd0: 6e696d76 0000085a 6ab27c67 000000a4
+fc19dbe0: 6cb664fc 000000a4 d7ddb137 0000008c
+fc19dbf0: 00000000 00000000 00000000 00000000
+> pmic 36f2 2
+036f2: bb d7

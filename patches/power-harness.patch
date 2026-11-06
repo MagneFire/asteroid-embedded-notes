@@ -196,7 +196,7 @@ index 536e27c..f095a27 100644
  	bt_lpm_poll();
  	bool boost = cpu_clock_is_slow() && bt_idle_ms() == 0;
 diff --git a/src/console/console.c b/src/console/console.c
-index 5c3b5a4..84c9b34 100644
+index 5c3b5a4..672fee4 100644
 --- a/src/console/console.c
 +++ b/src/console/console.c
 @@ -394,6 +394,13 @@ static void cmd_bt(const char *args)
@@ -497,7 +497,7 @@ index 5c3b5a4..84c9b34 100644
 +		 * and C = D with the MX or the CX vote only. It stops at the last
 +		 * arm: the votes last, so D cannot come back. */
 +		enum { D = PT_ALL | PT_USBRAIL | PT_PANEL, M = D | PT_MX | PT_CX, F = M | PT_L8, L = D | PT_MX, C = D | PT_CX };
-+		static const uint32_t order_mx[] = { D, D, D, M, F, F, M, F, M, M, F, M, L, L, M, C, C, M };
++		static const uint32_t order_mx[] = { D, D, D, M, L, L, M, C, C, M, F, F, M, F, M, M, F, M };
 +		if (pt_arm == 0)
 +			powertest_bt(false);
 +		else

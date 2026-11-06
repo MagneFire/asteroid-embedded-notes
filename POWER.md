@@ -1167,3 +1167,44 @@ So with no vote the RPM is free to reach VDD-min; a sleep vote at active levels
 blocks it and costs about 5 mA. That argues against CX/MX being left high with no
 vote, though 2-minute arms cannot separate never voted from M. L8 off is
 untested in VDD-min, it was only tried in XO shutdown.
+
+## 25. Vote arms, day run (2026-11-06)
+
+`powertest 15 20 mx`, AOD off, BT off, base D = mask 23f, started on a fresh
+boot. 30 arms over 10 h unplugged, arms 18-29 being the last arm running on. No
+reset, no fault record, votes acknowledged. L8 off ran 80 min and 80-odd timer
+wakes. logs-day-mx-2026-11-06-sturgeon.txt (run starts at the boot at 210 s),
+-state.txt, tools/an-day-mx.py. First 3 min after each change dropped.
+
+| Arm | Sleep set | RPM state | cc, mA (se) | Trim | Temp |
+|---|---|---|---|---|---|
+| D 0-2 | never voted | VDD-min 99.9 % | 2.54 (0.04) | bbd5.9 | 18.6 |
+| M, 347 min | L3 750 mV, CX 0 | VDD-min 99.9 % | 2.69 | bbd5.8 | 19.4 |
+| F 10-11, 13, 16 | M + L8 off | VDD-min 99.9 % | 2.58 | bbd5 | 20.0 |
+| L 4-5 | L3 750 mV, CX active | XO shutdown 99.9 % | 5.59 (0.06) | bbd6.3 | 18.6 |
+| C 7-8 | L3 active, CX 0 | XO shutdown 99.9 % | 5.22 (0.07) | bbd5.3 | 19.1 |
+
+Votes do not outlive `adb reboot`: the previous boot went down with the sleep set
+at active levels, which blocks VDD-min, and D here reached VDD-min after a
+reboot with no vote made. So never voted is a real state and the rehearsal's N
+was not inherited.
+
+Either rail left at its active level alone blocks VDD-min, so the RPM needs both
+free. Each costs about 2.5-3 mA over VDD-min.
+
+Never voted is no worse than M: D is 0.15 lower raw, about 0.08 higher after a
+fit on trim and temperature, with one D block at the very start. So the
+Linux sleep votes for CX and L3 buy nothing measurable here. They stay a vendor-parity
+change, not an explanation for the gap.
+
+L8 off against the M blocks either side: -0.15, -0.40, +0.11, mean -0.15, se 0.15.
+No detectable saving and no harm. No wake to the panel happened with L8 off, so its
+restore under a real panel wake is untested.
+
+M's arms drift 2.43-2.93 mA with mask unchanged, so 20-min arms carry about 0.15 mA
+of unexplained scatter. Inside D, M and F, cc goes 2.42, 2.62, 2.61, 2.86, 3.11 mA
+for trim bbd4 to bbd8, or 0.28 mA per code in a fit with temperature at 0.31 mA/C,
+well under the 0.48 of §19. At bbd7, where AsteroidOS read about 2.0 mA, this
+state reads 2.86, but that compares runs on different days and is no measured gap.
+
+CX, MX and L8 are out as the cause of the remaining difference.
