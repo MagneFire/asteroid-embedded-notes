@@ -511,3 +511,16 @@
 [3131.205] bms: 91% (calculated 92%), ocv 4229164 uV, cc 38 uAh, fcc 321000 uAh, uuc 6420 uAh, iavg -31 mA, rbatt 848 mOhm, 19.3 C
 [3151.672] bms: 91% (calculated 92%), ocv 4229164 uV, cc -129 uAh, fcc 321000 uAh, uuc 6420 uAh, iavg -30 mA, rbatt 828 mOhm, 19.6 C
 [3171.298] bms: 92% (calculated 92%), ocv 4229164 uV, cc -281 uAh, fcc 321000 uAh, uuc 6420 uAh, iavg -27 mA, rbatt 803 mOhm, 20.0 C
+[3173.333] power: asleep, 268 wakeups, 258/77/4 collapses, -29 mA average
+[3191.622] bms: 92% (calculated 92%), ocv 4229164 uV, cc -435 uAh, fcc 321000 uAh, uuc 6420 uAh, iavg -27 mA, rbatt 783 mOhm, 20.3 C
+[3211.939] bms: 92% (calculated 92%), ocv 4229164 uV, cc -586 uAh, fcc 321000 uAh, uuc 6420 uAh, iavg -27 mA, rbatt 763 mOhm, 20.6 C
+[3231.245] bms: 92% (calculated 92%), ocv 4229164 uV, cc -728 uAh, fcc 321000 uAh, uuc 6420 uAh, iavg -25 mA, rbatt 753 mOhm, 20.8 C
+[3232.223] nimble: GATT procedure initiated: notify; att_handle=56
+[3233.569] power: asleep, 60 wakeups, 318/77/4 collapses, -26 mA average
+[3233.583] power: cc -26704 uA over 60236 ms, xo 0 x 0 ms, vmin 0 x 0 ms, slept 60224 ms
+[3251.856] bms: 92% (calculated 92%), ocv 4229164 uV, cc -878 uAh, fcc 321000 uAh, uuc 6420 uAh, iavg -27 mA, rbatt 744 mOhm, 21.0 C
+[3271.157] bms: 92% (calculated 92%), ocv 4229164 uV, cc -1017 uAh, fcc 321000 uAh, uuc 6420 uAh, iavg -25 mA, rbatt 729 mOhm, 21.2 C
+[3291.473] bms: 92% (calculated 92%), ocv 4229164 uV, cc -1163 uAh, fcc 321000 uAh, uuc 6420 uAh, iavg -26 mA, rbatt 719 mOhm, 21.4 C
+[3294.517] power: asleep, 60 wakeups, 378/77/4 collapses, -25 mA average
+[3294.531] power: cc -25856 uA over 60948 ms, xo 0 x 0 ms, vmin 0 x 0 ms, slept 60941 ms
+[3311.788] bms: 92% (calculated 92%), ocv 4229164 uV, cc -1307 uAh, fcc 321000 uAh, uuc 6420 uAh, iavg -25 mA, rbatt 714 mOhm, 21.5 C

@@ -1,5 +1,5 @@
 diff --git a/src/asteroid.h b/src/asteroid.h
-index 142601d..b4562a5 100644
+index 142601d..ad6945b 100644
 --- a/src/asteroid.h
 +++ b/src/asteroid.h
 @@ -169,7 +169,40 @@ enum { BAT_DISCHARGING, BAT_CHARGING, BAT_FULL };
@@ -24,7 +24,7 @@ index 142601d..b4562a5 100644
 +bool rpm_sleep_bus(bool on);
 +bool rpm_ldo_sleep_lpm(bool on);
 +bool rpm_sleep_mx(bool l3, bool cx);
-+bool rpm_sleep_l8(bool off);
++bool rpm_sleep_l8(bool off, bool voted);
 +int rpm_regulator_both(uint32_t type, uint32_t id, bool on);
 +bool rpm_sd_rails(bool off);
 +int rpm_rail_on_hpm(uint32_t id, uint32_t uv);
@@ -196,7 +196,7 @@ index 536e27c..f095a27 100644
  	bt_lpm_poll();
  	bool boost = cpu_clock_is_slow() && bt_idle_ms() == 0;
 diff --git a/src/console/console.c b/src/console/console.c
-index 5c3b5a4..8b4d872 100644
+index 5c3b5a4..84c9b34 100644
 --- a/src/console/console.c
 +++ b/src/console/console.c
 @@ -394,6 +394,13 @@ static void cmd_bt(const char *args)
@@ -304,7 +304,7 @@ index 5c3b5a4..8b4d872 100644
  };
  
  static void cmd_help(const char *args)
-@@ -1132,8 +1193,271 @@ static void finish(void)
+@@ -1132,8 +1193,273 @@ static void finish(void)
  		done(ctx);
  }
  
@@ -404,7 +404,7 @@ index 5c3b5a4..8b4d872 100644
 +		have |= PT_SDRAIL;
 +	if (rpm_sleep_mx(m & PT_MX, m & PT_CX))
 +		have |= m & (PT_MX | PT_CX);
-+	if (rpm_sleep_l8(m & PT_L8))
++	if (rpm_sleep_l8(m & PT_L8, m & (PT_MX | PT_CX)))
 +		have |= m & PT_L8;
 +	display_set_rails(m & PT_PANELRAIL);
 +	display_set_deep(m & PT_PANEL);
@@ -492,16 +492,18 @@ index 5c3b5a4..8b4d872 100644
 +		enum { B = PT_ALL, G = (PT_ALL & ~PT_TOUCH) | PT_GESTURE, V = PT_ALL | PT_USBRAIL,
 +		       A = PT_ALL | PT_PANEL | PT_PANELRAIL | PT_EMMCRAIL | PT_USBRAIL };
 +		static const uint16_t order[] = { B, G, G, B, B, A, A, B, B, V, V, B };
-+		/* D = V with the panel in deep standby; M = D with Linux's MX
-+		 * and CX sleep votes; E = D with L8 off in sleep. The first D
-+		 * arms have never voted, later ones sleep at the active votes. */
-+		enum { D = PT_ALL | PT_USBRAIL | PT_PANEL, M = D | PT_MX | PT_CX, E = D | PT_L8 };
-+		static const uint32_t order_mx[] = { D, D, M, M, D, D, E, E, D };
++		/* D = V with the panel in deep standby, never voted; M = D with
++		 * Linux's MX and CX sleep votes; F = M with L8 off in sleep; L
++		 * and C = D with the MX or the CX vote only. It stops at the last
++		 * arm: the votes last, so D cannot come back. */
++		enum { D = PT_ALL | PT_USBRAIL | PT_PANEL, M = D | PT_MX | PT_CX, F = M | PT_L8, L = D | PT_MX, C = D | PT_CX };
++		static const uint32_t order_mx[] = { D, D, D, M, F, F, M, F, M, M, F, M, L, L, M, C, C, M };
 +		if (pt_arm == 0)
 +			powertest_bt(false);
 +		else
 +			log_printf("powertest: arm %d end, have %03x\n", pt_arm - 1, pt_applied);
-+		unsigned m = pt_mx ? order_mx[pt_arm % ARRAY_SIZE(order_mx)] : order[pt_arm % ARRAY_SIZE(order)];
++		unsigned last = ARRAY_SIZE(order_mx) - 1;
++		unsigned m = pt_mx ? order_mx[(unsigned)pt_arm < last ? (unsigned)pt_arm : last] : order[pt_arm % ARRAY_SIZE(order)];
 +		powertest_measures(m);
 +		log_printf("powertest: arm %d night=%03x aod=%s bt=off have %03x\n", pt_arm, m, setting_get(SETTING_AOD) ? "on" : "off",
 +			   pt_applied);
@@ -1245,7 +1247,7 @@ index 4f2991b..0ce262d 100644
  	return first || !ms ? 0 : (int32_t)(uas * 1000 / ms);
  }
 diff --git a/src/soc/rpm.c b/src/soc/rpm.c
-index f26cd99..f16c1fd 100644
+index f26cd99..f4dde68 100644
 --- a/src/soc/rpm.c
 +++ b/src/soc/rpm.c
 @@ -182,7 +182,11 @@ static int request(uint32_t set, uint32_t type, uint32_t id, const uint32_t *kvp
@@ -1399,10 +1401,10 @@ index f26cd99..f16c1fd 100644
 +
 +/* Harness: L8 off in the sleep set, as Linux has it with the panel off.
 + * It also supplies the CPU PLL. */
-+bool rpm_sleep_l8(bool off)
++bool rpm_sleep_l8(bool off, bool voted)
 +{
 +	static int8_t have = -1;
-+	if (have == off || (have < 0 && !off))
++	if (have == off || (have < 0 && !off && !voted))
 +		return true;
 +	uint32_t act[9] = { RPM_KEY_SWEN, 4, 1, RPM_KEY_UV, 4, 1800000, RPM_KEY_MA, 4, 10 };
 +	uint32_t slp[9] = { RPM_KEY_SWEN, 4, !off, RPM_KEY_UV, 4, 1800000, RPM_KEY_MA, 4, 10 };
@@ -1699,7 +1701,7 @@ index 692b418..07d3ebe 100644
  	if (retry_t && usb_down) {
  		uint32_t r = left(retry_t, 5000, now);
 diff --git a/tests/stubs.c b/tests/stubs.c
-index d17bf84..361fc14 100644
+index d17bf84..0b96fb0 100644
 --- a/tests/stubs.c
 +++ b/tests/stubs.c
 @@ -40,10 +40,50 @@ int bt_start(const uint8_t *bdaddr, struct bt_info *info)
@@ -1734,7 +1736,7 @@ index d17bf84..361fc14 100644
 +uint32_t pmic_avg_ms;
 +bool rpm_ldo_sleep_lpm(bool on) { return true; }
 +bool rpm_sleep_mx(bool l3, bool cx) { return true; }
-+bool rpm_sleep_l8(bool off) { return true; }
++bool rpm_sleep_l8(bool off, bool voted) { return true; }
 +int rpm_regulator_both(uint32_t type, uint32_t id, bool on) { return 0; }
 +bool rpm_sd_rails(bool off) { return true; }
 +int rpm_rail_on_hpm(uint32_t id, uint32_t uv) { return 0; }
