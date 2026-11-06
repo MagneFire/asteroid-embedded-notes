@@ -1085,3 +1085,29 @@ here. AsteroidOS: 3.07 mA raw, 1.45 mA in its intervals at trim bbd6, with touch
 doze and the hub running. The gap stays open.
 
 Correction to §22 (ASTRA-POWER-11.md): G wrote F11 report mode 2; the vendor's F11 wake gesture mode is 4 (2 is F12's), so +0.3 mA is not the cost of tap to wake. V's -0.25 mA is one block and L20 only (L10 stays on). L, V and C were never run together; their sum is a prediction.
+
+## 23. Combined arm, corrected G, V again (2026-11-05/06 night)
+
+`powertest 15 20 night`, schedule B G G B B A A B B V V B, 10 h unplugged, 30
+arms, 99.9% VDD-min in every arm, no resets, every rail and the card back each
+time, USB configured 0.4 s after the plug-in. Same treatment as §22, but a contrast
+here is one block against the B blocks either side. Log:
+logs-night-gav-2026-11-06-sturgeon.txt. Trim moved only bbd3 -> bbd8, B stayed
+at 2.66-3.01 mA per block.
+
+| Arm | Vs neighbouring B, per block | Mean |
+|---|---|---|
+| G, F11 mode 4, doze 8 (tap to wake on) | +0.21, +0.39, +0.25 | +0.28 |
+| V, L20 off | -0.39, -0.25 | -0.32 |
+| A, panel deep standby + L4/L15 + L17 + L20 off | -0.43, -0.26 | -0.35 |
+
+Tap to wake costs about 0.3 mA, the same as the mode 2 arm. V holds up. A is
+the surprise: the prediction was -0.8 mA, and it is no better than V alone.
+A minus V is about 0.0 +/- 0.1 mA, so panel rails and L17 add nothing measurable
+on top of L20, though L alone read -0.4 in §22. Either the savings overlap or
+§22's L was overstated. Unknown which; not additive either way.
+
+Wakes are not the gap. Time outside VDD-min is 25 ms a minute in every arm; even
+at 100 mA that is 0.04 mA. So a 60 vs 300 s stats wake cannot matter, and the
+rest of the gap, if real, is current drawn inside VDD-min: a rail, voltage or
+peripheral left on.
