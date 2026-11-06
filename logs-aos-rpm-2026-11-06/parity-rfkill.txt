@@ -1,0 +1,8 @@
+brcm_Bluetooth_rfkill
+phy0
+brcmfmac-wifi
+hci0
+1
+0
+0
+1

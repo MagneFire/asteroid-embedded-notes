@@ -1113,3 +1113,28 @@ in every arm, so 0.05-0.06 mA if it were all at an assumed 100 mA. A wake could
 still leave something on afterwards, so 60 vs 300 s is low priority, not ruled
 out. The rest of the gap, if real, is most likely current drawn inside VDD-min.
 The counter does not show CX/MX voltage or that the state matches Linux.
+
+## 24. What Linux really votes for sleep (2026-11-06)
+
+AsteroidOS booted with `rpm_smd_regulator.debug_mask=7 rpm_smd.debug_mask=5` added
+to the boot image's command line, BT off by bluetoothctl, AOD off, 77 min
+unplugged. logs-aos-rpm-2026-11-06/, replayed by tools/aos-rpmstate.py. The
+shadow counter went backwards (9008 -> 8485 uAh, trim bbca -> bbd3): unusable.
+
+Sleep-set state at the last suspend:
+
+| Resource | Linux sleep | Linux active | Firmware |
+|---|---|---|---|
+| S1 CX corner | **corn 0** | corn 3 | no vote |
+| L3 MX | **750 mV** | 1280 mV | no vote |
+| L8 | **off** (`swen 0`) | on, 10 mA | no sleep vote |
+| L4, L10, L15, L17, L20 | off | off | on except L20 (A arm off) |
+| L6, L19, LVS1 | on | on | on |
+
+SUSPEND.md §6 step 6 planned the L3 vote and was never done, and its "l3_so is not
+sent" is wrong: `ldoa 3 s=slp uv=750000` goes out at boot (9.06 s), via 8226_l3_ao.
+So the firmware's "VDD-min" may be VDD-min with CX and MX left at active levels;
+the RPM's counter would not show that. Untested. Whether the RPM lowers them on
+its own without a sleep vote is unknown.
+
+No /dev/mem or devmem on AsteroidOS, so raw TLMM reads there need a kernel change.

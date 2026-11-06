@@ -1,0 +1,1056 @@
+== time 1793947511 uptime 47.21 usb 1 cap 91 volt 4280860 cur -48969 temp 259
+== regulators (name state users opmode uV)
+regulator-dummy  0  
+8226_s1 disabled 0 idle 1
+8226_l3 disabled 0 idle 1
+8226_l3_ao enabled 1 idle 1280000
+8226_l3_so disabled 0 idle 750000
+8226_l4 enabled 1 normal 1200000
+8226_l5 disabled 0 idle 1200000
+8226_l6 enabled 4 normal 1800000
+8226_l7 disabled 0 idle 1850000
+8226_l8 enabled 1 normal 1800000
+8226_l8_ao enabled 1 idle 1800000
+8226_l8_so disabled 0 idle 1800000
+8226_s1_corner enabled 4 idle 5
+8226_l9 disabled 0 idle 2050000
+8226_l10 enabled 1 normal 1800000
+8226_l12 disabled 0 idle 1800000
+8226_l14 disabled 0 idle 2750000
+8226_l15 enabled 1 normal 2800000
+8226_l16 disabled 0 idle 3300000
+8226_l17 enabled 1 normal 2950000
+8226_l18 disabled 0 idle 2950000
+8226_l19 enabled 1 idle 2850000
+8226_l20 enabled 1 normal 3075000
+8226_s1_corner_ao enabled 1 idle 5
+8226_l21 disabled 0 idle 2950000
+8226_l22 disabled 0 idle 2950000
+8226_l23 disabled 0 idle 2950000
+8226_l24 disabled 0 idle 1300000
+8226_l25 disabled 0 idle 1775000
+8226_l26 disabled 0 idle 1225000
+8226_l27 disabled 0 idle 2050000
+8226_l28 disabled 0 idle 2950000
+8226_lvs1 enabled 2  
+8226_s2 enabled 1  1130000
+8226_s1_floor_corner disabled 0 idle 1
+apc_corner enabled 1  7
+gdsc_venus disabled 0 normal 
+gdsc_mdss enabled 4 normal 
+gdsc_jpeg disabled 0 normal 
+gdsc_vfe disabled 0 normal 
+gdsc_oxili_cx enabled 2 normal 
+gdsc_usb_hsic disabled 0 normal 
+batfet enabled 1  
+8226_smbbp_boost disabled 0  5000000
+8226_smbbp_otg disabled 0  
+8226_s3 disabled 0 idle 1200000
+8226_s4 disabled 0 idle 1800000
+8226_s5 disabled 0 idle 1150000
+8226_l1 disabled 0 idle 1225000
+8226_l2 disabled 0 idle 1200000
+== PMIC LDO mode/enable registers (+0x45 mode, +0x46 enable), L1-L28
+L1 14040 -- -- -- -- -- 80 00
+L2 14140 -- -- -- -- -- 80 80
+L3 14240 -- -- -- -- -- 80 80
+L4 14340 -- -- -- -- -- 80 80
+L5 14440 -- -- -- -- -- 80 00
+L6 14540 -- -- -- -- -- 80 80
+L7 14640 -- -- -- -- -- 80 00
+L8 14740 -- -- -- -- -- 80 80
+L9 14840 -- -- -- -- -- 80 00
+L10 14940 -- -- -- -- -- 80 80
+L11 14A40 -- -- -- -- -- 00 00
+L12 14B40 -- -- -- -- -- 10 80
+L13 14C40 -- -- -- -- -- 00 00
+L14 14D40 -- -- -- -- -- 80 00
+L15 14E40 -- -- -- -- -- 80 80
+L16 14F40 -- -- -- -- -- 80 00
+L17 15040 -- -- -- -- -- 80 80
+L18 15140 -- -- -- -- -- 80 80
+L19 15240 -- -- -- -- -- 00 80
+L20 15340 -- -- -- -- -- 80 80
+L21 15440 -- -- -- -- -- 80 80
+L22 15540 -- -- -- -- -- 80 00
+L23 15640 -- -- -- -- -- 80 00
+L24 15740 -- -- -- -- -- 80 00
+L25 15840 -- -- -- -- -- 80 00
+L26 15940 -- -- -- -- -- 80 00
+L27 15A40 -- -- -- -- -- 80 00
+L28 15B40 -- -- -- -- -- 80 00
+== LVS1 (+0x46)
+18040 -- -- -- -- -- -- 80
+== SMPS S1-S5 mode/enable (+0x45/+0x46 of each control block)
+11440 -- -- -- -- -- 40 80
+11740 -- -- -- -- -- 40 80
+11A40 -- -- -- -- -- 40 80
+11D40 -- -- -- -- -- 40 80
+12040 -- -- -- -- -- 80 00
+== IADC trim / BMS
+036F0 -- -- BB CA
+== rpm_stats
+RPM Mode:xosd
+	 count:0
+time in last mode(msec):0
+time since last mode(sec):58
+actual last sleep(msec):0
+client votes: 0x00000000
+
+RPM Mode:vmin
+	 count:0
+time in last mode(msec):0
+time since last mode(sec):58
+actual last sleep(msec):0
+client votes: 0x00000000
+
+== rpm_master_stats
+APSS
+	shutdown_req:0x401C8099
+	wakeup_ind:0x401CD4D1
+	bringup_req:0x401CD552
+	bringup_ack:0x401CD592
+	last_sleep_transition_duration:0x173f
+	last_wake_transition_duration:0x316
+	wakeup_reason:0x1
+	numshutdowns:0x8a
+	active_cores:0x1
+		core0
+MPSS
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+LPSS
+	shutdown_req:0x335184D9
+	wakeup_ind:0x21720A61
+	bringup_req:0x3351352C
+	bringup_ack:0x335142BA
+	last_sleep_transition_duration:0xb19
+	last_wake_transition_duration:0x2f8
+	wakeup_reason:0x0
+	numshutdowns:0x10
+	active_cores:0x0
+PRONTO
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+APSS
+	shutdown_req:0x401C8099
+	wakeup_ind:0x401CD4D1
+	bringup_req:0x401CD552
+	bringup_ack:0x401CD592
+	last_sleep_transition_duration:0x173f
+	last_wake_transition_duration:0x316
+	wakeup_reason:0x1
+	numshutdowns:0x8a
+	active_cores:0x1
+		core0
+MPSS
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+LPSS
+	shutdown_req:0x335184D9
+	wakeup_ind:0x21720A61
+	bringup_req:0x3351352C
+	bringup_ack:0x335142BA
+	last_sleep_transition_duration:0xb19
+	last_wake_transition_duration:0x2f8
+	wakeup_reason:0x0
+	numshutdowns:0x10
+	active_cores:0x0
+PRONTO
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+APSS
+	shutdown_req:0x401C8099
+	wakeup_ind:0x401CD4D1
+	bringup_req:0x401CD552
+	bringup_ack:0x401CD592
+	last_sleep_transition_duration:0x173f
+	last_wake_transition_duration:0x316
+	wakeup_reason:0x1
+	numshutdowns:0x8a
+	active_cores:0x1
+		core0
+MPSS
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+LPSS
+	shutdown_req:0x335184D9
+	wakeup_ind:0x21720A61
+	bringup_req:0x3351352C
+	bringup_ack:0x335142BA
+	last_sleep_transition_duration:0xb19
+	last_wake_transition_duration:0x2f8
+	wakeup_reason:0x0
+	numshutdowns:0x10
+	active_cores:0x0
+PRONTO
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+APSS
+	shutdown_req:0x401C8099
+	wakeup_ind:0x401CD4D1
+	bringup_req:0x401CD552
+	bringup_ack:0x401CD592
+	last_sleep_transition_duration:0x173f
+	last_wake_transition_duration:0x316
+	wakeup_reason:0x1
+	numshutdowns:0x8a
+	active_cores:0x1
+		core0
+MPSS
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+LPSS
+	shutdown_req:0x335184D9
+	wakeup_ind:0x21720A61
+	bringup_req:0x3351352C
+	bringup_ack:0x335142BA
+	last_sleep_transition_duration:0xb19
+	last_wake_transition_duration:0x2f8
+	wakeup_reason:0x0
+	numshutdowns:0x10
+	active_cores:0x0
+PRONTO
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+APSS
+	shutdown_req:0x401C8099
+	wakeup_ind:0x401CD4D1
+	bringup_req:0x401CD552
+	bringup_ack:0x401CD592
+	last_sleep_transition_duration:0x173f
+	last_wake_transition_duration:0x316
+	wakeup_reason:0x1
+	numshutdowns:0x8a
+	active_cores:0x1
+		core0
+MPSS
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+LPSS
+	shutdown_req:0x335184D9
+	wakeup_ind:0x21720A61
+	bringup_req:0x3351352C
+	bringup_ack:0xPRONTO
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+APSS
+	shutdown_req:0x401C8099
+	wakeup_ind:0x401CD4D1
+	bringup_req:0x401CD552
+	bringup_ack:0x401CD592
+	last_sleep_transition_duration:0x173f
+	last_wake_transition_duration:0x316
+	wakeup_reason:0x1
+	numshutdowns:0x8a
+	active_cores:0x1
+		core0
+MPSS
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+LPSS
+	shutdown_req:0x335184D9
+	wakeup_ind:0x21720A61
+	bringup_req:0x3351352C
+	bringup_ack:0x335142BA
+	last_sleep_transition_duration:0xb19
+	last_wake_transition_duration:0x2f8
+	wakeup_reason:0x0
+	numshutdowns:0x10
+	active_cores:0x0
+PRONTO
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+APSS
+	shutdown_req:0x401C8099
+	wakeup_ind:0x401CD4D1
+	bringup_req:0x401CD552
+	bringup_ack:0x401CD592
+	last_sleep_transition_duration:0x173f
+	last_wake_transition_duration:0x316
+	wakeup_reason:0x1
+	numshutdowns:0x8a
+	active_cores:0x1
+		core0
+MPSS
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+LPSS
+	shutdown_req:0x335184D9
+	wakeup_ind:0x21720A61
+	bringup_req:0x3351352C
+	bringup_ack:0x335142BA
+	last_sleep_transition_duration:0xb19
+	last_wake_transition_duration:0x2f8
+	wakeup_reason:0x0
+	numshutdowns:0x10
+	active_cores:0x0
+PRONTO
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+APSS
+	shutdown_req:0x401C8099
+	wakeup_ind:0x401CD4D1
+	bringup_req:0x401CD552
+	bringup_ack:0x401CD592
+	last_sleep_transition_duration:0x173f
+	last_wake_transition_duration:0x316
+	wakeup_reason:0x1
+	numshutdowns:0x8a
+	active_cores:0x1
+		core0
+MPSS
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+LPSS
+	shutdown_req:0x335184D9
+	wakeup_ind:0x21720A61
+	bringup_req:0x3351352C
+	bringup_ack:0x335142BA
+	last_sleep_transition_duration:0xb19
+	last_wake_transition_duration:0x2f8
+	wakeup_reason:0x0
+	numshutdowns:0x10
+	active_cores:0x0
+PRONTO
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+APSS
+	shutdown_req:0x401C8099
+	wakeup_ind:0x401CD4D1
+	bringup_req:0x401CD552
+	bringup_ack:0x401CD592
+	last_sleep_transition_duration:0x173f
+	last_wake_transition_duration:0x316
+	wakeup_reason:0x1
+	numshutdowns:0x8a
+	active_cores:0x1
+		core0
+MPSS
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+LPSS
+	shutdown_req:0x335184D9
+	wakeup_ind:0x21720A61
+	bringup_req:0x3351352C
+	bringup_ack:0x335142BA
+	last_sleep_transition_duration:0xb19
+	last_wake_transition_duration:0x2f8
+	wakeup_reason:0x0
+	numshutdowns:0x10
+	active_cores:0x0
+PRONTO
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+APSS
+	shutdown_req:0x401C8099
+	wakeup_ind:0x401CD4D1
+	bringup_req:0x401CD552
+	bringup_ack:0x401CD592
+	last_sleep_transition_duration:0x173f
+	last_wake_transition_duration:0x316
+	wakeup_reason:0x1
+	numshutdowns:0x8a
+	active_cores:0x1
+		core0
+MPSS
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transLPSS
+	shutdown_req:0x335184D9
+	wakeup_ind:0x21720A61
+	bringup_req:0x3351352C
+	bringup_ack:0x335142BA
+	last_sleep_transition_duration:0xb19
+	last_wake_transition_duration:0x2f8
+	wakeup_reason:0x0
+	numshutdowns:0x10
+	active_cores:0x0
+PRONTO
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+APSS
+	shutdown_req:0x401C8099
+	wakeup_ind:0x401CD4D1
+	bringup_req:0x401CD552
+	bringup_ack:0x401CD592
+	last_sleep_transition_duration:0x173f
+	last_wake_transition_duration:0x316
+	wakeup_reason:0x1
+	numshutdowns:0x8a
+	active_cores:0x1
+		core0
+MPSS
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+LPSS
+	shutdown_req:0x335184D9
+	wakeup_ind:0x21720A61
+	bringup_req:0x3351352C
+	bringup_ack:0x335142BA
+	last_sleep_transition_duration:0xb19
+	last_wake_transition_duration:0x2f8
+	wakeup_reason:0x0
+	numshutdowns:0x10
+	active_cores:0x0
+PRONTO
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+APSS
+	shutdown_req:0x401C8099
+	wakeup_ind:0x401CD4D1
+	bringup_req:0x401CD552
+	bringup_ack:0x401CD592
+	last_sleep_transition_duration:0x173f
+	last_wake_transition_duration:0x316
+	wakeup_reason:0x1
+	numshutdowns:0x8a
+	active_cores:0x1
+		core0
+MPSS
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+LPSS
+	shutdown_req:0x335184D9
+	wakeup_ind:0x21720A61
+	bringup_req:0x3351352C
+	bringup_ack:0x335142BA
+	last_sleep_transition_duration:0xb19
+	last_wake_transition_duration:0x2f8
+	wakeup_reason:0x0
+	numshutdowns:0x10
+	active_cores:0x0
+PRONTO
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+APSS
+	shutdown_req:0x401C8099
+	wakeup_ind:0x401CD4D1
+	bringup_req:0x401CD552
+	bringup_ack:0x401CD592
+	last_sleep_transition_duration:0x173f
+	last_wake_transition_duration:0x316
+	wakeup_reason:0x1
+	numshutdowns:0x8a
+	active_cores:0x1
+		core0
+MPSS
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+LPSS
+	shutdown_req:0x335184D9
+	wakeup_ind:0x21720A61
+	bringup_req:0x3351352C
+	bringup_ack:0x335142BA
+	last_sleep_transition_duration:0xb19
+	last_wake_transition_duration:0x2f8
+	wakeup_reason:0x0
+	numshutdowns:0x10
+	active_cores:0x0
+PRONTO
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+APSS
+	shutdown_req:0x401C8099
+	wakeup_ind:0x401CD4D1
+	bringup_req:0x401CD552
+	bringup_ack:0x401CD592
+	last_sleep_transition_duration:0x173f
+	last_wake_transition_duration:0x316
+	wakeup_reason:0x1
+	numshutdowns:0x8a
+	active_cores:0x1
+		core0
+MPSS
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+LPSS
+	shutdown_req:0x335184D9
+	wakeup_ind:0x21720A61
+	bringup_req:0x3351352C
+	bringup_ack:0x335142BA
+	last_sleep_transition_duration:0xb19
+	last_wake_transition_duration:0x2f8
+	wakeup_reason:0x0
+	numshutdowns:0x10
+	active_cores:0x0
+PRONTO
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+APSS
+	shutdown_req:0x401C8099
+	wakeup_ind:0x401CD4D1
+	bringup_req:0x401CD552
+	bringup_ack:0x401CD59MPSS
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+LPSS
+	shutdown_req:0x335184D9
+	wakeup_ind:0x21720A61
+	bringup_req:0x3351352C
+	bringup_ack:0x335142BA
+	last_sleep_transition_duration:0xb19
+	last_wake_transition_duration:0x2f8
+	wakeup_reason:0x0
+	numshutdowns:0x10
+	active_cores:0x0
+PRONTO
+	shutdown_req:0x0
+	wakeup_ind:0x0
+	bringup_req:0x0
+	bringup_ack:0x0
+	last_sleep_transition_duration:0x0
+	last_wake_transition_duration:0x0
+	wakeup_reason:0x0
+	numshutdowns:0x0
+	active_cores:0x1
+		core0
+== wakeup_sources
+name		active_count	event_count	wakeup_count	expire_count	active_since	total_time	max_time	last_change	prevent_suspend_time
+aossnap     	1		1		0		0		1262		1262		1262		47172		0
+usb_moded_input	4		4		0		0		0		1		0		43410		0
+mce_proximity_stm	1		1		0		0		0		100		100		18010		0
+mce_cpu_keepalive	2		2		0		0		0		15400		9031		35013		0
+mce_inactivity_notify	1		1		0		0		0		5000		5000		21127		0
+mce_hbtimer_dispatch	2		2		0		0		0		0		0		16124		0
+mce_bluez_wait	4		4		0		0		0		11575		5564		48423		0
+mce_rtc_wakeup	4		5		0		0		0		9		7		19405		0
+dsme_iphb_wakeup	4		4		0		0		0		801		200		19603		0
+dsme_rtc_input	10		10		0		0		0		1		0		19404		0
+mce_lpm_off 	10		10		0		0		3066		6986		3603		45368		0
+usb_moded_state	1		1		0		0		0		5004		5004		20250		0
+adsp_IPCRTR 	18		37		0		0		0		8		6		28705		0
+mce_display_on	2		2		0		0		32742		33483		32742		15692		0
+mce_display_stm	16		16		0		0		0		907		487		45369		0
+mce_tklock_notify	6		6		0		0		0		12067		2555		46375		0
+mce_mux     	24		24		0		0		0		17814		2865		47958		0
+wlan_wd_wake	4		4		0		0		0		310		147		5939		0
+wlan_ctrl_wake	1		1		0		1		0		490		490		5380		0
+wlan_rx_wake	0		0		0		0		0		0		0		3709		0
+wlan_wake   	12		12		0		0		0		589		564		5939		0
+mmc1:0001   	0		0		0		0		0		0		0		3673		0
+bam_dmux_wakelock	0		0		0		0		0		0		0		3200		0
+msm_hsusb_host	0		0		0		0		0		0		0		3193		0
+tp_wake_lock	1		1		0		0		0		10310		10310		13454		0
+pm8226_led  	0		0		0		0		0		0		0		2998		0
+battery     	7		15		0		0		0		1429		423		43266		0
+chg_wake_lock	1		1		0		0		45434		45434		45434		3000		0
+pm8226_poweroff	0		0		0		0		0		0		0		2866		0
+qpnp-charger-3	1		6		0		0		43688		43688		43688		4746		0
+bms         	6		7		0		0		0		1651		457		43405		0
+qpnp-bms-4  	0		0		0		0		0		0		0		2529		0
+qpnp_cv_lock	2		2		0		0		0		290		171		6108		0
+qpnp_low_voltage_lock	0		0		0		0		0		0		0		2529		0
+qpnp_soc_wake	15		15		0		0		0		1437		175		43405		0
+ssr(modem)  	0		0		0		0		0		0		0		2523		0
+pil-modem   	0		0		0		0		0		0		0		2523		0
+ssr(adsp)   	0		0		0		0		0		0		0		2522		0
+pil-adsp    	1		1		0		0		0		1328		1328		14373		0
+mcusleep    	0		0		0		0		0		0		0		2483		0
+qpnp-power-on-1	0		0		0		0		0		0		0		2465		0
+alarm       	0		0		0		0		0		0		0		2462		0
+mmc1_detect 	1		1		0		1		0		495		495		4170		0
+mmc0_detect 	1		1		0		1		0		495		495		2910		0
+bluesleep   	3		6		0		2		2028		9005		4483		46406		0
+qpnp-iadc-11	33		33		0		0		0		200		15		47308		0
+qpnp-vadc-10	0		0		0		0		0		0		0		2145		0
+qpnp-rtc-14 	3		3		0		0		0		0		0		19402		0
+synaptics_i2c_rmi4	0		0		0		0		0		0		0		2140		0
+usb         	4		11		0		0		0		48		24		4760		0
+f9a55000.usb	0		0		0		0		0		0		0		1754		0
+msm_otg     	1		1		0		0		46681		46681		46681		1754		0
+ipc00000002_kworker/0:1	17		37		0		0		0		7		6		28705		0
+ipc00000001_kworker/0:1	0		0		0		0		0		0		0		1747		0
+DIAG_WS     	0		0		0		0		0		0		0		1654		0
+SMDTTY_READ_IN_SUSPEND	0		0		0		0		0		0		0		1650		0
+msm_serial_hs_dma	3		3		0		0		0		12217		8215		48415		0
+msm_serial_hs_rx	8		293		0		7		24		4820		1209		48411		0
+vsync_suspend_wake_lock	0		0		0		0		0		0		0		1624		0
+vsync_suspend_wake_lock	0		0		0		0		0		0		0		1624		0
+IDLE_ON_WAKELOCK	0		0		0		0		0		0		0		1594		0
+alarmtimer  	0		0		0		0		0		0		0		1558		0
+vibrator    	0		0		0		0		0		0		0		1530		0
+smsm_snapshot	2		2		0		0		0		0		0		80		0
+autosleep   	6		6		0		0		0		0		0		15952		0
+== suspend_stats
+success: 0
+fail: 0
+failed_freeze: 0
+failed_prepare: 0
+failed_suspend: 0
+failed_suspend_late: 0
+failed_suspend_noirq: 0
+failed_resume: 0
+failed_resume_early: 0
+failed_resume_noirq: 0
+failures:
+  last_failed_dev:	
+			
+  last_failed_errno:	0
+			0
+  last_failed_step:	
+			
+== interrupts
+           CPU0       
+ 20:      10601       GIC  arch_timer
+ 35:          0       GIC  apps_wdog_bark
+ 39:       1698       GIC  arch_mem_timer
+ 47:         10       GIC  cpr
+ 56:          0       GIC  modem
+ 59:          0       GIC  smp2p
+ 65:       1815       GIC  kgsl-3d0
+ 74:          0       GIC  msm_iommu_nonsecure_irq
+ 75:          0       GIC  msm_iommu_secure_irq, msm_iommu_secure_irq
+ 78:          0       GIC  msm_iommu_secure_irq, msm_iommu_secure_irq
+ 79:          0       GIC  msm_iommu_nonsecure_irq
+ 97:          0       GIC  msm_iommu_nonsecure_irq, msm_iommu_nonsecure_irq, msm_iommu_nonsecure_irq
+102:          0       GIC  msm_iommu_nonsecure_irq, msm_iommu_nonsecure_irq, msm_iommu_nonsecure_irq
+104:       1869       GIC  MDSS
+109:          0       GIC  ocmem_dm_irq
+128:        103       GIC  qup_err_intr
+129:       1553       GIC  qup_err_intr
+130:          0       GIC  qup_err_intr
+131:        371       GIC  qup_err_intr
+139:        325       GIC  msm_serial_hsl1
+142:          0       GIC  msm_hs_uart
+155:      11800       GIC  mmc0
+159:       3185       GIC  mmc1
+166:        222       GIC  msm_otg, msm_hsusb
+170:          5       GIC  msm_sdcc.1
+172:          0       GIC  msm_otg
+174:          0       GIC  qcom,smd-wcnss
+175:          0       GIC  smp2p
+176:          0       GIC  qcom,smsm-wcnss
+188:        360       GIC  qcom,smd-adsp
+189:          0       GIC  qcom,smsm-adsp
+190:          6       GIC  smp2p
+194:          0       GIC  adsp
+200:       5365       GIC  qcom,smd-rpm
+203:         66       GIC  fc4281d0.qcom,mpm
+216:          0       GIC  tsens_interrupt
+222:          7       GIC  fc4cf000.qcom,spmi
+240:         91       GIC  msmgpio
+256:          5       GIC  msm_sdcc.3
+261:          0       GIC  msm_iommu_global_cfg_irq, msm_iommu_global_cfg_irq, msm_iommu_global_cfg_irq, msm_iommu_global_cfg_irq, msm_iommu_global_cfg_irq
+263:          0       GIC  msm_iommu_global_client_irq, msm_iommu_global_client_irq, msm_iommu_global_client_irq, msm_iommu_global_client_irq, msm_iommu_global_client_irq
+270:        554       GIC  sps
+273:          0       GIC  msm_iommu_nonsecure_irq, msm_iommu_nonsecure_irq, msm_iommu_nonsecure_irq
+288:          0  qpnp-int  msm_otg
+290:          1   msmgpio  sdhci-msm sdiowakeup
+291:          0  qpnp-int  qpnp_kpdpwr_status
+292:          0  qpnp-int  qpnp_resin_status
+294:          0  qpnp-int  qpnp_kpdpwr_resin_bark
+295:          1  qpnp-int  vbat-det-lo
+299:          0  qpnp-int  trkl-chg-on
+300:          1  qpnp-int  fast-chg-on
+301:          0  qpnp-int  chg-failed
+310:          0  qpnp-int  batt-pres
+311:          0  qpnp-int  bat-temp-ok
+318:          0  qpnp-int  usbin-valid
+319:          0  qpnp-int  chg-gone
+320:          0  qpnp-int  usb-ocp
+325:          0  qpnp-int  ocv_thr
+326:          0  qpnp-int  sw_cc_thr
+332:          1  qpnp-int  qpnp_adc_tm_high_interrupt
+333:          0  qpnp-int  qpnp_adc_tm_low_interrupt
+334:          0  qpnp-int  pm8226_tz
+335:          3  qpnp-int  qpnp_rtc_alarm
+336:          0   msmgpio  mcusleep hostwake
+337:          5   msmgpio  bluetooth hostwake
+339:          1   msmgpio  synaptics_dsx
+340:         84   msmgpio
+469:          0  smp2p_gpio  modem
+470:          0  smp2p_gpio  error_ready_interrupt
+471:          0  smp2p_gpio  modem
+472:          0  smp2p_gpio  modem
+501:          0  smp2p_gpio  adsp
+502:          1  smp2p_gpio  error_ready_interrupt
+503:          1  smp2p_gpio  adsp
+504:          0  smp2p_gpio  adsp
+IPI0:          0  CPU wakeup interrupts
+IPI1:         16  Timer broadcast interrupts
+IPI2:       1509  Rescheduling interrupts
+IPI3:         10  Function call interrupts
+IPI4:          5  Single function call interrupts
+IPI5:          0  CPU stop interrupts
+IPI6:          0  CPU backtrace
+Err:          0
+== enabled clocks
+Enabled clocks:
+	xo:4:4 [19200000]
+	cxo_lpm_clk:1:1 [1000] -> xo:4:4 [19200000]
+	gcc_lpass_q6_axi_clk:1:1 [0]
+	gpll0:4:4 [600000000] -> xo:4:4 [19200000]
+	axi_clk_src:4:3 [200000000, 2] -> mmpll0_pll:1:1 [800000000] -> xo:4:4 [19200000]
+	xo_a_clk:3:3 [19200000]
+	a7sspll:1:1 [1190400000, 2] -> xo_a_clk:3:3 [19200000]
+	kpss_ahb_clk_src:1:1 [19200000] -> xo_a_clk:3:3 [19200000]
+	snoc_clk:1:1 [120000000]
+	snoc_msmbus_clk:1:1 [120000000] -> snoc_clk:1:1 [120000000]
+	snoc_a_clk:1:1 [17562500]
+	snoc_msmbus_a_clk:1:1 [17562500] -> snoc_a_clk:1:1 [17562500]
+	pnoc_clk:1:1 [120000000]
+	pnoc_msmbus_clk:1:1 [120000000] -> pnoc_clk:1:1 [120000000]
+	pnoc_a_clk:1:1 [17562500]
+	pnoc_msmbus_a_clk:1:1 [17562500] -> pnoc_a_clk:1:1 [17562500]
+	bimc_clk:1:1 [400000000]
+	bimc_msmbus_clk:1:1 [400000000] -> bimc_clk:1:1 [400000000]
+	bimc_a_clk:1:1 [532938752]
+	bimc_msmbus_a_clk:1:1 [532938752] -> bimc_a_clk:1:1 [532938752]
+	ocmemgx_clk:2:2 [320000000]
+	ocmemgx_msmbus_clk:1:1 [320000000] -> ocmemgx_clk:2:2 [320000000]
+	mmss_mmssnoc_axi_clk:1:1 [0] -> axi_clk_src:4:3 [200000000, 2] -> mmpll0_pll:1:1 [800000000] -> xo:4:4 [19200000]
+	mmss_s0_axi_clk:1:1 [200000000] -> axi_clk_src:4:3 [200000000, 2] -> mmpll0_pll:1:1 [800000000] -> xo:4:4 [19200000]
+	mmss_misc_ahb_clk:1:1 [0]
+	cxo_otg_clk:1:1 [1000] -> xo:4:4 [19200000]
+	gcc_usb_hs_ahb_clk:1:1 [0]
+	usb_hs_system_clk_src:1:1 [75000000, 2] -> gpll0:4:4 [600000000] -> xo:4:4 [19200000]
+	gcc_usb_hs_system_clk:1:1 [75000000] -> usb_hs_system_clk_src:1:1 [75000000, 2] -> gpll0:4:4 [600000000] -> xo:4:4 [19200000]
+	gcc_usb2a_phy_sleep_clk:1:1 [0]
+	gcc_blsp1_ahb_clk:1:1 [0]
+	blsp1_uart1_apps_clk_src:1:1 [7372800, 2] -> gpll0:4:4 [600000000] -> xo:4:4 [19200000]
+	gcc_blsp1_uart1_apps_clk:1:1 [7372800] -> blsp1_uart1_apps_clk_src:1:1 [7372800, 2] -> gpll0:4:4 [600000000] -> xo:4:4 [19200000]
+	gcc_sdcc3_ahb_clk:1:1 [0]
+	sdcc3_apps_clk_src:1:1 [50000000, 2] -> gpll0:4:4 [600000000] -> xo:4:4 [19200000]
+	gcc_sdcc3_apps_clk:1:1 [50000000] -> sdcc3_apps_clk_src:1:1 [50000000, 2] -> gpll0:4:4 [600000000] -> xo:4:4 [19200000]
+	mmssnoc_ahb_a_clk:1:1 [40000000]
+	mmpll0_pll:1:1 [800000000] -> xo:4:4 [19200000]
+	dsi_vco_clk:2:2 [624960000]
+	analog_postdiv_clk:1:1 [312480000] -> dsi_vco_clk:2:2 [624960000]
+	indirect_path_div2_clk:1:1 [156240000] -> analog_postdiv_clk:1:1 [312480000] -> dsi_vco_clk:2:2 [624960000]
+	byte_mux:1:1 [156240000] -> indirect_path_div2_clk:1:1 [156240000] -> analog_postdiv_clk:1:1 [312480000] -> dsi_vco_clk:2:2 [624960000]
+	byte_clk_src:1:1 [39060000] -> byte_mux:1:1 [156240000] -> indirect_path_div2_clk:1:1 [156240000] -> analog_postdiv_clk:1:1 [312480000] -> dsi_vco_clk:2:2 [624960000]
+	byte0_clk_src:1:1 [39060000, 2] -> byte_clk_src:1:1 [39060000] -> byte_mux:1:1 [156240000] -> indirect_path_div2_clk:1:1 [156240000] -> analog_postdiv_clk:1:1 [312480000] -> dsi_vco_clk:2:2 [624960000]
+	mdss_byte0_clk:1:1 [39060000] -> byte0_clk_src:1:1 [39060000, 2] -> byte_clk_src:1:1 [39060000] -> byte_mux:1:1 [156240000] -> indirect_path_div2_clk:1:1 [156240000] -> analog_postdiv_clk:1:1 [312480000] -> dsi_vco_clk:2:2 [624960000]
+	esc0_clk_src:1:1 [19200000, 2]
+	mdss_esc0_clk:1:1 [19200000] -> esc0_clk_src:1:1 [19200000, 2]
+	pixel_clk_src:1:1 [34720000] -> dsi_vco_clk:2:2 [624960000]
+	pclk0_clk_src:1:1 [13020000, 2] -> pixel_clk_src:1:1 [34720000] -> dsi_vco_clk:2:2 [624960000]
+	mdss_pclk0_clk:1:1 [13020000] -> pclk0_clk_src:1:1 [13020000, 2] -> pixel_clk_src:1:1 [34720000] -> dsi_vco_clk:2:2 [624960000]
+	mdss_ahb_clk:2:2 [0]
+	mdss_axi_clk:2:2 [0] -> axi_clk_src:4:3 [200000000, 2] -> mmpll0_pll:1:1 [800000000] -> xo:4:4 [19200000]
+	mdp_clk_src:2:2 [92310000, 2] -> gpll0:4:4 [600000000] -> xo:4:4 [19200000]
+	mdss_mdp_clk:2:2 [0] -> mdp_clk_src:2:2 [92310000, 2] -> gpll0:4:4 [600000000] -> xo:4:4 [19200000]
+	mdss_mdp_lut_clk:1:1 [0] -> mdp_clk_src:2:2 [92310000, 2] -> gpll0:4:4 [600000000] -> xo:4:4 [19200000]
+	vsync_clk_src:1:1 [19200000, 2]
+	mdss_vsync_clk:1:1 [19200000] -> vsync_clk_src:1:1 [19200000, 2]
+	gfx3d_clk_src:1:0 [320000000]
+	oxili_gfx3d_clk:1:0 [320000000] -> gfx3d_clk_src:1:0 [320000000]
+	oxilicx_ahb_clk:1:0 [0]
+	oxilicx_axi_clk:1:0 [0] -> axi_clk_src:4:3 [200000000, 2] -> mmpll0_pll:1:1 [800000000] -> xo:4:4 [19200000]
+	ocmemgx_core_clk:1:1 [1000] -> ocmemgx_clk:2:2 [320000000]
+	a7ssmux:1:1 [1190400000, 5] -> a7sspll:1:1 [1190400000, 2] -> xo_a_clk:3:3 [19200000]
+Enabled clock count: 63
+== gpio
+GPIOs 0-116, platform/fd510000.gpio, msmgpio:
+ gpio-12  (UART_RX_GPIO        ) in  hi
+ gpio-13  (UART_TX_GPIO        ) in  hi
+ gpio-14  (UART_RFR_GPIO       ) in  hi
+ gpio-15  (UART_CTS_GPIO       ) in  hi
+ gpio-16  (!Ì¿               ) out hi
+ gpio-17  (!Ì¿               ) in  hi
+ gpio-25  (disp_rst_n          ) in  hi
+ gpio-59  (drv2605Trigger      ) in  lo
+ gpio-60  (drv2605Enable       ) out hi
+ gpio-62  (ext-wake-mcu-gpio   ) out lo
+ gpio-63  (bt_ext_wake         ) out hi
+ gpio-64  (bt_host_wake        ) in  hi
+ gpio-65  (mcu-wake-ap-gpio    ) in  lo
+ gpio-66  (WL_HOST_WAKE        ) in  lo
+ gpio-67  (bt_reset            ) out hi
+ gpio-78  (disp_enable         ) in  hi
+ gpio-87  (gpio_mcu_reset      ) out hi
+ gpio-106 (gpio_mcu_boot1      ) out lo
+ gpio-108 (mcu-ap-status-gpio  ) out hi
+ gpio-110 (WL_REG_ON           ) out lo
+ gpio-111 (gpio_mcu_boot0      ) out lo
+ gpio-114 (mcu-status-gpio     ) in  hi
+
+GPIOs 315-346, platform/qcom,smp2pgpio-rdbg-1-out.34, rdbg:
+
+GPIOs 347-378, platform/qcom,smp2pgpio-rdbg-1-in.32, rdbg:
+
+GPIOs 379-410, platform/qcom,smp2pgpio-rdbg-2-out.30, rdbg:
+
+GPIOs 411-442, platform/qcom,smp2pgpio-rdbg-2-in.28, rdbg:
+
+GPIOs 443-474, platform/qcom,smp2pgpio-ssr-smp2p-4-out.20, master-kernel:
+
+GPIOs 475-506, platform/qcom,smp2pgpio-ssr-smp2p-4-in.19, slave-kernel:
+
+GPIOs 507-538, platform/qcom,smp2pgpio-ssr-smp2p-2-out.15, master-kernel:
+
+GPIOs 539-570, platform/qcom,smp2pgpio-ssr-smp2p-2-in.14, slave-kernel:
+
+GPIOs 571-602, platform/qcom,smp2pgpio-ssr-smp2p-1-out.9, master-kernel:
+
+GPIOs 603-634, platform/qcom,smp2pgpio-ssr-smp2p-1-in.8, slave-kernel:
+
+GPIOs 635-666, platform/qcom,smp2pgpio-smp2p-4-out.18, smp2p:
+
+GPIOs 667-698, platform/qcom,smp2pgpio-smp2p-4-in.16, smp2p:
+
+GPIOs 699-730, platform/qcom,smp2pgpio-smp2p-2-out.12, smp2p:
+
+GPIOs 731-762, platform/qcom,smp2pgpio-smp2p-2-in.10, smp2p:
+
+GPIOs 763-794, platform/qcom,smp2pgpio-smp2p-1-out.6, smp2p:
+
+GPIOs 795-826, platform/qcom,smp2pgpio-smp2p-1-in.4, smp2p:
+
+GPIOs 827-858, platform/qcom,smp2pgpio-smp2p-7-out.2, smp2p:
+
+GPIOs 859-890, platform/qcom,smp2pgpio-smp2p-7-in.0, smp2p:
+
+GPIOs 891-898, spmi/qpnp-pin-9, pm8226-mpp:
+
+GPIOs 899-906, spmi/qpnp-pin-8, pm8226-gpio:
+ gpio-899 (TAPAN_CODEC_PMIC_MCL) in  lo
+ gpio-900 (TAPAN_CODEC_VDD_SPKR) in  lo
+
+GPIOs 907-1023, platform/fd510000.pinctrl, msm_tlmm_gpio:
+== mmc0 ios
+clock:		0 Hz
+vdd:		7 (1.65 - 1.95 V)
+bus mode:	2 (push-pull)
+chip select:	0 (don't care)
+power mode:	2 (on)
+bus width:	3 (8 bits)
+timing spec:	8 (mmc high-speed SDR200)
+signal voltage:	0 (3.30 V)
+== otg_state
+b_peripheral
+== runtime pm
+/sys/bus/mmc/devices/mmc0:0001/power auto active active 44660 suspended 1480
+/sys/bus/mmc/devices/mmc1:0001/power auto unsupported active 0 suspended 0
+/sys/class/mmc_host/mmc0/device/power auto active active 44880 suspended 1400
+/sys/bus/platform/devices/f9a55000.usb/power auto active active 46760 suspended 0
+== touch
+3
+1
