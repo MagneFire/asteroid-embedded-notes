@@ -1,5 +1,6 @@
 import re,statistics as st,sys
-L=open('day-run.log').read().split('\n')
+L=open(sys.argv[1]).read().split('\n')
+L=L[max(i for i,l in enumerate(L) if ' up, timer ' in l):]
 names={'23f':'D','2823f':'M','3823f':'F','823f':'L','2023f':'C'}
 arms=[];cur=None;trim=None;temp=None
 for l in L:

@@ -1184,27 +1184,33 @@ wakes. logs-day-mx-2026-11-06-sturgeon.txt (run starts at the boot at 210 s),
 | L 4-5 | L3 750 mV, CX active | XO shutdown 99.9 % | 5.59 (0.06) | bbd6.3 | 18.6 |
 | C 7-8 | L3 active, CX 0 | XO shutdown 99.9 % | 5.22 (0.07) | bbd5.3 | 19.1 |
 
-Votes do not outlive `adb reboot`: the previous boot went down with the sleep set
-at active levels, which blocks VDD-min, and D here reached VDD-min after a
-reboot with no vote made. So never voted is a real state and the rehearsal's N
-was not inherited.
+The blocking votes did not survive here: an earlier boot went down with the sleep
+set at active levels, and after two `adb reboot`s with a plugged-in boot between
+them D reached VDD-min with no vote made. That says nothing general about what
+erases votes, nor about the rehearsal's first state.
 
-Either rail left at its active level alone blocks VDD-min, so the RPM needs both
-free. Each costs about 2.5-3 mA over VDD-min.
+Either tested high request alone blocks VDD-min: CX corner 6 with L3 750 mV, and L3
+1280 mV with CX 0. Each costs about 2.5-3 mA over VDD-min. Linux's last active
+corner was 3, which was not tried, so the threshold is unknown.
 
-Never voted is no worse than M: D is 0.15 lower raw, about 0.08 higher after a
-fit on trim and temperature, with one D block at the very start. So the
-Linux sleep votes for CX and L3 buy nothing measurable here. They stay a vendor-parity
-change, not an explanation for the gap.
+M shows no saving over never voted: D is 0.15 lower raw, 0.08 to 0.16 higher
+after a fit on trim and temperature, with only one D block, at the very start. M
+also adds active CX and L3 votes and an L8 sleep-on, so it is not a clean
+comparison of two sleep voltages. Whether they are equal is not settled.
 
 L8 off against the M blocks either side: -0.15, -0.40, +0.11, mean -0.15, se 0.15.
-No detectable saving and no harm. No wake to the panel happened with L8 off, so its
-restore under a real panel wake is untested.
+No detectable saving; a t interval on three contrasts is about -0.77 to +0.48, so a
+small one is not excluded. Timer wakes were fine. No panel wake happened with L8
+off, and the panel was in deep standby, which sleep-parity's display path does
+not use, so this does not show it safe there.
 
 M's arms drift 2.43-2.93 mA with mask unchanged, so 20-min arms carry about 0.15 mA
 of unexplained scatter. Inside D, M and F, cc goes 2.42, 2.62, 2.61, 2.86, 3.11 mA
-for trim bbd4 to bbd8, or 0.28 mA per code in a fit with temperature at 0.31 mA/C,
-well under the 0.48 of §19. At bbd7, where AsteroidOS read about 2.0 mA, this
+for trim bbd4 to bbd8. A fit gives 0.28 mA per code and 0.31 mA/C, or 0.36 and 0.39
+weighting trim by the time it applied (the analyser gives an interval the trim
+logged at its end). These are associations, not corrections. At bbd7, where AsteroidOS read about 2.0 mA, this
 state reads 2.86, but that compares runs on different days and is no measured gap.
 
-CX, MX and L8 are out as the cause of the remaining difference.
+These votes show no convincing saving in this run and much weaken the theory that
+CX or MX sit high. Smaller effects, and any L8 saving, remain open. Astra's
+review: ASTRA-POWER-16.md. Next is a same-day AsteroidOS/firmware crossover.
