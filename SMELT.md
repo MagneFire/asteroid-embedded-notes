@@ -22,3 +22,24 @@ current baseline; `pmic_charger_configure` must not run until SMBB wiring is kno
 Milestones: 1 boot and identify (`board: smelt`, adb over the dock, back to fastboot); 2 usable
 watch (panel, LM3535, MAX17050, charger off, gpio 54, touch); 3 BT, hub without flashing, tilt
 wake, cluster collapse, current against an AsteroidOS measurement.
+
+## First boot on a real smelt (2026-11-06)
+
+Main b4954a0 from RAM, `fastboot boot`, bootloader SMELT_50.22, unlocked, panel nt35350 large.
+logs-smelt-first-boot-2026-11-06.txt. Up: board by panel size (SMEM platform read 0), gauge,
+LM3535 answers, eMMC, store on cache, mXT family 82, USB, BT, M4 firmware 0084, GPU.
+
+Not working: nothing reaches the panel, which keeps the Motorola logo. PP0 done never fires, so
+each frame times out at 100 ms (10 fps) and the display never rests. CTL_LAYER0 reads 0 where
+sturgeon has 0x200 (RGB0 on stage 1), CTL_FLUSH stays ffff. display_init relies on the bootloader
+leaving the pipeline set up. Next: set it up as mdss_mdp_ctl does. DT has cont-splash, TE pin,
+mdp-trigger "none", dma-trigger sw. Taps did nothing visible, touch not checked further.
+
+Heat: gauge 50 -> 56 C in about 3 min on the dock at 100%, back much hotter, thermal shutdown
+suspected. Unproved lead: bq5105x-ctrl only exports chg_term 53, chg_rate 58, chg_n 94 (active
+low); userspace (healthd.smelt, charge-restart-level=98) ends charging, and the firmware
+drives none of them. The firmware has no temperature limit here.
+
+AsteroidOS autosleep drops USB: hold a wakelock for adb. usbproxy-bm holds back the tail of a
+fastboot download that is not a multiple of its 4096-byte chunk: pad the image. Backup of the cache
+head verified (ch.gz in the session scratchpad, sha1 364c9397; boot sha1 a90433e1, not pulled).
