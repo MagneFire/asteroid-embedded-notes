@@ -1145,3 +1145,10 @@ the RPM's counter would not show that. Untested. Whether the RPM lowers them on
 its own without a sleep vote is unknown.
 
 No /dev/mem or devmem on AsteroidOS, so raw TLMM reads there need a kernel change.
+
+Pins with BT off on the firmware (logs-fw-tlmm-bt-off-2026-11-06.txt, awake just
+after `bt off`): GPIO67 output low, and GPIO110 WL_REG_ON reads low through its
+reset pull-down, so both REG_ON lines are off. DEV_WAKE output low, as the vendor's
+teardown. UART, HOST_WAKE, GPIO66, SDC3 and GPIO68-71 all input, pull-down, reading
+low: nothing drives them high against the pull. A weak pull-up in the chip is
+not excluded.

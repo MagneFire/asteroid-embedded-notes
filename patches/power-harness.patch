@@ -1,8 +1,8 @@
 diff --git a/src/asteroid.h b/src/asteroid.h
-index 142601d..4472d78 100644
+index 142601d..b4562a5 100644
 --- a/src/asteroid.h
 +++ b/src/asteroid.h
-@@ -169,7 +169,38 @@ enum { BAT_DISCHARGING, BAT_CHARGING, BAT_FULL };
+@@ -169,7 +169,40 @@ enum { BAT_DISCHARGING, BAT_CHARGING, BAT_FULL };
  int pmic_battery_status(void);
  int32_t pmic_battery_ua(void);
  int32_t pmic_battery_avg_ua(void);
@@ -23,6 +23,8 @@ index 142601d..4472d78 100644
 +bool hub_services_are_off(void);
 +bool rpm_sleep_bus(bool on);
 +bool rpm_ldo_sleep_lpm(bool on);
++bool rpm_sleep_mx(bool l3, bool cx);
++bool rpm_sleep_l8(bool off);
 +int rpm_regulator_both(uint32_t type, uint32_t id, bool on);
 +bool rpm_sd_rails(bool off);
 +int rpm_rail_on_hpm(uint32_t id, uint32_t uv);
@@ -194,7 +196,7 @@ index 536e27c..f095a27 100644
  	bt_lpm_poll();
  	bool boost = cpu_clock_is_slow() && bt_idle_ms() == 0;
 diff --git a/src/console/console.c b/src/console/console.c
-index 5c3b5a4..d6a6742 100644
+index 5c3b5a4..8b4d872 100644
 --- a/src/console/console.c
 +++ b/src/console/console.c
 @@ -394,6 +394,13 @@ static void cmd_bt(const char *args)
@@ -241,14 +243,15 @@ index 5c3b5a4..d6a6742 100644
  }
  
  static void cmd_buzz(const char *args)
-@@ -923,6 +944,41 @@ static void cmd_uibench(const char *args)
+@@ -923,6 +944,42 @@ static void cmd_uibench(const char *args)
  	say("panel %lu: %lu us per repaint\n", p, (time_us() - t0) / n);
  }
  
 +static void cmd_powertest(const char *args);
 +enum { PT_USB = 1, PT_RPM = 2, PT_HUB = 4, PT_EMMC = 8, PT_TOUCH = 16, PT_ALL = 31,
 +       PT_USBRAIL = 0x20, PT_TOUCHRAIL = 0x40, PT_LDO = 0x80, PT_AMP = 0x100, PT_PANEL = 0x200, PT_HUBSVC = 0x400,
-+       PT_SDRAIL = 0x800, PT_GESTURE = 0x1000, PT_PANELRAIL = 0x2000, PT_EMMCRAIL = 0x4000, PT_EVERY = 0x7fff };
++       PT_SDRAIL = 0x800, PT_GESTURE = 0x1000, PT_PANELRAIL = 0x2000, PT_EMMCRAIL = 0x4000, PT_MX = 0x8000, PT_L8 = 0x10000, PT_CX = 0x20000,
++       PT_EVERY = 0x3ffff };
 +static void powertest_measures(unsigned m);
 +static unsigned pt_applied, pt_want;
 +static uint32_t pt_usb_undo;
@@ -257,7 +260,7 @@ index 5c3b5a4..d6a6742 100644
 +{
 +	uint32_t m;
 +	if (!parse_num(&args, 16, &m) || m > PT_EVERY) {
-+		say("usage: measures <hex mask: 1 usb, 2 rpm, 4 hub, 8 emmc, 10 touch, 20 usb rails, 40 touch rail, 80 ldo sleep, 100 amp, 200 panel deep, 400 hub services, 800 sd rails, 1000 touch gesture, 2000 panel rails, 4000 emmc vcc>\n");
++		say("usage: measures <hex mask: 1 usb, 2 rpm, 4 hub, 8 emmc, 10 touch, 20 usb rails, 40 touch rail, 80 ldo sleep, 100 amp, 200 panel deep, 400 hub services, 800 sd rails, 1000 touch gesture, 2000 panel rails, 4000 emmc vcc, 8000 mx sleep, 10000 l8 sleep off, 20000 cx sleep>\n");
 +		return;
 +	}
 +	powertest_measures(m);
@@ -283,7 +286,7 @@ index 5c3b5a4..d6a6742 100644
  static void cmd_echo(const char *args)
  {
  	say("%s\n", args);
-@@ -955,6 +1011,7 @@ static const struct command commands[] = {
+@@ -955,6 +1012,7 @@ static const struct command commands[] = {
  	{ "kv", "[set <key> <text> | del <key>]", cmd_kv },
  	{ "btinfo", "", cmd_btinfo },
  	{ "amp", "", cmd_amp },
@@ -291,17 +294,17 @@ index 5c3b5a4..d6a6742 100644
  	{ "buzz", "[ms]", cmd_buzz },
  	{ "hub", "[send <hex bytes>]", cmd_hub },
  	{ "touch", "tap <x> <y> | swipe <x0> <y0> <x1> <y1> [ms]", cmd_touch },
-@@ -963,6 +1020,9 @@ static const struct command commands[] = {
+@@ -963,6 +1021,9 @@ static const struct command commands[] = {
  	{ "media", "<volume> <playing> <title>|<artist>", cmd_media },
  	{ "uibench", "<panel> <gpu> [times]", cmd_uibench },
  	{ "echo", "<text>", cmd_echo },
 +	{ "rest", "[0|1|2]", cmd_rest },
 +	{ "measures", "<hex mask>", cmd_measures },
-+	{ "powertest", "<settle_min> <arm_min> [lpm|dsi|sleep|floor|night]", cmd_powertest },
++	{ "powertest", "<settle_min> <arm_min> [lpm|dsi|sleep|floor|night|mx]", cmd_powertest },
  };
  
  static void cmd_help(const char *args)
-@@ -1132,8 +1192,261 @@ static void finish(void)
+@@ -1132,8 +1193,271 @@ static void finish(void)
  		done(ctx);
  }
  
@@ -310,19 +313,19 @@ index 5c3b5a4..d6a6742 100644
 + * round until the cable is back, each logged. */
 +static uint32_t pt_t0, pt_settle_ms, pt_arm_ms;
 +static int pt_arm = -1;
-+static bool pt_waiting, pt_lpm, pt_dsi, pt_sleep, pt_floor, pt_night;
++static bool pt_waiting, pt_lpm, pt_dsi, pt_sleep, pt_floor, pt_night, pt_mx;
 +
 +static void cmd_powertest(const char *args)
 +{
 +	uint32_t settle, arm;
 +	if (!parse_num(&args, 10, &settle) || !parse_num(&args, 10, &arm) || !arm || arm > 600 || settle > 600) {
-+		say("usage: powertest <settle_min> <arm_min 1-600> [lpm|dsi|sleep|floor|night]\n");
++		say("usage: powertest <settle_min> <arm_min 1-600> [lpm|dsi|sleep|floor|night|mx]\n");
 +		return;
 +	}
 +	while (*args == ' ')
 +		args++;
 +	if (*args && strcmp(args, "lpm") && strcmp(args, "dsi") && strcmp(args, "sleep") && strcmp(args, "floor") &&
-+	    strcmp(args, "night")) {
++	    strcmp(args, "night") && strcmp(args, "mx")) {
 +		say("powertest: unknown mode %s\n", args);
 +		return;
 +	}
@@ -331,7 +334,8 @@ index 5c3b5a4..d6a6742 100644
 +	pt_dsi = !strcmp(args, "dsi");
 +	pt_sleep = !strcmp(args, "sleep") || !strcmp(args, "floor");
 +	pt_floor = !strcmp(args, "floor");
-+	pt_night = !strcmp(args, "night");
++	pt_mx = !strcmp(args, "mx");
++	pt_night = pt_mx || !strcmp(args, "night");
 +	if (pt_night)
 +		pt_sleep = true;
 +	pt_settle_ms = settle * 60000;
@@ -398,6 +402,10 @@ index 5c3b5a4..d6a6742 100644
 +		have |= PT_AMP;
 +	if (rpm_sd_rails(m & PT_SDRAIL) && (m & PT_SDRAIL))
 +		have |= PT_SDRAIL;
++	if (rpm_sleep_mx(m & PT_MX, m & PT_CX))
++		have |= m & (PT_MX | PT_CX);
++	if (rpm_sleep_l8(m & PT_L8))
++		have |= m & PT_L8;
 +	display_set_rails(m & PT_PANELRAIL);
 +	display_set_deep(m & PT_PANEL);
 +	if ((m & PT_PANELRAIL) && display_rails_are_off())
@@ -484,11 +492,16 @@ index 5c3b5a4..d6a6742 100644
 +		enum { B = PT_ALL, G = (PT_ALL & ~PT_TOUCH) | PT_GESTURE, V = PT_ALL | PT_USBRAIL,
 +		       A = PT_ALL | PT_PANEL | PT_PANELRAIL | PT_EMMCRAIL | PT_USBRAIL };
 +		static const uint16_t order[] = { B, G, G, B, B, A, A, B, B, V, V, B };
++		/* D = V with the panel in deep standby; M = D with Linux's MX
++		 * and CX sleep votes; E = D with L8 off in sleep. The first D
++		 * arms have never voted, later ones sleep at the active votes. */
++		enum { D = PT_ALL | PT_USBRAIL | PT_PANEL, M = D | PT_MX | PT_CX, E = D | PT_L8 };
++		static const uint32_t order_mx[] = { D, D, M, M, D, D, E, E, D };
 +		if (pt_arm == 0)
 +			powertest_bt(false);
 +		else
 +			log_printf("powertest: arm %d end, have %03x\n", pt_arm - 1, pt_applied);
-+		unsigned m = order[pt_arm % ARRAY_SIZE(order)];
++		unsigned m = pt_mx ? order_mx[pt_arm % ARRAY_SIZE(order_mx)] : order[pt_arm % ARRAY_SIZE(order)];
 +		powertest_measures(m);
 +		log_printf("powertest: arm %d night=%03x aod=%s bt=off have %03x\n", pt_arm, m, setting_get(SETTING_AOD) ? "on" : "off",
 +			   pt_applied);
@@ -1232,10 +1245,23 @@ index 4f2991b..0ce262d 100644
  	return first || !ms ? 0 : (int32_t)(uas * 1000 / ms);
  }
 diff --git a/src/soc/rpm.c b/src/soc/rpm.c
-index f26cd99..5832323 100644
+index f26cd99..f16c1fd 100644
 --- a/src/soc/rpm.c
 +++ b/src/soc/rpm.c
-@@ -202,8 +202,8 @@ int rpm_regulator_voltage(uint32_t type, uint32_t id, uint32_t uv)
+@@ -182,7 +182,11 @@ static int request(uint32_t set, uint32_t type, uint32_t id, const uint32_t *kvp
+ 	notify();
+ 	log_printf("rpm: msg %lu -> %lu bytes: %08lx %08lx %08lx %08lx %08lx\n", msg_id, hdr[0],
+ 		   resp[0], resp[1], resp[2], resp[3], resp[4]);
+-	return resp[0] == RPM_REQ ? 0 : -3;
++	if (resp[0] != RPM_REQ || hdr[0] != 20 || resp[4] != msg_id) {
++		log_printf("rpm: msg %lu not acknowledged\n", msg_id);
++		return -3;
++	}
++	return 0;
+ }
+ 
+ int rpm_request(uint32_t type, uint32_t id, const uint32_t *kvp, unsigned nkvp)
+@@ -202,8 +206,8 @@ int rpm_regulator_voltage(uint32_t type, uint32_t id, uint32_t uv)
  	return rpm_request(type, id, kvp, 1);
  }
  
@@ -1246,7 +1272,7 @@ index f26cd99..5832323 100644
  int rpm_regulator_sleep_enable(uint32_t type, uint32_t id, bool on)
  {
  	uint32_t kvp[3] = { 0x6e657773, 4, on };
-@@ -244,3 +244,118 @@ void rpm_sleep_votes(void)
+@@ -244,3 +248,189 @@ void rpm_sleep_votes(void)
  	uint32_t kvp[3] = { RPM_KEY_ENABLE, 4, 0 };
  	request(RPM_SET_SLEEP, RPM_CLK0, 0, kvp, 1);
  }
@@ -1313,6 +1339,77 @@ index f26cd99..5832323 100644
 +	if (ok)
 +		ldo_sleep = on;
 +	log_printf("rpm: ldo sleep votes %s%s\n", on ? "low power" : "as active", ok ? "" : " NOT all acknowledged");
++	return ok;
++}
++
++/* Harness: the sleep votes Linux holds at suspend. MX (L3) at 750 mV and
++ * no CX corner in the sleep set; the first use sets the active ones Linux
++ * has first, so nothing relies on the bootloader's. Off, once voted, the
++ * sleep set repeats the active ones: there is no going back to no vote. */
++#define RPM_KEY_UV	0x00007675u
++#define RPM_KEY_CORN	0x6e726f63u
++#define RPM_KEY_VFC	0x00636676u
++#define L3_ACTIVE_UV	1280000
++#define L3_SLEEP_UV	750000
++#define S1_ACTIVE_CORN	6
++static bool cx_vote(uint32_t set, uint32_t corner)
++{
++	uint32_t kvp[12] = { RPM_KEY_SWEN, 4, 1, RPM_KEY_MA, 4, 0, RPM_KEY_CORN, 4, corner, RPM_KEY_VFC, 4, 0 };
++	return !request(set, RPM_SMPA, 1, kvp, 4);
++}
++static bool mx_vote(uint32_t set, uint32_t uv)
++{
++	uint32_t kvp[3] = { RPM_KEY_UV, 4, uv };
++	return !request(set, RPM_LDOA, 3, kvp, 1);
++}
++bool rpm_sleep_mx(bool l3, bool cx)
++{
++	static bool active;
++	static int8_t have_l3 = -1, have_cx = -1;
++	if (!active && !l3 && !cx)
++		return true;
++	if (have_l3 == l3 && have_cx == cx)
++		return true;
++	bool ok = true;
++	if (!active) {
++		uint32_t kvp[9] = { RPM_KEY_SWEN, 4, 1, RPM_KEY_UV, 4, L3_ACTIVE_UV, RPM_KEY_MA, 4, 0 };
++		ok = !request(RPM_SET_ACTIVE, RPM_LDOA, 3, kvp, 3) && cx_vote(RPM_SET_ACTIVE, S1_ACTIVE_CORN);
++		if (!ok) {
++			log_printf("rpm: active mx/cx votes failed\n");
++			return false;
++		}
++		active = true;
++	}
++	if (have_l3 != l3) {
++		if (mx_vote(RPM_SET_SLEEP, l3 ? L3_SLEEP_UV : L3_ACTIVE_UV))
++			have_l3 = l3;
++		else
++			ok = false;
++	}
++	if (have_cx != cx) {
++		if (cx_vote(RPM_SET_SLEEP, cx ? 0 : S1_ACTIVE_CORN))
++			have_cx = cx;
++		else
++			ok = false;
++	}
++	log_printf("rpm: sleep votes l3 %s, cx corner %s%s\n", l3 ? "750 mV" : "active", cx ? "0" : "active",
++		   ok ? "" : " NOT all acknowledged");
++	return ok;
++}
++
++/* Harness: L8 off in the sleep set, as Linux has it with the panel off.
++ * It also supplies the CPU PLL. */
++bool rpm_sleep_l8(bool off)
++{
++	static int8_t have = -1;
++	if (have == off || (have < 0 && !off))
++		return true;
++	uint32_t act[9] = { RPM_KEY_SWEN, 4, 1, RPM_KEY_UV, 4, 1800000, RPM_KEY_MA, 4, 10 };
++	uint32_t slp[9] = { RPM_KEY_SWEN, 4, !off, RPM_KEY_UV, 4, 1800000, RPM_KEY_MA, 4, 10 };
++	bool ok = !request(RPM_SET_ACTIVE, RPM_LDOA, 8, act, 3) && !request(RPM_SET_SLEEP, RPM_LDOA, 8, slp, 3);
++	if (ok)
++		have = off;
++	log_printf("rpm: l8 sleep %s%s\n", off ? "off" : "on", ok ? "" : " NOT all acknowledged");
 +	return ok;
 +}
 +
@@ -1602,10 +1699,10 @@ index 692b418..07d3ebe 100644
  	if (retry_t && usb_down) {
  		uint32_t r = left(retry_t, 5000, now);
 diff --git a/tests/stubs.c b/tests/stubs.c
-index d17bf84..5e354dc 100644
+index d17bf84..361fc14 100644
 --- a/tests/stubs.c
 +++ b/tests/stubs.c
-@@ -40,10 +40,48 @@ int bt_start(const uint8_t *bdaddr, struct bt_info *info)
+@@ -40,10 +40,50 @@ int bt_start(const uint8_t *bdaddr, struct bt_info *info)
  	return -1;
  }
  void bt_stop(void) {}
@@ -1636,6 +1733,8 @@ index d17bf84..5e354dc 100644
 +bool rpm_sleep_bus(bool on) { return true; }
 +uint32_t pmic_avg_ms;
 +bool rpm_ldo_sleep_lpm(bool on) { return true; }
++bool rpm_sleep_mx(bool l3, bool cx) { return true; }
++bool rpm_sleep_l8(bool off) { return true; }
 +int rpm_regulator_both(uint32_t type, uint32_t id, bool on) { return 0; }
 +bool rpm_sd_rails(bool off) { return true; }
 +int rpm_rail_on_hpm(uint32_t id, uint32_t uv) { return 0; }
