@@ -57,3 +57,17 @@ current_avg. Values from the boot log, temperatures in 0.1 C:
 The firmware has none of this: it started at 50 C and ran past 53 C still charging. From its code: chg_term 1 stops
 charging, 0 allows it; chg_rate 1 is the reduced rate; it also writes 1 to the dock's smart_debounce.
 So AsteroidOS already had the cell near 50 C on this dock.
+
+## smelt-safety branch (2026-11-06)
+
+Worktree ../asteroid-embedded-smelt2, 9 commits on main b4954a0, all build, 19 host tests pass.
+Darrel checked on smelt: display, flat tire, palm, edge gestures, tilt to wake, AOD brightness,
+rotation. Sturgeon: button, sleep, AOD. Tilt fix: gesture wake bit off with the screen on, as the
+vendor's display notify does; the M4 otherwise only fired on lowering the wrist. AsteroidOS on
+this watch showed the gesture rate at -1 in every state read, so how it drives this is not traced.
+
+Open: crash on sleep (twice, no log, not since); charging after a stop needs lifting off the pad
+on AsteroidOS, so the warm cycle may stop charging for good; 53 C stop not seen on the watch, 60 C
+unvalidated, heat on the pad 37 to 49 C in minutes; chin details for indicator and speed dial;
+second hub interrupt with status 0 after each gesture; codex fixes (full timer, tilt retry) not
+yet booted on a watch.
