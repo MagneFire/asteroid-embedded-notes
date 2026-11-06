@@ -1214,3 +1214,10 @@ state reads 2.86, but that compares runs on different days and is no measured ga
 These votes show no convincing saving in this run and much weaken the theory that
 CX or MX sit high. Smaller effects, and any L8 saving, remain open. Astra's
 review: ASTRA-POWER-16.md. Next is a same-day AsteroidOS/firmware crossover.
+
+## Resuming power work (2026-11-07)
+
+Start from patches/worktree-app-2026-11-06.patch, not patches/power-harness.patch. The app patch is
+the harness ported to the refactored main.c; power-harness.patch is for the older aod-display-rest
+code and won't apply. Neither is rebased on current main, so expect to port it. Branch tips are in
+patches/removed-branches-2026-11-06.txt.
