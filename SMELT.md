@@ -42,4 +42,4 @@ drives none of them. The firmware has no temperature limit here.
 
 AsteroidOS autosleep drops USB: hold a wakelock for adb. usbproxy-bm holds back the tail of a
 fastboot download that is not a multiple of its 4096-byte chunk: pad the image. Backup of the cache
-head verified (ch.gz in the session scratchpad, sha1 364c9397; boot sha1 a90433e1, not pulled).
+head verified (smelt-cache-head-2026-11-06.gz, sha1 364c9397; boot sha1 a90433e1, not pulled).
