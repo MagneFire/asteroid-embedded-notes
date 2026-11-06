@@ -43,3 +43,17 @@ drives none of them. The firmware has no temperature limit here.
 AsteroidOS autosleep drops USB: hold a wakelock for adb. usbproxy-bm holds back the tail of a
 fastboot download that is not a multiple of its 4096-byte chunk: pad the image. Backup of the cache
 head verified (smelt-cache-head-2026-11-06.gz, sha1 364c9397; boot sha1 a90433e1, not pulled).
+
+## Charging policy (healthd.smelt, 2026-11-06)
+
+Binary: wrynose build tmp/work/smelt-oe-linux-gnueabi/android/marshmallow/image/system/bin/healthd.
+It writes /sys/devices/0.bq5105x-ctrl/chg_term and chg_rate, reads chg_n and the gauge's
+current_avg. Values from the boot log, temperatures in 0.1 C:
+
+- Monitor every 60 s charging; discharging 600 s, or 60 s when warm. Thermal rules start 300 s after boot.
+- Above 45.0 C (hyst 3.0) periodic charging: 600 s on, 300 s off. A reduced rate exists too.
+- Terminate at 53.0 C (hyst 1.0).
+- Complete after 1800 s, or current_avg at or under 16 mA 5 times; restart at 98 %.
+
+The firmware has none of this: it started at 50 C and ran past 53 C still charging. Polarity of
+the lines still to be read. So AsteroidOS already had the cell near 50 C on this dock.
