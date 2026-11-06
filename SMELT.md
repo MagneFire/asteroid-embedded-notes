@@ -71,3 +71,14 @@ on AsteroidOS, so the warm cycle may stop charging for good; 53 C stop not seen 
 unvalidated, heat on the pad 37 to 49 C in minutes; chin details for indicator and speed dial;
 second hub interrupt with status 0 after each gesture; codex fixes (full timer, tilt retry) not
 yet booted on a watch.
+
+## Merged into main (2026-11-06, f93f312, not pushed)
+
+15 commits from smelt-safety. Every commit builds, 19 host tests pass. The final commits were never
+booted, on any watch: the last boots had debug code on top, removed before committing. Shared
+changes not rechecked on sturgeon or sparrow: polled I2C wait, recovery, palm cancel, wake log.
+
+Crash record: logs-smelt-crash-2026-11-06.txt, watchdog bark at spm.c:180-183 from power_idle, 3 s
+after a qup2 timeout. Late wake cause unknown. The stop at 53 C worked. Dock: 40 to 50 C in minutes, and it never
+restarted in 15 min after a stop. Self-wake gone in one 15 min run. The BCR address is proved by
+"qup2 recovered". Open: charge policy for this dock, late wake, chin details, sparrow.
