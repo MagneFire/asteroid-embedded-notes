@@ -133,3 +133,5 @@ After that, the ROM bootloader stopped answering at all. A fresh firmware boot d
 neither did AsteroidOS's own driver ("Barker fail", -ENOTCONN on every try). GPIO 6/7 read high,
 reset 62 is released, boot0 109 is high. The M4 needs a power cycle, which a reset doesn't give it.
 Lost: tilt wake and rotation. Log: logs-smelt-m4-2026-11-07.txt.
+
+Analysis, vendor comparison and the M4 image's own behaviour: SMELT-M4.md (2026-11-07).
