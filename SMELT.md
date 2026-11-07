@@ -122,3 +122,5 @@ animation: Darrel thinks it may already be fixed, re-test only.
 
 Sturgeon at efc895c (2026-11-07, Darrel): boot handover, no face resize, slide-in, overshoot (not
 AsteroidOS's, kept as is) and the speed dial name swipe all fine. Smelt and sparrow not run yet.
+
+Sparrow at efc895c: boots, `buzz 500` felt by Darrel, no "not taken" log, EN 0x1c046 back to 00.
