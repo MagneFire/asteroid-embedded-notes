@@ -82,3 +82,40 @@ Crash record: logs-smelt-crash-2026-11-06.txt, watchdog bark at spm.c:180-183 fr
 after a qup2 timeout. Late wake cause unknown. The stop at 53 C worked. Dock: 40 to 50 C in minutes, and it never
 restarted in 15 min after a stop. Self-wake gone in one 15 min run. The BCR address is proved by
 "qup2 recovered". Open: charge policy for this dock, late wake, chin details, sparrow.
+
+## Polish round on main (2026-11-07, a7fd7f8..efc895c, not pushed, not booted)
+
+Darrel's smelt report: vibration dead, tilt and tap wake unreliable, plus on every watch no list
+overshoot, a black gap at boot, the face snapping size once, an open with fade but no slide, and
+the speed dial name not swiping back. Nothing below has run on a watch.
+
+- Slide missing: `stack_update` got the pass's `now`, read before `stack_open_app` set `app_t0`; the
+  uint32 difference wrapped and ended the slide on its first frame. Clamped at 0, host test added.
+- Black gap: `fbcon_init` presented a black frame before the GPU microcode read and hub upload,
+  undoing b4dbb37. Removed; the console now only presents when written to (no-UI path).
+- Size snap: `present_clock` ran after `frame_draw`, settings only from `start_run` at 2 s. Frame 1
+  showed the face at full size before nightstand's 0.86. Settings now pushed in `app_init`, clock
+  before each frame.
+- Speed dial: Slint ignores drags from the name; the C ring test sent part of the name to Slint, so
+  only presses inside the hole became a screen swipe. The name sets launcher-edges bit 5 and the
+  stack treats such presses as not the wheel's.
+- Overshoot: Pager rubber-bands (give min(0.3 item, 15 u), resist e*give/(e+2 give)) and a flick
+  reaching an end with speed left (v^2 - 0.003 d) overshoots up to 0.6 give, held in `drag` while a
+  Timer waits out the move, then 300 ms back. Settings' Flickables replaced by `Scroller`
+  (SwipeGestureHandler, so children still get presses after FORWARD_DELAY); a press on a coasting
+  list only grabs it on the first move. Not tuned on a watch.
+- Tap wake: at the 100 ms asleep scan a quick tap comes as one T9 message with PRESS|RELEASE and no
+  DETECT; since c28d144 that was dropped. Now pushed as down and up (vendor atmxt.c AOT path does
+  the same). Palm cancels were already logged.
+- Tilt wake: a failed gesture-bit write left the watch free to sleep with tilt off (Codex P2).
+  hub_m4 tracks tilt_set, retries from m4_poll, and can_sleep waits for it. QUP2 timeouts that
+  restart the M4 while asleep still lose gestures: not addressed.
+- Vibration: smelt's vendor tree (dts/android-smelt, from googlesource SRCREV 49608c8, pc was down)
+  enables qcom,vibrator@c000 with only vib-vtg-level 2300 mV over the mtp's 3100: manual mode, and
+  its qpnp-vibrator.c (hw/smelt) writes VTG then EN bit 7 exactly as haptics_pmic.c does. No code
+  cause found. pm8226_set now reads EN back and logs once if the write did not take; next step on
+  the watch is `buzz 500` and that log line.
+
+Not done, Darrel didn't pick them: chin layout (bottom indicator, speed dial bottom disc, page dots
+under the 30 px flat tire) and rotation being on because the frame is 360x360. Round back/close
+animation: Darrel thinks it may already be fixed, re-test only.
