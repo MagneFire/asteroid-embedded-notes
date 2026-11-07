@@ -1,0 +1,1947 @@
+[7.391] asteroid-embedded 6742e696c8+ up, timer 19200000 Hz, scm 0
+[7.391] cpu: clock at boot cfg 00000501, a7 pll mode 00000007 l 41 status 00010001; now cfg 00000501 status 00010001
+[7.392] smem: item 137 at 03000000 + 00005478 size 00000060 (ext 00000000)
+[7.392] board: smelt by panel size (tree 01e00000 Moto 360 2015, machtype 0, panel 360x330, platform 0)
+[7.393] smem: item 13 at 03000000 + 00005c08 size 00000800 (ext 00000000)
+[7.393] smem: item 18 at fc428000 + 00000000 size 00000058 (ext fc428000)
+[7.393] smem: item 342 at fc428000 + 00000200 size 00000800 (ext fc428000)
+[7.393] rpm: channel 4 info 88 fifo 1024, local state 0 remote 1, idx 0/0 0/0
+[7.394] rpm: remote state 1 after 0 ms
+[7.394] rpm: opened, remote state 2 after 0 ms
+[7.394] rpm: msg 1 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000001
+[7.394] rpm: msg 2 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000002
+[7.395] rpm: msg 3 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000003
+[7.395] rpm: msg 4 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000004
+[7.395] rpm: bus votes in 764 us, 0 of 4 not acknowledged
+[7.395] rpm: msg 5 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000005
+[7.395] rpm: msg 6 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000006
+[7.396] rpm: msg 7 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000007
+[7.396] rpm: msg 8 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000008
+[7.396] rpm: msg 9 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000009
+[7.396] spmi arbiter 20000002, pmic type 51.04 pon 02 warm 0200 poff 0020 ps_hold 01/80
+[7.396] display: mdp rev 10010001 fb 07e9c000 360x360 format 0002243f cmd autorefresh 0 op_mode 00000000
+[7.397] display: pp tear 0 sync 00000000 height 0 init 0 thresh 00000000 start 0 rdptr 0, te gpio cfg 00000081
+[7.496] display: te gpio 11 edges in 100 ms
+[7.500] display: framebuffers cleared in 2099 + 2496 us
+[7.500] display: ctl top 00020020 layer 00000000 intf 00000100
+[7.501] i2c: qup3 io_mode 0000c0a5 fifo 32 entries, state 0000001c, reset 0
+[7.504] backlight: lm3535 revision 03
+[7.504] no fault record from the previous boot
+[7.504] i2c: qup3 io_mode 0000c0a5 fifo 32 entries, state 0000001c, reset 0
+[7.505] gauge: max17050, 76%, status 0000, dock 1
+[7.506] i2c: qup3 io_mode 0000c0a5 fifo 32 entries, state 0000001c, reset 0
+[7.507] rpm: msg 10 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000a
+[7.507] rpm: msg 11 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000b
+[7.515] rpm: msg 12 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000c
+[7.515] light: tsl2584, id 98
+[7.519] rpm: msg 13 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000d
+[7.519] rpm: msg 14 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000e
+[7.519] emmc: mci 00000038 caps 642dc8b2, bus power 5, pwrctl 2
+[7.529] emmc: ocr c0ff8080 after 7 ms
+[7.545] emmc: init done in 26 ms: 7634944 sectors, 8-bit, 50000000 Hz
+[7.553] rpm: msg 15 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000f
+[7.553] gpu: powered, hw version 00070010, gdsc a0222000
+[7.554] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[7.554] gpu: selftest passed in 4 us: scratch reg 5eed0001, memory c0ffee42
+[7.563] ui: ready
+[7.563] rpm: msg 16 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000010
+[7.563] rpm: msg 17 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000011
+[7.564] rpm: msg 18 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000012
+[7.564] rpm: msg 19 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000013
+[7.585] i2c: qup5 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[7.591] touch: mxt family 82 variant 13 version 30 build aa, 19 objects, range 359 x 329, ids 2+4
+[7.591] haptics: pm8226 vibrator type 15.01 vtg 17 en 00, 2300 mV
+[7.591] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[8.204] rtc 1793745324, battery 4009 mV, dock 1 usb 1 chg_n 0, 76%, 47.3 C, status 0000, 0 errors
+[8.204] storage: store 1048576 bytes in 1 runs, writable
+[8.207] kv: slots valid/valid, using 1, seq 10, 76 bytes
+[8.208] kv: slots valid/valid, using 1, seq 10, 76 bytes
+[8.278] tick 0, 1 fps, rtc 1793745324, battery 4008 mV, dock 1 usb 1 chg_n 0, 76%, 47.3 C, status 0000, 0 errors, usb 0/0, touch 4/0
+[8.279] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, -66 mA average
+[8.279] gpu: 1 frames, 1793 us submit to idle, 243 us vertices
+[8.279] ui: 1 of 1 frames repainted, update 67807 us avg, 67806 us per repaint
+[8.433] usb: configured, high speed
+[8.465] adb: host connected, max payload 1048576
+[9.208] tick 1, 11 fps, rtc 1793745325, battery 4006 mV, dock 1 usb 1 chg_n 0, 76%, 47.5 C, status 0000, 0 errors, usb 310/122, touch 4/0
+[9.209] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, -61 mA average
+[9.209] gpu: 11 frames, 1700 us submit to idle, 190 us vertices
+[9.209] ui: 0 of 967 frames repainted, update 4 us avg, 0 us per repaint
+[10.207] steps: 0 today, 26 in total
+[10.209] tick 2, 11 fps, rtc 1793745326, battery 4005 mV, dock 1 usb 1 chg_n 0, 76%, 47.5 C, status 0000, 0 errors, usb 620/244, touch 4/0
+[10.209] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -1 mA, -56 mA average
+[10.209] gpu: 11 frames, 1696 us submit to idle, 190 us vertices
+[10.209] ui: 0 of 1001 frames repainted, update 4 us avg, 0 us per repaint
+[10.703] hub: m4 firmware 0084 up
+[10.703] hub: accelerometer on
+[11.208] tick 3, 11 fps, rtc 1793745327, battery 4004 mV, dock 1 usb 1 chg_n 0, 76%, 47.5 C, status 0000, 0 errors, usb 620/244, touch 4/0
+[11.209] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, -52 mA average
+[11.209] gpu: 11 frames, 1697 us submit to idle, 190 us vertices
+[11.209] ui: 0 of 996 frames repainted, update 4 us avg, 0 us per repaint
+[12.209] tick 4, 11 fps, rtc 1793745328, battery 4005 mV, dock 1 usb 1 chg_n 0, 76%, 47.5 C, status 0000, 0 errors, usb 620/244, touch 4/0
+[12.209] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -1 mA, -47 mA average
+[12.209] gpu: 11 frames, 1698 us submit to idle, 190 us vertices
+[12.209] ui: 0 of 999 frames repainted, update 4 us avg, 0 us per repaint
+[13.208] tick 5, 11 fps, rtc 1793745329, battery 4003 mV, dock 1 usb 1 chg_n 0, 76%, 47.5 C, status 0000, 0 errors, usb 731/6574, touch 4/0
+[13.209] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, -43 mA average
+[13.209] gpu: 11 frames, 1701 us submit to idle, 190 us vertices
+[13.209] ui: 0 of 1003 frames repainted, update 4 us avg, 0 us per repaint
+[14.209] tick 6, 11 fps, rtc 1793745330, battery 4004 mV, dock 1 usb 1 chg_n 0, 76%, 47.5 C, status 0000, 0 errors, usb 731/6574, touch 4/0
+[14.209] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -1 mA, -40 mA average
+[14.209] gpu: 11 frames, 1697 us submit to idle, 190 us vertices
+[14.209] ui: 0 of 999 frames repainted, update 4 us avg, 0 us per repaint
+[15.208] tick 7, 11 fps, rtc 1793745331, battery 4002 mV, dock 1 usb 1 chg_n 0, 76%, 47.5 C, status 0000, 0 errors, usb 731/6574, touch 4/0
+[15.209] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -2 mA, -36 mA average
+[15.209] gpu: 11 frames, 1696 us submit to idle, 190 us vertices
+[15.209] ui: 0 of 998 frames repainted, update 4 us avg, 0 us per repaint
+[16.209] tick 8, 11 fps, rtc 1793745332, battery 4002 mV, dock 1 usb 1 chg_n 0, 76%, 47.5 C, status 0000, 0 errors, usb 731/6574, touch 4/0
+[16.209] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 1 mA, -33 mA average
+[16.209] gpu: 11 frames, 1694 us submit to idle, 190 us vertices
+[16.209] ui: 0 of 999 frames repainted, update 4 us avg, 0 us per repaint
+[17.209] tick 9, 12 fps, rtc 1793745333, battery 4001 mV, dock 1 usb 1 chg_n 0, 76%, 47.5 C, status 0000, 0 errors, usb 731/6574, touch 4/0
+[17.210] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -1 mA, -30 mA average
+[17.210] gpu: 12 frames, 1692 us submit to idle, 189 us vertices
+[17.210] ui: 0 of 999 frames repainted, update 4 us avg, 0 us per repaint
+[18.201] rpm: msg 20 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000014
+[18.260] rpm: msg 21 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000015
+[18.260] light: 370 lux, code 36
+[18.261] sleep
+[18.265] rpm: msg 22 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000016
+[18.268] emmc: asleep
+[19.333] hub: accelerometer off
+[44.625] rpm: msg 23 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000017
+[44.685] rpm: msg 24 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000018
+[5.709] asteroid-embedded 6742e696c8+ up, timer 19200000 Hz, scm 0
+[5.709] cpu: clock at boot cfg 00000501, a7 pll mode 00000007 l 41 status 00010001; now cfg 00000501 status 00010001
+[5.709] smem: item 137 at 03000000 + 00005478 size 00000060 (ext 00000000)
+[5.709] board: smelt by panel size (tree 01e00000 Moto 360 2015, machtype 0, panel 360x330, platform 0)
+[5.710] smem: item 13 at 03000000 + 00005c08 size 00000800 (ext 00000000)
+[5.711] smem: item 18 at fc428000 + 00000000 size 00000058 (ext fc428000)
+[5.711] smem: item 342 at fc428000 + 00000200 size 00000800 (ext fc428000)
+[5.711] rpm: channel 4 info 88 fifo 1024, local state 0 remote 1, idx 0/0 0/0
+[5.711] rpm: remote state 1 after 0 ms
+[5.711] rpm: opened, remote state 2 after 0 ms
+[5.712] rpm: msg 1 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000001
+[5.712] rpm: msg 2 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000002
+[5.712] rpm: msg 3 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000003
+[5.712] rpm: msg 4 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000004
+[5.712] rpm: bus votes in 782 us, 0 of 4 not acknowledged
+[5.713] rpm: msg 5 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000005
+[5.713] rpm: msg 6 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000006
+[5.713] rpm: msg 7 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000007
+[5.713] rpm: msg 8 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000008
+[5.713] rpm: msg 9 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000009
+[5.713] spmi arbiter 20000002, pmic type 51.04 pon 02 warm 0200 poff 0020 ps_hold 01/80
+[5.713] display: mdp rev 10010001 fb 07e9c000 360x360 format 0002243f cmd autorefresh 0 op_mode 00000000
+[5.714] display: pp tear 0 sync 00000000 height 0 init 0 thresh 00000000 start 0 rdptr 0, te gpio cfg 00000081
+[5.813] display: te gpio 12 edges in 100 ms
+[5.817] display: framebuffers cleared in 2099 + 2496 us
+[5.817] display: ctl top 00020020 layer 00000000 intf 00000100
+[5.818] i2c: qup3 io_mode 0000c0a5 fifo 32 entries, state 0000001c, reset 0
+[5.821] backlight: lm3535 revision 03
+[5.821] no fault record from the previous boot
+[5.821] i2c: qup3 io_mode 0000c0a5 fifo 32 entries, state 0000001c, reset 0
+[5.822] gauge: max17050, 76%, status 0000, dock 1
+[5.823] i2c: qup3 io_mode 0000c0a5 fifo 32 entries, state 0000001c, reset 0
+[5.824] rpm: msg 10 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000a
+[5.824] rpm: msg 11 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000b
+[5.832] rpm: msg 12 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000c
+[5.832] light: tsl2584, id 98
+[5.834] rpm: msg 13 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000d
+[5.834] rpm: msg 14 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000e
+[5.834] emmc: mci 00000038 caps 642dc8b2, bus power 5, pwrctl 2
+[5.844] emmc: ocr c0ff8080 after 7 ms
+[5.860] emmc: init done in 27 ms: 7634944 sectors, 8-bit, 50000000 Hz
+[5.867] rpm: msg 15 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000f
+[5.867] gpu: powered, hw version 00070010, gdsc a0222000
+[5.868] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[5.868] gpu: selftest passed in 4 us: scratch reg 5eed0001, memory c0ffee42
+[5.877] ui: ready
+[5.878] rpm: msg 16 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000010
+[5.878] rpm: msg 17 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000011
+[5.878] rpm: msg 18 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000012
+[5.878] rpm: msg 19 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000013
+[5.899] i2c: qup5 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[5.905] touch: mxt family 82 variant 13 version 30 build aa, 19 objects, range 359 x 329, ids 2+4
+[5.905] haptics: pm8226 vibrator type 15.01 vtg 17 en 00, 2300 mV
+[5.906] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[6.519] rtc 1793745390, battery 3985 mV, dock 1 usb 1 chg_n 0, 76%, 47.6 C, status 0000, 0 errors
+[6.519] storage: store 1048576 bytes in 1 runs, writable
+[6.521] kv: slots valid/valid, using 1, seq 10, 76 bytes
+[6.523] kv: slots valid/valid, using 1, seq 10, 76 bytes
+[6.593] tick 0, 1 fps, rtc 1793745390, battery 3985 mV, dock 1 usb 1 chg_n 0, 76%, 47.6 C, status 0000, 0 errors, usb 0/0, touch 4/0
+[6.593] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -2 mA, 0 mA average
+[6.593] gpu: 1 frames, 1793 us submit to idle, 244 us vertices
+[6.593] ui: 1 of 1 frames repainted, update 67923 us avg, 67922 us per repaint
+[6.749] usb: configured, high speed
+[6.781] adb: host connected, max payload 1048576
+[7.522] tick 1, 11 fps, rtc 1793745391, battery 3985 mV, dock 1 usb 1 chg_n 0, 76%, 47.6 C, status 0000, 0 errors, usb 310/122, touch 4/0
+[7.523] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, -1 mA average
+[7.523] gpu: 11 frames, 1699 us submit to idle, 189 us vertices
+[7.523] ui: 0 of 956 frames repainted, update 4 us avg, 0 us per repaint
+[8.521] steps: 0 today, 26 in total
+[8.523] tick 2, 11 fps, rtc 1793745392, battery 3984 mV, dock 1 usb 1 chg_n 0, 76%, 47.7 C, status 0000, 0 errors, usb 778/14031, touch 4/0
+[8.523] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -2 mA, -1 mA average
+[8.523] gpu: 11 frames, 1697 us submit to idle, 189 us vertices
+[8.523] ui: 0 of 1008 frames repainted, update 4 us avg, 0 us per repaint
+[9.017] hub: m4 firmware 0084 up
+[9.017] hub: accelerometer on
+[9.522] tick 3, 11 fps, rtc 1793745393, battery 3985 mV, dock 1 usb 1 chg_n 0, 76%, 47.7 C, status 0000, 0 errors, usb 778/14031, touch 4/0
+[9.523] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, 0 mA average
+[9.523] gpu: 11 frames, 1697 us submit to idle, 189 us vertices
+[9.523] ui: 0 of 996 frames repainted, update 4 us avg, 0 us per repaint
+[10.523] tick 4, 11 fps, rtc 1793745394, battery 3985 mV, dock 1 usb 1 chg_n 0, 76%, 47.7 C, status 0000, 0 errors, usb 778/14031, touch 4/0
+[10.523] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, 0 mA average
+[10.523] gpu: 11 frames, 1697 us submit to idle, 190 us vertices
+[10.523] ui: 0 of 999 frames repainted, update 4 us avg, 0 us per repaint
+[11.522] tick 5, 11 fps, rtc 1793745395, battery 3986 mV, dock 1 usb 1 chg_n 0, 76%, 47.9 C, status 0000, 0 errors, usb 778/14031, touch 4/0
+[11.523] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -2 mA, 0 mA average
+[11.523] gpu: 11 frames, 1701 us submit to idle, 189 us vertices
+[11.523] ui: 0 of 998 frames repainted, update 4 us avg, 0 us per repaint
+[12.523] tick 6, 11 fps, rtc 1793745396, battery 3984 mV, dock 1 usb 1 chg_n 0, 76%, 47.9 C, status 0000, 0 errors, usb 778/14031, touch 4/0
+[12.523] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, 0 mA average
+[12.523] gpu: 11 frames, 1697 us submit to idle, 189 us vertices
+[12.523] ui: 0 of 999 frames repainted, update 4 us avg, 0 us per repaint
+[13.522] tick 7, 11 fps, rtc 1793745397, battery 3984 mV, dock 1 usb 1 chg_n 0, 76%, 47.9 C, status 0000, 0 errors, usb 778/14031, touch 4/0
+[13.523] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, 0 mA average
+[13.523] gpu: 11 frames, 1696 us submit to idle, 189 us vertices
+[13.523] ui: 0 of 998 frames repainted, update 4 us avg, 0 us per repaint
+[14.523] tick 8, 11 fps, rtc 1793745398, battery 3984 mV, dock 1 usb 1 chg_n 0, 76%, 47.9 C, status 0000, 0 errors, usb 778/14031, touch 4/0
+[14.523] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, 0 mA average
+[14.523] gpu: 11 frames, 1692 us submit to idle, 190 us vertices
+[14.523] ui: 0 of 999 frames repainted, update 4 us avg, 0 us per repaint
+[15.523] tick 9, 12 fps, rtc 1793745399, battery 3985 mV, dock 1 usb 1 chg_n 0, 76%, 48.0 C, status 0000, 0 errors, usb 778/14031, touch 4/0
+[15.524] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -4 mA, -1 mA average
+[15.524] gpu: 12 frames, 1692 us submit to idle, 189 us vertices
+[15.524] ui: 0 of 998 frames repainted, update 4 us avg, 0 us per repaint
+[16.515] rpm: msg 20 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000014
+[16.574] rpm: msg 21 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000015
+[16.574] light: 389 lux, code 36
+[16.575] sleep
+[16.580] rpm: msg 22 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000016
+[16.583] emmc: asleep
+[17.624] hub: accelerometer off
+[35.796] rpm: msg 23 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000017
+[35.855] rpm: msg 24 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000018
+[37.643] wake: key
+[37.647] rpm: msg 25 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000019
+[37.647] gpu: powered, hw version 00070010, gdsc a0222000
+[37.648] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[37.649] gpu: resumed in 2018 us
+[37.659] tick 31, 14 fps, rtc 1793745422, battery 3914 mV, dock 1 usb 0 chg_n 0, 76%, 47.1 C, status 0000, 0 errors, usb 778/14031, touch 4/0
+[37.660] power: awake, asleep 100% of the last second, 91 wakeups, 88/3/0 collapses, battery 61 mA, 7 mA average
+[37.661] gpu: 12 frames, 1779 us submit to idle, 194 us vertices
+[37.661] ui: 0 of 992 frames repainted, update 4 us avg, 0 us per repaint
+[37.663] hub: accelerometer on
+[38.370] gesture: swipe down (143,120 -> 123,311 in 134 ms)
+[38.537] usb: unconfigured
+[38.537] usb: unplugged, phy in low power mode
+[38.671] tick 32, 60 fps, rtc 1793745423, battery 3706 mV, dock 1 usb 0 chg_n 0, 76%, 47.1 C, status 0000, 0 errors, usb 778/14031, touch 14/0
+[38.672] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 139 mA, 21 mA average
+[38.672] gpu: 60 frames, 2819 us submit to idle, 190 us vertices
+[38.672] ui: 18 of 60 frames repainted, update 373 us avg, 1006 us per repaint
+[38.871] gesture: swipe up (164,281 -> 145,114 in 100 ms)
+[39.690] tick 33, 57 fps, rtc 1793745424, battery 3732 mV, dock 1 usb 0 chg_n 0, 76%, 46.8 C, status 0000, 0 errors, usb 778/14031, touch 29/0
+[39.691] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 118 mA, 30 mA average
+[39.691] gpu: 57 frames, 2798 us submit to idle, 190 us vertices
+[39.691] ui: 13 of 125 frames repainted, update 106 us avg, 986 us per repaint
+[40.040] gauge: dock 0, usb 0
+[40.309] gesture: swipe down (307,199 -> 302,243 in 735 ms)
+[40.693] tick 34, 60 fps, rtc 1793745425, battery 3697 mV, dock 0 usb 0 chg_n 0, 76%, 46.7 C, status 0000, 0 errors, usb 778/14031, touch 84/0
+[40.693] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 141 mA, 39 mA average
+[40.693] gpu: 60 frames, 2595 us submit to idle, 190 us vertices
+[40.693] ui: 1 of 61 frames repainted, update 18 us avg, 793 us per repaint
+[41.677] tick 35, 26 fps, rtc 1793745426, battery 3742 mV, dock 0 usb 0 chg_n 0, 76%, 46.4 C, status 0000, 0 errors, usb 778/14031, touch 84/0
+[41.678] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 105 mA, 46 mA average
+[41.678] gpu: 26 frames, 2807 us submit to idle, 190 us vertices
+[41.678] ui: 0 of 672 frames repainted, update 4 us avg, 0 us per repaint
+[42.263] gesture: tap (162,173 -> 162,173 in 32 ms)
+[42.698] tick 36, 33 fps, rtc 1793745427, battery 3699 mV, dock 0 usb 0 chg_n 0, 76%, 46.4 C, status 0000, 0 errors, usb 778/14031, touch 86/0
+[42.699] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 141 mA, 54 mA average
+[42.699] gpu: 33 frames, 2823 us submit to idle, 190 us vertices
+[42.699] ui: 0 of 600 frames repainted, update 4 us avg, 0 us per repaint
+[43.121] gesture: tap (152,192 -> 152,192 in 98 ms)
+[43.700] tick 37, 53 fps, rtc 1793745428, battery 3690 mV, dock 0 usb 0 chg_n 0, 76%, 46.2 C, status 0000, 0 errors, usb 778/14031, touch 88/0
+[43.701] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 144 mA, 60 mA average
+[43.701] gpu: 53 frames, 2837 us submit to idle, 189 us vertices
+[43.701] ui: 0 of 197 frames repainted, update 4 us avg, 0 us per repaint
+[44.447] gesture: tap (155,155 -> 155,155 in 53 ms)
+[44.703] tick 38, 31 fps, rtc 1793745429, battery 3702 mV, dock 0 usb 0 chg_n 0, 76%, 45.9 C, status 0000, 0 errors, usb 778/14031, touch 90/0
+[44.704] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 138 mA, 66 mA average
+[44.704] gpu: 31 frames, 2803 us submit to idle, 189 us vertices
+[44.704] ui: 0 of 626 frames repainted, update 4 us avg, 0 us per repaint
+[45.054] hub: accelerometer off
+[45.687] tick 39, 32 fps, rtc 1793745430, battery 3702 mV, dock 0 usb 0 chg_n 0, 76%, 45.9 C, status 0000, 0 errors, usb 778/14031, touch 90/0
+[45.688] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 129 mA, 72 mA average
+[45.688] gpu: 32 frames, 2533 us submit to idle, 190 us vertices
+[45.688] ui: 1 of 553 frames repainted, update 37 us avg, 18629 us per repaint
+[45.973] gesture: swipe right (81,186 -> 314,226 in 118 ms)
+[46.340] gesture: swipe left (282,224 -> 60,257 in 100 ms)
+[46.658] gesture: swipe up (254,286 -> 264,37 in 101 ms)
+[46.708] tick 40, 53 fps, rtc 1793745431, battery 3658 mV, dock 0 usb 0 chg_n 0, 76%, 45.6 C, status 0000, 0 errors, usb 778/14031, touch 118/0
+[46.709] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 160 mA, 79 mA average
+[46.709] gpu: 53 frames, 1956 us submit to idle, 190 us vertices
+[46.709] ui: 0 of 223 frames repainted, update 4 us avg, 0 us per repaint
+[47.517] gesture: swipe right (222,298 -> 333,195 in 284 ms)
+[47.732] tick 41, 52 fps, rtc 1793745432, battery 3634 mV, dock 0 usb 0 chg_n 0, 76%, 45.4 C, status 0000, 0 errors, usb 778/14031, touch 141/0
+[47.733] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 178 mA, 87 mA average
+[47.733] gpu: 52 frames, 3241 us submit to idle, 194 us vertices
+[47.733] ui: 20 of 52 frames repainted, update 7034 us avg, 18279 us per repaint
+[48.463] gesture: swipe down (192,176 -> 174,323 in 552 ms)
+[48.730] tick 42, 46 fps, rtc 1793745433, battery 3642 mV, dock 0 usb 0 chg_n 0, 76%, 45.3 C, status 0000, 0 errors, usb 778/14031, touch 174/0
+[48.731] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 157 mA, 94 mA average
+[48.731] gpu: 46 frames, 3420 us submit to idle, 196 us vertices
+[48.731] ui: 27 of 46 frames repainted, update 10488 us avg, 17865 us per repaint
+[49.355] gesture: swipe down (305,165 -> 250,288 in 120 ms)
+[49.751] tick 43, 48 fps, rtc 1793745434, battery 3627 mV, dock 0 usb 0 chg_n 0, 76%, 45.3 C, status 0000, 0 errors, usb 778/14031, touch 190/0
+[49.752] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 180 mA, 101 mA average
+[49.752] gpu: 48 frames, 3438 us submit to idle, 194 us vertices
+[49.752] ui: 21 of 110 frames repainted, update 3440 us avg, 18002 us per repaint
+[50.652] gesture: swipe down (195,167 -> 213,204 in 1032 ms)
+[50.753] tick 44, 48 fps, rtc 1793745435, battery 3641 mV, dock 0 usb 0 chg_n 0, 76%, 45.0 C, status 0000, 0 errors, usb 778/14031, touch 238/0
+[50.753] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 156 mA, 106 mA average
+[50.754] gpu: 48 frames, 2999 us submit to idle, 194 us vertices
+[50.754] ui: 23 of 48 frames repainted, update 8578 us avg, 17895 us per repaint
+[51.106] gesture: tap (87,81 -> 87,81 in 100 ms)
+[51.755] tick 45, 58 fps, rtc 1793745436, battery 3637 mV, dock 0 usb 0 chg_n 0, 76%, 44.9 C, status 0000, 0 errors, usb 778/14031, touch 240/0
+[51.756] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 162 mA, 111 mA average
+[51.756] gpu: 58 frames, 5078 us submit to idle, 190 us vertices
+[51.756] ui: 2 of 58 frames repainted, update 921 us avg, 26542 us per repaint
+[51.922] gesture: swipe right (114,178 -> 234,297 in 116 ms)
+[52.739] tick 46, 27 fps, rtc 1793745437, battery 3683 mV, dock 0 usb 0 chg_n 0, 76%, 44.9 C, status 0000, 0 errors, usb 778/14031, touch 249/0
+[52.740] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 129 mA, 113 mA average
+[52.740] gpu: 27 frames, 5604 us submit to idle, 192 us vertices
+[52.740] ui: 16 of 644 frames repainted, update 174 us avg, 6859 us per repaint
+[52.896] gesture: swipe right (199,147 -> 316,224 in 172 ms)
+[53.496] gesture: swipe left (265,189 -> 121,320 in 118 ms)
+[53.761] tick 47, 33 fps, rtc 1793745438, battery 3649 mV, dock 0 usb 0 chg_n 0, 76%, 44.8 C, status 0000, 0 errors, usb 778/14031, touch 267/0
+[53.762] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 169 mA, 117 mA average
+[53.762] gpu: 33 frames, 5584 us submit to idle, 193 us vertices
+[53.762] ui: 26 of 561 frames repainted, update 341 us avg, 7197 us per repaint
+[54.117] gesture: swipe right (140,210 -> 256,296 in 139 ms)
+[54.746] tick 48, 15 fps, rtc 1793745439, battery 3675 mV, dock 0 usb 0 chg_n 0, 76%, 44.7 C, status 0000, 0 errors, usb 778/14031, touch 275/0
+[54.746] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 137 mA, 119 mA average
+[54.746] gpu: 15 frames, 5579 us submit to idle, 191 us vertices
+[54.747] ui: 5 of 879 frames repainted, update 33 us avg, 5053 us per repaint
+[55.424] gesture: swipe right (155,266 -> 279,174 in 129 ms)
+[55.767] tick 49, 23 fps, rtc 1793745440, battery 3640 mV, dock 0 usb 0 chg_n 0, 76%, 44.4 C, status 0000, 0 errors, usb 778/14031, touch 283/0
+[55.768] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 173 mA, 121 mA average
+[55.768] gpu: 23 frames, 5622 us submit to idle, 193 us vertices
+[55.768] ui: 14 of 715 frames repainted, update 182 us avg, 9045 us per repaint
+[56.476] gesture: swipe right (244,182 -> 305,226 in 110 ms)
+[56.770] tick 50, 21 fps, rtc 1793745441, battery 3638 mV, dock 0 usb 0 chg_n 0, 76%, 44.4 C, status 0000, 0 errors, usb 778/14031, touch 288/0
+[56.771] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 168 mA, 123 mA average
+[56.771] gpu: 21 frames, 5684 us submit to idle, 192 us vertices
+[56.771] ui: 12 of 745 frames repainted, update 181 us avg, 11017 us per repaint
+[57.330] gesture: swipe left (303,181 -> 154,321 in 134 ms)
+[57.754] tick 51, 25 fps, rtc 1793745442, battery 3640 mV, dock 0 usb 0 chg_n 0, 76%, 44.3 C, status 0000, 0 errors, usb 778/14031, touch 298/0
+[57.755] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 160 mA, 124 mA average
+[57.755] gpu: 25 frames, 5713 us submit to idle, 192 us vertices
+[57.755] ui: 18 of 634 frames repainted, update 292 us avg, 10159 us per repaint
+[58.594] gesture: swipe right (150,228 -> 211,281 in 182 ms)
+[58.755] tick 52, 16 fps, rtc 1793745443, battery 3643 mV, dock 0 usb 0 chg_n 0, 76%, 44.1 C, status 0000, 0 errors, usb 778/14031, touch 307/0
+[58.756] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 161 mA, 126 mA average
+[58.756] gpu: 16 frames, 5723 us submit to idle, 192 us vertices
+[58.756] ui: 7 of 834 frames repainted, update 118 us avg, 13533 us per repaint
+[59.482] gesture: swipe down (213,208 -> 117,310 in 118 ms)
+[59.779] tick 53, 29 fps, rtc 1793745444, battery 3662 mV, dock 0 usb 0 chg_n 0, 76%, 44.1 C, status 0000, 0 errors, usb 778/14031, touch 316/0
+[59.780] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 126 mA, 127 mA average
+[59.780] gpu: 29 frames, 5805 us submit to idle, 193 us vertices
+[59.780] ui: 22 of 660 frames repainted, update 256 us avg, 7523 us per repaint
+[59.857] gesture: swipe right (100,225 -> 204,294 in 128 ms)
+[60.575] gesture: swipe right (151,236 -> 230,307 in 118 ms)
+[60.763] tick 54, 31 fps, rtc 1793745445, battery 3649 mV, dock 0 usb 0 chg_n 0, 76%, 43.9 C, status 0000, 0 errors, usb 778/14031, touch 330/0
+[60.764] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 127 mA, 127 mA average
+[60.764] gpu: 31 frames, 5883 us submit to idle, 192 us vertices
+[60.764] ui: 27 of 536 frames repainted, update 462 us avg, 9089 us per repaint
+[61.571] gesture: swipe right (150,247 -> 255,310 in 129 ms)
+[61.764] tick 55, 24 fps, rtc 1793745446, battery 3633 mV, dock 0 usb 0 chg_n 0, 76%, 43.8 C, status 0000, 0 errors, usb 778/14031, touch 338/0
+[61.764] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 172 mA, 129 mA average
+[61.765] gpu: 24 frames, 5866 us submit to idle, 191 us vertices
+[61.765] ui: 17 of 706 frames repainted, update 217 us avg, 8828 us per repaint
+[62.631] gesture: swipe left (282,225 -> 139,321 in 125 ms)
+[62.804] tick 56, 24 fps, rtc 1793745447, battery 3629 mV, dock 0 usb 0 chg_n 0, 76%, 43.7 C, status 0000, 0 errors, usb 778/14031, touch 348/0
+[62.805] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 176 mA, 130 mA average
+[62.805] gpu: 24 frames, 5811 us submit to idle, 192 us vertices
+[62.805] ui: 16 of 711 frames repainted, update 264 us avg, 11548 us per repaint
+[63.563] gesture: swipe right (157,243 -> 240,307 in 118 ms)
+[63.778] tick 57, 16 fps, rtc 1793745448, battery 3671 mV, dock 0 usb 0 chg_n 0, 76%, 43.7 C, status 0000, 0 errors, usb 778/14031, touch 356/0
+[63.779] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 120 mA, 130 mA average
+[63.779] gpu: 16 frames, 5804 us submit to idle, 192 us vertices
+[63.779] ui: 7 of 805 frames repainted, update 115 us avg, 12814 us per repaint
+[64.109] gesture: swipe right (175,231 -> 277,158 in 139 ms)
+[64.777] tick 58, 21 fps, rtc 1793745449, battery 3660 mV, dock 0 usb 0 chg_n 0, 76%, 43.6 C, status 0000, 0 errors, usb 778/14031, touch 365/0
+[64.778] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 125 mA, 131 mA average
+[64.778] gpu: 21 frames, 5828 us submit to idle, 193 us vertices
+[64.778] ui: 13 of 725 frames repainted, update 180 us avg, 9727 us per repaint
+[65.778] tick 59, 11 fps, rtc 1793745450, battery 3662 mV, dock 0 usb 0 chg_n 0, 76%, 43.5 C, status 0000, 0 errors, usb 778/14031, touch 365/0
+[65.779] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 147 mA, 131 mA average
+[65.779] gpu: 11 frames, 5794 us submit to idle, 190 us vertices
+[65.779] ui: 0 of 944 frames repainted, update 4 us avg, 0 us per repaint
+[65.972] gesture: swipe right (228,187 -> 314,253 in 117 ms)
+[66.327] gesture: swipe left (273,168 -> 156,264 in 109 ms)
+[66.777] tick 60, 22 fps, rtc 1793745451, battery 3652 mV, dock 0 usb 0 chg_n 0, 75%, 43.5 C, status 0400, 0 errors, usb 778/14031, touch 380/0
+[66.778] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 121 mA, 132 mA average
+[66.778] gpu: 22 frames, 5808 us submit to idle, 194 us vertices
+[66.778] ui: 14 of 692 frames repainted, update 199 us avg, 9543 us per repaint
+[67.268] gesture: swipe right (200,209 -> 276,273 in 150 ms)
+[67.778] tick 61, 23 fps, rtc 1793745452, battery 3655 mV, dock 0 usb 0 chg_n 0, 75%, 43.4 C, status 0400, 0 errors, usb 778/14031, touch 388/0
+[67.779] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 151 mA, 132 mA average
+[67.779] gpu: 23 frames, 5765 us submit to idle, 192 us vertices
+[67.779] ui: 15 of 719 frames repainted, update 150 us avg, 6950 us per repaint
+[68.071] gesture: swipe down (181,205 -> 255,296 in 128 ms)
+[68.778] tick 62, 24 fps, rtc 1793745453, battery 3657 mV, dock 0 usb 0 chg_n 0, 75%, 43.3 C, status 0400, 0 errors, usb 778/14031, touch 395/0
+[68.778] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 128 mA, 132 mA average
+[68.778] gpu: 24 frames, 5771 us submit to idle, 191 us vertices
+[68.779] ui: 16 of 722 frames repainted, update 197 us avg, 8701 us per repaint
+[69.635] gesture: swipe right (170,272 -> 288,173 in 129 ms)
+[69.777] tick 63, 16 fps, rtc 1793745454, battery 3623 mV, dock 0 usb 0 chg_n 0, 75%, 43.2 C, status 0400, 0 errors, usb 778/14031, touch 403/0
+[69.778] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 161 mA, 133 mA average
+[69.778] gpu: 16 frames, 5875 us submit to idle, 192 us vertices
+[69.778] ui: 6 of 825 frames repainted, update 122 us avg, 16245 us per repaint
+[70.778] tick 64, 18 fps, rtc 1793745455, battery 3659 mV, dock 0 usb 0 chg_n 0, 75%, 43.2 C, status 0400, 0 errors, usb 778/14031, touch 403/0
+[70.778] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 130 mA, 133 mA average
+[70.779] gpu: 18 frames, 5847 us submit to idle, 191 us vertices
+[70.779] ui: 8 of 805 frames repainted, update 75 us avg, 7102 us per repaint
+[71.134] gesture: swipe left (292,153 -> 84,310 in 150 ms)
+[71.637] gesture: swipe down (161,205 -> 268,313 in 129 ms)
+[71.799] tick 65, 29 fps, rtc 1793745456, battery 3649 mV, dock 0 usb 0 chg_n 0, 75%, 43.1 C, status 0400, 0 errors, usb 778/14031, touch 424/0
+[71.800] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 130 mA, 134 mA average
+[71.800] gpu: 29 frames, 5784 us submit to idle, 193 us vertices
+[71.800] ui: 22 of 575 frames repainted, update 492 us avg, 12767 us per repaint
+[72.773] gesture: swipe down (268,200 -> 165,308 in 118 ms)
+[72.835] tick 66, 19 fps, rtc 1793745457, battery 3649 mV, dock 0 usb 0 chg_n 0, 75%, 43.0 C, status 0400, 0 errors, usb 778/14031, touch 432/0
+[72.836] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 125 mA, 134 mA average
+[72.836] gpu: 19 frames, 5817 us submit to idle, 192 us vertices
+[72.836] ui: 10 of 772 frames repainted, update 193 us avg, 14617 us per repaint
+[73.619] gesture: swipe up (172,272 -> 294,136 in 182 ms)
+[73.826] tick 67, 28 fps, rtc 1793745458, battery 3611 mV, dock 0 usb 0 chg_n 0, 75%, 43.0 C, status 0400, 0 errors, usb 778/14031, touch 442/0
+[73.827] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 163 mA, 135 mA average
+[73.827] gpu: 28 frames, 5900 us submit to idle, 192 us vertices
+[73.827] ui: 20 of 581 frames repainted, update 404 us avg, 11574 us per repaint
+[74.282] gesture: swipe right (220,144 -> 312,204 in 118 ms)
+[74.820] tick 68, 26 fps, rtc 1793745459, battery 3642 mV, dock 0 usb 0 chg_n 0, 75%, 42.8 C, status 0400, 0 errors, usb 778/14031, touch 449/0
+[74.821] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 126 mA, 136 mA average
+[74.821] gpu: 26 frames, 5952 us submit to idle, 192 us vertices
+[74.821] ui: 20 of 526 frames repainted, update 495 us avg, 12907 us per repaint
+[75.819] tick 69, 11 fps, rtc 1793745460, battery 3655 mV, dock 0 usb 0 chg_n 0, 75%, 42.8 C, status 0400, 0 errors, usb 778/14031, touch 449/0
+[75.820] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 126 mA, 135 mA average
+[75.820] gpu: 11 frames, 5900 us submit to idle, 190 us vertices
+[75.820] ui: 0 of 943 frames repainted, update 4 us avg, 0 us per repaint
+[76.820] tick 70, 12 fps, rtc 1793745461, battery 3651 mV, dock 0 usb 0 chg_n 0, 75%, 42.7 C, status 0400, 0 errors, usb 778/14031, touch 449/0
+[76.821] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 140 mA, 135 mA average
+[76.821] gpu: 12 frames, 5874 us submit to idle, 190 us vertices
+[76.821] ui: 0 of 939 frames repainted, update 4 us avg, 0 us per repaint
+[76.989] gesture: swipe right (238,179 -> 292,207 in 114 ms)
+[77.820] tick 71, 22 fps, rtc 1793745462, battery 3651 mV, dock 0 usb 0 chg_n 0, 75%, 42.7 C, status 0400, 0 errors, usb 778/14031, touch 455/0
+[77.820] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 118 mA, 136 mA average
+[77.820] gpu: 22 frames, 5880 us submit to idle, 191 us vertices
+[77.821] ui: 14 of 657 frames repainted, update 321 us avg, 14867 us per repaint
+[78.819] tick 72, 11 fps, rtc 1793745463, battery 3654 mV, dock 0 usb 0 chg_n 0, 75%, 42.5 C, status 0400, 0 errors, usb 778/14031, touch 455/0
+[78.820] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 121 mA, 135 mA average
+[78.820] gpu: 11 frames, 5887 us submit to idle, 190 us vertices
+[78.820] ui: 0 of 943 frames repainted, update 4 us avg, 0 us per repaint
+[79.026] gesture: swipe right (257,182 -> 326,205 in 109 ms)
+[79.820] tick 73, 23 fps, rtc 1793745464, battery 3644 mV, dock 0 usb 0 chg_n 0, 75%, 42.5 C, status 0400, 0 errors, usb 778/14031, touch 462/0
+[79.820] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 131 mA, 135 mA average
+[79.821] gpu: 23 frames, 5927 us submit to idle, 191 us vertices
+[79.821] ui: 16 of 700 frames repainted, update 220 us avg, 9435 us per repaint
+[79.989] gesture: swipe right (243,184 -> 302,217 in 109 ms)
+[80.664] gesture: swipe right (245,194 -> 292,226 in 109 ms)
+[80.819] tick 74, 29 fps, rtc 1793745465, battery 3601 mV, dock 0 usb 0 chg_n 0, 75%, 42.5 C, status 0400, 0 errors, usb 778/14031, touch 475/0
+[80.820] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 161 mA, 136 mA average
+[80.820] gpu: 29 frames, 5969 us submit to idle, 191 us vertices
+[80.820] ui: 22 of 584 frames repainted, update 357 us avg, 9361 us per repaint
+[81.615] gesture: swipe down (293,178 -> 235,263 in 139 ms)
+[81.845] tick 75, 24 fps, rtc 1793745466, battery 3615 mV, dock 0 usb 0 chg_n 0, 75%, 42.4 C, status 0400, 0 errors, usb 778/14031, touch 483/0
+[81.846] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 160 mA, 136 mA average
+[81.846] gpu: 24 frames, 5978 us submit to idle, 192 us vertices
+[81.846] ui: 15 of 693 frames repainted, update 213 us avg, 9568 us per repaint
+[82.313] gesture: swipe right (220,229 -> 290,297 in 109 ms)
+[82.827] tick 76, 29 fps, rtc 1793745467, battery 3626 mV, dock 0 usb 0 chg_n 0, 75%, 42.3 C, status 0400, 0 errors, usb 778/14031, touch 490/0
+[82.828] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 130 mA, 137 mA average
+[82.828] gpu: 29 frames, 6012 us submit to idle, 192 us vertices
+[82.828] ui: 22 of 595 frames repainted, update 302 us avg, 8060 us per repaint
+[83.211] gesture: swipe down (212,221 -> 254,268 in 150 ms)
+[83.828] tick 77, 25 fps, rtc 1793745468, battery 3630 mV, dock 0 usb 0 chg_n 0, 75%, 42.2 C, status 0400, 0 errors, usb 778/14031, touch 497/0
+[83.829] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 131 mA, 137 mA average
+[83.829] gpu: 25 frames, 6022 us submit to idle, 191 us vertices
+[83.829] ui: 16 of 688 frames repainted, update 237 us avg, 10029 us per repaint
+[84.046] gesture: swipe right (205,253 -> 281,214 in 128 ms)
+[84.827] tick 78, 24 fps, rtc 1793745469, battery 3642 mV, dock 0 usb 0 chg_n 0, 75%, 42.2 C, status 0400, 0 errors, usb 778/14031, touch 504/0
+[84.828] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 120 mA, 138 mA average
+[84.828] gpu: 24 frames, 5990 us submit to idle, 192 us vertices
+[84.828] ui: 15 of 689 frames repainted, update 192 us avg, 8542 us per repaint
+[85.352] gesture: swipe up (213,278 -> 186,214 in 140 ms)
+[85.828] tick 79, 22 fps, rtc 1793745470, battery 3583 mV, dock 0 usb 0 chg_n 0, 75%, 42.2 C, status 0400, 0 errors, usb 778/14031, touch 511/0
+[85.829] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 173 mA, 137 mA average
+[85.829] gpu: 22 frames, 5944 us submit to idle, 193 us vertices
+[85.829] ui: 14 of 693 frames repainted, update 260 us avg, 12677 us per repaint
+[86.252] gesture: swipe down (306,152 -> 236,244 in 128 ms)
+[86.828] tick 80, 22 fps, rtc 1793745471, battery 3625 mV, dock 0 usb 0 chg_n 0, 75%, 42.1 C, status 0400, 0 errors, usb 778/14031, touch 521/0
+[86.828] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 139 mA, 137 mA average
+[86.828] gpu: 22 frames, 5927 us submit to idle, 193 us vertices
+[86.829] ui: 14 of 702 frames repainted, update 201 us avg, 9787 us per repaint
+[86.937] gesture: swipe down (165,183 -> 264,298 in 161 ms)
+[87.623] gesture: swipe right (185,238 -> 320,175 in 139 ms)
+[87.863] tick 81, 28 fps, rtc 1793745472, battery 3612 mV, dock 0 usb 0 chg_n 0, 75%, 42.1 C, status 0400, 0 errors, usb 778/14031, touch 538/0
+[87.864] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 145 mA, 139 mA average
+[87.864] gpu: 28 frames, 5912 us submit to idle, 194 us vertices
+[87.864] ui: 21 of 573 frames repainted, update 434 us avg, 11616 us per repaint
+[88.330] gesture: swipe down (231,177 -> 292,249 in 118 ms)
+[88.835] tick 82, 28 fps, rtc 1793745473, battery 3603 mV, dock 0 usb 0 chg_n 0, 75%, 42.0 C, status 0400, 0 errors, usb 778/14031, touch 546/0
+[88.835] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 132 mA, 138 mA average
+[88.836] gpu: 28 frames, 5880 us submit to idle, 192 us vertices
+[88.836] ui: 21 of 597 frames repainted, update 287 us avg, 8056 us per repaint
+[89.208] gesture: swipe right (210,192 -> 299,250 in 118 ms)
+[89.829] gesture: swipe left (285,199 -> 167,293 in 139 ms)
+[89.886] tick 83, 25 fps, rtc 1793745474, battery 3627 mV, dock 0 usb 0 chg_n 0, 75%, 42.0 C, status 0400, 0 errors, usb 778/14031, touch 565/0
+[89.886] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 120 mA, 137 mA average
+[89.887] gpu: 25 frames, 5840 us submit to idle, 192 us vertices
+[89.887] ui: 18 of 701 frames repainted, update 302 us avg, 11611 us per repaint
+[90.721] gesture: swipe down (186,57 -> 191,319 in 309 ms)
+[90.889] tick 84, 40 fps, rtc 1793745475, battery 3585 mV, dock 0 usb 0 chg_n 0, 75%, 41.9 C, status 0400, 0 errors, usb 778/14031, touch 591/0
+[90.889] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 151 mA, 138 mA average
+[90.889] gpu: 40 frames, 5746 us submit to idle, 191 us vertices
+[90.890] ui: 12 of 358 frames repainted, update 445 us avg, 13161 us per repaint
+[90.940] emmc: awake
+[91.256] gesture: swipe down (232,84 -> 206,280 in 164 ms)
+[91.857] gesture: swipe up (210,272 -> 287,51 in 117 ms)
+[91.891] tick 85, 51 fps, rtc 1793745476, battery 3584 mV, dock 0 usb 0 chg_n 0, 75%, 41.9 C, status 0400, 0 errors, usb 778/14031, touch 611/0
+[91.892] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 163 mA, 140 mA average
+[91.892] gpu: 51 frames, 2624 us submit to idle, 190 us vertices
+[91.892] ui: 1 of 242 frames repainted, update 28 us avg, 5771 us per repaint
+[92.875] tick 86, 44 fps, rtc 1793745477, battery 3620 mV, dock 0 usb 0 chg_n 0, 75%, 41.7 C, status 0400, 0 errors, usb 778/14031, touch 611/0
+[92.876] power: awake, asleep 0% of the last second, 0 wakeups, 88/3/0 collapses, battery 127 mA, 141 mA average
+[92.876] gpu: 44 frames, 1994 us submit to idle, 189 us vertices
+[92.876] ui: 0 of 338 frames repainted, update 4 us avg, 0 us per repaint
+[92.968] rpm: msg 26 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000001a
+[93.028] rpm: msg 27 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000001b
+[93.028] sleep
+[93.034] rpm: msg 28 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000001c
+[93.951] emmc: asleep
+[95.655] rpm: msg 29 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000001d
+[95.714] rpm: msg 30 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000001e
+[97.664] gauge: dock 1, usb 1
+[97.769] usb: up again in 103 ms
+[97.770] usb: cable plugged in
+[97.774] wake: charger
+[97.777] rpm: msg 31 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000001f
+[97.778] gpu: powered, hw version 00070010, gdsc a0222000
+[97.779] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[97.779] gpu: resumed in 2006 us
+[97.808] tick 91, 4 fps, rtc 1793745482, battery 3916 mV, dock 1 usb 1 chg_n 0, 75%, 41.3 C, status 0400, 0 errors, usb 778/14031, touch 611/0
+[97.809] power: awake, asleep 100% of the last second, 3 wakeups, 88/6/0 collapses, battery -4 mA, 95 mA average
+[97.809] gpu: 2 frames, 2306 us submit to idle, 214 us vertices
+[97.809] ui: 1 of 92 frames repainted, update 215 us avg, 19417 us per repaint
+[97.810] hub: accelerometer on
+[97.999] usb: configured, high speed
+[98.776] tick 92, 46 fps, rtc 1793745483, battery 3921 mV, dock 1 usb 1 chg_n 0, 75%, 41.4 C, status 0400, 0 errors, usb 778/14031, touch 611/0
+[98.776] power: awake, asleep 0% of the last second, 0 wakeups, 88/6/0 collapses, battery -3 mA, 86 mA average
+[98.777] gpu: 46 frames, 2808 us submit to idle, 189 us vertices
+[98.777] ui: 0 of 141 frames repainted, update 4 us avg, 0 us per repaint
+[99.190] adb: host connected, max payload 1048576
+[99.775] tick 93, 11 fps, rtc 1793745484, battery 3922 mV, dock 1 usb 1 chg_n 0, 75%, 41.6 C, status 0400, 0 errors, usb 1088/14153, touch 611/0
+[99.776] power: awake, asleep 0% of the last second, 0 wakeups, 88/6/0 collapses, battery 0 mA, 79 mA average
+[99.776] gpu: 11 frames, 2708 us submit to idle, 190 us vertices
+[99.776] ui: 0 of 989 frames repainted, update 4 us avg, 0 us per repaint
+[100.774] rpm: msg 32 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000020
+[100.834] rpm: msg 33 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000021
+[100.834] sleep
+[100.839] rpm: msg 34 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000022
+[101.874] hub: accelerometer off
+[113.010] wake: touch
+[113.013] rpm: msg 35 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000023
+[113.013] gpu: powered, hw version 00070010, gdsc a0222000
+[113.014] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[113.015] gpu: resumed in 2007 us
+[113.026] tick 106, 13 fps, rtc 1793745497, battery 3936 mV, dock 1 usb 1 chg_n 0, 75%, 42.7 C, status 0400, 0 errors, usb 1088/14153, touch 612/0
+[113.027] power: awake, asleep 100% of the last second, 12 wakeups, 100/6/0 collapses, battery -10 mA, 22 mA average
+[113.027] gpu: 12 frames, 2726 us submit to idle, 193 us vertices
+[113.028] ui: 0 of 982 frames repainted, update 4 us avg, 0 us per repaint
+[113.029] hub: accelerometer on
+[113.732] gesture: swipe down (135,81 -> 144,303 in 117 ms)
+[114.033] tick 107, 60 fps, rtc 1793745498, battery 3935 mV, dock 1 usb 1 chg_n 0, 75%, 42.7 C, status 0400, 0 errors, usb 1088/14153, touch 624/0
+[114.034] power: awake, asleep 0% of the last second, 0 wakeups, 100/6/0 collapses, battery -18 mA, 20 mA average
+[114.034] gpu: 60 frames, 2813 us submit to idle, 190 us vertices
+[114.034] ui: 18 of 60 frames repainted, update 341 us avg, 1012 us per repaint
+[114.417] gesture: swipe up (117,259 -> 85,76 in 167 ms)
+[115.035] tick 108, 60 fps, rtc 1793745499, battery 3936 mV, dock 1 usb 1 chg_n 0, 75%, 43.0 C, status 0400, 0 errors, usb 1088/14153, touch 638/0
+[115.036] power: awake, asleep 0% of the last second, 0 wakeups, 100/6/0 collapses, battery 0 mA, 18 mA average
+[115.036] gpu: 60 frames, 2811 us submit to idle, 190 us vertices
+[115.036] ui: 24 of 60 frames repainted, update 401 us avg, 996 us per repaint
+[116.020] tick 109, 15 fps, rtc 1793745500, battery 3935 mV, dock 1 usb 1 chg_n 0, 75%, 43.0 C, status 0400, 0 errors, usb 1088/14153, touch 638/0
+[116.020] power: awake, asleep 0% of the last second, 0 wakeups, 100/6/0 collapses, battery 0 mA, 17 mA average
+[116.020] gpu: 15 frames, 2770 us submit to idle, 190 us vertices
+[116.020] ui: 0 of 887 frames repainted, update 4 us avg, 0 us per repaint
+[117.019] tick 110, 11 fps, rtc 1793745501, battery 3939 mV, dock 1 usb 1 chg_n 0, 75%, 43.2 C, status 0400, 0 errors, usb 1088/14153, touch 638/0
+[117.020] power: awake, asleep 0% of the last second, 0 wakeups, 100/6/0 collapses, battery 0 mA, 15 mA average
+[117.020] gpu: 11 frames, 2714 us submit to idle, 190 us vertices
+[117.020] ui: 0 of 984 frames repainted, update 4 us avg, 0 us per repaint
+[118.020] tick 111, 11 fps, rtc 1793745502, battery 3776 mV, dock 1 usb 0 chg_n 0, 75%, 43.2 C, status 0400, 0 errors, usb 1088/14153, touch 638/0
+[118.020] power: awake, asleep 0% of the last second, 0 wakeups, 100/6/0 collapses, battery 72 mA, 18 mA average
+[118.020] gpu: 11 frames, 2708 us submit to idle, 189 us vertices
+[118.021] ui: 0 of 988 frames repainted, update 4 us avg, 0 us per repaint
+[119.019] tick 112, 11 fps, rtc 1793745503, battery 3758 mV, dock 1 usb 0 chg_n 0, 75%, 43.2 C, status 0400, 0 errors, usb 1088/14153, touch 638/0
+[119.020] power: awake, asleep 0% of the last second, 0 wakeups, 100/6/0 collapses, battery 118 mA, 13 mA average
+[119.020] gpu: 11 frames, 2709 us submit to idle, 189 us vertices
+[119.020] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[120.020] tick 113, 12 fps, rtc 1793745504, battery 3686 mV, dock 1 usb 0 chg_n 0, 75%, 43.2 C, status 0400, 0 errors, usb 1088/14153, touch 638/0
+[120.020] power: awake, asleep 0% of the last second, 0 wakeups, 100/6/0 collapses, battery 124 mA, 22 mA average
+[120.021] gpu: 12 frames, 2707 us submit to idle, 189 us vertices
+[120.021] ui: 0 of 985 frames repainted, update 4 us avg, 0 us per repaint
+[120.952] usb: unconfigured
+[120.952] usb: unplugged, phy in low power mode
+[121.019] tick 114, 11 fps, rtc 1793745505, battery 3688 mV, dock 1 usb 0 chg_n 0, 75%, 43.0 C, status 0400, 0 errors, usb 1088/14153, touch 638/0
+[121.020] power: awake, asleep 0% of the last second, 0 wakeups, 100/6/0 collapses, battery 103 mA, 30 mA average
+[121.020] gpu: 11 frames, 2702 us submit to idle, 189 us vertices
+[121.020] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[121.952] gauge: dock 0, usb 0
+[122.020] tick 115, 12 fps, rtc 1793745506, battery 3694 mV, dock 0 usb 0 chg_n 0, 75%, 43.0 C, status 0400, 0 errors, usb 1088/14153, touch 638/0
+[122.020] power: awake, asleep 0% of the last second, 0 wakeups, 100/6/0 collapses, battery 107 mA, 37 mA average
+[122.021] gpu: 12 frames, 2701 us submit to idle, 190 us vertices
+[122.021] ui: 1 of 985 frames repainted, update 4 us avg, 791 us per repaint
+[123.019] tick 116, 11 fps, rtc 1793745507, battery 3686 mV, dock 0 usb 0 chg_n 0, 75%, 43.0 C, status 0400, 0 errors, usb 1088/14153, touch 638/0
+[123.020] power: awake, asleep 0% of the last second, 0 wakeups, 100/6/0 collapses, battery 111 mA, 43 mA average
+[123.020] gpu: 11 frames, 2702 us submit to idle, 190 us vertices
+[123.020] ui: 0 of 985 frames repainted, update 4 us avg, 0 us per repaint
+[124.020] tick 117, 11 fps, rtc 1793745508, battery 3683 mV, dock 0 usb 0 chg_n 0, 75%, 42.7 C, status 0400, 0 errors, usb 1088/14153, touch 638/0
+[124.020] power: awake, asleep 0% of the last second, 0 wakeups, 100/6/0 collapses, battery 105 mA, 48 mA average
+[124.021] gpu: 11 frames, 2713 us submit to idle, 189 us vertices
+[124.021] ui: 0 of 977 frames repainted, update 4 us avg, 0 us per repaint
+[124.501] rpm: msg 36 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000024
+[124.560] rpm: msg 37 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000025
+[124.560] sleep
+[124.565] rpm: msg 38 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000026
+[127.733] hub: accelerometer off
+[127.737] wake: touch
+[127.741] rpm: msg 39 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000027
+[127.741] gpu: powered, hw version 00070010, gdsc a0222000
+[127.742] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[127.743] gpu: resumed in 2001 us
+[127.772] tick 121, 7 fps, rtc 1793745512, battery 3905 mV, dock 0 usb 0 chg_n 0, 75%, 42.1 C, status 0400, 0 errors, usb 1088/14153, touch 639/0
+[127.772] power: awake, asleep 100% of the last second, 1 wakeups, 100/7/0 collapses, battery 9 mA, 41 mA average
+[127.773] gpu: 6 frames, 2585 us submit to idle, 198 us vertices
+[127.773] ui: 1 of 471 frames repainted, update 48 us avg, 20925 us per repaint
+[128.739] tick 122, 43 fps, rtc 1793745513, battery 3652 mV, dock 0 usb 0 chg_n 0, 75%, 42.1 C, status 0400, 0 errors, usb 1088/14153, touch 640/0
+[128.739] power: awake, asleep 0% of the last second, 0 wakeups, 100/7/0 collapses, battery 125 mA, 49 mA average
+[128.739] gpu: 43 frames, 2015 us submit to idle, 189 us vertices
+[128.740] ui: 0 of 49 frames repainted, update 5 us avg, 0 us per repaint
+[129.738] tick 123, 12 fps, rtc 1793745514, battery 3658 mV, dock 0 usb 0 chg_n 0, 75%, 41.7 C, status 0400, 0 errors, usb 1088/14153, touch 640/0
+[129.739] power: awake, asleep 0% of the last second, 0 wakeups, 100/7/0 collapses, battery 122 mA, 56 mA average
+[129.739] gpu: 12 frames, 1912 us submit to idle, 190 us vertices
+[129.739] ui: 0 of 975 frames repainted, update 4 us avg, 0 us per repaint
+[130.739] tick 124, 11 fps, rtc 1793745515, battery 3644 mV, dock 0 usb 0 chg_n 0, 75%, 41.5 C, status 0400, 0 errors, usb 1088/14153, touch 640/0
+[130.739] power: awake, asleep 0% of the last second, 0 wakeups, 100/7/0 collapses, battery 133 mA, 62 mA average
+[130.740] gpu: 11 frames, 1915 us submit to idle, 189 us vertices
+[130.740] ui: 0 of 988 frames repainted, update 4 us avg, 0 us per repaint
+[131.738] tick 125, 11 fps, rtc 1793745516, battery 3637 mV, dock 0 usb 0 chg_n 0, 75%, 41.4 C, status 0400, 0 errors, usb 1088/14153, touch 640/0
+[131.739] power: awake, asleep 0% of the last second, 0 wakeups, 100/7/0 collapses, battery 133 mA, 67 mA average
+[131.739] gpu: 11 frames, 1920 us submit to idle, 189 us vertices
+[131.739] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[132.739] tick 126, 11 fps, rtc 1793745517, battery 3642 mV, dock 0 usb 0 chg_n 0, 75%, 41.4 C, status 0400, 0 errors, usb 1088/14153, touch 640/0
+[132.739] power: awake, asleep 0% of the last second, 0 wakeups, 100/7/0 collapses, battery 134 mA, 72 mA average
+[132.740] gpu: 11 frames, 1931 us submit to idle, 189 us vertices
+[132.740] ui: 0 of 989 frames repainted, update 4 us avg, 0 us per repaint
+[132.983] hub: accelerometer on
+[133.834] usb: up again in 103 ms
+[133.853] tick 127, 12 fps, rtc 1793745518, battery 3896 mV, dock 0 usb 1 chg_n 0, 75%, 41.3 C, status 0400, 0 errors, usb 1088/14153, touch 640/0
+[133.854] power: awake, asleep 0% of the last second, 0 wakeups, 100/7/0 collapses, battery -10 mA, 68 mA average
+[133.854] gpu: 12 frames, 1995 us submit to idle, 191 us vertices
+[133.854] ui: 1 of 982 frames repainted, update 18 us avg, 14437 us per repaint
+[134.066] usb: configured, high speed
+[134.098] adb: host connected, max payload 1048576
+[134.835] gauge: dock 1, usb 1
+[134.835] usb: cable plugged in
+[134.841] tick 128, 12 fps, rtc 1793745519, battery 3914 mV, dock 1 usb 1 chg_n 0, 75%, 41.4 C, status 0400, 0 errors, usb 1398/14275, touch 640/0
+[134.841] power: awake, asleep 0% of the last second, 0 wakeups, 100/7/0 collapses, battery 6 mA, 62 mA average
+[134.841] gpu: 12 frames, 2720 us submit to idle, 190 us vertices
+[134.841] ui: 1 of 990 frames repainted, update 5 us avg, 1238 us per repaint
+[135.836] tick 129, 11 fps, rtc 1793745520, battery 3921 mV, dock 1 usb 1 chg_n 0, 75%, 41.5 C, status 0400, 0 errors, usb 1398/14275, touch 640/0
+[135.837] power: awake, asleep 0% of the last second, 0 wakeups, 100/7/0 collapses, battery -5 mA, 57 mA average
+[135.837] gpu: 11 frames, 2722 us submit to idle, 189 us vertices
+[135.837] ui: 0 of 972 frames repainted, update 4 us avg, 0 us per repaint
+[136.837] tick 130, 11 fps, rtc 1793745521, battery 3924 mV, dock 1 usb 1 chg_n 0, 75%, 41.5 C, status 0400, 0 errors, usb 1398/14275, touch 640/0
+[136.838] power: awake, asleep 0% of the last second, 0 wakeups, 100/7/0 collapses, battery -1 mA, 52 mA average
+[136.838] gpu: 11 frames, 2720 us submit to idle, 189 us vertices
+[136.838] ui: 0 of 983 frames repainted, update 4 us avg, 0 us per repaint
+[137.835] rpm: msg 40 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000028
+[137.895] rpm: msg 41 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000029
+[137.895] sleep
+[137.899] rpm: msg 42 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000002a
+[138.935] hub: accelerometer off
+[141.932] wake: touch
+[141.936] rpm: msg 43 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000002b
+[141.936] gpu: powered, hw version 00070010, gdsc a0222000
+[141.937] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[141.938] gpu: resumed in 2003 us
+[141.948] tick 135, 14 fps, rtc 1793745526, battery 3931 mV, dock 1 usb 1 chg_n 0, 75%, 42.0 C, status 0400, 0 errors, usb 1398/14275, touch 642/0
+[141.949] power: awake, asleep 100% of the last second, 4 wakeups, 104/7/0 collapses, battery 3 mA, 32 mA average
+[141.950] gpu: 13 frames, 2727 us submit to idle, 193 us vertices
+[141.950] ui: 0 of 978 frames repainted, update 4 us avg, 0 us per repaint
+[141.952] hub: accelerometer on
+[142.958] tick 136, 55 fps, rtc 1793745527, battery 3932 mV, dock 1 usb 1 chg_n 0, 75%, 42.1 C, status 0400, 0 errors, usb 1398/14275, touch 661/0
+[142.958] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery 0 mA, 29 mA average
+[142.959] gpu: 55 frames, 2824 us submit to idle, 190 us vertices
+[142.959] ui: 0 of 82 frames repainted, update 263 us avg, 0 us per repaint
+[143.492] gesture: swipe up (286,227 -> 340,160 in 791 ms)
+[143.893] gesture: swipe right (90,175 -> 328,171 in 184 ms)
+[143.960] tick 137, 60 fps, rtc 1793745528, battery 3932 mV, dock 1 usb 1 chg_n 0, 75%, 42.1 C, status 0400, 0 errors, usb 1398/14275, touch 723/0
+[143.961] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery 4 mA, 26 mA average
+[143.961] gpu: 60 frames, 2575 us submit to idle, 190 us vertices
+[143.961] ui: 1 of 60 frames repainted, update 26 us avg, 1283 us per repaint
+[144.294] gesture: swipe left (293,147 -> 140,178 in 167 ms)
+[144.661] gesture: swipe down (175,168 -> 177,300 in 117 ms)
+[144.962] tick 138, 60 fps, rtc 1793745529, battery 3933 mV, dock 1 usb 1 chg_n 0, 75%, 42.2 C, status 0400, 0 errors, usb 1398/14275, touch 743/0
+[144.963] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery -3 mA, 23 mA average
+[144.963] gpu: 60 frames, 2384 us submit to idle, 191 us vertices
+[144.963] ui: 19 of 60 frames repainted, update 312 us avg, 975 us per repaint
+[145.162] gesture: swipe up (200,295 -> 166,165 in 133 ms)
+[145.497] gesture: swipe up (194,243 -> 160,128 in 101 ms)
+[145.988] tick 139, 58 fps, rtc 1793745530, battery 3934 mV, dock 1 usb 1 chg_n 0, 75%, 42.4 C, status 0400, 0 errors, usb 1398/14275, touch 773/0
+[145.989] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery -2 mA, 21 mA average
+[145.989] gpu: 58 frames, 3067 us submit to idle, 191 us vertices
+[145.989] ui: 20 of 58 frames repainted, update 2071 us avg, 5994 us per repaint
+[146.194] gesture: swipe down (267,102 -> 279,310 in 374 ms)
+[146.989] tick 140, 40 fps, rtc 1793745531, battery 3934 mV, dock 1 usb 1 chg_n 0, 75%, 42.4 C, status 0400, 0 errors, usb 1398/14275, touch 791/0
+[146.989] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery 15 mA, 19 mA average
+[146.989] gpu: 40 frames, 3449 us submit to idle, 199 us vertices
+[146.990] ui: 40 of 40 frames repainted, update 18123 us avg, 18123 us per repaint
+[147.312] gesture: tap (286,282 -> 267,307 in 68 ms)
+[148.009] tick 141, 35 fps, rtc 1793745532, battery 3933 mV, dock 1 usb 1 chg_n 0, 75%, 42.6 C, status 0400, 0 errors, usb 1398/14275, touch 795/0
+[148.009] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery 2 mA, 17 mA average
+[148.010] gpu: 35 frames, 3425 us submit to idle, 198 us vertices
+[148.010] ui: 33 of 229 frames repainted, update 2599 us avg, 18008 us per repaint
+[148.366] gesture: swipe down (273,75 -> 303,273 in 173 ms)
+[149.011] tick 142, 40 fps, rtc 1793745533, battery 3936 mV, dock 1 usb 1 chg_n 0, 75%, 42.8 C, status 0400, 0 errors, usb 1398/14275, touch 812/0
+[149.012] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery -5 mA, 16 mA average
+[149.012] gpu: 40 frames, 3415 us submit to idle, 198 us vertices
+[149.012] ui: 40 of 40 frames repainted, update 18068 us avg, 18067 us per repaint
+[149.580] gesture: swipe left (275,79 -> 72,62 in 243 ms)
+[150.025] tick 143, 37 fps, rtc 1793745534, battery 3935 mV, dock 1 usb 1 chg_n 0, 75%, 43.0 C, status 0400, 0 errors, usb 1398/14275, touch 826/0
+[150.026] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery -18 mA, 14 mA average
+[150.026] gpu: 37 frames, 3410 us submit to idle, 199 us vertices
+[150.026] ui: 36 of 133 frames repainted, update 4871 us avg, 17982 us per repaint
+[150.626] gesture: swipe down (155,177 -> 140,315 in 179 ms)
+[151.028] tick 144, 45 fps, rtc 1793745535, battery 3936 mV, dock 1 usb 1 chg_n 0, 75%, 43.0 C, status 0400, 0 errors, usb 1398/14275, touch 837/0
+[151.028] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery 7 mA, 13 mA average
+[151.028] gpu: 45 frames, 3173 us submit to idle, 196 us vertices
+[151.028] ui: 30 of 45 frames repainted, update 12057 us avg, 18082 us per repaint
+[151.428] gesture: swipe up (193,179 -> 145,27 in 167 ms)
+[152.037] tick 145, 59 fps, rtc 1793745536, battery 3938 mV, dock 1 usb 1 chg_n 0, 75%, 43.2 C, status 0400, 0 errors, usb 1398/14275, touch 856/0
+[152.038] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery -18 mA, 11 mA average
+[152.038] gpu: 59 frames, 3210 us submit to idle, 190 us vertices
+[152.038] ui: 5 of 59 frames repainted, update 1198 us avg, 14081 us per repaint
+[152.093] gesture: swipe down (241,67 -> 323,161 in 173 ms)
+[152.614] gesture: swipe down (151,192 -> 124,315 in 179 ms)
+[153.036] tick 146, 40 fps, rtc 1793745537, battery 3936 mV, dock 1 usb 1 chg_n 0, 75%, 43.3 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[153.037] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery 19 mA, 10 mA average
+[153.037] gpu: 40 frames, 3245 us submit to idle, 204 us vertices
+[153.037] ui: 40 of 40 frames repainted, update 18190 us avg, 18189 us per repaint
+[154.016] tick 147, 23 fps, rtc 1793745538, battery 3937 mV, dock 1 usb 1 chg_n 0, 75%, 43.3 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[154.017] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery 2 mA, 10 mA average
+[154.017] gpu: 23 frames, 2785 us submit to idle, 193 us vertices
+[154.017] ui: 3 of 691 frames repainted, update 80 us avg, 17442 us per repaint
+[155.017] tick 148, 11 fps, rtc 1793745539, battery 3939 mV, dock 1 usb 1 chg_n 0, 75%, 43.4 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[155.018] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery -17 mA, 9 mA average
+[155.018] gpu: 11 frames, 2725 us submit to idle, 190 us vertices
+[155.018] ui: 0 of 978 frames repainted, update 4 us avg, 0 us per repaint
+[156.040] tick 149, 13 fps, rtc 1793745540, battery 3938 mV, dock 1 usb 1 chg_n 0, 75%, 43.5 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[156.041] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery 13 mA, 7 mA average
+[156.041] gpu: 13 frames, 2733 us submit to idle, 192 us vertices
+[156.041] ui: 1 of 974 frames repainted, update 15 us avg, 11296 us per repaint
+[157.016] tick 150, 11 fps, rtc 1793745541, battery 3937 mV, dock 1 usb 1 chg_n 0, 75%, 43.5 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[157.017] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery -13 mA, 6 mA average
+[157.017] gpu: 11 frames, 2736 us submit to idle, 190 us vertices
+[157.017] ui: 0 of 952 frames repainted, update 4 us avg, 0 us per repaint
+[158.017] tick 151, 11 fps, rtc 1793745542, battery 3940 mV, dock 1 usb 1 chg_n 0, 75%, 43.5 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[158.017] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery -20 mA, 4 mA average
+[158.017] gpu: 11 frames, 2736 us submit to idle, 190 us vertices
+[158.018] ui: 0 of 976 frames repainted, update 4 us avg, 0 us per repaint
+[159.016] tick 152, 11 fps, rtc 1793745543, battery 3940 mV, dock 1 usb 1 chg_n 0, 75%, 43.6 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[159.017] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery 5 mA, 5 mA average
+[159.017] gpu: 11 frames, 2732 us submit to idle, 189 us vertices
+[159.017] ui: 0 of 976 frames repainted, update 4 us avg, 0 us per repaint
+[160.017] tick 153, 11 fps, rtc 1793745544, battery 3809 mV, dock 1 usb 0 chg_n 0, 75%, 43.7 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[160.017] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery 15 mA, 4 mA average
+[160.018] gpu: 11 frames, 2739 us submit to idle, 190 us vertices
+[160.018] ui: 0 of 978 frames repainted, update 4 us avg, 0 us per repaint
+[161.016] tick 154, 11 fps, rtc 1793745545, battery 3687 mV, dock 1 usb 0 chg_n 0, 75%, 43.7 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[161.017] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery 140 mA, 14 mA average
+[161.017] gpu: 11 frames, 2722 us submit to idle, 190 us vertices
+[161.017] ui: 0 of 980 frames repainted, update 4 us avg, 0 us per repaint
+[162.015] usb: unconfigured
+[162.015] usb: unplugged, phy in low power mode
+[162.017] tick 155, 11 fps, rtc 1793745546, battery 3676 mV, dock 1 usb 0 chg_n 0, 75%, 43.6 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[162.017] power: awake, asleep 0% of the last second, 0 wakeups, 104/7/0 collapses, battery 115 mA, 24 mA average
+[162.018] gpu: 11 frames, 2715 us submit to idle, 190 us vertices
+[162.018] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[162.686] rpm: msg 44 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000002c
+[162.745] rpm: msg 45 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000002d
+[162.745] sleep
+[162.750] rpm: msg 46 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000002e
+[163.836] hub: accelerometer off
+[163.840] wake: tilt
+[163.844] rpm: msg 47 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000002f
+[163.844] gpu: powered, hw version 00070010, gdsc a0222000
+[163.845] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[163.846] gpu: resumed in 2024 us
+[163.856] tick 157, 10 fps, rtc 1793745548, battery 3893 mV, dock 1 usb 0 chg_n 0, 75%, 43.4 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[163.856] power: awake, asleep 100% of the last second, 1 wakeups, 104/8/0 collapses, battery 7 mA, 27 mA average
+[163.857] gpu: 9 frames, 2726 us submit to idle, 195 us vertices
+[163.857] ui: 0 of 659 frames repainted, update 4 us avg, 0 us per repaint
+[163.859] hub: accelerometer on
+[164.344] gauge: dock 0, usb 0
+[164.841] tick 158, 44 fps, rtc 1793745549, battery 3686 mV, dock 0 usb 0 chg_n 0, 75%, 43.2 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[164.842] power: awake, asleep 0% of the last second, 0 wakeups, 104/8/0 collapses, battery 97 mA, 36 mA average
+[164.842] gpu: 44 frames, 2835 us submit to idle, 189 us vertices
+[164.842] ui: 1 of 49 frames repainted, update 29 us avg, 1208 us per repaint
+[165.842] tick 159, 11 fps, rtc 1793745550, battery 3687 mV, dock 0 usb 0 chg_n 0, 75%, 43.0 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[165.843] power: awake, asleep 0% of the last second, 0 wakeups, 104/8/0 collapses, battery 108 mA, 41 mA average
+[165.843] gpu: 11 frames, 2717 us submit to idle, 190 us vertices
+[165.843] ui: 0 of 977 frames repainted, update 4 us avg, 0 us per repaint
+[166.841] tick 160, 11 fps, rtc 1793745551, battery 3682 mV, dock 0 usb 0 chg_n 0, 75%, 42.7 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[166.842] power: awake, asleep 0% of the last second, 0 wakeups, 104/8/0 collapses, battery 106 mA, 47 mA average
+[166.842] gpu: 11 frames, 2715 us submit to idle, 189 us vertices
+[166.842] ui: 0 of 978 frames repainted, update 4 us avg, 0 us per repaint
+[167.842] tick 161, 11 fps, rtc 1793745552, battery 3675 mV, dock 0 usb 0 chg_n 0, 75%, 42.7 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[167.843] power: awake, asleep 0% of the last second, 0 wakeups, 104/8/0 collapses, battery 113 mA, 52 mA average
+[167.843] gpu: 11 frames, 2714 us submit to idle, 190 us vertices
+[167.843] ui: 0 of 978 frames repainted, update 4 us avg, 0 us per repaint
+[168.841] tick 162, 11 fps, rtc 1793745553, battery 3675 mV, dock 0 usb 0 chg_n 0, 75%, 42.5 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[168.842] power: awake, asleep 0% of the last second, 0 wakeups, 104/8/0 collapses, battery 108 mA, 58 mA average
+[168.842] gpu: 11 frames, 2721 us submit to idle, 190 us vertices
+[168.842] ui: 0 of 976 frames repainted, update 4 us avg, 0 us per repaint
+[169.344] hub: accelerometer off
+[169.842] tick 163, 12 fps, rtc 1793745554, battery 3646 mV, dock 0 usb 0 chg_n 0, 75%, 42.3 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[169.843] power: awake, asleep 0% of the last second, 0 wakeups, 104/8/0 collapses, battery 123 mA, 62 mA average
+[169.843] gpu: 12 frames, 2327 us submit to idle, 191 us vertices
+[169.843] ui: 1 of 966 frames repainted, update 19 us avg, 14588 us per repaint
+[170.841] tick 164, 11 fps, rtc 1793745555, battery 3639 mV, dock 0 usb 0 chg_n 0, 75%, 42.3 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[170.842] power: awake, asleep 0% of the last second, 0 wakeups, 104/8/0 collapses, battery 125 mA, 67 mA average
+[170.842] gpu: 11 frames, 1938 us submit to idle, 189 us vertices
+[170.842] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[171.842] tick 165, 11 fps, rtc 1793745556, battery 3636 mV, dock 0 usb 0 chg_n 0, 75%, 42.0 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[171.843] power: awake, asleep 0% of the last second, 0 wakeups, 104/8/0 collapses, battery 130 mA, 73 mA average
+[171.843] gpu: 11 frames, 1931 us submit to idle, 189 us vertices
+[171.843] ui: 0 of 988 frames repainted, update 4 us avg, 0 us per repaint
+[172.842] tick 166, 12 fps, rtc 1793745557, battery 3639 mV, dock 0 usb 0 chg_n 0, 75%, 41.6 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[172.843] power: awake, asleep 0% of the last second, 0 wakeups, 104/8/0 collapses, battery 116 mA, 77 mA average
+[172.843] gpu: 12 frames, 1941 us submit to idle, 189 us vertices
+[172.843] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[173.841] rpm: msg 48 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000030
+[173.901] rpm: msg 49 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000031
+[173.901] sleep
+[173.906] rpm: msg 50 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000032
+[174.812] wake: tilt
+[174.816] rpm: msg 51 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000033
+[174.816] gpu: powered, hw version 00070010, gdsc a0222000
+[174.817] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[174.818] gpu: resumed in 2003 us
+[174.827] tick 168, 13 fps, rtc 1793745559, battery 3868 mV, dock 0 usb 0 chg_n 0, 75%, 41.1 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[174.828] power: awake, asleep 96% of the last second, 1 wakeups, 104/9/0 collapses, battery 8 mA, 76 mA average
+[174.829] gpu: 12 frames, 1946 us submit to idle, 194 us vertices
+[174.829] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[175.825] tick 169, 45 fps, rtc 1793745560, battery 3632 mV, dock 0 usb 0 chg_n 0, 75%, 40.8 C, status 0400, 0 errors, usb 1398/14275, touch 869/0
+[175.826] power: awake, asleep 0% of the last second, 0 wakeups, 104/9/0 collapses, battery 117 mA, 81 mA average
+[175.826] gpu: 45 frames, 2030 us submit to idle, 189 us vertices
+[175.826] ui: 0 of 48 frames repainted, update 5 us avg, 0 us per repaint
+[175.877] touch: palm
+[175.877] rpm: msg 52 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000034
+[175.987] rpm: msg 53 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000035
+[175.987] light: 39 lux, code 22
+[175.988] sleep
+[175.993] rpm: msg 54 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000036
+[176.253] wake: tilt
+[176.257] rpm: msg 55 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000037
+[176.257] gpu: powered, hw version 00070010, gdsc a0222000
+[176.258] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[176.259] gpu: resumed in 2006 us
+[176.844] tick 170, 36 fps, rtc 1793745561, battery 3600 mV, dock 0 usb 0 chg_n 0, 75%, 40.3 C, status 0400, 0 errors, usb 1398/14275, touch 871/0
+[176.844] power: awake, asleep 37% of the last second, 1 wakeups, 104/10/0 collapses, battery 152 mA, 85 mA average
+[176.844] gpu: 35 frames, 2035 us submit to idle, 190 us vertices
+[176.845] ui: 0 of 88 frames repainted, update 5 us avg, 0 us per repaint
+[177.827] tick 171, 16 fps, rtc 1793745562, battery 3637 mV, dock 0 usb 0 chg_n 0, 75%, 40.3 C, status 0400, 0 errors, usb 1398/14275, touch 871/0
+[177.828] power: awake, asleep 0% of the last second, 0 wakeups, 104/10/0 collapses, battery 113 mA, 88 mA average
+[177.828] gpu: 16 frames, 1986 us submit to idle, 189 us vertices
+[177.828] ui: 0 of 554 frames repainted, update 4 us avg, 0 us per repaint
+[178.828] tick 172, 11 fps, rtc 1793745563, battery 3625 mV, dock 0 usb 0 chg_n 0, 75%, 40.1 C, status 0400, 0 errors, usb 1398/14275, touch 871/0
+[178.828] power: awake, asleep 0% of the last second, 0 wakeups, 104/10/0 collapses, battery 123 mA, 91 mA average
+[178.829] gpu: 11 frames, 1935 us submit to idle, 189 us vertices
+[178.829] ui: 0 of 988 frames repainted, update 4 us avg, 0 us per repaint
+[179.827] tick 173, 11 fps, rtc 1793745564, battery 3634 mV, dock 0 usb 0 chg_n 0, 75%, 39.7 C, status 0400, 0 errors, usb 1398/14275, touch 871/0
+[179.828] power: awake, asleep 0% of the last second, 0 wakeups, 104/10/0 collapses, battery 115 mA, 94 mA average
+[179.828] gpu: 11 frames, 1936 us submit to idle, 190 us vertices
+[179.828] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[180.761] touch: palm
+[180.762] rpm: msg 56 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000038
+[180.821] rpm: msg 57 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000039
+[180.821] light: 3 lux, code 4
+[180.821] sleep
+[180.827] rpm: msg 58 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000003a
+[189.149] wake: tilt
+[189.152] rpm: msg 59 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000003b
+[189.152] gpu: powered, hw version 00070010, gdsc a0222000
+[189.154] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[189.154] gpu: resumed in 2022 us
+[189.169] tick 182, 13 fps, rtc 1793745573, battery 3901 mV, dock 0 usb 0 chg_n 0, 74%, 37.9 C, status 0400, 0 errors, usb 1398/14275, touch 872/0
+[189.170] power: awake, asleep 100% of the last second, 1 wakeups, 104/11/0 collapses, battery 6 mA, 50 mA average
+[189.170] gpu: 12 frames, 1945 us submit to idle, 193 us vertices
+[189.170] ui: 1 of 923 frames repainted, update 8 us avg, 4281 us per repaint
+[190.151] tick 183, 43 fps, rtc 1793745574, battery 3649 mV, dock 0 usb 0 chg_n 0, 74%, 37.6 C, status 0400, 0 errors, usb 1398/14275, touch 872/0
+[190.152] power: awake, asleep 0% of the last second, 0 wakeups, 104/11/0 collapses, battery 119 mA, 58 mA average
+[190.152] gpu: 43 frames, 2025 us submit to idle, 189 us vertices
+[190.152] ui: 0 of 51 frames repainted, update 5 us avg, 0 us per repaint
+[191.150] tick 184, 11 fps, rtc 1793745575, battery 3644 mV, dock 0 usb 0 chg_n 0, 74%, 37.5 C, status 0400, 0 errors, usb 1398/14275, touch 872/0
+[191.151] power: awake, asleep 0% of the last second, 0 wakeups, 104/11/0 collapses, battery 123 mA, 63 mA average
+[191.151] gpu: 11 frames, 1929 us submit to idle, 189 us vertices
+[191.151] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[192.151] tick 185, 11 fps, rtc 1793745576, battery 3639 mV, dock 0 usb 0 chg_n 0, 74%, 37.3 C, status 0400, 0 errors, usb 1398/14275, touch 872/0
+[192.152] power: awake, asleep 0% of the last second, 0 wakeups, 104/11/0 collapses, battery 126 mA, 67 mA average
+[192.152] gpu: 11 frames, 1927 us submit to idle, 189 us vertices
+[192.152] ui: 0 of 988 frames repainted, update 4 us avg, 0 us per repaint
+[193.151] tick 186, 11 fps, rtc 1793745577, battery 3633 mV, dock 0 usb 0 chg_n 0, 74%, 37.3 C, status 0400, 0 errors, usb 1398/14275, touch 872/0
+[193.151] power: awake, asleep 0% of the last second, 0 wakeups, 104/11/0 collapses, battery 112 mA, 72 mA average
+[193.151] gpu: 11 frames, 1932 us submit to idle, 189 us vertices
+[193.152] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[194.150] tick 187, 11 fps, rtc 1793745578, battery 3629 mV, dock 0 usb 0 chg_n 0, 74%, 37.2 C, status 0400, 0 errors, usb 1398/14275, touch 872/0
+[194.151] power: awake, asleep 0% of the last second, 0 wakeups, 104/11/0 collapses, battery 119 mA, 77 mA average
+[194.151] gpu: 11 frames, 1936 us submit to idle, 189 us vertices
+[194.151] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[195.151] tick 188, 11 fps, rtc 1793745579, battery 3627 mV, dock 0 usb 0 chg_n 0, 74%, 37.1 C, status 0400, 0 errors, usb 1398/14275, touch 872/0
+[195.151] power: awake, asleep 0% of the last second, 0 wakeups, 104/11/0 collapses, battery 120 mA, 80 mA average
+[195.152] gpu: 11 frames, 1943 us submit to idle, 190 us vertices
+[195.152] ui: 0 of 988 frames repainted, update 4 us avg, 0 us per repaint
+[196.151] tick 189, 12 fps, rtc 1793745580, battery 3623 mV, dock 0 usb 0 chg_n 0, 74%, 37.1 C, status 0400, 0 errors, usb 1398/14275, touch 872/0
+[196.152] power: awake, asleep 0% of the last second, 0 wakeups, 104/11/0 collapses, battery 122 mA, 83 mA average
+[196.152] gpu: 12 frames, 1940 us submit to idle, 189 us vertices
+[196.152] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[197.151] tick 190, 11 fps, rtc 1793745581, battery 3625 mV, dock 0 usb 0 chg_n 0, 74%, 37.1 C, status 0400, 0 errors, usb 1398/14275, touch 872/0
+[197.151] power: awake, asleep 0% of the last second, 0 wakeups, 104/11/0 collapses, battery 113 mA, 86 mA average
+[197.152] gpu: 11 frames, 1932 us submit to idle, 189 us vertices
+[197.152] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[198.150] tick 191, 11 fps, rtc 1793745582, battery 3621 mV, dock 0 usb 0 chg_n 0, 74%, 37.0 C, status 0400, 0 errors, usb 1398/14275, touch 872/0
+[198.151] power: awake, asleep 0% of the last second, 0 wakeups, 104/11/0 collapses, battery 112 mA, 89 mA average
+[198.151] gpu: 11 frames, 1921 us submit to idle, 189 us vertices
+[198.151] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[199.149] rpm: msg 60 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000003c
+[199.259] rpm: msg 61 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000003d
+[199.260] light: 677 lux, code 36
+[199.260] sleep
+[199.265] rpm: msg 62 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000003e
+[212.292] wake: tilt
+[212.296] rpm: msg 63 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000003f
+[212.296] gpu: powered, hw version 00070010, gdsc a0222000
+[212.297] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[212.298] gpu: resumed in 2003 us
+[212.309] tick 205, 13 fps, rtc 1793745596, battery 3895 mV, dock 0 usb 0 chg_n 0, 74%, 35.4 C, status 0400, 0 errors, usb 1398/14275, touch 872/0
+[212.310] power: awake, asleep 100% of the last second, 1 wakeups, 104/12/0 collapses, battery 8 mA, 34 mA average
+[212.311] gpu: 12 frames, 1950 us submit to idle, 193 us vertices
+[212.311] ui: 0 of 988 frames repainted, update 5 us avg, 0 us per repaint
+[213.294] tick 206, 43 fps, rtc 1793745597, battery 3637 mV, dock 0 usb 0 chg_n 0, 74%, 35.2 C, status 0400, 0 errors, usb 1398/14275, touch 872/0
+[213.295] power: awake, asleep 0% of the last second, 0 wakeups, 104/12/0 collapses, battery 119 mA, 43 mA average
+[213.295] gpu: 43 frames, 2029 us submit to idle, 189 us vertices
+[213.295] ui: 0 of 49 frames repainted, update 5 us avg, 0 us per repaint
+[214.293] tick 207, 11 fps, rtc 1793745598, battery 3625 mV, dock 0 usb 0 chg_n 0, 74%, 35.2 C, status 0400, 0 errors, usb 1398/14275, touch 872/0
+[214.294] power: awake, asleep 0% of the last second, 0 wakeups, 104/12/0 collapses, battery 119 mA, 48 mA average
+[214.294] gpu: 11 frames, 1918 us submit to idle, 189 us vertices
+[214.294] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[215.294] tick 208, 11 fps, rtc 1793745599, battery 3614 mV, dock 0 usb 0 chg_n 0, 74%, 35.3 C, status 0400, 0 errors, usb 1398/14275, touch 872/0
+[215.295] power: awake, asleep 0% of the last second, 0 wakeups, 104/12/0 collapses, battery 127 mA, 55 mA average
+[215.295] gpu: 11 frames, 1910 us submit to idle, 189 us vertices
+[215.295] ui: 0 of 988 frames repainted, update 4 us avg, 0 us per repaint
+[215.595] hub: accelerometer on
+[216.389] usb: up again in 103 ms
+[216.410] tick 209, 12 fps, rtc 1793745600, battery 3872 mV, dock 0 usb 1 chg_n 0, 74%, 35.3 C, status 0400, 0 errors, usb 1398/14275, touch 872/0
+[216.411] power: awake, asleep 0% of the last second, 0 wakeups, 104/12/0 collapses, battery 1 mA, 53 mA average
+[216.411] gpu: 12 frames, 1967 us submit to idle, 190 us vertices
+[216.411] ui: 1 of 984 frames repainted, update 20 us avg, 16216 us per repaint
+[216.618] usb: configured, high speed
+[216.650] adb: host connected, max payload 1048576
+[217.393] tick 210, 12 fps, rtc 1793745601, battery 3902 mV, dock 0 usb 1 chg_n 0, 74%, 35.6 C, status 0400, 0 errors, usb 1708/14397, touch 872/0
+[217.394] power: awake, asleep 0% of the last second, 0 wakeups, 104/12/0 collapses, battery 2 mA, 48 mA average
+[217.394] gpu: 12 frames, 2652 us submit to idle, 190 us vertices
+[217.394] ui: 0 of 992 frames repainted, update 4 us avg, 0 us per repaint
+[217.891] gauge: dock 1, usb 1
+[217.891] usb: cable plugged in
+[218.393] tick 211, 12 fps, rtc 1793745602, battery 3911 mV, dock 1 usb 1 chg_n 0, 74%, 35.6 C, status 0400, 0 errors, usb 1708/14397, touch 872/0
+[218.393] power: awake, asleep 0% of the last second, 0 wakeups, 104/12/0 collapses, battery 1 mA, 44 mA average
+[218.394] gpu: 12 frames, 2655 us submit to idle, 190 us vertices
+[218.394] ui: 1 of 984 frames repainted, update 5 us avg, 1214 us per repaint
+[218.751] touch: palm
+[218.751] rpm: msg 64 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000040
+[218.861] rpm: msg 65 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000041
+[218.861] sleep
+[218.867] rpm: msg 66 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000042
+[219.895] hub: accelerometer off
+[276.275] rpm: msg 67 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000043
+[276.335] rpm: msg 68 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000044
+[279.295] power: asleep, 60 wakeups, 164/12/0 collapses, 0 mA average
+[313.968] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[313.993] i2c: qup2 recovered
+[317.954] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[319.967] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[321.980] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[323.993] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[324.022] hub: m4 failing on the bus, restarting it
+[324.040] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[328.022] hub: m4 firmware 0084 up
+[336.081] rpm: msg 69 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000045
+[336.140] rpm: msg 70 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000046
+[340.108] power: asleep, 61 wakeups, 225/12/0 collapses, 0 mA average
+[396.472] rpm: msg 71 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000047
+[396.531] rpm: msg 72 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000048
+[400.498] power: asleep, 60 wakeups, 285/12/0 collapses, 0 mA average
+[455.855] rpm: msg 73 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000049
+[455.915] rpm: msg 74 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000004a
+[460.888] power: asleep, 60 wakeups, 345/12/0 collapses, -1 mA average
+[473.366] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[473.391] i2c: qup2 recovered
+[477.352] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[479.365] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[481.378] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[483.391] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[483.420] hub: m4 failing on the bus, restarting it
+[483.420] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[487.420] hub: m4 firmware 0084 up
+[516.616] rpm: msg 75 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000004b
+[516.675] rpm: msg 76 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000004c
+[521.649] power: asleep, 61 wakeups, 406/12/0 collapses, -1 mA average
+[545.921] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[545.946] i2c: qup2 recovered
+[548.901] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[551.920] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[552.921] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[555.946] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[555.975] hub: m4 failing on the bus, restarting it
+[555.975] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[559.975] hub: m4 firmware 0084 up
+[576.086] rpm: msg 77 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000004d
+[576.146] rpm: msg 78 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000004e
+[582.126] power: asleep, 61 wakeups, 467/12/0 collapses, -2 mA average
+[619.377] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[619.402] i2c: qup2 recovered
+[621.369] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[624.389] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[626.402] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[628.415] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[628.443] hub: m4 failing on the bus, restarting it
+[628.443] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[632.443] hub: m4 firmware 0084 up
+[636.476] rpm: msg 79 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000004f
+[636.536] rpm: msg 80 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000050
+[642.516] power: asleep, 60 wakeups, 527/12/0 collapses, -2 mA average
+[695.860] rpm: msg 81 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000051
+[695.920] rpm: msg 82 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000052
+[702.906] power: asleep, 60 wakeups, 587/12/0 collapses, 0 mA average
+[731.558] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[731.583] i2c: qup2 recovered
+[734.532] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[737.558] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[739.571] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[741.584] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[741.612] hub: m4 failing on the bus, restarting it
+[741.613] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[745.612] hub: m4 firmware 0084 up
+[755.685] rpm: msg 83 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000053
+[755.745] rpm: msg 84 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000054
+[763.737] power: asleep, 61 wakeups, 648/12/0 collapses, -1 mA average
+[794.922] gauge: charging stopped at 53.4 C, 3951 mV, 74%
+[797.939] gauge: dock 0, usb 1
+[803.993] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[804.018] i2c: qup2 recovered
+[807.966] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[809.979] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[811.992] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[814.005] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[814.034] hub: m4 failing on the bus, restarting it
+[814.053] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[816.028] rpm: msg 85 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000055
+[816.088] rpm: msg 86 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000056
+[818.034] hub: m4 firmware 0084 up
+[824.081] power: asleep, 60 wakeups, 708/12/0 collapses, -1 mA average
+[825.070] gauge: charging allowed at 51.1 C, 3949 mV, 74%
+[876.456] rpm: msg 87 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000057
+[876.516] rpm: msg 88 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000058
+[877.436] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[877.461] i2c: qup2 recovered
+[880.435] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[882.448] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[884.461] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[884.546] power: asleep, 60 wakeups, 768/12/0 collapses, 0 mA average
+[885.461] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[886.474] hub: m4 failing on the bus, restarting it
+[886.474] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[890.502] hub: m4 firmware 0084 up
+[935.803] rpm: msg 89 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000059
+[935.862] rpm: msg 90 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000005a
+[944.862] power: asleep, 60 wakeups, 828/12/0 collapses, 0 mA average
+[948.985] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[949.010] i2c: qup2 recovered
+[952.904] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[954.917] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[956.930] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[958.943] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[958.971] hub: m4 failing on the bus, restarting it
+[958.971] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[962.971] hub: m4 firmware 0084 up
+[996.193] rpm: msg 91 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000005b
+[996.253] rpm: msg 92 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000005c
+[1005.252] power: asleep, 61 wakeups, 888/12/1 collapses, 0 mA average
+[1006.242] gauge: charging stopped at 46.8 C, 3950 mV, 74%
+[1021.514] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1021.539] i2c: qup2 recovered
+[1025.501] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1027.514] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1029.527] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1031.540] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1031.568] hub: m4 failing on the bus, restarting it
+[1031.569] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[1035.568] hub: m4 firmware 0084 up
+[1055.706] rpm: msg 93 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000005d
+[1055.766] rpm: msg 94 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000005e
+[1065.772] power: asleep, 61 wakeups, 949/12/1 collapses, -1 mA average
+[1094.151] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1094.176] i2c: qup2 recovered
+[1097.125] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1100.151] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1102.164] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1104.177] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1104.205] hub: m4 failing on the bus, restarting it
+[1104.205] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[1108.205] hub: m4 firmware 0084 up
+[1116.265] rpm: msg 95 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000005f
+[1116.324] rpm: msg 96 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000060
+[1126.330] power: asleep, 61 wakeups, 1010/12/1 collapses, -1 mA average
+[1166.814] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1166.839] i2c: qup2 recovered
+[1170.801] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1172.814] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1174.827] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1175.834] rpm: msg 97 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000061
+[1175.894] rpm: msg 98 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000062
+[1176.840] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1176.868] hub: m4 failing on the bus, restarting it
+[1176.868] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[1180.868] hub: m4 firmware 0084 up
+[1186.915] power: asleep, 61 wakeups, 1071/12/1 collapses, -2 mA average
+[1236.234] rpm: msg 99 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000063
+[1236.293] rpm: msg 100 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000064
+[1239.519] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1239.544] i2c: qup2 recovered
+[1243.506] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1245.519] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1247.532] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1247.616] power: asleep, 61 wakeups, 1132/12/1 collapses, -1 mA average
+[1248.532] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1249.545] hub: m4 failing on the bus, restarting it
+[1249.545] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[1253.573] hub: m4 firmware 0084 up
+[1295.854] rpm: msg 101 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000065
+[1295.914] rpm: msg 102 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000066
+[1307.932] power: asleep, 60 wakeups, 1192/12/1 collapses, -1 mA average
+[1308.922] gauge: charging allowed at 42.3 C, 3953 mV, 74%
+[1312.226] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1312.251] i2c: qup2 recovered
+[1316.212] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1318.225] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1320.239] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1322.252] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1322.280] hub: m4 failing on the bus, restarting it
+[1322.280] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[1326.280] hub: m4 firmware 0084 up
+[1356.483] rpm: msg 103 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000067
+[1356.543] rpm: msg 104 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000068
+[1368.561] power: asleep, 61 wakeups, 1253/12/1 collapses, 0 mA average
+[1384.987] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1385.012] i2c: qup2 recovered
+[1388.974] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1390.987] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1393.000] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1395.013] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1395.041] hub: m4 failing on the bus, restarting it
+[1395.041] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[1399.041] hub: m4 firmware 0084 up
+[1416.159] rpm: msg 105 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000069
+[1416.219] rpm: msg 106 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000006a
+[1429.244] power: asleep, 61 wakeups, 1314/12/1 collapses, 0 mA average
+[1457.787] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1457.812] i2c: qup2 recovered
+[1460.762] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1463.787] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1465.800] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1467.813] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1467.842] hub: m4 failing on the bus, restarting it
+[1467.842] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[1471.841] hub: m4 firmware 0084 up
+[1475.875] rpm: msg 107 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000006b
+[1475.935] rpm: msg 108 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000006c
+[1489.967] power: asleep, 61 wakeups, 1375/12/1 collapses, 0 mA average
+[1530.612] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1530.637] i2c: qup2 recovered
+[1534.598] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1536.611] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1536.696] rpm: msg 109 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000006d
+[1536.755] rpm: msg 110 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000006e
+[1538.625] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1540.638] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1540.666] hub: m4 failing on the bus, restarting it
+[1540.666] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[1544.666] hub: m4 firmware 0084 up
+[1550.713] power: asleep, 61 wakeups, 1436/12/1 collapses, -1 mA average
+[1596.005] rpm: msg 111 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000006f
+[1596.065] rpm: msg 112 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000070
+[1603.455] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1603.480] i2c: qup2 recovered
+[1607.442] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1608.449] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1611.468] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1611.553] power: asleep, 61 wakeups, 1497/12/1 collapses, 0 mA average
+[1612.468] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1613.481] hub: m4 failing on the bus, restarting it
+[1613.481] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[1617.509] hub: m4 firmware 0084 up
+[1655.764] rpm: msg 113 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000071
+[1655.824] rpm: msg 114 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000072
+[1671.868] power: asleep, 60 wakeups, 1557/12/1 collapses, 0 mA average
+[1676.290] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1676.315] i2c: qup2 recovered
+[1680.276] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1682.289] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1684.302] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1686.315] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1686.344] hub: m4 failing on the bus, restarting it
+[1686.344] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[1690.343] hub: m4 firmware 0084 up
+[1716.520] rpm: msg 115 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000073
+[1716.580] rpm: msg 116 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000074
+[1732.625] power: asleep, 61 wakeups, 1618/12/1 collapses, 0 mA average
+[1749.176] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1749.201] i2c: qup2 recovered
+[1753.163] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1755.176] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1757.189] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1759.202] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1759.230] hub: m4 failing on the bus, restarting it
+[1759.230] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[1763.230] hub: m4 firmware 0084 up
+[1776.322] rpm: msg 117 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000075
+[1776.382] rpm: msg 118 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000076
+[1793.433] power: asleep, 61 wakeups, 1679/12/1 collapses, -1 mA average
+[1822.082] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1822.107] i2c: qup2 recovered
+[1825.057] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1828.082] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1830.095] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1832.108] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1832.137] hub: m4 failing on the bus, restarting it
+[1832.137] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[1836.136] hub: m4 firmware 0084 up
+[1836.170] rpm: msg 119 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000077
+[1836.230] rpm: msg 120 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000078
+[1854.262] power: asleep, 61 wakeups, 1740/12/1 collapses, 0 mA average
+[1895.004] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1895.029] i2c: qup2 recovered
+[1895.981] rpm: msg 121 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000079
+[1896.040] rpm: msg 122 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000007a
+[1898.991] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1901.004] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1903.017] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1905.030] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1905.058] hub: m4 failing on the bus, restarting it
+[1905.058] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[1909.058] hub: m4 firmware 0084 up
+[1915.105] power: asleep, 61 wakeups, 1801/12/1 collapses, 0 mA average
+[1956.371] rpm: msg 123 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000007b
+[1956.430] rpm: msg 124 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000007c
+[1967.949] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1967.974] i2c: qup2 recovered
+[1971.931] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1973.944] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1975.957] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1976.042] power: asleep, 61 wakeups, 1862/12/1 collapses, 0 mA average
+[1976.957] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[1977.970] hub: m4 failing on the bus, restarting it
+[1977.970] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[1981.998] hub: m4 firmware 0084 up
+[2016.227] rpm: msg 125 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000007d
+[2016.287] rpm: msg 126 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000007e
+[2036.358] power: asleep, 60 wakeups, 1922/12/1 collapses, 0 mA average
+[2040.874] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2040.899] i2c: qup2 recovered
+[2044.860] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2046.873] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2048.886] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2050.899] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2050.928] hub: m4 failing on the bus, restarting it
+[2050.928] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[2054.927] hub: m4 firmware 0084 up
+[2076.072] rpm: msg 127 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000007f
+[2076.132] rpm: msg 128 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000080
+[2097.209] power: asleep, 61 wakeups, 1983/12/1 collapses, 0 mA average
+[2113.850] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2113.875] i2c: qup2 recovered
+[2117.833] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2119.846] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2121.859] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2123.872] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2123.900] hub: m4 failing on the bus, restarting it
+[2123.900] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[2127.900] hub: m4 firmware 0084 up
+[2135.960] rpm: msg 129 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000081
+[2136.019] rpm: msg 130 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000082
+[2158.103] power: asleep, 61 wakeups, 2044/12/1 collapses, 0 mA average
+[2186.828] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2186.853] i2c: qup2 recovered
+[2189.798] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2192.823] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2194.836] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2195.844] rpm: msg 131 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000083
+[2195.904] rpm: msg 132 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000084
+[2196.849] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2196.878] hub: m4 failing on the bus, restarting it
+[2196.878] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[2200.877] hub: m4 firmware 0084 up
+[2219.003] power: asleep, 61 wakeups, 2105/12/1 collapses, -1 mA average
+[2256.243] rpm: msg 133 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000085
+[2256.303] rpm: msg 134 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000086
+[2259.820] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2259.845] i2c: qup2 recovered
+[2263.802] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2265.815] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2267.828] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2269.841] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2269.870] hub: m4 failing on the bus, restarting it
+[2269.870] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[2273.870] hub: m4 firmware 0084 up
+[2279.917] power: asleep, 61 wakeups, 2166/12/1 collapses, 0 mA average
+[2316.151] rpm: msg 135 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000087
+[2316.210] rpm: msg 136 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000088
+[2332.825] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2332.850] i2c: qup2 recovered
+[2336.807] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2338.820] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2339.827] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2340.885] power: asleep, 61 wakeups, 2227/12/1 collapses, -1 mA average
+[2341.833] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2342.846] hub: m4 failing on the bus, restarting it
+[2342.846] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[2346.874] hub: m4 firmware 0084 up
+[2376.071] rpm: msg 137 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000089
+[2376.130] rpm: msg 138 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000008a
+[2401.234] power: asleep, 60 wakeups, 2287/12/1 collapses, 0 mA average
+[2405.817] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2405.842] i2c: qup2 recovered
+[2409.799] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2411.812] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2413.825] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2415.838] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2415.867] hub: m4 failing on the bus, restarting it
+[2415.867] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[2419.867] hub: m4 firmware 0084 up
+[2435.979] rpm: msg 139 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000008b
+[2436.038] rpm: msg 140 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000008c
+[2462.148] power: asleep, 61 wakeups, 2348/12/1 collapses, 0 mA average
+[2478.854] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2478.879] i2c: qup2 recovered
+[2482.836] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2484.849] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2486.862] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2488.875] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2488.904] hub: m4 failing on the bus, restarting it
+[2488.904] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[2492.904] hub: m4 firmware 0084 up
+[2495.931] rpm: msg 141 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000008d
+[2495.991] rpm: msg 142 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000008e
+[2523.107] power: asleep, 61 wakeups, 2409/12/1 collapses, 0 mA average
+[2551.898] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2551.923] i2c: qup2 recovered
+[2554.868] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2555.932] rpm: msg 143 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000008f
+[2555.991] rpm: msg 144 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000090
+[2557.893] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2559.906] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2561.919] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2561.948] hub: m4 failing on the bus, restarting it
+[2561.948] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[2565.947] hub: m4 firmware 0084 up
+[2584.073] power: asleep, 61 wakeups, 2470/12/1 collapses, 0 mA average
+[2616.281] rpm: msg 145 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000091
+[2616.340] rpm: msg 146 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000092
+[2624.956] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2624.981] i2c: qup2 recovered
+[2628.938] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2630.951] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2632.964] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2634.977] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2635.005] hub: m4 failing on the bus, restarting it
+[2635.005] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[2639.005] hub: m4 firmware 0084 up
+[2645.052] power: asleep, 61 wakeups, 2531/12/1 collapses, 0 mA average
+[2676.238] rpm: msg 147 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000093
+[2676.298] rpm: msg 148 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000094
+[2698.023] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2698.048] i2c: qup2 recovered
+[2702.005] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2704.018] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2706.031] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2706.116] power: asleep, 61 wakeups, 2592/12/1 collapses, 0 mA average
+[2707.031] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2708.044] hub: m4 failing on the bus, restarting it
+[2708.044] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[2712.072] hub: m4 firmware 0084 up
+[2736.236] rpm: msg 149 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000095
+[2736.296] rpm: msg 150 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000096
+[2766.431] power: asleep, 60 wakeups, 2652/12/1 collapses, -1 mA average
+[2796.626] rpm: msg 151 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000097
+[2796.686] rpm: msg 152 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000098
+[2822.449] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2822.474] i2c: qup2 recovered
+[2826.431] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2826.516] power: asleep, 60 wakeups, 2712/12/1 collapses, 0 mA average
+[2828.438] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2830.457] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2832.470] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2832.499] hub: m4 failing on the bus, restarting it
+[2832.499] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[2836.498] hub: m4 firmware 0084 up
+[2855.630] rpm: msg 153 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000099
+[2855.689] rpm: msg 154 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000009a
+[2886.832] power: asleep, 60 wakeups, 2772/12/1 collapses, 0 mA average
+[2895.549] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2895.574] i2c: qup2 recovered
+[2899.531] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2901.544] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2903.557] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2905.570] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2905.598] hub: m4 failing on the bus, restarting it
+[2905.598] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[2909.598] hub: m4 firmware 0084 up
+[2915.645] rpm: msg 155 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000009b
+[2915.704] rpm: msg 156 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000009c
+[2946.847] power: asleep, 60 wakeups, 2832/12/1 collapses, 0 mA average
+[2968.659] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2968.684] i2c: qup2 recovered
+[2972.641] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2974.654] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2975.662] rpm: msg 157 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000009d
+[2975.721] rpm: msg 158 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000009e
+[2976.667] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2978.680] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[2978.709] hub: m4 failing on the bus, restarting it
+[2978.709] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[2982.708] hub: m4 firmware 0084 up
+[3006.873] power: asleep, 60 wakeups, 2892/12/1 collapses, -1 mA average
+[3036.061] rpm: msg 159 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000009f
+[3036.120] rpm: msg 160 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000a0
+[3041.774] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3041.799] i2c: qup2 recovered
+[3045.756] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3047.769] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3049.782] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3051.795] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3051.824] hub: m4 failing on the bus, restarting it
+[3051.824] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3055.823] hub: m4 firmware 0084 up
+[3066.903] power: asleep, 60 wakeups, 2952/12/1 collapses, 0 mA average
+[3096.091] rpm: msg 161 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000a1
+[3096.151] rpm: msg 162 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000a2
+[3114.898] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3114.923] i2c: qup2 recovered
+[3118.880] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3120.893] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3122.906] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3124.919] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3124.948] hub: m4 failing on the bus, restarting it
+[3124.948] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3126.942] power: asleep, 60 wakeups, 3012/12/1 collapses, 0 mA average
+[3128.947] hub: m4 firmware 0084 up
+[3156.131] rpm: msg 163 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000a3
+[3156.190] rpm: msg 164 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000a4
+[3187.333] power: asleep, 60 wakeups, 3072/12/1 collapses, 0 mA average
+[3188.021] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3188.046] i2c: qup2 recovered
+[3192.003] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3194.010] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3196.029] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3198.042] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3198.071] hub: m4 failing on the bus, restarting it
+[3198.071] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3202.071] hub: m4 firmware 0084 up
+[3216.169] rpm: msg 165 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000a5
+[3216.229] rpm: msg 166 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000a6
+[3247.372] power: asleep, 60 wakeups, 3132/12/1 collapses, 0 mA average
+[3261.164] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3261.189] i2c: qup2 recovered
+[3265.146] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3267.159] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3269.172] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3271.185] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3271.213] hub: m4 failing on the bus, restarting it
+[3271.214] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3275.213] hub: m4 firmware 0084 up
+[3276.227] rpm: msg 167 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000a7
+[3276.287] rpm: msg 168 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000a8
+[3307.430] power: asleep, 60 wakeups, 3192/12/1 collapses, -1 mA average
+[3334.311] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3334.336] i2c: qup2 recovered
+[3336.332] rpm: msg 169 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000a9
+[3336.391] rpm: msg 170 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000aa
+[3338.293] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3340.306] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3342.319] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3344.332] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3344.361] hub: m4 failing on the bus, restarting it
+[3344.361] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3348.360] hub: m4 firmware 0084 up
+[3367.492] power: asleep, 60 wakeups, 3252/12/1 collapses, 0 mA average
+[3395.674] rpm: msg 171 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000ab
+[3395.733] rpm: msg 172 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000ac
+[3407.463] i2c: qup2 timeout: state 0000001d i2c 04138700 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3407.488] i2c: qup2 recovered
+[3411.445] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3412.452] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3415.471] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3417.484] i2c: qup2 error (in irq): state 0000001d i2c 041321c4 err 00000000 op 00000010, cbcr 00000001 rcgr 00000000 ahb 04f60000
+[3417.512] hub: m4 failing on the bus, restarting it
+[3417.513] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3418.145] hub: m4 bootloader not answering
+[3427.559] power: asleep, 60 wakeups, 3312/12/1 collapses, 0 mA average
+[3447.679] hub: m4 failing on the bus, restarting it
+[3447.680] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3448.312] hub: m4 bootloader not answering
+[3455.741] rpm: msg 173 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000ad
+[3455.800] rpm: msg 174 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000ae
+[3477.875] hub: m4 failing on the bus, restarting it
+[3477.875] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3478.507] hub: m4 bootloader not answering
+[3487.950] power: asleep, 60 wakeups, 3372/12/1 collapses, 0 mA average
+[3508.070] hub: m4 failing on the bus, restarting it
+[3508.070] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3508.703] hub: m4 bootloader not answering
+[3516.132] rpm: msg 175 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000af
+[3516.191] rpm: msg 176 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000b0
+[3538.265] hub: m4 failing on the bus, restarting it
+[3538.266] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3538.898] hub: m4 bootloader not answering
+[3548.341] power: asleep, 60 wakeups, 3432/12/1 collapses, 0 mA average
+[3568.460] hub: m4 failing on the bus, restarting it
+[3568.461] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3569.093] hub: m4 bootloader not answering
+[3576.522] rpm: msg 177 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000b1
+[3576.582] rpm: msg 178 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000b2
+[3598.656] hub: m4 failing on the bus, restarting it
+[3598.656] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3599.289] hub: m4 bootloader not answering
+[3608.731] power: asleep, 60 wakeups, 3492/12/1 collapses, 0 mA average
+[3628.851] hub: m4 failing on the bus, restarting it
+[3628.851] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3629.484] hub: m4 bootloader not answering
+[3635.906] rpm: msg 179 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000b3
+[3635.966] rpm: msg 180 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000b4
+[3659.046] hub: m4 failing on the bus, restarting it
+[3659.047] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3659.679] hub: m4 bootloader not answering
+[3669.122] power: asleep, 60 wakeups, 3552/12/1 collapses, 0 mA average
+[3689.242] hub: m4 failing on the bus, restarting it
+[3689.242] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3689.874] hub: m4 bootloader not answering
+[3696.297] rpm: msg 181 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000b5
+[3696.357] rpm: msg 182 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000b6
+[3719.437] hub: m4 failing on the bus, restarting it
+[3719.437] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3720.070] hub: m4 bootloader not answering
+[3729.512] power: asleep, 60 wakeups, 3612/12/1 collapses, 0 mA average
+[3749.632] hub: m4 failing on the bus, restarting it
+[3749.633] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3750.265] hub: m4 bootloader not answering
+[3755.681] rpm: msg 183 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000b7
+[3755.741] rpm: msg 184 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000b8
+[3779.827] hub: m4 failing on the bus, restarting it
+[3779.828] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3780.460] hub: m4 bootloader not answering
+[3789.903] power: asleep, 60 wakeups, 3672/12/1 collapses, 0 mA average
+[3810.023] hub: m4 failing on the bus, restarting it
+[3810.023] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3810.656] hub: m4 bootloader not answering
+[3816.072] rpm: msg 185 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000b9
+[3816.132] rpm: msg 186 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000ba
+[3840.218] hub: m4 failing on the bus, restarting it
+[3840.219] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3840.851] hub: m4 bootloader not answering
+[3850.293] power: asleep, 60 wakeups, 3732/12/1 collapses, 0 mA average
+[3870.413] hub: m4 failing on the bus, restarting it
+[3870.414] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3871.046] hub: m4 bootloader not answering
+[3876.462] rpm: msg 187 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000bb
+[3876.522] rpm: msg 188 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000bc
+[3900.609] hub: m4 failing on the bus, restarting it
+[3900.609] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3901.242] hub: m4 bootloader not answering
+[3910.684] power: asleep, 60 wakeups, 3792/12/1 collapses, 0 mA average
+[3930.804] hub: m4 failing on the bus, restarting it
+[3930.804] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3931.437] hub: m4 bootloader not answering
+[3935.847] rpm: msg 189 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000bd
+[3935.906] rpm: msg 190 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000be
+[3961.000] hub: m4 failing on the bus, restarting it
+[3961.000] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3961.632] hub: m4 bootloader not answering
+[3971.075] power: asleep, 60 wakeups, 3852/12/1 collapses, 0 mA average
+[3991.195] hub: m4 failing on the bus, restarting it
+[3991.195] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3991.828] hub: m4 bootloader not answering
+[3996.237] rpm: msg 191 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000bf
+[3996.297] rpm: msg 192 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000c0
+[4021.390] hub: m4 failing on the bus, restarting it
+[4021.391] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4022.023] hub: m4 bootloader not answering
+[4031.466] power: asleep, 60 wakeups, 3912/12/1 collapses, -1 mA average
+[4051.586] hub: m4 failing on the bus, restarting it
+[4051.586] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4052.218] hub: m4 bootloader not answering
+[4056.628] rpm: msg 193 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000c1
+[4056.688] rpm: msg 194 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000c2
+[4081.781] hub: m4 failing on the bus, restarting it
+[4081.781] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4082.414] hub: m4 bootloader not answering
+[4091.856] power: asleep, 60 wakeups, 3972/12/1 collapses, 0 mA average
+[4111.976] hub: m4 failing on the bus, restarting it
+[4111.976] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4112.609] hub: m4 bootloader not answering
+[4116.012] rpm: msg 195 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000c3
+[4116.072] rpm: msg 196 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000c4
+[4142.171] hub: m4 failing on the bus, restarting it
+[4142.172] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4142.804] hub: m4 bootloader not answering
+[4152.247] power: asleep, 60 wakeups, 4032/12/1 collapses, 0 mA average
+[4172.366] hub: m4 failing on the bus, restarting it
+[4172.367] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4172.999] hub: m4 bootloader not answering
+[4176.402] rpm: msg 197 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000c5
+[4176.462] rpm: msg 198 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000c6
+[4202.562] hub: m4 failing on the bus, restarting it
+[4202.562] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4203.195] hub: m4 bootloader not answering
+[4212.637] power: asleep, 60 wakeups, 4092/12/1 collapses, -1 mA average
+[4232.757] hub: m4 failing on the bus, restarting it
+[4232.757] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4233.390] hub: m4 bootloader not answering
+[4235.786] rpm: msg 199 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000c7
+[4235.846] rpm: msg 200 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000c8
+[4262.952] hub: m4 failing on the bus, restarting it
+[4262.953] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4263.585] hub: m4 bootloader not answering
+[4273.028] power: asleep, 60 wakeups, 4152/12/1 collapses, -1 mA average
+[4293.148] hub: m4 failing on the bus, restarting it
+[4293.148] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4293.780] hub: m4 bootloader not answering
+[4296.177] rpm: msg 201 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000c9
+[4296.237] rpm: msg 202 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000ca
+[4323.343] hub: m4 failing on the bus, restarting it
+[4323.343] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4323.976] hub: m4 bootloader not answering
+[4333.418] power: asleep, 60 wakeups, 4212/12/1 collapses, 0 mA average
+[4353.538] hub: m4 failing on the bus, restarting it
+[4353.539] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4354.171] hub: m4 bootloader not answering
+[4356.568] rpm: msg 203 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000cb
+[4356.627] rpm: msg 204 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000cc
+[4383.734] hub: m4 failing on the bus, restarting it
+[4383.734] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4384.366] hub: m4 bootloader not answering
+[4393.809] power: asleep, 60 wakeups, 4272/12/1 collapses, 0 mA average
+[4413.929] hub: m4 failing on the bus, restarting it
+[4413.929] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4414.562] hub: m4 bootloader not answering
+[4415.952] rpm: msg 205 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000cd
+[4416.012] rpm: msg 206 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000ce
+[4444.124] hub: m4 failing on the bus, restarting it
+[4444.125] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4444.757] hub: m4 bootloader not answering
+[4454.200] power: asleep, 60 wakeups, 4332/12/1 collapses, 0 mA average
+[4474.319] hub: m4 failing on the bus, restarting it
+[4474.320] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4474.952] hub: m4 bootloader not answering
+[4476.342] rpm: msg 207 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000cf
+[4476.402] rpm: msg 208 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000d0
+[4504.515] hub: m4 failing on the bus, restarting it
+[4504.515] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4505.148] hub: m4 bootloader not answering
+[4514.590] power: asleep, 60 wakeups, 4392/12/1 collapses, 0 mA average
+[4534.710] hub: m4 failing on the bus, restarting it
+[4534.711] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4535.343] hub: m4 bootloader not answering
+[4535.727] rpm: msg 209 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000d1
+[4535.786] rpm: msg 210 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000d2
+[4564.906] hub: m4 failing on the bus, restarting it
+[4564.906] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4565.538] hub: m4 bootloader not answering
+[4574.981] power: asleep, 60 wakeups, 4452/12/1 collapses, 0 mA average
+[4595.101] hub: m4 failing on the bus, restarting it
+[4595.101] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4595.734] hub: m4 bootloader not answering
+[4595.734] rpm: msg 211 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000d3
+[4595.794] rpm: msg 212 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000d4
+[4625.296] hub: m4 failing on the bus, restarting it
+[4625.296] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4625.929] hub: m4 bootloader not answering
+[4635.371] power: asleep, 60 wakeups, 4512/12/1 collapses, 0 mA average
+[4655.491] hub: m4 failing on the bus, restarting it
+[4655.492] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4656.124] hub: m4 bootloader not answering
+[4656.125] rpm: msg 213 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000d5
+[4656.184] rpm: msg 214 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000d6
+[4685.687] hub: m4 failing on the bus, restarting it
+[4685.687] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4686.319] hub: m4 bootloader not answering
+[4695.762] power: asleep, 60 wakeups, 4572/12/1 collapses, 0 mA average
+[4715.882] hub: m4 failing on the bus, restarting it
+[4715.882] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4716.515] hub: m4 bootloader not answering
+[4716.516] rpm: msg 215 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000d7
+[4716.575] rpm: msg 216 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000d8
+[4746.077] hub: m4 failing on the bus, restarting it
+[4746.078] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4746.710] hub: m4 bootloader not answering
+[4756.153] power: asleep, 60 wakeups, 4632/12/1 collapses, 0 mA average
+[4776.272] hub: m4 failing on the bus, restarting it
+[4776.273] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4776.905] hub: m4 bootloader not answering
+[4776.906] rpm: msg 217 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000d9
+[4776.966] rpm: msg 218 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000da
+[4806.468] hub: m4 failing on the bus, restarting it
+[4806.468] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4807.101] hub: m4 bootloader not answering
+[4816.543] power: asleep, 60 wakeups, 4692/12/1 collapses, 0 mA average
+[4835.666] rpm: msg 219 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000db
+[4835.726] rpm: msg 220 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000dc
+[4835.726] light: 232 lux, code 35
+[4836.663] hub: m4 failing on the bus, restarting it
+[4836.663] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4837.296] hub: m4 bootloader not answering
+[4866.858] hub: m4 failing on the bus, restarting it
+[4866.859] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4867.491] hub: m4 bootloader not answering
+[4876.934] power: asleep, 60 wakeups, 4752/12/1 collapses, 0 mA average
+[4896.057] rpm: msg 221 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000dd
+[4896.117] rpm: msg 222 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000de
+[4897.054] hub: m4 failing on the bus, restarting it
+[4897.054] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4897.687] hub: m4 bootloader not answering
+[4927.249] hub: m4 failing on the bus, restarting it
+[4927.249] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4927.882] hub: m4 bootloader not answering
+[4937.325] power: asleep, 60 wakeups, 4812/12/1 collapses, 0 mA average
+[4956.448] rpm: msg 223 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000df
+[4956.508] rpm: msg 224 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000e0
+[4956.508] light: 200 lux, code 34
+[4957.444] hub: m4 failing on the bus, restarting it
+[4957.445] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4958.077] hub: m4 bootloader not answering
+[4987.640] hub: m4 failing on the bus, restarting it
+[4987.640] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[4988.273] hub: m4 bootloader not answering
+[4997.715] power: asleep, 60 wakeups, 4872/12/1 collapses, 0 mA average
+[5015.832] rpm: msg 225 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000e1
+[5015.892] rpm: msg 226 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000e2
+[5017.835] hub: m4 failing on the bus, restarting it
+[5017.836] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[5018.468] hub: m4 bootloader not answering
+[5048.030] hub: m4 failing on the bus, restarting it
+[5048.031] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[5048.663] hub: m4 bootloader not answering
+[5058.106] power: asleep, 60 wakeups, 4932/12/1 collapses, 0 mA average
+[5076.223] rpm: msg 227 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000e3
+[5076.282] rpm: msg 228 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000e4
+[5076.282] light: 231 lux, code 35
+[5078.226] hub: m4 failing on the bus, restarting it
+[5078.226] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[5078.859] hub: m4 bootloader not answering
+[5108.421] hub: m4 failing on the bus, restarting it
+[5108.421] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[5109.054] hub: m4 bootloader not answering
+[5109.058] wake: touch
+[5109.061] rpm: msg 229 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000e5
+[5109.061] gpu: powered, hw version 00070010, gdsc a0222000
+[5109.062] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[5109.063] gpu: resumed in 1504 us
+[5109.070] emmc: awake
+[5109.080] tick 5102, 87 fps, rtc 1793750493, battery 3953 mV, dock 0 usb 1 chg_n 0, 74%, 28.6 C, status 0400, 0 errors, usb 1708/14397, touch 876/0
+[5109.081] power: awake, asleep 100% of the last second, 50 wakeups, 4982/12/1 collapses, battery 0 mA, 0 mA average
+[5109.081] gpu: 5 frames, 2660 us submit to idle, 199 us vertices
+[5109.081] ui: 1 of 356 frames repainted, update 20 us avg, 5572 us per repaint
+[5109.559] gesture: swipe right (76,157 -> 318,197 in 134 ms)
+[5109.892] gesture: swipe left (283,182 -> 8,195 in 100 ms)
+[5110.076] tick 5103, 59 fps, rtc 1793750494, battery 3951 mV, dock 0 usb 1 chg_n 0, 74%, 28.6 C, status 0400, 0 errors, usb 1708/14397, touch 895/0
+[5110.077] power: awake, asleep 0% of the last second, 0 wakeups, 4982/12/1 collapses, battery 0 mA, 0 mA average
+[5110.077] gpu: 59 frames, 2400 us submit to idle, 190 us vertices
+[5110.077] ui: 0 of 59 frames repainted, update 5 us avg, 0 us per repaint
+[5110.243] gesture: swipe left (209,143 -> 12,188 in 116 ms)
+[5110.543] gesture: swipe right (86,188 -> 300,206 in 67 ms)
+[5111.026] gesture: swipe down (202,149 -> 189,320 in 100 ms)
+[5111.077] tick 5104, 60 fps, rtc 1793750495, battery 3953 mV, dock 0 usb 1 chg_n 0, 74%, 28.7 C, status 0400, 0 errors, usb 1708/14397, touch 918/0
+[5111.078] power: awake, asleep 0% of the last second, 0 wakeups, 4982/12/1 collapses, battery 0 mA, 0 mA average
+[5111.078] gpu: 60 frames, 2429 us submit to idle, 190 us vertices
+[5111.078] ui: 0 of 60 frames repainted, update 5 us avg, 0 us per repaint
+[5111.660] gesture: swipe up (208,299 -> 273,81 in 133 ms)
+[5111.994] gesture: swipe up (191,281 -> 270,94 in 83 ms)
+[5112.078] tick 5105, 60 fps, rtc 1793750496, battery 3953 mV, dock 0 usb 1 chg_n 0, 74%, 28.7 C, status 0400, 0 errors, usb 1708/14397, touch 937/0
+[5112.079] power: awake, asleep 0% of the last second, 0 wakeups, 4982/12/1 collapses, battery 0 mA, 0 mA average
+[5112.079] gpu: 60 frames, 2796 us submit to idle, 190 us vertices
+[5112.079] ui: 0 of 60 frames repainted, update 5 us avg, 0 us per repaint
+[5112.940] gesture: swipe left (287,261 -> 188,321 in 115 ms)
+[5113.084] tick 5106, 49 fps, rtc 1793750497, battery 3952 mV, dock 0 usb 1 chg_n 0, 74%, 28.8 C, status 0400, 0 errors, usb 1708/14397, touch 944/0
+[5113.084] power: awake, asleep 0% of the last second, 0 wakeups, 4982/12/1 collapses, battery -1 mA, 0 mA average
+[5113.085] gpu: 49 frames, 3385 us submit to idle, 192 us vertices
+[5113.085] ui: 10 of 181 frames repainted, update 1006 us avg, 18138 us per repaint
+[5113.729] gesture: swipe down (202,147 -> 164,300 in 145 ms)
+[5114.080] tick 5107, 42 fps, rtc 1793750498, battery 3954 mV, dock 0 usb 1 chg_n 0, 74%, 28.9 C, status 0400, 0 errors, usb 1708/14397, touch 959/0
+[5114.081] power: awake, asleep 0% of the last second, 0 wakeups, 4982/12/1 collapses, battery 0 mA, 0 mA average
+[5114.081] gpu: 42 frames, 3206 us submit to idle, 198 us vertices
+[5114.081] ui: 35 of 42 frames repainted, update 14842 us avg, 17807 us per repaint
+[5114.113] gesture: swipe down (202,172 -> 158,313 in 100 ms)
+[5114.597] gesture: swipe up (191,287 -> 212,152 in 101 ms)
+[5115.081] tick 5108, 60 fps, rtc 1793750499, battery 3953 mV, dock 0 usb 1 chg_n 0, 74%, 29.0 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5115.082] power: awake, asleep 0% of the last second, 0 wakeups, 4982/12/1 collapses, battery 0 mA, 0 mA average
+[5115.082] gpu: 60 frames, 2706 us submit to idle, 189 us vertices
+[5115.082] ui: 0 of 60 frames repainted, update 5 us avg, 0 us per repaint
+[5116.066] tick 5109, 21 fps, rtc 1793750500, battery 3953 mV, dock 0 usb 1 chg_n 0, 74%, 29.0 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5116.066] power: awake, asleep 0% of the last second, 0 wakeups, 4982/12/1 collapses, battery 0 mA, 0 mA average
+[5116.066] gpu: 21 frames, 2711 us submit to idle, 190 us vertices
+[5116.067] ui: 0 of 772 frames repainted, update 4 us avg, 0 us per repaint
+[5117.065] tick 5110, 11 fps, rtc 1793750501, battery 3952 mV, dock 0 usb 1 chg_n 0, 74%, 29.1 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5117.066] power: awake, asleep 0% of the last second, 0 wakeups, 4982/12/1 collapses, battery 0 mA, 0 mA average
+[5117.066] gpu: 11 frames, 2636 us submit to idle, 190 us vertices
+[5117.066] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[5118.066] tick 5111, 11 fps, rtc 1793750502, battery 3952 mV, dock 0 usb 1 chg_n 0, 74%, 29.1 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5118.066] power: awake, asleep 0% of the last second, 0 wakeups, 4982/12/1 collapses, battery 0 mA, 0 mA average
+[5118.067] gpu: 11 frames, 2639 us submit to idle, 190 us vertices
+[5118.067] ui: 0 of 988 frames repainted, update 4 us avg, 0 us per repaint
+[5119.065] tick 5112, 12 fps, rtc 1793750503, battery 3954 mV, dock 0 usb 1 chg_n 0, 74%, 29.1 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5119.066] power: awake, asleep 0% of the last second, 0 wakeups, 4982/12/1 collapses, battery 0 mA, 0 mA average
+[5119.066] gpu: 12 frames, 2648 us submit to idle, 190 us vertices
+[5119.066] ui: 0 of 986 frames repainted, update 4 us avg, 0 us per repaint
+[5120.066] tick 5113, 11 fps, rtc 1793750504, battery 3953 mV, dock 0 usb 1 chg_n 0, 74%, 29.1 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5120.066] power: awake, asleep 0% of the last second, 0 wakeups, 4982/12/1 collapses, battery 0 mA, 0 mA average
+[5120.067] gpu: 11 frames, 2646 us submit to idle, 190 us vertices
+[5120.067] ui: 0 of 988 frames repainted, update 4 us avg, 0 us per repaint
+[5121.065] tick 5114, 11 fps, rtc 1793750505, battery 3953 mV, dock 0 usb 1 chg_n 0, 74%, 29.2 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5121.066] power: awake, asleep 0% of the last second, 0 wakeups, 4982/12/1 collapses, battery 0 mA, 0 mA average
+[5121.066] gpu: 11 frames, 2644 us submit to idle, 190 us vertices
+[5121.066] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[5122.066] tick 5115, 11 fps, rtc 1793750506, battery 3953 mV, dock 0 usb 1 chg_n 0, 74%, 29.2 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5122.066] power: awake, asleep 0% of the last second, 0 wakeups, 4982/12/1 collapses, battery -1 mA, 0 mA average
+[5122.067] gpu: 11 frames, 2645 us submit to idle, 189 us vertices
+[5122.067] ui: 0 of 988 frames repainted, update 4 us avg, 0 us per repaint
+[5123.065] tick 5116, 11 fps, rtc 1793750507, battery 3664 mV, dock 0 usb 0 chg_n 0, 74%, 29.2 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5123.066] power: awake, asleep 0% of the last second, 0 wakeups, 4982/12/1 collapses, battery 94 mA, 2 mA average
+[5123.066] gpu: 11 frames, 2655 us submit to idle, 190 us vertices
+[5123.066] ui: 0 of 988 frames repainted, update 4 us avg, 0 us per repaint
+[5124.066] tick 5117, 11 fps, rtc 1793750508, battery 3571 mV, dock 0 usb 0 chg_n 0, 74%, 29.2 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5124.067] power: awake, asleep 0% of the last second, 0 wakeups, 4982/12/1 collapses, battery 105 mA, 9 mA average
+[5124.067] gpu: 11 frames, 2656 us submit to idle, 189 us vertices
+[5124.067] ui: 0 of 988 frames repainted, update 4 us avg, 0 us per repaint
+[5124.680] rpm: msg 230 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000e6
+[5124.740] rpm: msg 231 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000e7
+[5124.740] light: 169 lux, code 33
+[5124.740] sleep
+[5124.745] rpm: msg 232 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000e8
+[5124.747] emmc: asleep
+[5125.452] usb: unconfigured
+[5125.452] usb: unplugged, phy in low power mode
+[5128.604] gauge: charging allowed, reduced at 29.0 C, 4380 mV, 74%
+[5128.763] wake: key
+[5128.766] rpm: msg 233 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000e9
+[5128.767] gpu: powered, hw version 00070010, gdsc a0222000
+[5128.768] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[5128.768] gpu: resumed in 1502 us
+[5128.796] tick 5122, 9 fps, rtc 1793750513, battery 4379 mV, dock 0 usb 0 chg_n 0, 74%, 29.0 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5128.797] power: awake, asleep 100% of the last second, 18 wakeups, 4995/16/2 collapses, battery -143 mA, -15 mA average
+[5128.797] gpu: 8 frames, 2563 us submit to idle, 196 us vertices
+[5128.797] ui: 1 of 607 frames repainted, update 35 us avg, 18995 us per repaint
+[5129.114] gauge: dock 1, usb 0
+[5129.114] usb: cable plugged in
+[5129.765] tick 5123, 45 fps, rtc 1793750514, battery 4327 mV, dock 1 usb 0 chg_n 0, 74%, 28.9 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5129.765] power: awake, asleep 0% of the last second, 0 wakeups, 4995/16/2 collapses, battery -116 mA, -22 mA average
+[5129.766] gpu: 45 frames, 2441 us submit to idle, 190 us vertices
+[5129.766] ui: 1 of 293 frames repainted, update 60 us avg, 16299 us per repaint
+[5130.764] tick 5124, 12 fps, rtc 1793750515, battery 4338 mV, dock 1 usb 0 chg_n 0, 74%, 28.9 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5130.765] power: awake, asleep 0% of the last second, 0 wakeups, 4995/16/2 collapses, battery -115 mA, -29 mA average
+[5130.765] gpu: 12 frames, 2643 us submit to idle, 189 us vertices
+[5130.765] ui: 0 of 986 frames repainted, update 4 us avg, 0 us per repaint
+[5131.765] tick 5125, 11 fps, rtc 1793750516, battery 4332 mV, dock 1 usb 0 chg_n 0, 74%, 28.9 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5131.765] power: awake, asleep 0% of the last second, 0 wakeups, 4995/16/2 collapses, battery -113 mA, -37 mA average
+[5131.766] gpu: 11 frames, 2647 us submit to idle, 190 us vertices
+[5131.766] ui: 0 of 988 frames repainted, update 4 us avg, 0 us per repaint
+[5132.764] tick 5126, 11 fps, rtc 1793750517, battery 3885 mV, dock 1 usb 0 chg_n 0, 74%, 29.0 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5132.765] power: awake, asleep 0% of the last second, 0 wakeups, 4995/16/2 collapses, battery 94 mA, -38 mA average
+[5132.765] gpu: 11 frames, 2647 us submit to idle, 190 us vertices
+[5132.765] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[5133.765] tick 5127, 11 fps, rtc 1793750518, battery 3660 mV, dock 1 usb 0 chg_n 0, 74%, 29.0 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5133.766] power: awake, asleep 0% of the last second, 0 wakeups, 4995/16/2 collapses, battery 80 mA, -27 mA average
+[5133.766] gpu: 11 frames, 2635 us submit to idle, 190 us vertices
+[5133.766] ui: 0 of 988 frames repainted, update 4 us avg, 0 us per repaint
+[5134.764] tick 5128, 11 fps, rtc 1793750519, battery 3621 mV, dock 1 usb 0 chg_n 0, 74%, 28.9 C, status 0400, 0 errors, usb 1708/14397, touch 968/0
+[5134.765] power: awake, asleep 0% of the last second, 0 wakeups, 4995/16/2 collapses, battery 82 mA, -18 mA average
+[5134.765] gpu: 11 frames, 2637 us submit to idle, 189 us vertices
+[5134.765] ui: 0 of 987 frames repainted, update 4 us avg, 0 us per repaint
+[5135.451] rpm: msg 234 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000ea
+[5135.510] rpm: msg 235 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000eb
+[5135.511] light: 268 lux, code 36
+[5135.511] sleep
+[5135.515] rpm: msg 236 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000ec
+[5135.619] gauge: dock 0, usb 0
+[5136.625] rpm: msg 237 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000ed
+[5136.685] rpm: msg 238 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000ee
+[5136.685] light: 199 lux, code 34
+[5141.421] hub: m4 failing on the bus, restarting it
+[5141.421] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[5142.030] hub: m4 bootloader not answering
+[5142.034] wake: touch
+[5142.038] rpm: msg 239 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000ef
+[5142.038] gpu: powered, hw version 00070010, gdsc a0222000
+[5142.039] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[5142.039] gpu: resumed in 1504 us
+[5142.066] tick 5135, 11 fps, rtc 1793750526, battery 3610 mV, dock 0 usb 0 chg_n 0, 74%, 28.2 C, status 0400, 0 errors, usb 1708/14397, touch 974/0
+[5142.067] power: awake, asleep 100% of the last second, 3 wakeups, 4995/19/2 collapses, battery 99 mA, 4 mA average
+[5142.067] gpu: 9 frames, 2571 us submit to idle, 195 us vertices
+[5142.067] ui: 1 of 680 frames repainted, update 33 us avg, 19522 us per repaint
+[5142.130] gesture: tap (173,155 -> 173,155 in 33 ms)
+[5143.036] tick 5136, 48 fps, rtc 1793750527, battery 3521 mV, dock 0 usb 0 chg_n 0, 74%, 28.2 C, status 0400, 0 errors, usb 1708/14397, touch 976/0
+[5143.036] power: awake, asleep 0% of the last second, 0 wakeups, 4995/19/2 collapses, battery 117 mA, 14 mA average
+[5143.036] gpu: 48 frames, 2002 us submit to idle, 189 us vertices
+[5143.037] ui: 0 of 233 frames repainted, update 4 us avg, 0 us per repaint
+[5143.221] rpm: msg 240 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000f0
+[5143.281] rpm: msg 241 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000f1
+[5143.281] sleep
+[5143.286] rpm: msg 242 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000f2
+[5149.527] gauge: dock 1, usb 1
+[5149.631] usb: up again in 103 ms
+[5149.631] usb: cable plugged in
+[5149.634] wake: charger
+[5149.637] rpm: msg 243 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000f3
+[5149.638] gpu: powered, hw version 00070010, gdsc a0222000
+[5149.639] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[5149.639] gpu: resumed in 1502 us
+[5149.662] tick 5143, 4 fps, rtc 1793750534, battery 3934 mV, dock 1 usb 1 chg_n 0, 74%, 28.0 C, status 0400, 0 errors, usb 1708/14397, touch 976/0
+[5149.662] power: awake, asleep 100% of the last second, 2 wakeups, 4995/21/2 collapses, battery -4 mA, 11 mA average
+[5149.663] gpu: 3 frames, 2165 us submit to idle, 207 us vertices
+[5149.663] ui: 1 of 185 frames repainted, update 80 us avg, 14004 us per repaint
+[5149.860] usb: configured, high speed
+[5149.892] adb: host connected, max payload 1048576
+[5150.635] tick 5144, 44 fps, rtc 1793750534, battery 3940 mV, dock 1 usb 1 chg_n 0, 74%, 28.2 C, status 0400, 0 errors, usb 2018/14519, touch 976/0
+[5150.636] power: awake, asleep 0% of the last second, 0 wakeups, 4995/21/2 collapses, battery 2 mA, 10 mA average
+[5150.636] gpu: 44 frames, 2768 us submit to idle, 189 us vertices
+[5150.636] ui: 0 of 148 frames repainted, update 4 us avg, 0 us per repaint
+[5151.636] tick 5145, 11 fps, rtc 1793750535, battery 3944 mV, dock 1 usb 1 chg_n 0, 74%, 28.5 C, status 0400, 0 errors, usb 2018/14519, touch 976/0
+[5151.637] power: awake, asleep 0% of the last second, 0 wakeups, 4995/21/2 collapses, battery -6 mA, 10 mA average
+[5151.637] gpu: 11 frames, 2652 us submit to idle, 189 us vertices
+[5151.637] ui: 0 of 988 frames repainted, update 4 us avg, 0 us per repaint
+[5152.634] rpm: msg 244 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000f4
+[5152.693] rpm: msg 245 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000f5
+[5152.694] light: 237 lux, code 35
+[5152.694] sleep
+[5152.698] rpm: msg 246 -> 20 bytes: 00716572 0000000c 2367736d 00000004 000000f6
+[5171.851] hub: m4 failing on the bus, restarting it
+[5171.851] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[5172.484] hub: m4 bootloader not answering

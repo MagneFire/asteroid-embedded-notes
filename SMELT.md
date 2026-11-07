@@ -124,3 +124,12 @@ Sturgeon at efc895c (2026-11-07, Darrel): boot handover, no face resize, slide-i
 AsteroidOS's, kept as is) and the speed dial name swipe all fine. Smelt and sparrow not run yet.
 
 Sparrow at efc895c: boots, `buzz 500` felt by Darrel, no "not taken" log, EN 0x1c046 back to 00.
+
+## M4 wedged (2026-11-07)
+Asleep on the dock, qup2 timed out about every 70 s after the M4's wake line rose (I2C status
+041321c4 / 04138700: bus active, SDA high, SCL low, so the M4 holds the clock). Each one ended in
+"failing on the bus" and a reset that brought firmware 0084 back, about 45 times, until 3417 s.
+After that, the ROM bootloader stopped answering at all. A fresh firmware boot didn't fix it, and
+neither did AsteroidOS's own driver ("Barker fail", -ENOTCONN on every try). GPIO 6/7 read high,
+reset 62 is released, boot0 109 is high. The M4 needs a power cycle, which a reset doesn't give it.
+Lost: tilt wake and rotation. Log: logs-smelt-m4-2026-11-07.txt.
