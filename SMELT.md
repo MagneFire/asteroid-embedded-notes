@@ -119,3 +119,6 @@ the speed dial name not swiping back. Nothing below has run on a watch.
 Not done, Darrel didn't pick them: chin layout (bottom indicator, speed dial bottom disc, page dots
 under the 30 px flat tire) and rotation being on because the frame is 360x360. Round back/close
 animation: Darrel thinks it may already be fixed, re-test only.
+
+Sturgeon at efc895c (2026-11-07, Darrel): boot handover, no face resize, slide-in, overshoot (not
+AsteroidOS's, kept as is) and the speed dial name swipe all fine. Smelt and sparrow not run yet.
