@@ -1136,7 +1136,8 @@ Five things Darrel noticed on the watch that behaved differently from AsteroidOS
   changes nothing, as there is nothing more to show.
 - Why 5 s and not the 10 s screen timeout: the face only shows the time, a glance is enough,
   and every second at the AOD brightness is sleep current spent. Easy to change in one place.
-- Not tested on a watch (none attached). To check: tilt dark -> face for 5 s -> dark again,
-  log `peek: tilt` then `power: always-on on/off`; a tilt with the face up extends it; a tap
-  during a peek wakes fully; the settings row shows "Always on" wrapped on two lines in the
-  value column (shorten to "Face" if it looks wrong).
+- Tested on sturgeon by Darrel (3e05f25): dark -> face ~0.35 s after the tilt -> dark 5 s
+  later, a second tilt extends it, a tap during the peek wakes fully, "Always on" wraps to two
+  lines in the settings row and fits. First try did nothing: `power_peek` stamped the peek with
+  `time_ms()`, later than the `now` the pass had taken at the top of the main loop, so the
+  unsigned age wrapped and the peek expired in the same pass. The age is signed now.
