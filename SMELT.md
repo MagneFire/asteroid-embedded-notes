@@ -135,3 +135,25 @@ reset 62 is released, boot0 109 is high. The M4 needs a power cycle, which a res
 Lost: tilt wake and rotation. Log: logs-smelt-m4-2026-11-07.txt.
 
 Analysis, vendor comparison and the M4 image's own behaviour: SMELT-M4.md (2026-11-07).
+
+## Firmware flashed to `boot` for the crash hunt (2026-11-07)
+
+The asleep-on-USB deaths (SMELT-M4.md §8) rebooted into AsteroidOS, which sat on the record RAM,
+and they take 10 min to hours to reproduce. So the firmware image (d4e693d plus one uncommitted
+debug line in main.c that writes the fastboot cookie 0x77665500 to IMEM at boot) was flashed to
+`boot` with `fastboot -s M987BW25ZV flash boot build/asteroid.img`. Every reset now comes back
+into the firmware, which prints "previous boot ended with:" and keeps the 256 KiB console ring;
+a reset that skips `reset_now` (watchdog bite, PMIC reset, long power press) parks in fastboot
+because of the cookie, and `fastboot -s M987BW25ZV continue` boots the firmware from there.
+Proved with `mem e0000000 1` over adb: data abort, back in the firmware in about 2 s,
+`tools/run.py --attach --adb-serial asteroid-smelt` printed the record symbolized to `cmd_mem`.
+
+Backups, checksums verified against `sha1sum` on the watch: `backup/smelt/` (boot-asteroidos.img
+sha1 a90433e1, recovery-asteroidos.img, aboot.img). Partitions: boot mmcblk0p24, recovery p25,
+aboot p3. Restore AsteroidOS with
+`fastboot -s M987BW25ZV flash boot backup/smelt/boot-asteroidos.img`; `fastboot boot` of the backup
+also runs it from RAM, but a Linux boot wipes the record region, so only after the evidence is out.
+Reading a death: firmware back by itself = a recorded fault or bark; in fastboot = a reset without
+`reset_now` (a bite whose bark could not run shows as "no fault record" after `continue`); hung =
+long power press, but the KPDPWR S2 reset type is whatever AsteroidOS last set and may lose DRAM.
+Never run `make run`/run.py without serials while smelt is attached.

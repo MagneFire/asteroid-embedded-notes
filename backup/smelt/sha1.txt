@@ -1,0 +1,3 @@
+c4f17ed062fc936d74acfd0b68b343609bbd2403  aboot.img
+a90433e1679f281a6cdcd60789d3c2af593bb08d  boot-asteroidos.img
+673cf37fedb51eefb42fb6bedbd3aadc33ed2156  recovery-asteroidos.img
