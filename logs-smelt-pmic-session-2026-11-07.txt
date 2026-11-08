@@ -1,0 +1,196 @@
+[3.075] asteroid-embedded 8bf6a8c2c4+ up, timer 19200000 Hz, scm 0
+[3.075] cpu: clock at boot cfg 00000501, a7 pll mode 00000007 l 41 status 00010001; now cfg 00000501 status 00010001
+[3.075] smem: item 137 at 03000000 + 00005478 size 00000060 (ext 00000000)
+[3.075] board: smelt by panel size (tree 01e00000 Moto 360 2015, machtype 0, panel 360x330, platform 0)
+[3.082] smem: item 13 at 03000000 + 00005c08 size 00000800 (ext 00000000)
+[3.083] smem: item 18 at fc428000 + 00000000 size 00000058 (ext fc428000)
+[3.083] smem: item 342 at fc428000 + 00000200 size 00000800 (ext fc428000)
+[3.083] rpm: channel 4 info 88 fifo 1024, local state 0 remote 1, idx 0/0 0/0
+[3.083] rpm: remote state 1 after 0 ms
+[3.083] rpm: opened, remote state 2 after 0 ms
+[3.083] rpm: msg 1 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000001
+[3.084] rpm: msg 2 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000002
+[3.084] rpm: msg 3 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000003
+[3.084] rpm: msg 4 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000004
+[3.085] rpm: bus votes in 1224 us, 0 of 4 not acknowledged
+[3.085] rpm: msg 5 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000005
+[3.085] rpm: msg 6 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000006
+[3.086] rpm: msg 7 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000007
+[3.086] rpm: msg 8 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000008
+[3.086] rpm: msg 9 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000009
+[3.086] spmi arbiter 20000002, pmic type 51.04 pon 12 smpl usb warm 0200 ps-hold poff 0020 uvlo ps_hold 01/80, vph 4971 mV, vbat_sns 4971 mV, usb 5140 mV
+[3.086] display: mdp rev 10010001 fb 07e9c000 360x360 format 0002243f cmd autorefresh 0 op_mode 00000000
+[3.086] display: pp tear 0 sync 00000000 height 0 init 0 thresh 00000000 start 0 rdptr 0, te gpio cfg 00000081
+[3.186] display: te gpio 12 edges in 100 ms
+[3.190] display: framebuffers cleared in 2098 + 2495 us
+[3.190] display: ctl top 00020020 layer 00000000 intf 00000100
+[3.192] i2c: qup3 io_mode 0000c0a5 fifo 32 entries, state 0000001c, reset 0
+[3.194] backlight: lm3535 revision 03
+[3.194] no fault record from the previous boot
+[3.195] no log from the previous boot: cold power-on, or another OS ran
+[3.195] i2c: qup3 io_mode 0000c0a5 fifo 32 entries, state 0000001c, reset 0
+[3.196] gauge: max17050, 63%, status 0000, dock 0
+[3.197] i2c: qup3 io_mode 0000c0a5 fifo 32 entries, state 0000001c, reset 0
+[3.198] rpm: msg 10 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000a
+[3.198] rpm: msg 11 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000b
+[3.206] rpm: msg 12 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000c
+[3.206] light: tsl2584, id 98
+[3.208] rpm: msg 13 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000d
+[3.208] rpm: msg 14 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000e
+[3.208] emmc: mci 00000038 caps 642dc8b2, bus power 5, pwrctl 2
+[3.218] emmc: ocr c0ff8080 after 8 ms
+[3.234] emmc: init done in 26 ms: 7634944 sectors, 8-bit, 50000000 Hz
+[3.240] rpm: msg 15 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000f
+[3.240] gpu: powered, hw version 00070010, gdsc a0222000
+[3.241] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[3.241] gpu: selftest passed in 4 us: scratch reg 5eed0001, memory c0ffee42
+[3.249] ui: ready
+[3.250] rpm: msg 16 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000010
+[3.250] rpm: msg 17 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000011
+[3.250] rpm: msg 18 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000012
+[3.250] rpm: msg 19 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000013
+[3.271] i2c: qup5 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3.277] touch: mxt family 82 variant 13 version 30 build aa, 19 objects, range 359 x 329, ids 2+4
+[3.278] haptics: pm8226 vibrator type 15.01 vtg 17 en 00, 2300 mV
+[3.278] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[3.891] rtc 1793764821, battery 3928 mV, dock 0 usb 1 chg_n 0, 63%, 37.8 C, status 0000, 0 errors
+[3.891] storage: store 1048576 bytes in 1 runs, writable
+[3.893] kv: slots valid/valid, using 1, seq 40, 910 bytes
+[3.895] kv: slots valid/valid, using 1, seq 40, 910 bytes
+[3.963] tick 0, 1 fps, rtc 1793764821, battery 3929 mV, dock 0 usb 1 chg_n 0, 63%, 37.8 C, status 0000, 0 errors, usb 0/0, touch 4/0
+[3.964] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, 120 mA average
+[3.964] gpu: 1 frames, 1612 us submit to idle, 246 us vertices
+[3.964] ui: 1 of 1 frames repainted, update 66759 us avg, 66758 us per repaint
+[4.120] usb: configured, high speed
+[4.152] adb: host connected, max payload 1048576
+[4.895] tick 1, 11 fps, rtc 1793764822, battery 3937 mV, dock 0 usb 1 chg_n 0, 63%, 37.8 C, status 0000, 0 errors, usb 310/122, touch 4/0
+[4.896] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, 109 mA average
+[4.896] gpu: 11 frames, 1520 us submit to idle, 190 us vertices
+[4.896] ui: 0 of 974 frames repainted, update 4 us avg, 0 us per repaint
+events before this boot:
+1793763152 boot cable 1 usb 1, pmic type 51.04 pon 12 smpl usb warm 0200 ps-hold poff 0020 uvlo ps_hold 01/80, no log from the previous boot
+1793763557 boot cable 1 usb 1, pmic type 51.04 pon 12 smpl usb warm 0200 ps-hold poff 0020 uvlo ps_hold 01/80, no log from the previous boot
+1793763969 boot cable 1 usb 1, pmic type 51.04 pon 12 smpl usb warm 0200 ps-hold poff 0020 uvlo ps_hold 01/80
+1793764171 boot cable 1 usb 1, pmic type 51.04 pon 12 smpl usb warm 0200 ps-hold poff 0020 uvlo ps_hold 01/80
+1793764311 boot cable 1 usb 1, pmic type 51.04 pon 12 smpl usb warm 0000 poff 0020 uvlo ps_hold 01/80, no log from the previous boot
+1793764626 boot cable 1 usb 1, pmic type 51.04 pon 12 smpl usb warm 0200 ps-hold poff 0020 uvlo ps_hold 01/80, no log from the previous boot
+[5.894] steps: 33 today, 59 in total
+[5.896] tick 2, 11 fps, rtc 1793764823, battery 3944 mV, dock 0 usb 1 chg_n 0, 63%, 37.8 C, status 0000, 0 errors, usb 620/244, touch 4/0
+[5.896] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -1 mA, 101 mA average
+[5.896] gpu: 11 frames, 1518 us submit to idle, 190 us vertices
+[5.896] ui: 0 of 998 frames repainted, update 4 us avg, 0 us per repaint
+[6.389] hub: m4 firmware 0084 up
+[6.389] hub: accelerometer on
+[6.895] tick 3, 11 fps, rtc 1793764824, battery 3946 mV, dock 0 usb 1 chg_n 0, 63%, 37.8 C, status 0000, 0 errors, usb 620/244, touch 4/0
+[6.896] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, 92 mA average
+[6.896] gpu: 11 frames, 1518 us submit to idle, 190 us vertices
+[6.896] ui: 0 of 996 frames repainted, update 4 us avg, 0 us per repaint
+[7.896] tick 4, 11 fps, rtc 1793764825, battery 3948 mV, dock 0 usb 1 chg_n 0, 63%, 37.7 C, status 0000, 0 errors, usb 904/5196, touch 4/0
+[7.896] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, 83 mA average
+[7.896] gpu: 11 frames, 1518 us submit to idle, 190 us vertices
+[7.896] ui: 0 of 1007 frames repainted, update 4 us avg, 0 us per repaint
+[8.895] tick 5, 11 fps, rtc 1793764826, battery 3951 mV, dock 0 usb 1 chg_n 0, 63%, 37.7 C, status 0000, 0 errors, usb 904/5196, touch 4/0
+[8.896] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, 77 mA average
+[8.896] gpu: 11 frames, 1523 us submit to idle, 189 us vertices
+[8.896] ui: 0 of 998 frames repainted, update 4 us avg, 0 us per repaint
+[9.896] tick 6, 11 fps, rtc 1793764827, battery 3951 mV, dock 0 usb 1 chg_n 0, 63%, 37.7 C, status 0000, 0 errors, usb 904/5196, touch 4/0
+[9.896] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -1 mA, 70 mA average
+[9.896] gpu: 11 frames, 1518 us submit to idle, 190 us vertices
+[9.896] ui: 0 of 999 frames repainted, update 4 us avg, 0 us per repaint
+[10.895] tick 7, 11 fps, rtc 1793764828, battery 3952 mV, dock 0 usb 1 chg_n 0, 63%, 37.7 C, status 0000, 0 errors, usb 904/5196, touch 4/0
+[10.896] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, 63 mA average
+[10.896] gpu: 11 frames, 1517 us submit to idle, 190 us vertices
+[10.896] ui: 0 of 998 frames repainted, update 4 us avg, 0 us per repaint
+[11.896] tick 8, 11 fps, rtc 1793764829, battery 3955 mV, dock 0 usb 1 chg_n 0, 63%, 37.7 C, status 0000, 0 errors, usb 904/5196, touch 4/0
+[11.896] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -1 mA, 57 mA average
+[11.896] gpu: 11 frames, 1515 us submit to idle, 190 us vertices
+[11.896] ui: 0 of 999 frames repainted, update 4 us avg, 0 us per repaint
+[12.896] tick 9, 12 fps, rtc 1793764830, battery 3957 mV, dock 0 usb 1 chg_n 0, 63%, 37.6 C, status 0000, 0 errors, usb 904/5196, touch 4/0
+[12.897] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, 53 mA average
+[12.897] gpu: 12 frames, 1512 us submit to idle, 189 us vertices
+[12.897] ui: 0 of 999 frames repainted, update 4 us avg, 0 us per repaint
+[13.887] rpm: msg 20 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000014
+[13.997] rpm: msg 21 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000015
+[13.997] light: 2 lux, code 3
+[13.997] sleep
+[14.002] rpm: msg 22 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000016
+[14.004] emmc: asleep
+[42.802] rpm: msg 23 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000017
+[42.861] rpm: msg 24 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000018
+[42.871] display: lanes not in ULPS, status 00000f0e, not resting
+[43.075] display: lanes not in ULPS, status 00000f0e, not resting
+[43.272] display: lanes not in ULPS, status 00000f0e, not resting
+[43.465] display: lanes not in ULPS, status 00000f0e, not resting
+[43.669] display: lanes not in ULPS, status 00000f0e, not resting
+[43.872] display: lanes not in ULPS, status 00000f0e, not resting
+[44.081] display: lanes not in ULPS, status 00000f0e, not resting
+[44.289] display: lanes not in ULPS, status 00000f0e, not resting
+[44.491] display: lanes not in ULPS, status 00000f0e, not resting
+[44.698] display: lanes not in ULPS, status 00000f0e, not resting
+[44.902] display: lanes not in ULPS, status 00000f0e, not resting
+[45.111] display: lanes not in ULPS, status 00000f0e, not resting
+[45.170] display: lanes not in ULPS, status 00000f0e, not resting
+[46.399] display: lanes not in ULPS, status 00000f0e, not resting
+[46.608] display: lanes not in ULPS, status 00000f0e, not resting
+[46.815] display: lanes not in ULPS, status 00000f0e, not resting
+[47.019] display: lanes not in ULPS, status 00000f0e, not resting
+[47.227] display: lanes not in ULPS, status 00000f0e, not resting
+[47.432] display: lanes not in ULPS, status 00000f0e, not resting
+[47.636] display: lanes not in ULPS, status 00000f0e, not resting
+[47.829] display: lanes not in ULPS, status 00000f0e, not resting
+[47.899] display: lanes not in ULPS, status 00000f0e, not resting
+[48.976] display: lanes not in ULPS, status 00000f0e, not resting
+[49.997] display: lanes not in ULPS, status 00000f0e, not resting
+[51.147] display: lanes not in ULPS, status 00000f0e, not resting
+[51.351] display: lanes not in ULPS, status 00000f0e, not resting
+[51.555] display: lanes not in ULPS, status 00000f0e, not resting
+[52.509] display: lanes not in ULPS, status 00000f0e, not resting
+[53.539] display: lanes not in ULPS, status 00000f0e, not resting
+[54.672] display: lanes not in ULPS, status 00000f0e, not resting
+[54.743] display: lanes not in ULPS, status 00000f0e, not resting
+[55.832] display: lanes not in ULPS, status 00000f0e, not resting
+[56.038] display: lanes not in ULPS, status 00000f0e, not resting
+[56.241] display: lanes not in ULPS, status 00000f0e, not resting
+[56.438] display: lanes not in ULPS, status 00000f0e, not resting
+[56.510] display: lanes not in ULPS, status 00000f0e, not resting
+[57.659] display: lanes not in ULPS, status 00000f0e, not resting
+[57.865] display: lanes not in ULPS, status 00000f0e, not resting
+[58.071] display: lanes not in ULPS, status 00000f0e, not resting
+[58.265] display: lanes not in ULPS, status 00000f0e, not resting
+[58.468] display: lanes not in ULPS, status 00000f0e, not resting
+[59.348] display: lanes not in ULPS, status 00000f0e, not resting
+[60.502] display: lanes not in ULPS, status 00000f0e, not resting
+[60.691] display: lanes not in ULPS, status 00000f0e, not resting
+[60.762] display: lanes not in ULPS, status 00000f0e, not resting
+[61.775] display: lanes not in ULPS, status 00000f0e, not resting
+[62.790] display: lanes not in ULPS, status 00000f0e, not resting
+[63.945] display: lanes not in ULPS, status 00000f0e, not resting
+[64.153] display: lanes not in ULPS, status 00000f0e, not resting
+[64.356] display: lanes not in ULPS, status 00000f0e, not resting
+[64.559] display: lanes not in ULPS, status 00000f0e, not resting
+[64.762] display: lanes not in ULPS, status 00000f0e, not resting
+[64.964] display: lanes not in ULPS, status 00000f0e, not resting
+[65.170] display: lanes not in ULPS, status 00000f0e, not resting
+[65.370] display: lanes not in ULPS, status 00000f0e, not resting
+[66.385] display: lanes not in ULPS, status 00000f0e, not resting
+[66.588] display: lanes not in ULPS, status 00000f0e, not resting
+[66.796] display: lanes not in ULPS, status 00000f0e, not resting
+[66.989] display: lanes not in ULPS, status 00000f0e, not resting
+[67.174] display: lanes not in ULPS, status 00000f0e, not resting
+[67.359] display: lanes not in ULPS, status 00000f0e, not resting
+[67.555] display: lanes not in ULPS, status 00000f0e, not resting
+[67.757] display: lanes not in ULPS, status 00000f0e, not resting
+[67.831] display: lanes not in ULPS, status 00000f0e, not resting
+[68.844] display: lanes not in ULPS, status 00000f0e, not resting
+[69.993] display: lanes not in ULPS, status 00000f0e, not resting
+[70.200] display: lanes not in ULPS, status 00000f0e, not resting
+[70.390] display: lanes not in ULPS, status 00000f0e, not resting
+[70.603] display: lanes not in ULPS, status 00000f0e, not resting
+[70.675] display: lanes not in ULPS, status 00000f0e, not resting
+[71.688] display: lanes not in ULPS, status 00000f0e, not resting
+[72.703] display: lanes not in ULPS, status 00000f0e, not resting
+[73.715] power: asleep, 633 wakeups, 109/0/4 collapses, 0 mA average
+[73.719] display: lanes not in ULPS, status 00000f0e, not resting
+[74.734] display: lanes not in ULPS, status 00000f0e, not resting
+[75.885] display: lanes not in ULPS, status 00000f0e, not resting
+[76.092] display: lanes not in ULPS, status 00000f0e, not resting

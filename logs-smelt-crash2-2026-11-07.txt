@@ -1,0 +1,111 @@
+[1.879] asteroid-embedded d4e693df72+ up, timer 19200000 Hz, scm 0
+[1.879] cpu: clock at boot cfg 00000501, a7 pll mode 00000007 l 41 status 00010001; now cfg 00000501 status 00010001
+[1.879] smem: item 137 at 03000000 + 00005478 size 00000060 (ext 00000000)
+[1.880] board: smelt by panel size (tree 01e00000 Moto 360 2015, machtype 0, panel 360x330, platform 0)
+[1.881] smem: item 13 at 03000000 + 00005c08 size 00000800 (ext 00000000)
+[1.881] smem: item 18 at fc428000 + 00000000 size 00000058 (ext fc428000)
+[1.881] smem: item 342 at fc428000 + 00000200 size 00000800 (ext fc428000)
+[1.881] rpm: channel 4 info 88 fifo 1024, local state 0 remote 1, idx 0/0 0/0
+[1.881] rpm: remote state 1 after 0 ms
+[1.881] rpm: opened, remote state 2 after 0 ms
+[1.882] rpm: msg 1 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000001
+[1.882] rpm: msg 2 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000002
+[1.882] rpm: msg 3 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000003
+[1.882] rpm: msg 4 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000004
+[1.882] rpm: bus votes in 766 us, 0 of 4 not acknowledged
+[1.883] rpm: msg 5 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000005
+[1.883] rpm: msg 6 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000006
+[1.883] rpm: msg 7 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000007
+[1.883] rpm: msg 8 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000008
+[1.884] rpm: msg 9 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000009
+[1.884] spmi arbiter 20000002, pmic type 51.04 pon 02 warm 0000 poff 0020 ps_hold 01/80
+[1.884] display: mdp rev 10010001 fb 07e9c000 360x360 format 0002243f cmd autorefresh 0 op_mode 00000000
+[1.884] display: pp tear 0 sync 00000000 height 0 init 0 thresh 00000000 start 0 rdptr 0, te gpio cfg 00000081
+[1.983] display: te gpio 12 edges in 100 ms
+[1.988] display: framebuffers cleared in 2100 + 2489 us
+[1.988] display: ctl top 00020020 layer 00000000 intf 00000100
+[1.989] i2c: qup3 io_mode 0000c0a5 fifo 32 entries, state 0000001c, reset 0
+[1.992] backlight: lm3535 revision 03
+[1.992] no fault record from the previous boot
+[1.992] i2c: qup3 io_mode 0000c0a5 fifo 32 entries, state 0000001c, reset 0
+[1.993] gauge: max17050, 70%, status 0000, dock 0
+[1.995] i2c: qup3 io_mode 0000c0a5 fifo 32 entries, state 0000001c, reset 0
+[1.995] rpm: msg 10 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000a
+[1.995] rpm: msg 11 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000b
+[2.004] rpm: msg 12 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000c
+[2.004] light: tsl2584, id 98
+[2.005] rpm: msg 13 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000d
+[2.006] rpm: msg 14 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000e
+[2.006] emmc: mci 00000038 caps 642dc8b2, bus power 5, pwrctl 2
+[2.015] emmc: ocr c0ff8080 after 7 ms
+[2.031] emmc: init done in 26 ms: 7634944 sectors, 8-bit, 50000000 Hz
+[2.041] rpm: msg 15 -> 20 bytes: 00716572 0000000c 2367736d 00000004 0000000f
+[2.041] gpu: powered, hw version 00070010, gdsc a0222000
+[2.042] gpu: pm4 v00330043 pfp v00330020, micro engine running
+[2.042] gpu: selftest passed in 5 us: scratch reg 5eed0001, memory c0ffee42
+[2.051] ui: ready
+[2.051] rpm: msg 16 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000010
+[2.051] rpm: msg 17 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000011
+[2.052] rpm: msg 18 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000012
+[2.052] rpm: msg 19 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000013
+[2.073] i2c: qup5 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[2.079] touch: mxt family 82 variant 13 version 30 build aa, 19 objects, range 359 x 329, ids 2+4
+[2.079] haptics: pm8226 vibrator type 15.01 vtg 17 en 00, 2300 mV
+[2.079] i2c: qup2 io_mode 000000a5 fifo 32 entries, state 0000001c, reset 0
+[2.692] rtc 1793758679, battery 3962 mV, dock 0 usb 1 chg_n 0, 70%, 33.1 C, status 0000, 0 errors
+[2.692] storage: store 1048576 bytes in 1 runs, writable
+[2.695] kv: slots valid/valid, using 0, seq 15, 124 bytes
+[2.696] kv: slots valid/valid, using 0, seq 15, 124 bytes
+[2.765] tick 0, 1 fps, rtc 1793758679, battery 3974 mV, dock 0 usb 1 chg_n 0, 70%, 33.1 C, status 0000, 0 errors, usb 0/0, touch 4/0
+[2.766] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 0 mA, 56 mA average
+[2.766] gpu: 1 frames, 1752 us submit to idle, 244 us vertices
+[2.766] ui: 1 of 1 frames repainted, update 66981 us avg, 66980 us per repaint
+[2.925] usb: configured, high speed
+[3.494] adb: host connected, max payload 1048576
+[3.709] tick 1, 12 fps, rtc 1793758680, battery 4003 mV, dock 0 usb 1 chg_n 0, 70%, 33.2 C, status 0000, 0 errors, usb 310/122, touch 4/0
+[3.710] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -1 mA, 52 mA average
+[3.710] gpu: 12 frames, 1659 us submit to idle, 191 us vertices
+[3.710] ui: 1 of 969 frames repainted, update 16 us avg, 11993 us per repaint
+[4.695] steps: 15 today, 41 in total
+[4.697] tick 2, 11 fps, rtc 1793758681, battery 4019 mV, dock 0 usb 1 chg_n 0, 70%, 33.3 C, status 0000, 0 errors, usb 310/122, touch 4/0
+[4.698] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -1 mA, 47 mA average
+[4.698] gpu: 11 frames, 1658 us submit to idle, 190 us vertices
+[4.698] ui: 0 of 986 frames repainted, update 4 us avg, 0 us per repaint
+[5.190] hub: m4 firmware 0084 up
+[5.190] hub: accelerometer on
+[5.696] tick 3, 11 fps, rtc 1793758682, battery 4029 mV, dock 0 usb 1 chg_n 0, 70%, 33.3 C, status 0000, 0 errors, usb 310/122, touch 4/0
+[5.697] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -5 mA, 43 mA average
+[5.697] gpu: 11 frames, 1658 us submit to idle, 190 us vertices
+[5.697] ui: 0 of 996 frames repainted, update 4 us avg, 0 us per repaint
+[6.697] tick 4, 11 fps, rtc 1793758683, battery 4034 mV, dock 0 usb 1 chg_n 0, 70%, 33.4 C, status 0000, 0 errors, usb 310/122, touch 4/0
+[6.697] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -4 mA, 39 mA average
+[6.697] gpu: 11 frames, 1657 us submit to idle, 190 us vertices
+[6.697] ui: 0 of 1000 frames repainted, update 4 us avg, 0 us per repaint
+[7.696] tick 5, 11 fps, rtc 1793758684, battery 4036 mV, dock 0 usb 1 chg_n 0, 70%, 33.7 C, status 0000, 0 errors, usb 310/122, touch 4/0
+[7.697] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -5 mA, 35 mA average
+[7.697] gpu: 11 frames, 1663 us submit to idle, 190 us vertices
+[7.697] ui: 0 of 998 frames repainted, update 4 us avg, 0 us per repaint
+[8.195] gauge: dock 1, usb 1
+[8.195] usb: cable plugged in
+[8.697] tick 6, 12 fps, rtc 1793758685, battery 4038 mV, dock 1 usb 1 chg_n 0, 70%, 33.7 C, status 0000, 0 errors, usb 310/122, touch 4/0
+[8.697] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 2 mA, 32 mA average
+[8.697] gpu: 12 frames, 1659 us submit to idle, 190 us vertices
+[8.697] ui: 1 of 987 frames repainted, update 5 us avg, 1091 us per repaint
+[9.696] tick 7, 11 fps, rtc 1793758686, battery 4040 mV, dock 1 usb 1 chg_n 0, 70%, 34.0 C, status 0000, 0 errors, usb 310/122, touch 4/0
+[9.697] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -2 mA, 30 mA average
+[9.697] gpu: 11 frames, 1656 us submit to idle, 190 us vertices
+[9.697] ui: 0 of 998 frames repainted, update 4 us avg, 0 us per repaint
+[10.697] tick 8, 11 fps, rtc 1793758687, battery 4041 mV, dock 1 usb 1 chg_n 0, 70%, 34.2 C, status 0000, 0 errors, usb 310/122, touch 4/0
+[10.697] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery -1 mA, 27 mA average
+[10.697] gpu: 11 frames, 1654 us submit to idle, 190 us vertices
+[10.697] ui: 0 of 999 frames repainted, update 4 us avg, 0 us per repaint
+[11.696] tick 9, 12 fps, rtc 1793758688, battery 4043 mV, dock 1 usb 1 chg_n 0, 70%, 34.4 C, status 0000, 0 errors, usb 310/122, touch 4/0
+[11.697] power: awake, asleep 0% of the last second, 0 wakeups, 0/0/0 collapses, battery 2 mA, 24 mA average
+[11.697] gpu: 12 frames, 1651 us submit to idle, 190 us vertices
+[11.697] ui: 0 of 998 frames repainted, update 4 us avg, 0 us per repaint
+[12.689] rpm: msg 20 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000014
+[12.800] rpm: msg 21 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000015
+[12.800] light: 3 lux, code 4
+[12.800] sleep
+[12.804] rpm: msg 22 -> 20 bytes: 00716572 0000000c 2367736d 00000004 00000016
+[12.806] emmc: asleep
