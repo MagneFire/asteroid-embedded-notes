@@ -1119,3 +1119,24 @@ Five things Darrel noticed on the watch that behaved differently from AsteroidOS
   loop); nothing cleared them, so the three by three title left coloured corners. Square panels
   now get a frame-filling quad (CPU: span fill) in the outer colour first, not turned with the
   nightstand rotation.
+
+## Tilt to the always-on face (2026-11-08, Fable, `tilt-aod` branch, worktree `../asteroid-embedded-tilt-aod`)
+
+- Darrel's ask: a tilt should be able to show the always-on face instead of waking the whole UI,
+  a glance at the time without the backlight at full brightness or the GPU up. Neither WearOS
+  nor AsteroidOS has this; Garmin and Fitbit "gesture" modes do roughly the same (the face for
+  a few seconds). No reference code, so the shape is ours.
+- Shape: `tilt` is now 0 off, 1 screen (the old on), 2 always-on face, cycled in Settings like
+  burn-in protection (the stored byte keeps 0/1 meaning what it did). Mode 2 asleep calls
+  `power_peek`, which the policy keeps as `peeking` with a start time and a 5 s `PEEK_MS`;
+  `aod_wanted()` ORs it in, so the existing `AOD_ENTER`/`AOD_LEAVE` path in `power_update`
+  brings the panel up at the AOD brightness and takes it down again, and `power_next_ms` gives
+  the deadline so the idle sleep ends on time. Another tilt restarts the 5 s; a wake clears it;
+  a tap still wakes fully (tap-to-wake is untouched). With the always-on face already on, mode 2
+  changes nothing, as there is nothing more to show.
+- Why 5 s and not the 10 s screen timeout: the face only shows the time, a glance is enough,
+  and every second at the AOD brightness is sleep current spent. Easy to change in one place.
+- Not tested on a watch (none attached). To check: tilt dark -> face for 5 s -> dark again,
+  log `peek: tilt` then `power: always-on on/off`; a tilt with the face up extends it; a tap
+  during a peek wakes fully; the settings row shows "Always on" wrapped on two lines in the
+  value column (shorten to "Face" if it looks wrong).
