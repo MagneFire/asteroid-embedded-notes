@@ -1,0 +1,40 @@
+diff --git a/src/sensors/hub_m4.c b/src/sensors/hub_m4.c
+index 8d0bbb6..83d09ec 100644
+--- a/src/sensors/hub_m4.c
++++ b/src/sensors/hub_m4.c
+@@ -159,6 +159,8 @@ static void reset_pulse(void)
+ 	wait_ms(BL_READY_MS);
+ }
+ 
++#define EPOCH_PLAUSIBLE	1400000000u
++
+ static bool m4_init(void)
+ {
+ 	uint8_t barker[M4_MARK_MAX];
+@@ -253,8 +255,6 @@ static bool write_tilt(uint32_t now)
+ /* The time goes to the hub, except at the start with a hub that keeps
+  * the time itself: then the clock is set from it, unless the hub has
+  * lost it and the clock has been set since. */
+-#define EPOCH_PLAUSIBLE	1400000000u
+-
+ static void time_start(void)
+ {
+ 	uint8_t b[4];
+@@ -337,6 +337,17 @@ static void m4_poll(void)
+ {
+ 	i2c_poll(BUS);
+ 	uint32_t now = time_ms();
++	/* A hub that keeps the time answers before its start is over: the
++	 * clock is set from it as soon as it does. */
++	static uint32_t asked_t;
++	if (state == HUB_BOOTING && V->keeps_time && !rtc_valid() && now - go_t >= 200 && now - asked_t >= 100) {
++		uint8_t a[2] = { V->general, M4_GENERAL_UTC }, b[4];
++		asked_t = now;
++		if (!i2c_xfer(BUS, ADDR, a, 2, b, 4) && m4_u32(b) >= EPOCH_PLAUSIBLE) {
++			rtc_write(m4_u32(b));
++			log_printf("hub: m4 clock %lu, %lu ms into its start\n", m4_u32(b), now - go_t);
++		}
++	}
+ 	if (state == HUB_BOOTING && now - go_t >= BOOT_MS)
+ 		started();
+ 	if (state != HUB_BOOTING && fails >= FAIL_LIMIT && now - restart_t >= RESTART_MS)

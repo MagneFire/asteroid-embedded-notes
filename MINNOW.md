@@ -208,3 +208,44 @@ What the watch showed that reading had not:
 Open: the hub does not answer some transfers (`i2c2: no answer to 39`) and reports firmware
 0000; sleep current not measured; CORE retention, lower OPPs and DSS overlays not written.
 Reviews and their open items: `hw/minnow/review-opus-2026-11-11.md`.
+
+## Performance and scaling (2026-11-11 night)
+
+Merged into main (f5f5297): the frame work below. On branch `minnow-dvfs` (worktree
+`../asteroid-embedded-perf`, 2ccbde4, not merged): clock and voltage scaling.
+
+- **Where a frame went.** The mesh took 7.1 of 8 ms: floating point divisions per row, and the
+  Cortex-A8's VFP is slow at scalar arithmetic. In 16.16 integers with one division per edge it
+  is 1.55 ms; a composite is 2.1-2.4 ms and swipes hold 61 fps at 60 Hz. The flip waits 12-14 ms
+  for the previous frame to go out over DSI, which is what bounds the rate.
+- **RunFast mode** (FPSCR FZ and DN) makes the vertex maths 30 % quicker and does nothing for
+  repaints.
+- **Repaints.** `prof <n>` samples the PC on the 1 ms tick; `tools/prof.py` names the functions.
+  65 % of a face repaint was Slint's `draw_texture_line` and its blend. The paint hooks the GPU
+  watches use now draw on the CPU with NEON: rectangles, textures (nearest scaling), rounded
+  rectangles without a border, the rounded clip. Face 11.0 -> 6.0 ms, side pages 2.5 -> 1.2,
+  top 5.4 -> 4.8, bottom 11.7 -> 10.0 (what is left there is the allocator and items made and
+  dropped on every repaint). `uibench p 0` is Slint's own drawing, `uibench p 1` the hooks.
+- **Rounded clip and rotate animation** were GPU-only before: the battery bar had square ends
+  and the rotation snapped on minnow.
+- **CPU supply.** DCDC1_OP holds the voltage (SELREG clear): 0x3e = 1.275 V in range 0, the
+  vendor's 800 MHz value. So the images that wrote range 1 ran the CPU at 1.475 V. With reg
+  0x26 bit 0 set the DCDC1 registers read 0 over SPI; 0x26 = 0x48 keeps them on SPI.
+- **Scaling.** 200 MHz (M2 x 4) at 0.975 V (sel 0x26) asleep and awake after 300 ms without
+  activity; 800 MHz at the bootloader's voltage otherwise, voltage first with a 200 us wait.
+  Read back correctly, 93-100 % idle on the face, mesh steps 7.8 ms, swipes 49-59 fps. Ran
+  90 s with idle, sleep and wake; no longer soak, no current measured.
+- **Gauge and pad** verified: `usb out, started over` gives 3760 mV where USB showed 4.8 V;
+  `dock 1` two seconds after the pad; the charging animation runs. The percentage jumps after
+  each restart (39, 35, 34, 66 that evening).
+- **Clock at start.** 00:00 until 3.2 s: the hub is reset into its ROM bootloader (0.6 s) and
+  given 2.5 s to start before the time is read. It does not answer before its reset (10 ms of
+  tries at 0.06 s), so it is probably not running then; whether the bootloader or our own pin
+  set-up at 1 ms stops it is not known. An untested patch that asks it every 100 ms while it
+  starts is in `hw/minnow/hub-early-clock-untested.patch`. Parked.
+- **`no answer to 39`** lines during normal running are first tries the hub driver's retry
+  recovers (the error count stays 0): the hub seems to sleep through the first transfer.
+- **`touch swipe`** did nothing on the mXT driver until the injection was added.
+- **uibench** with hundreds of repaints tripped the watchdog before it fed it.
+- **SGX530:** scoping study in `~/Downloads/AsteroidOS/minnow/sgx-study/`. Replay of the
+  transfer queue looks feasible (fills, blends, scaling), triangles not; not started.
