@@ -1141,3 +1141,29 @@ Five things Darrel noticed on the watch that behaved differently from AsteroidOS
   lines in the settings row and fits. First try did nothing: `power_peek` stamped the peek with
   `time_ms()`, later than the `now` the pass had taken at the top of the main loop, so the
   unsigned age wrapped and the peek expired in the same pass. The age is signed now.
+
+## adb "offline" through the USB proxy, and a silent host keeping the watch awake (2026-11-10, Fable)
+
+Smelt behind usbproxy-bm: after a flash and reboot, `adb shell status` answered at 9.5 s uptime,
+the `log 400` after it never returned, and the Mac listed `asteroid-smelt offline` from then on
+(the proxy keeps the watch's serial, so the Mac's device list says nothing about the watch).
+Logs: logs-usbproxy-adb-stall-2026-11-10.txt, logs-smelt-adb-stall-2026-11-10.txt.
+
+- Proxy: `bridge: slot 0 watch IN result 1` at 1708.063 with no "device gone" after it, and
+  `ehci` showed the adb IN queue head at tok 00188d10: babble, on a 24-byte read. The bridge
+  reads adb-aware (a 24-byte header, then exactly data_length, `w2h_fill`). After a failed read
+  it drops the pending payload and goes back to 24-byte header reads (`bridge_watch_in_done`),
+  but the watch still had its payload queued (512-byte packets), so every read babbled: 130 138
+  failures at the 10 ms retry, 22 min. A manual `hostxfer in 4096 0` on the proxy console took
+  the watch's 2584-byte payload, the bridge logged "reads again", and adb came back. That is the
+  recovery until the proxy is fixed (after a failed read, read with a full buffer while
+  resyncing, not 24 bytes). What made the first read fail is not known.
+- Watch: from 9.5 s its log has `usb: busy for 2001 ms: event 0, tx 1, pending 1` every 2 s (652
+  times) and `power: asleep, 95x xxx wakeups, 0/0/0 collapses, 130 to 132 mA average` each
+  minute. 663d00d ("Don't sleep while adb is busy") spins the main loop at the full clock for as
+  long as an adb transfer waits for the host, with no limit.
+- Fix, branch `adb-stall` (worktree ../asteroid-embedded-adb, off gauge-por): usb_busy stops
+  waiting after 2 s without an adb transfer completing and waits again once one completes. Calls
+  more than 500 ms apart do not count as one wait (the first version tripped at boot). Checked on
+  smelt by freezing the Mac's adb server (SIGSTOP) during `log 100000` for 75 s: one "takes no adb
+  data" line, 75 mA and normal wakeups, "takes adb data again" on SIGCONT, full log still 0.18 s.

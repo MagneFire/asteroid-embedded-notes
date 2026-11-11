@@ -1,0 +1,502 @@
+### log 60000
+log 60000
+[0.354] boot 1: entry at 284 ms, gp0=00000000 gp1=b0070000 gp2=b100011c gp3=00000105 wdt=1
+[0.365] usb: gadget initialised, held until the watch side is known
+[0.386] ehci1: up, usbcmd=00010b39 usbsts=0000c004 hcsparams=00001101 portsc=00001803
+[0.393] ohci1: up, revision=00000010 control=000000b7 rhstatus=00000100
+[0.400] usb: host on EHCI1 + OHCI1 initialised
+[0.404] power: idle (cpu 648 MHz)
+[0.606] port: connected, enabled on ehci
+[0.624] host: device 1 descriptor 18d1:4ee7 ep0 64
+[0.636] host: interface 2 (proto 01) -> slot 0, in 81 (mps 512) out 01
+[0.642] host: device 1 mounted, 18d1:4ee7, high speed
+[0.647] bridge: slot 0 bound to device 1 (81/01), 0 bytes waiting for it
+[0.654] power: active (cpu 1008 MHz)
+[0.657] host: device 1 serial asteroid-smelt
+[0.661] usb: gadget asteroid-smelt presented (adb + fastboot)
+[0.888] slot 0 open: in 81 out 01
+[0.891] slot 1 open: in 82 out 02
+[0.894] usb: configured by the host (high speed); GP1 cleared
+[81.412] bridge: slot 0 watch IN result 1
+[81.416] host: device 1 gone
+[81.418] bridge: set halt on EP81
+[81.421] bridge: slot 0 unbound (halt pulse to kick adb, then idle NAK)
+[81.428] host: slot 0 unbound
+[81.430] port: DISCONNECTED on ehci
+[81.434] power: idle (cpu 648 MHz)
+[81.449] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[81.674] port: connected on ehci
+[81.684] port: DISCONNECTED on ehci
+[81.721] bridge: clear halt on EP81
+[82.455] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[83.604] port: connected on ehci
+[83.806] port: connected, enabled on ehci
+[83.827] host: device 1 descriptor 22b8:2e80 ep0 64
+[83.843] host: interface 0 (proto 03) -> slot 1, in 81 (mps 512) out 01
+[83.849] host: device 1 mounted, 22b8:2e80, high speed
+[83.854] bridge: slot 1 bound to device 1 (81/01), 0 bytes waiting for it
+[83.861] power: active (cpu 1008 MHz)
+[83.866] host: device 1 serial M987BW25ZV
+[83.870] usb: watch M987BW25ZV; re-presenting the gadget
+[84.031] usb: suspended
+[84.211] slot 0 open: in 81 out 01
+[84.214] slot 1 open: in 82 out 02
+[84.217] usb: configured again (high speed)
+[84.477] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[85.734] host: device 1 gone
+[85.736] bridge: slot 1 unbound (idle NAK)
+[85.740] host: slot 1 unbound
+[85.742] port: DISCONNECTED on ehci
+[85.746] power: idle (cpu 648 MHz)
+[92.980] port: connected on ehci
+[93.182] port: connected, enabled on ehci
+[93.202] host: device 1 descriptor 18d1:0001 ep0 64
+[93.209] mirror: 18d1:0001 not mirrored: configuration does not start with an interface
+[93.217] host: device 1 mounted, 18d1:0001, high speed
+[93.221] power: active (cpu 1008 MHz)
+[93.720] host: device 1 gone
+[93.722] port: DISCONNECTED on ehci
+[93.726] power: idle (cpu 648 MHz)
+[93.926] port: connected on ehci
+[94.042] port: DISCONNECTED on ehci
+[95.165] port: connected on ehci
+[95.367] port: connected, enabled on ehci
+[95.384] host: device 1 descriptor 18d1:4ee7 ep0 64
+[95.392] host: interface 0 (proto 01) -> slot 0, in 81 (mps 512) out 01
+[95.398] host: device 1 mounted, 18d1:4ee7, high speed
+[95.403] bridge: slot 0 bound to device 1 (81/01), 0 bytes waiting for it
+[95.410] power: active (cpu 1008 MHz)
+[95.413] bridge: host CNXN captured while idle; replaying the host's last CNXN (286-byte banner) to the device
+[95.423] host: device 1 serial M987BW25ZV
+[180.014] bridge: slot 0 watch IN result 1
+[180.018] host: device 1 gone
+[180.021] bridge: set halt on EP81
+[180.024] bridge: slot 0 unbound (halt pulse to kick adb, then idle NAK)
+[180.030] host: slot 0 unbound
+[180.033] port: DISCONNECTED on ehci
+[180.036] power: idle (cpu 648 MHz)
+[180.095] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[180.324] bridge: clear halt on EP81
+[181.102] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[182.719] port: connected on ehci
+[182.729] port: DISCONNECTED on ehci
+[184.614] port: connected on ehci
+[184.816] port: connected, enabled on ehci
+[184.839] host: device 1 descriptor 22b8:2e80 ep0 64
+[184.854] host: interface 0 (proto 03) -> slot 1, in 81 (mps 512) out 01
+[184.860] host: device 1 mounted, 22b8:2e80, high speed
+[184.865] bridge: slot 1 bound to device 1 (81/01), 17 bytes waiting for it
+[184.872] power: active (cpu 1008 MHz)
+[184.878] host: device 1 serial M987BW25ZV
+[185.732] host: device 1 gone
+[185.735] bridge: slot 1 unbound (idle NAK)
+[185.738] host: slot 1 unbound
+[185.741] port: DISCONNECTED on ehci
+[185.745] power: idle (cpu 648 MHz)
+[186.764] port: connected on ehci
+[186.966] port: connected, enabled on ehci
+[186.986] host: device 1 descriptor 18d1:4ee7 ep0 64
+[186.995] host: interface 2 (proto 01) -> slot 0, in 81 (mps 512) out 01
+[187.001] host: device 1 mounted, 18d1:4ee7, high speed
+[187.006] bridge: slot 0 bound to device 1 (81/01), 0 bytes waiting for it
+[187.013] power: active (cpu 1008 MHz)
+[187.016] bridge: host CNXN captured while idle; replaying the host's last CNXN (286-byte banner) to the device
+[187.027] host: device 1 serial asteroid-smelt
+[187.031] usb: watch asteroid-smelt; re-presenting the gadget
+[187.192] usb: suspended
+[187.373] slot 0 open: in 81 out 01
+[187.376] slot 1 open: in 82 out 02
+[187.379] usb: configured again (high speed)
+[482.289] bridge: slot 0 watch IN result 1
+[482.292] host: device 1 gone
+[482.295] bridge: set halt on EP81
+[482.298] bridge: slot 0 unbound (halt pulse to kick adb, then idle NAK)
+[482.305] host: slot 0 unbound
+[482.307] port: DISCONNECTED on ehci
+[482.311] power: idle (cpu 648 MHz)
+[482.555] port: connected on ehci
+[482.566] port: DISCONNECTED on ehci
+[482.598] bridge: clear halt on EP81
+[482.611] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[484.487] port: connected on ehci
+[484.689] port: connected, enabled on ehci
+[484.710] host: device 1 descriptor 22b8:2e80 ep0 64
+[484.726] host: interface 0 (proto 03) -> slot 1, in 81 (mps 512) out 01
+[484.732] host: device 1 mounted, 22b8:2e80, high speed
+[484.737] bridge: slot 1 bound to device 1 (81/01), 0 bytes waiting for it
+[484.744] power: active (cpu 1008 MHz)
+[484.749] host: device 1 serial M987BW25ZV
+[484.753] usb: watch M987BW25ZV; re-presenting the gadget
+[484.914] usb: suspended
+[485.094] slot 0 open: in 81 out 01
+[485.097] slot 1 open: in 82 out 02
+[485.100] usb: configured again (high speed)
+[485.637] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[486.282] host: device 1 gone
+[486.284] bridge: slot 1 unbound (idle NAK)
+[486.288] host: slot 1 unbound
+[486.291] port: DISCONNECTED on ehci
+[486.295] power: idle (cpu 648 MHz)
+[487.315] port: connected on ehci
+[487.517] port: connected, enabled on ehci
+[487.536] host: device 1 descriptor 18d1:4ee7 ep0 64
+[487.545] host: interface 2 (proto 01) -> slot 0, in 81 (mps 512) out 01
+[487.551] host: device 1 mounted, 18d1:4ee7, high speed
+[487.556] bridge: slot 0 bound to device 1 (81/01), 0 bytes waiting for it
+[487.563] power: active (cpu 1008 MHz)
+[487.566] bridge: host CNXN captured while idle; replaying the host's last CNXN (286-byte banner) to the device
+[487.577] host: device 1 serial asteroid-smelt
+[487.581] usb: watch asteroid-smelt; re-presenting the gadget
+[487.741] usb: suspended
+[487.929] slot 0 open: in 81 out 01
+[487.932] slot 1 open: in 82 out 02
+[487.935] usb: configured again (high speed)
+[738.726] bridge: slot 0 watch IN result 1
+[738.730] host: device 1 gone
+[738.733] bridge: set halt on EP81
+[738.736] bridge: slot 0 unbound (halt pulse to kick adb, then idle NAK)
+[738.742] host: slot 0 unbound
+[738.745] port: DISCONNECTED on ehci
+[738.748] power: idle (cpu 648 MHz)
+[738.884] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[739.036] bridge: clear halt on EP81
+[739.898] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[771.058] port: connected on ehci
+[771.062] port: DISCONNECTED on ehci
+[772.084] port: connected on ehci
+[772.286] port: connected, enabled on ehci
+[772.307] host: device 1 descriptor 18d1:4ee7 ep0 64
+[772.315] host: interface 2 (proto 01) -> slot 0, in 81 (mps 512) out 01
+[772.321] host: device 1 mounted, 18d1:4ee7, high speed
+[772.326] bridge: slot 0 bound to device 1 (81/01), 0 bytes waiting for it
+[772.333] power: active (cpu 1008 MHz)
+[772.337] bridge: host CNXN captured while idle; replaying the host's last CNXN (286-byte banner) to the device
+[772.347] host: device 1 serial asteroid-smelt
+[945.872] bridge: slot 0 watch IN result 1
+[945.876] host: device 1 gone
+[945.878] bridge: set halt on EP81
+[945.881] bridge: slot 0 unbound (halt pulse to kick adb, then idle NAK)
+[945.888] host: slot 0 unbound
+[945.891] port: DISCONNECTED on ehci
+[945.894] power: idle (cpu 648 MHz)
+[946.134] port: connected on ehci
+[946.144] port: DISCONNECTED on ehci
+[946.181] bridge: clear halt on EP81
+[946.800] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[948.062] port: connected on ehci
+[948.265] port: connected, enabled on ehci
+[948.286] host: device 1 descriptor 22b8:2e80 ep0 64
+[948.301] host: interface 0 (proto 03) -> slot 1, in 81 (mps 512) out 01
+[948.308] host: device 1 mounted, 22b8:2e80, high speed
+[948.313] bridge: slot 1 bound to device 1 (81/01), 0 bytes waiting for it
+[948.319] power: active (cpu 1008 MHz)
+[948.325] host: device 1 serial M987BW25ZV
+[948.328] usb: watch M987BW25ZV; re-presenting the gadget
+[948.489] usb: suspended
+[948.675] slot 0 open: in 81 out 01
+[948.678] slot 1 open: in 82 out 02
+[948.681] usb: configured again (high speed)
+[948.819] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[949.849] host: device 1 gone
+[949.851] bridge: slot 1 unbound (idle NAK)
+[949.855] host: slot 1 unbound
+[949.858] port: DISCONNECTED on ehci
+[949.861] power: idle (cpu 648 MHz)
+[950.880] port: connected on ehci
+[951.082] port: connected, enabled on ehci
+[951.102] host: device 1 descriptor 18d1:4ee7 ep0 64
+[951.112] host: interface 2 (proto 01) -> slot 0, in 81 (mps 512) out 01
+[951.118] host: device 1 mounted, 18d1:4ee7, high speed
+[951.123] bridge: slot 0 bound to device 1 (81/01), 0 bytes waiting for it
+[951.130] power: active (cpu 1008 MHz)
+[951.134] bridge: host CNXN captured while idle; replaying the host's last CNXN (286-byte banner) to the device
+[951.144] host: device 1 serial asteroid-smelt
+[951.148] usb: watch asteroid-smelt; re-presenting the gadget
+[951.308] usb: suspended
+[951.490] slot 0 open: in 81 out 01
+[951.493] slot 1 open: in 82 out 02
+[951.496] usb: configured again (high speed)
+[1116.382] host: device 1 gone
+[1116.385] bridge: set halt on EP81
+[1116.388] bridge: slot 0 unbound (halt pulse to kick adb, then idle NAK)
+[1116.394] host: slot 0 unbound
+[1116.397] port: DISCONNECTED on ehci
+[1116.401] power: idle (cpu 648 MHz)
+[1116.645] port: connected on ehci
+[1116.655] port: DISCONNECTED on ehci
+[1116.688] bridge: clear halt on EP81
+[1117.337] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[1118.575] port: connected on ehci
+[1118.777] port: connected, enabled on ehci
+[1118.798] host: device 1 descriptor 22b8:2e80 ep0 64
+[1118.814] host: interface 0 (proto 03) -> slot 1, in 81 (mps 512) out 01
+[1118.821] host: device 1 mounted, 22b8:2e80, high speed
+[1118.826] bridge: slot 1 bound to device 1 (81/01), 0 bytes waiting for it
+[1118.832] power: active (cpu 1008 MHz)
+[1118.838] host: device 1 serial M987BW25ZV
+[1118.842] usb: watch M987BW25ZV; re-presenting the gadget
+[1119.003] usb: suspended
+[1119.187] slot 0 open: in 81 out 01
+[1119.190] slot 1 open: in 82 out 02
+[1119.193] usb: configured again (high speed)
+[1119.357] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[1120.398] host: device 1 gone
+[1120.400] bridge: slot 1 unbound (idle NAK)
+[1120.404] host: slot 1 unbound
+[1120.407] port: DISCONNECTED on ehci
+[1120.411] power: idle (cpu 648 MHz)
+[1121.441] port: connected on ehci
+[1121.643] port: connected, enabled on ehci
+[1121.662] host: device 1 descriptor 18d1:4ee7 ep0 64
+[1121.676] host: interface 2 (proto 01) -> slot 0, in 81 (mps 512) out 01
+[1121.682] host: device 1 mounted, 18d1:4ee7, high speed
+[1121.687] bridge: slot 0 bound to device 1 (81/01), 0 bytes waiting for it
+[1121.694] power: active (cpu 1008 MHz)
+[1121.698] bridge: host CNXN captured while idle; replaying the host's last CNXN (286-byte banner) to the device
+[1121.708] host: device 1 serial asteroid-smelt
+[1121.712] usb: watch asteroid-smelt; re-presenting the gadget
+[1121.872] usb: suspended
+[1122.064] slot 0 open: in 81 out 01
+[1122.067] slot 1 open: in 82 out 02
+[1122.071] usb: configured again (high speed)
+[1126.525] bridge: slot 0 watch IN result 1
+[1126.529] host: device 1 gone
+[1126.532] bridge: set halt on EP81
+[1126.535] bridge: slot 0 unbound (halt pulse to kick adb, then idle NAK)
+[1126.542] host: slot 0 unbound
+[1126.544] port: DISCONNECTED on ehci
+[1126.548] power: idle (cpu 648 MHz)
+[1126.788] port: connected on ehci
+[1126.798] port: DISCONNECTED on ehci
+[1126.835] bridge: clear halt on EP81
+[1127.423] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[1129.099] port: connected on ehci
+[1129.301] port: connected, enabled on ehci
+[1129.320] host: device 1 descriptor 18d1:4ee7 ep0 64
+[1129.330] host: interface 2 (proto 01) -> slot 0, in 81 (mps 512) out 01
+[1129.336] host: device 1 mounted, 18d1:4ee7, high speed
+[1129.341] bridge: slot 0 bound to device 1 (81/01), 0 bytes waiting for it
+[1129.348] power: active (cpu 1008 MHz)
+[1129.351] bridge: host CNXN captured while idle; replaying the host's last CNXN (286-byte banner) to the device
+[1129.361] host: device 1 serial asteroid-smelt
+[1134.703] bridge: slot 0 watch IN result 1
+[1134.706] host: device 1 gone
+[1134.709] bridge: set halt on EP81
+[1134.712] bridge: slot 0 unbound (halt pulse to kick adb, then idle NAK)
+[1134.719] host: slot 0 unbound
+[1134.722] port: DISCONNECTED on ehci
+[1134.725] power: idle (cpu 648 MHz)
+[1134.965] port: connected on ehci
+[1134.976] port: DISCONNECTED on ehci
+[1135.012] bridge: clear halt on EP81
+[1135.489] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[1137.287] port: connected on ehci
+[1137.489] port: connected, enabled on ehci
+[1137.508] host: device 1 descriptor 18d1:4ee7 ep0 64
+[1137.517] host: interface 2 (proto 01) -> slot 0, in 81 (mps 512) out 01
+[1137.523] host: device 1 mounted, 18d1:4ee7, high speed
+[1137.528] bridge: slot 0 bound to device 1 (81/01), 0 bytes waiting for it
+[1137.535] power: active (cpu 1008 MHz)
+[1137.538] bridge: host CNXN captured while idle; replaying the host's last CNXN (286-byte banner) to the device
+[1137.548] host: device 1 serial asteroid-smelt
+[1145.055] bridge: slot 0 watch IN result 1
+[1145.058] host: device 1 gone
+[1145.061] bridge: set halt on EP81
+[1145.064] bridge: slot 0 unbound (halt pulse to kick adb, then idle NAK)
+[1145.071] host: slot 0 unbound
+[1145.074] port: DISCONNECTED on ehci
+[1145.077] power: idle (cpu 648 MHz)
+[1145.317] port: connected on ehci
+[1145.328] port: DISCONNECTED on ehci
+[1145.364] bridge: clear halt on EP81
+[1145.589] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[1147.626] port: connected on ehci
+[1147.828] port: connected, enabled on ehci
+[1147.847] host: device 1 descriptor 18d1:4ee7 ep0 64
+[1147.858] host: interface 2 (proto 01) -> slot 0, in 81 (mps 512) out 01
+[1147.865] host: device 1 mounted, 18d1:4ee7, high speed
+[1147.870] bridge: slot 0 bound to device 1 (81/01), 0 bytes waiting for it
+[1147.876] power: active (cpu 1008 MHz)
+[1147.880] bridge: host CNXN captured while idle; replaying the host's last CNXN (286-byte banner) to the device
+[1147.890] host: device 1 serial asteroid-smelt
+[1182.390] bridge: slot 0 watch IN result 1
+[1182.393] host: device 1 gone
+[1182.396] bridge: set halt on EP81
+[1182.399] bridge: slot 0 unbound (halt pulse to kick adb, then idle NAK)
+[1182.406] host: slot 0 unbound
+[1182.409] port: DISCONNECTED on ehci
+[1182.412] power: idle (cpu 648 MHz)
+[1182.652] port: connected on ehci
+[1182.663] port: DISCONNECTED on ehci
+[1182.699] bridge: clear halt on EP81
+[1182.916] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[1184.585] port: connected on ehci
+[1184.787] port: connected, enabled on ehci
+[1184.807] host: device 1 descriptor 22b8:2e80 ep0 64
+[1184.822] host: interface 0 (proto 03) -> slot 1, in 81 (mps 512) out 01
+[1184.829] host: device 1 mounted, 22b8:2e80, high speed
+[1184.834] bridge: slot 1 bound to device 1 (81/01), 0 bytes waiting for it
+[1184.841] power: active (cpu 1008 MHz)
+[1184.846] host: device 1 serial M987BW25ZV
+[1184.850] usb: watch M987BW25ZV; re-presenting the gadget
+[1185.010] usb: suspended
+[1185.196] slot 0 open: in 81 out 01
+[1185.199] slot 1 open: in 82 out 02
+[1185.203] usb: configured again (high speed)
+[1185.981] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[1247.983] host: device 1 gone
+[1247.985] bridge: slot 1 unbound (idle NAK)
+[1247.989] host: slot 1 unbound
+[1247.992] port: DISCONNECTED on ehci
+[1247.996] power: idle (cpu 648 MHz)
+[1249.013] port: connected on ehci
+[1249.215] port: connected, enabled on ehci
+[1249.235] host: device 1 descriptor 18d1:4ee7 ep0 64
+[1249.244] host: interface 2 (proto 01) -> slot 0, in 81 (mps 512) out 01
+[1249.250] host: device 1 mounted, 18d1:4ee7, high speed
+[1249.255] bridge: slot 0 bound to device 1 (81/01), 0 bytes waiting for it
+[1249.262] power: active (cpu 1008 MHz)
+[1249.266] bridge: host CNXN captured while idle; replaying the host's last CNXN (286-byte banner) to the device
+[1249.276] host: device 1 serial asteroid-smelt
+[1249.280] usb: watch asteroid-smelt; re-presenting the gadget
+[1249.440] usb: suspended
+[1249.626] slot 0 open: in 81 out 01
+[1249.629] slot 1 open: in 82 out 02
+[1249.632] usb: configured again (high speed)
+[1251.231] bridge: slot 0 watch IN result 1
+[1251.235] host: device 1 gone
+[1251.237] bridge: set halt on EP81
+[1251.241] bridge: slot 0 unbound (halt pulse to kick adb, then idle NAK)
+[1251.247] host: slot 0 unbound
+[1251.250] port: DISCONNECTED on ehci
+[1251.254] power: idle (cpu 648 MHz)
+[1251.494] port: connected on ehci
+[1251.504] port: DISCONNECTED on ehci
+[1251.541] bridge: clear halt on EP81
+[1251.586] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[1253.817] port: connected on ehci
+[1254.019] port: connected, enabled on ehci
+[1254.036] host: device 1 descriptor 18d1:4ee7 ep0 64
+[1254.044] host: interface 2 (proto 01) -> slot 0, in 81 (mps 512) out 01
+[1254.051] host: device 1 mounted, 18d1:4ee7, high speed
+[1254.056] bridge: slot 0 bound to device 1 (81/01), 0 bytes waiting for it
+[1254.062] power: active (cpu 1008 MHz)
+[1254.066] bridge: host CNXN captured while idle; replaying the host's last CNXN (286-byte banner) to the device
+[1254.076] host: device 1 serial asteroid-smelt
+[1258.592] bridge: slot 0 watch IN result 1
+[1258.596] host: device 1 gone
+[1258.599] bridge: set halt on EP81
+[1258.602] bridge: slot 0 unbound (halt pulse to kick adb, then idle NAK)
+[1258.608] host: slot 0 unbound
+[1258.611] port: DISCONNECTED on ehci
+[1258.615] power: idle (cpu 648 MHz)
+[1258.653] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[1258.855] port: connected on ehci
+[1258.865] port: DISCONNECTED on ehci
+[1258.902] bridge: clear halt on EP81
+[1259.662] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[1261.162] port: connected on ehci
+[1261.365] port: connected, enabled on ehci
+[1261.382] host: device 1 descriptor 18d1:4ee7 ep0 64
+[1261.390] host: interface 2 (proto 01) -> slot 0, in 81 (mps 512) out 01
+[1261.397] host: device 1 mounted, 18d1:4ee7, high speed
+[1261.402] bridge: slot 0 bound to device 1 (81/01), 0 bytes waiting for it
+[1261.409] power: active (cpu 1008 MHz)
+[1261.412] bridge: host CNXN captured while idle; replaying the host's last CNXN (286-byte banner) to the device
+[1261.422] host: device 1 serial asteroid-smelt
+[1366.329] bridge: slot 0 watch IN result 1
+[1366.333] host: device 1 gone
+[1366.336] bridge: set halt on EP81
+[1366.339] bridge: slot 0 unbound (halt pulse to kick adb, then idle NAK)
+[1366.345] host: slot 0 unbound
+[1366.348] port: DISCONNECTED on ehci
+[1366.352] power: idle (cpu 648 MHz)
+[1366.592] port: connected on ehci
+[1366.602] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[1366.610] port: DISCONNECTED on ehci
+[1366.639] bridge: clear halt on EP81
+[1367.608] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[1368.523] port: connected on ehci
+[1368.725] port: connected, enabled on ehci
+[1368.746] host: device 1 descriptor 22b8:2e80 ep0 64
+[1368.762] host: interface 0 (proto 03) -> slot 1, in 81 (mps 512) out 01
+[1368.768] host: device 1 mounted, 22b8:2e80, high speed
+[1368.773] bridge: slot 1 bound to device 1 (81/01), 0 bytes waiting for it
+[1368.780] power: active (cpu 1008 MHz)
+[1368.785] host: device 1 serial M987BW25ZV
+[1368.789] usb: watch M987BW25ZV; re-presenting the gadget
+[1368.949] usb: suspended
+[1369.135] slot 0 open: in 81 out 01
+[1369.138] slot 1 open: in 82 out 02
+[1369.141] usb: configured again (high speed)
+[1369.632] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[1370.366] host: device 1 gone
+[1370.369] bridge: slot 1 unbound (idle NAK)
+[1370.373] host: slot 1 unbound
+[1370.376] port: DISCONNECTED on ehci
+[1370.379] power: idle (cpu 648 MHz)
+[1371.416] port: connected on ehci
+[1371.618] port: connected, enabled on ehci
+[1371.635] host: device 1 descriptor 18d1:4ee7 ep0 64
+[1371.643] host: interface 2 (proto 01) -> slot 0, in 81 (mps 512) out 01
+[1371.650] host: device 1 mounted, 18d1:4ee7, high speed
+[1371.655] bridge: slot 0 bound to device 1 (81/01), 0 bytes waiting for it
+[1371.662] power: active (cpu 1008 MHz)
+[1371.665] bridge: host CNXN captured while idle; replaying the host's last CNXN (286-byte banner) to the device
+[1371.675] host: device 1 serial asteroid-smelt
+[1371.679] usb: watch asteroid-smelt; re-presenting the gadget
+[1371.840] usb: suspended
+[1372.022] slot 0 open: in 81 out 01
+[1372.025] slot 1 open: in 82 out 02
+[1372.029] usb: configured again (high speed)
+[1693.108] bridge: slot 0 watch IN result 1
+[1693.112] host: device 1 gone
+[1693.115] bridge: set halt on EP81
+[1693.118] bridge: slot 0 unbound (halt pulse to kick adb, then idle NAK)
+[1693.124] host: slot 0 unbound
+[1693.127] port: DISCONNECTED on ehci
+[1693.131] power: idle (cpu 648 MHz)
+[1693.371] port: connected on ehci
+[1693.381] port: DISCONNECTED on ehci
+[1693.418] bridge: clear halt on EP81
+[1693.505] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[1695.301] port: connected on ehci
+[1695.503] port: connected, enabled on ehci
+[1695.523] host: device 1 descriptor 22b8:2e80 ep0 64
+[1695.538] host: interface 0 (proto 03) -> slot 1, in 81 (mps 512) out 01
+[1695.545] host: device 1 mounted, 22b8:2e80, high speed
+[1695.550] bridge: slot 1 bound to device 1 (81/01), 0 bytes waiting for it
+[1695.557] power: active (cpu 1008 MHz)
+[1695.562] host: device 1 serial M987BW25ZV
+[1695.566] usb: watch M987BW25ZV; re-presenting the gadget
+[1695.726] usb: suspended
+[1695.910] slot 0 open: in 81 out 01
+[1695.913] slot 1 open: in 82 out 02
+[1695.916] usb: configured again (high speed)
+[1696.539] bridge: idle adb slot: host CNXN captured (286-byte banner), held for the next device
+[1697.868] host: device 1 gone
+[1697.870] bridge: slot 1 unbound (idle NAK)
+[1697.874] host: slot 1 unbound
+[1697.877] port: DISCONNECTED on ehci
+[1697.881] power: idle (cpu 648 MHz)
+[1698.747] port: connected on ehci
+[1698.758] port: DISCONNECTED on ehci
+[1701.066] port: connected on ehci
+[1701.268] port: connected, enabled on ehci
+[1701.286] host: device 1 descriptor 18d1:4ee7 ep0 64
+[1701.295] host: interface 2 (proto 01) -> slot 0, in 81 (mps 512) out 01
+[1701.301] host: device 1 mounted, 18d1:4ee7, high speed
+[1701.306] bridge: slot 0 bound to device 1 (81/01), 0 bytes waiting for it
+[1701.313] power: active (cpu 1008 MHz)
+[1701.317] bridge: host CNXN captured while idle; replaying the host's last CNXN (286-byte banner) to the device
+[1701.327] host: device 1 serial asteroid-smelt
+[1701.331] usb: watch asteroid-smelt; re-presenting the gadget
+[1701.491] usb: suspended
+[1701.678] slot 0 open: in 81 out 01
+[1701.681] slot 1 open: in 82 out 02
+[1701.684] usb: configured again (high speed)
+[1708.063] bridge: slot 0 watch IN result 1
+[2921.134] console: host opened the port
+[2925.705] console: host closed the port
+[2930.658] console: host opened the port
+bm> 
