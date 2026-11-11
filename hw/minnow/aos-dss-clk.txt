@@ -1,0 +1,22 @@
+- DSS -
+dpll4_ck 1728000000
+DSS_FCK (DSS1_ALWON_FCLK) = 1728000000 / 10 * 1  = 172800000
+- DISPC -
+dispc fclk source = DSS_FCK (DSS1_ALWON_FCLK)
+fck		172800000       
+- LCD -
+LCD clk source = DSS_FCK (DSS1_ALWON_FCLK)
+lck		172800000       lck div	1
+pck		11520000        pck div	15
+- DSI1 PLL -
+dsi pll clkin	26000000
+Fint		2000000         regn 13
+CLKIN4DDR	416000000       regm 104
+DSI_PLL_HSDIV_DISPC (DSI1_PLL_FCLK)	138666666       regm_dispc 3	(off)
+DSI_PLL_HSDIV_DSI (DSI2_PLL_FCLK)	138666666       regm_dsi 3	(off)
+- DSI1 -
+dsi fclk source = DSS_FCK (DSS1_ALWON_FCLK)
+DSI_FCLK	172800000
+DDR_CLK		104000000
+TxByteClkHS	26000000
+LP_CLK		8666666

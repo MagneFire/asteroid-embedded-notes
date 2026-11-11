@@ -1,0 +1,47 @@
+GPIOs 0-31, gpio:
+ gpio-0   (tps65912-irq        ) in  lo
+ gpio-10  (wlcore_irq          ) in  lo
+ gpio-14  (minnow-panel reset  ) out lo
+ gpio-15  (tusb-resetn         ) out hi
+ gpio-16  (tusb-cs             ) out hi
+ gpio-21  (m4sensorhub-boot0   ) out hi
+ gpio-22  (?                   ) in  hi
+ gpio-23  (minnow-bridge reset ) out lo
+ gpio-27  (tusb-csn            ) out lo
+ gpio-28  (m4sensorhub-enable  ) out lo
+ gpio-29  (minnow-panel vsync_e) in  lo
+
+GPIOs 32-63, gpio:
+ gpio-42  (minnow-panel vio_en ) out hi
+ gpio-59  (m4sensorhub-intr    ) in  lo
+
+GPIOs 64-95, gpio:
+ gpio-76  (gpio_ap_int         ) in  hi
+ gpio-77  (mic_bias1_en        ) out lo
+ gpio-78  (charge_terminate    ) out lo
+ gpio-81  (gpio_c55_int        ) out hi
+ gpio-83  (kim                 ) out lo
+ gpio-84  (mic_bias3_en        ) out lo
+ gpio-85  (m25p_enable         ) in  lo
+ gpio-86  (disp_bridge         ) out lo
+ gpio-87  (minnow-panel mem_en ) out lo
+ gpio-94  (sys_reset           ) out lo
+
+GPIOs 96-127, gpio:
+ gpio-98  (LM3535 HWEN         ) out lo
+ gpio-99  (touch_irq           ) in  hi
+ gpio-126 (m4sensorhub-wake    ) out lo
+
+GPIOs 128-159, gpio:
+ gpio-129 (m4sensorhub-reset   ) out hi
+ gpio-140 (cc-alert            ) in  hi
+ gpio-142 (tusb-irq            ) in  hi
+ gpio-143 (wdi                 ) out lo
+ gpio-145 (rts                 ) out hi
+
+GPIOs 160-191, gpio:
+ gpio-164 (touch_reset         ) out hi
+ gpio-176 (?                   ) in  hi
+ gpio-177 (periph_26mhz        ) out hi
+ gpio-182 (factory_kill_disable) out lo
+ gpio-186 (vmmcwl_fixed        ) out lo

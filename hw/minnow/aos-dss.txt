@@ -1,0 +1,4 @@
+DSS_REVISION                        00000020
+DSS_SYSCONFIG                       00000001
+DSS_SYSSTATUS                       00000001
+DSS_CONTROL                         00000000
