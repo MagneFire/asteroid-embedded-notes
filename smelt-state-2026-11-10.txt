@@ -1,0 +1,95 @@
+uptime 36.329 s
+build 2cfe8c9b14+
+board smelt (by panel size)
+timer ticks 10857
+display frames 113
+battery 4389 mV
+charger dock 1 usb 1 chg_n 0, 75%, 42.2 C, status 0400, 0 errors
+rtc 1794267401
+brightness 100
+bt 0
+vibrate 1
+aod 0
+clock12 0
+watchface 0
+nightstand 1
+launcher 6
+tilt 0
+tap 1
+fahrenheit 0
+nightstand.brightness 30
+nightstand.delay 5
+nightstand.aod 0
+burnin 1
+cinema.aod 1
+nightstand.rotate 1
+watchface (1 bytes): 00
+2048 (40 bytes): 00 00 02 00 00 00 02 00 00 00 02 00 08 00 02 00 00 00 04 00 02 00 10 00 02 00 10 00 20 00 02 00 ...
+brightness.auto (1 bytes): 01
+weather (100 bytes): 55 73 73 65 6c 6f 2c 20 48 65 6c 6d 65 72 68 6f 65 6b 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ...
+vibrate (1 bytes): 01
+launcher (1 bytes): 06
+tilt (1 bytes): 00
+brightness (1 bytes): 64
+bt.bonds (920 bytes): 31 30 54 42 98 03 00 00 01 00 00 00 01 00 00 00 04 00 00 00 00 00 00 00 00 0a 2c 3d b2 32 bc 10 ...
+bt (1 bytes): 00
+steps (12 bytes): 9e 12 00 00 1e 51 00 00 3b 00 00 00
+aod (1 bytes): 00
+nightstand.aod (1 bytes): 00
+events (775 bytes): 31 37 39 34 32 36 36 39 39 32 20 63 61 62 6c 65 20 31 20 75 73 62 20 31 0a 31 37 39 34 32 36 37 ...
+seq 167
+--- dsi regs (flashed build 2cfe8c9+, fresh boot)
+04=
+08=device
+0c=device
+10=device
+3c=device
+68=device
+a8=device
+b0=device
+b4=device
+bc=device
+110=device
+00=device
+--- mmss clamp
+adb: device 'asteroid-smelt' not found
+--- tlmm 24 33 36 35
+adb: device 'asteroid-smelt' not found
+adb: device 'asteroid-smelt' not found
+adb: device 'asteroid-smelt' not found
+adb: device 'asteroid-smelt' not found
+--- L27 L4 L18 L28 status/en
+15a08=device
+15a46=device
+14308=device
+14346=device
+15108=device
+15146=device
+15b08=device
+15b46=device
+--- flashed build 2cfe8c9+, awake, fresh boot, dsi regs
+04=device
+08=device
+0c=device
+10=device
+3c=device
+68=device
+a8=device
+b0=device
+b4=device
+bc=device
+110=device
+--- tlmm 24 33 36 35
+adb: device 'asteroid-smelt' not found
+adb: device 'asteroid-smelt' not found
+adb: device 'asteroid-smelt' not found
+adb: device 'asteroid-smelt' not found
+--- L27 L4 L18 L28 status08/en46
+15a08=device
+15a46=device
+14308=device
+14346=device
+15108=device
+15146=device
+15b08=device
+15b46=device

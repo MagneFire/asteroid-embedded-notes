@@ -1,0 +1,21 @@
+=== gauge build 1b412aa+ (clamps always), awake after fresh boot
+uptime 68.658 s
+build 1b412aaf3a+
+charger dock 1 usb 1 chg_n 0, 77%, 45.0 C, status 0400, 0 errors
+04=00000115 08=00000000 0c=11111000 10=00008000 3c=10000000 68=00000000 a8=00001f0e b0=00000000 b4=00088888 bc=0000ffff 110= 
+--- tlmm 24 33 36 35
+adb: device 'asteroid-smelt' not found
+adb: device 'asteroid-smelt' not found
+adb: device 'asteroid-smelt' not found
+adb: device 'asteroid-smelt' not found
+--- L27 L4 L18 L28 status08/en46
+15a08=device 15a46=device 14308=device 14346=device 15108=device 15146=device 15b08=device 15b46=device 
+--- gauge
+adb: device 'asteroid-smelt' not found 
+adb: device 'asteroid-smelt' not found
+=== awake after a screen-off cycle
+04=00000115 08=00000000 0c=11111000 10=00008000 3c=10000000 68=00000000 a8=00001f1f b0=00000000 b4=00088888 bc=0000ffff 110= 
+adb: device 'asteroid-smelt' not found
+adb: device 'asteroid-smelt' not found
+L27 adb: device 'asteroid-smelt' not found
+adb: device 'asteroid-smelt' not found

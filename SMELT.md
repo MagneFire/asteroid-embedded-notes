@@ -314,3 +314,169 @@ Decided 2026-11-08: watches without the sensor keep the plain brightness setting
 To check on the watch: backlight leaking into the sensor (dark room, lux at 10 % against 100 %; the
 log prints `light: N lux, brightness P`), the 49 ms stall when the gain changes around 100-200 lux,
 the current of the held L18 rail while awake.
+
+## Power and display against the vendor kernel (2026-11-09, branch `smelt-idle`, not on a watch yet)
+
+Darrel: the battery drains quickly with AOD on, and after turning AOD off only the backlight comes
+on at wake. Offline comparison with the vendor kernel (pc: asteroid-wrynose work-shared/smelt).
+Worktree `../asteroid-embedded-smelt-idle`, three changes, uncommitted, builds, host tests pass.
+
+- **DSI clamps on the wrong wire.** `display_rest` clamped the clock lane and bits 5/4 of
+  MMSS_DSI_CLAMP, which is data lane 0 only under sturgeon's and sparrow's `lane_map_3012`. Smelt's
+  panel trees have no lane map (0123), so its data lane 0 is bits 7/6 and went unclamped through
+  every always-on power collapse. Fits the `lanes not in ULPS, status 00000f0e` lines (lane 0
+  neither stopped nor in ULPS, clock lane fine): in logs-smelt-pmic-session the first rest after
+  boot works and every one after the first resume fails; logs-smelt-8bf6a8c the same for 8 h. With
+  that the display stays clocked with the PLL on. logs-smelt-m4 has minute redraws without the
+  line, so it is not every boot; not explained. Now the pair is picked from the low two bits of
+  DSI_LANE_SWAP (0xb0), logged at boot as `data lane 0 on wire N`. The vendor's own clamp code
+  ignores the lane map (bits 7/6 for data lane 0 always); the firmware's 5/4 was found on sturgeon.
+- **Screen off.** The vendor powers the panel down when blanked (reset gpio 36 low, bias enable
+  gpio 33 low, L27 off, DSI controller and PHY off, no ULPS, no clamps) and on unblank brings it
+  up, pulses reset (1 10, 0 1, 1 10 ms) and resends the on commands plus tear on. The firmware
+  sent sleep-in and collapsed the power domain unclamped with the panel still powered, then relied
+  on sleep-out. Now the large panel (330 lines) is switched off and brought up the vendor's way;
+  the two small ones keep sleep-in/out until they can be told apart.
+- **Idle mode.** The vendor sends the panel's idle-on commands in low power (not on the dock). 330
+  lines is always the NT35350 large in the vendor trees, so its idle commands are in the board
+  table. The firmware sends them on the dock too.
+
+Not done, from the same comparison: the M4's accelerometer stays on (the crash workaround), so the
+hub never enters its own low power; smelt has no `unused_ldos` and no pin sleep states, rails and
+pins stay as the bootloader left them (the saved PMIC dump is slave 0, so which LDOs are on is not
+known: read 0x14x46 on the watch); Bluetooth sleep parameters not compared with the vendor's.
+Backlight curve, touch sleep record and light sensor match the vendor.
+
+To check on the watch: boot line `data lane 0 on wire 0`; AOD for 10 min without `lanes not in
+ULPS`; screen off and wake several times, picture back each time; AOD face in idle mode looks
+right; `power: asleep ... mA average` off USB against the 6 mA of 2026-11-07.
+
+### 2026-11-09 evening: the watch's log, and the test build booted from RAM
+
+logs-smelt-2cfe8c9-run-2026-11-09.txt: build 2cfe8c9+ from `boot`, off USB, 4.4 h, then the next
+boot. No `lanes not in ULPS` and no DSI timeout anywhere in it.
+- Asleep with AOD on: 9.5 mA mean (hourly means 8.5 to 10.5), in a lit room (backlight codes 28 to
+  36). With AOD off: 5 to 6 mA. Awake: 228 s in total, about 110 to 140 mA.
+- The level fell 51 -> 17 % in 15 765 s. Measured charge is about 9.5 mA x 4.3 h + 9 mAh awake =
+  50 mAh, which is 13 % of the 388 mAh design capacity, not 34 %. The same factor (about 2.6) showed
+  on AsteroidOS on 2026-11-07 (4 % in 64 min against 4 to 8 mA samples). So the cell most likely
+  holds about 150 mAh now. The cell also sags 300 mV at 110 mA (3562 -> 3262 mV), about 2.7 ohm.
+  Not confirmed from the gauge: no console command reads its FullCAP (0x10) yet.
+- First wake after AOD went off (15340 s): the firmware saw nothing wrong, 45 fps, no errors, so
+  the panel did not come out of sleep by itself or ignored the commands. Darrel saw backlight only.
+
+Test build (smelt-idle worktree, 3e05f25+) booted from RAM: `display: data lane 0 on wire 0`, so
+the old clamp bits were the wrong wire. Screen off three times with `set nightstand.aod 0` (on USB
+the nightstand setting decides): gpio 36 and 33 read 0 and L27 status 00 asleep, 1/1/82 awake, no
+errors. Whether the picture is back each time needs eyes; not yet confirmed by Darrel.
+
+### 2026-11-09 late: correction, the gauge has lost its cell model (Astra review)
+
+The "worn cell, about 150 mAh" reading above is withdrawn. Astra's review
+(ASTRA-SMELT-DRAIN-2026-11-09.md) pointed at what the firmware's own log says and I read past:
+every `tick` of the 2026-11-09 run has gauge `status 0002`, the POR bit, and each boot logs
+`gauge: max17050, N%, status 0002, lost its cell model` followed by `gauge: charging stopped,
+reduced ..., gauge not trusted`. Earlier logs had status 0000 (2026-11-07) and 4000 (2026-11-08
+morning), so the gauge lost power after that, in one of the cold boots (pon smpl, poff uvlo, "no
+log from the previous boot" in the events list, the first at rtc 1794151449).
+
+What follows from it:
+- After a POR the MAX17050 runs on its reset defaults, not smelt's cell model. The vendor driver
+  reloads the model, capacities and RepSOC on POR and clears the bit (max17042_battery.c
+  554-618, 679-730); the firmware never writes the gauge. So the percentage, and its rate of fall,
+  mean nothing at present. "100 %" was logged at 4059 mV, and 4396 mV was "100 %" on 2026-11-08.
+- With the gauge untrusted, charge_check stops charging at every boot. The cell still took charge
+  on the pad (-98 to -52 mA in the log), but there is no reason to think it reaches full.
+- The current readings stand: scaling matches the vendor (156.25 uA per count at 10 mOhm), 9.6 mA
+  asleep with always-on over 236 samples, 5.4 mA over 17 without. AvgCurrent is an 11 s filter
+  sampled once a minute, so wake tails and Bluetooth bursts are under-counted (one minute shows 89
+  wakeups and 44 mA with media traffic).
+- Not decided: how much the cell really holds, and whether the firmware draws more than
+  AsteroidOS. The 300 to 400 mV sag at 110 mA is real but does not give a capacity.
+
+Next: restore the model (boot the AsteroidOS backup from RAM once, its driver reloads it on POR;
+or have the firmware load it), charge fully, then compare the gauge's charge counter QH (0x4D)
+over a matched 10 min off USB on each side, and read FullCAP 0x10, FullCapNom 0x23, Cycles 0x17,
+DesignCap 0x18, RepCap 0x05. The firmware needs a POR path of its own, or the next flat battery
+puts it back here.
+
+### 2026-11-09 night: gauge registers with POR set, and the cell's voltage on USB
+
+Worktree `../asteroid-embedded-gauge`, branch `gauge-por` off `smelt-idle`, uncommitted: console
+`gauge <reg>...` reads MAX17050 registers. Snapshot from the firmware, POR set, before any Linux
+boot (rtc 1794255190, on the USB cable, awake):
+
+    00 Status 0002   05 RepCap 0208   06 RepSOC 5e20 (94 %)   ff VFSOC 2706 (39 %)
+    09 VCELL a0f8 (3219 mV)   10 FullCAP 0229 (276 mAh)   23 FullCapNom 0421 (528 mAh)
+    17 Cycles 00b0   18 DesignCap 07d0   1d Config 2250   1e IchgTerm 03c0
+    28 LearnCFG 2653   29 FilterCFG 4ea4   2a RelaxCFG 203b   38 RCOMP0 004c   39 TempCo 262b
+    12/22/32/42 QRTable 1e2f 1e00 1306 0c00   4d QH 0098
+
+DesignCap, Config, FilterCFG, RelaxCFG, RCOMP0, TempCo and the QR table are the chip's reset
+values, not the vendor tree's (776, 4254, 87a4, 043b, 0070, 5040, 2f80/1500/0783/0507): the model
+is gone, as the status said. RepSOC 94 % against VFSOC 39 % at 3.2 V under load.
+
+The USB cable does not charge this watch (dock 0 usb 1, positive current the whole time; only the
+pad charges). From the plug-in at rtc 1794253490 to 1794255210, 29 min at roughly 60 mA asleep
+and 115 mA awake (about 35 mAh by that estimate, not counted), the cell went from 3868 mV at
+60 mA to 3372 mV at 115 mA. That is a lot of voltage for little charge and points at a weak cell
+again, independently of the gauge's model; the sag alone is about 0.3 V at 110 mA. Not settled:
+QH from full to empty will give the capacity. AsteroidOS was not booted: at this voltage its boot
+current could brown the watch out and reset the gauge again. Charge on the pad first.
+
+### 2026-11-09 late night: model restored, firmware gets its own POR path (branch `gauge-por`)
+
+Darrel charged the watch on the pad (3970 mV at 60 mA on the cable afterwards). The AsteroidOS
+backup booted from RAM reloaded the model within a minute (dmesg "using maxim,configuration
+profile", no batt-id, so the default = FW3L data with version 0x0002; charge_full 388000). Back in
+the firmware the registers read: Status 0000, FullCAP/DesignCap/FullCapNom 0308 (776), Config 4254,
+FilterCFG 87a4, RelaxCFG 043b, RCOMP0 0070, TempCo 5040, QRTable 2f80/1500/0783/0507, ICHGTerm
+0080, LearnCFG 2646, Cycles 0091, RepSOC 97 %, VFSOC 90 %; `charging allowed`. The learned
+capacity is back at the design value, so the real capacity is still unknown.
+
+Branch `gauge-por` (worktree ../asteroid-embedded-gauge, off smelt-idle), two commits:
+- 5eee297: `src/soc/gauge_max17050.c` loads the board's `max17050_model` when the status has POR
+  (at init and at every 30 s poll), the vendor driver's sequence step for step: the overrides and
+  Valrt/Talrt, 500 ms, config registers, model under the 0x62/0x63 lock with read-back and the
+  locked-reads-zero check, RCOMP0/TempCo/ICHGTerm/QRTables, capacities, 350 ms, VFSOC0, Cycles 96,
+  RemCap/RepCap from VFSOC, dQacc/dPacc, RepSOC = VFSOC, POR cleared, Config_Ver 0x0002. The model
+  table in `src/board/smelt.c` is checked against the FW3L node of the vendor tree (48 words and
+  every parameter equal). Pure helpers and tests in max17050.c / gauge_test.c.
+- 1b412aa: console `gauge <reg>...` and `gauge load`.
+On the watch, `gauge load` after Linux's own load gave the same registers (LearnCFG 2636 vs 2646,
+low bits the gauge changes itself), RepSOC seeded to the 76 % VFSOC. The POR path itself has not
+run from a real power loss yet.
+
+Next: capacity. Off USB from full, read QH (0x4d, 0.5 mAh per count) at the start and the end of a
+run; a QH delta per percent gives the real capacity, model or not. Then the matched 10 min
+firmware/AsteroidOS QH comparison Astra proposed.
+
+### 2026-11-10 early: the picture stays black after a screen-off wake, what the watch said
+
+With the smelt-idle commits booted from RAM: wake after a screen-off is black with the backlight
+on, awake as well as in always-on. Also black with the clamps applied while the panel sleeps
+(an experiment, dropped), so the unclamped collapse is not the whole story. Registers awake, fresh
+boot and after a cycle (smelt-state*-2026-11-10.txt): DSI_CTRL 0x115, CMD_MODE_DMA_CTRL
+0x10000000 (embedded mode, bit 26 LP clear: the bootloader leaves commands in high speed), lane
+status 1f1f, DLN0_PHY_ERR 00088888 and TIMEOUT_STATUS ffff from the first boot on, ACK_ERR 0.
+The vendor sends the on commands (which end in 11 and 29) in dsi_lp_mode and the off and idle
+commands in HS. Commit 4393e63 on gauge-por puts the controller in LP for the start-up sequence
+only; not checked by eye yet (Darrel could not look). A DCS read (0x0A) from the firmware would
+settle whether the panel takes the commands at all; not written yet.
+
+Gotchas from the evening: a `mem` read of a DSI register while the display rests, and twice a read
+of DSI_INT_CTRL 0x110 even awake, reset the watch (bus hang, watchdog). The flashed `boot` still
+holds 2cfe8c9+, which is before the factory-kill fix, so under it a reset on USB is a power loss
+(pon smpl, poff uvlo) and the fastboot cookie line parks it in fastboot: `fastboot continue` or
+boot an image. The gauge kept its model through those resets (status 0400). The watch reached
+45 C on the dock plus USB.
+
+**Confirmed 2026-11-10:** with the start-up commands in LP (df1b0bd on gauge-por, amended from
+4393e63) Darrel sees the watchface after a screen-off wake; two more console sleep/wake cycles
+done after that. The panel power-down commit a0e5fe8 needs df1b0bd with it.
+
+**2026-11-10:** main fast-forwarded to 8c163f7 (the three display commits, df1b0bd, the gauge model
+load, the gauge console command and the adb stall fix), not pushed; flashed to smelt's `boot`.
+At the flash the gauge read 1 % at 3421 mV under 120 mA (VFSOC 4 %) after a night on the USB
+cable, which never charges. QH went 0xd6 (76 %, model reload) to 0x6a with one spell on the pad
+in between, so no capacity figure from it.
