@@ -211,8 +211,8 @@ Reviews and their open items: `hw/minnow/review-opus-2026-11-11.md`.
 
 ## Performance and scaling (2026-11-11 night)
 
-Merged into main (f5f5297): the frame work below. On branch `minnow-dvfs` (worktree
-`../asteroid-embedded-perf`, 2ccbde4, not merged): clock and voltage scaling.
+Merged into main: the frame work below (f5f5297) and the clock and voltage scaling (2ccbde4,
+merged 2026-11-12 after the soak).
 
 - **Where a frame went.** The mesh took 7.1 of 8 ms: floating point divisions per row, and the
   Cortex-A8's VFP is slow at scalar arithmetic. In 16.16 integers with one division per edge it
@@ -233,8 +233,10 @@ Merged into main (f5f5297): the frame work below. On branch `minnow-dvfs` (workt
   0x26 bit 0 set the DCDC1 registers read 0 over SPI; 0x26 = 0x48 keeps them on SPI.
 - **Scaling.** 200 MHz (M2 x 4) at 0.975 V (sel 0x26) asleep and awake after 300 ms without
   activity; 800 MHz at the bootloader's voltage otherwise, voltage first with a 200 us wait.
-  Read back correctly, 93-100 % idle on the face, mesh steps 7.8 ms, swipes 49-59 fps. Ran
-  90 s with idle, sleep and wake; no longer soak, no current measured.
+  Read back correctly, 93-100 % idle on the face, mesh steps 7.8 ms, swipes 49-59 fps.
+  Soak 2026-11-12: 15 one-minute cycles (wake, four swipes, 10 s awake, 40 s asleep) with
+  BT bonded and connected, 19 min up, no fault, 0 BT resets, 68-70 % of awake time at the
+  slow clock, 30-32 C on USB. No current measured yet.
 - **Gauge and pad** verified: `usb out, started over` gives 3760 mV where USB showed 4.8 V;
   `dock 1` two seconds after the pad; the charging animation runs. The percentage jumps after
   each restart (39, 35, 34, 66 that evening).
@@ -249,3 +251,11 @@ Merged into main (f5f5297): the frame work below. On branch `minnow-dvfs` (workt
 - **uibench** with hundreds of repaints tripped the watchdog before it fed it.
 - **SGX530:** scoping study in `~/Downloads/AsteroidOS/minnow/sgx-study/`. Replay of the
   transfer queue looks feasible (fills, blends, scaling), triangles not; not started.
+- **Clock after AsteroidOS.** After a night under AsteroidOS the M4 clock read 01:51 at 07:01
+  (5 h 09 behind); AsteroidOS's own clock was about 4 h behind local time. The firmware keeps
+  local time in the M4, Linux probably UTC. Likely AsteroidOS writes its (wrong) time into the
+  M4; to check: `date; hwclock -r; cat /sys/class/rtc/rtc*/name` under AsteroidOS, then boot the
+  firmware straight away and compare.
+- **`set bt 1`** on the console only stores the value; the quick settings toggle starts BT.
+  After AsteroidOS paired with the phone the old bond no longer matched and the phone paired
+  again.
